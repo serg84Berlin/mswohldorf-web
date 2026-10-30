@@ -1,0 +1,30 @@
+---
+import Basis from '../layouts/Basis.astro';
+import SeitenKopf from '../components/SeitenKopf.astro';
+import AnlassKarten from '../components/AnlassKarten.astro';
+import Symbol from '../components/Symbol.astro';
+---
+
+<Basis titel="Seite nicht gefunden" beschreibung="Diese Seite gibt es nicht (mehr). Zurück an Bord der MS Wohldorf." fussVon="var(--color-schaum)">
+  <SeitenKopf eyebrow="Fehler 404" titel="Hier ist kein Wasser unterm Kiel." lead="Die gesuchte Seite gibt es nicht (mehr). Vielleicht finden Sie hier, was Sie suchen:">
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href="/" class="knopf knopf-messing" data-magnet>Zur Startseite <Symbol name="pfeil" /></a>
+      <a href="/anfrage/" class="knopf knopf-geist text-schaum">Anfrage stellen</a>
+    </div>
+  </SeitenKopf>
+  <section class="bg-schaum">
+    <div class="seite-breite py-12 lg:py-16">
+      <h2 class="titel-mittel text-tiefe">Anlässe an Bord</h2>
+      <div class="mt-8"><AnlassKarten /></div>
+    </div>
+  </section>
+</Basis>
+
+<style>
+  .bg-schaum {
+    background: var(--color-schaum);
+  }
+  .text-tiefe {
+    color: var(--color-tiefe);
+  }
+</style>

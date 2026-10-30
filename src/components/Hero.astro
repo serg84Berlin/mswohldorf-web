@@ -1,0 +1,197 @@
+---
+/**
+ * Startseiten-Hero. LCP ist das Poster (gleiches Motiv wie die 3D-Bühne);
+ * die WebGL-Szene wird erst danach im Leerlauf nachgeladen (start.ts).
+ */
+import { getImage } from 'astro:assets';
+import posterQuer from '../assets/hero/poster-quer.jpg';
+import posterHoch from '../assets/hero/poster-hoch.jpg';
+import schiff from '../assets/hero/schiff-freigestellt.webp';
+import Symbol from './Symbol.astro';
+import Welle from './Welle.astro';
+import { FAKTEN } from '../config';
+
+const HOCHKANT = '(max-aspect-ratio: 19/20)';
+async function quellen(bild: ImageMetadata, breiten: number[]) {
+  const formate = ['avif', 'webp'] as const;
+  const ergebnis: { typ: string; srcset: string }[] = [];
+  for (const format of formate) {
+    const teile = await Promise.all(breiten.map(async (w) => `${(await getImage({ src: bild, width: w, format, quality: format === 'avif' ? 55 : 72 })).src} ${w}w`));
+    ergebnis.push({ typ: `image/${format}`, srcset: teile.join(', ') });
+  }
+  return ergebnis;
+}
+const hoch = await quellen(posterHoch, [480, 720, 900]);
+const quer = await quellen(posterQuer, [960, 1440, 1920]);
+const rueckfall = await getImage({ src: posterQuer, width: 1440, format: 'jpg', quality: 72 });
+
+const titel = 'Ein Stück Hafengeschichte für Ihren Anlass.';
+const woerter = titel.split(' ');
+---
+
+<section class="hero auf-dunkel" data-hero data-anfrage-verbergen aria-labelledby="hero-titel">
+  <div class="hero-buehne" aria-hidden="true">
+    <picture class="hero-poster">
+      {hoch.map((q) => <source media={HOCHKANT} type={q.typ} srcset={q.srcset} sizes="100vw" />)}
+      {quer.map((q) => <source type={q.typ} srcset={q.srcset} sizes="100vw" />)}
+      <img src={rueckfall.src} alt="" width={posterQuer.width} height={posterQuer.height} fetchpriority="high" loading="eager" decoding="async" />
+    </picture>
+    <canvas class="hero-leinwand" data-hero-leinwand data-schiff={schiff.src}></canvas>
+    <div class="hero-schleier"></div>
+  </div>
+
+  <div class="seite-breite hero-inhalt">
+    <p class="eyebrow hero-auf" style="--i:0">MS Wohldorf · Eventschiff in Hamburg</p>
+    <h1 id="hero-titel" class="titel-gross wort-animiert mt-4 max-w-[13ch] text-schaum">
+      {woerter.map((w, i) => <span class="wort" style={`--i:${i}`}>{w}{i < woerter.length - 1 ? ' ' : ''}</span>)}
+    </h1>
+    <p class="lead hero-auf mt-6 max-w-xl text-sand" style="--i:6">
+      Gebaut {FAKTEN.baujahr} als HADAG-Hafenfähre, {FAKTEN.umbau} umgebaut: Die MS Wohldorf ist heute Bühne für Firmenevents,
+      Workshops, Drehs, Lesungen und private Feiern — für bis zu {FAKTEN.maxGaeste} Gäste.
+    </p>
+    <div class="hero-auf mt-9 flex flex-wrap gap-3" style="--i:7">
+      <a href="/anfrage/" class="knopf knopf-messing" data-magnet>Unverbindlich anfragen <Symbol name="pfeil" /></a>
+      <a href="#rundgang" class="knopf knopf-geist text-schaum"><Symbol name="wuerfel" /> 3D-Rundgang</a>
+    </div>
+  </div>
+
+  <a href="#vorstellung" class="hero-runter">
+    <span class="hero-runter-linie" aria-hidden="true"></span>
+    <span class="text-[0.7rem] font-semibold tracking-[0.22em] uppercase">Entdecken</span>
+    <span class="sr-only">: weiter zur Vorstellung</span>
+  </a>
+  <Welle von="transparent" nach="var(--color-schaum)" class="hero-welle" />
+</section>
+
+<script>
+  import '../scripts/hero/start';
+</script>
+
+<style>
+  .hero {
+    position: relative;
+    isolation: isolate;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: var(--color-tiefe);
+    color: var(--color-schaum);
+    padding-block: 6.5rem 7rem;
+  }
+  .hero-buehne {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+  }
+  .hero-poster,
+  .hero-poster img,
+  .hero-leinwand {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .hero-poster img {
+    object-fit: cover;
+    transform-origin: 70% 60%;
+  }
+  :global(:root[data-bewegung='an']) .hero:not(.szene-bereit) .hero-poster img {
+    animation: ken-burns 26s ease-in-out infinite alternate;
+  }
+  .hero-leinwand {
+    opacity: 0;
+    transition: opacity 1.6s var(--ease-welle);
+    display: block;
+  }
+  .szene-bereit .hero-leinwand {
+    opacity: 1;
+  }
+  .hero-schleier {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgb(6 18 31 / 0.82) 0%, rgb(6 18 31 / 0.5) 34%, rgb(6 18 31 / 0) 60%),
+      linear-gradient(0deg, rgb(6 18 31 / 0.75) 0%, rgb(6 18 31 / 0) 30%),
+      linear-gradient(180deg, rgb(6 18 31 / 0.55) 0%, rgb(6 18 31 / 0) 22%);
+  }
+  @media (max-aspect-ratio: 19/20) {
+    .hero {
+      align-items: flex-start;
+      padding-top: 6.5rem;
+    }
+    .hero-schleier {
+      background:
+        linear-gradient(180deg, rgb(6 18 31 / 0.86) 0%, rgb(6 18 31 / 0.62) 42%, rgb(6 18 31 / 0) 62%),
+        linear-gradient(0deg, rgb(6 18 31 / 0.55) 0%, rgb(6 18 31 / 0) 22%);
+    }
+  }
+  .hero-inhalt {
+    transform: translate3d(0, calc(var(--hero-p, 0) * -70px), 0);
+    opacity: calc(1 - var(--hero-p, 0) * 1.5);
+    will-change: transform, opacity;
+  }
+  :global(:root[data-bewegung='aus']) .hero-inhalt {
+    transform: none;
+    opacity: 1;
+  }
+  .text-sand {
+    color: var(--color-sand);
+  }
+  @keyframes hero-auf {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 18px, 0);
+    }
+  }
+  :global(.js) .hero-auf {
+    animation: hero-auf 1.1s var(--ease-welle) both;
+    animation-delay: calc(var(--i) * 85ms + 250ms);
+  }
+  .hero :global(.hero-welle) {
+    position: absolute;
+    inset: auto 0 0 0;
+  }
+  .hero-runter {
+    position: absolute;
+    left: 50%;
+    bottom: clamp(3.4rem, 7vw, 5.6rem);
+    z-index: 1;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--color-sand);
+    padding: 0.4rem;
+  }
+  .hero-runter-linie {
+    width: 1px;
+    height: 2.6rem;
+    background: linear-gradient(to bottom, transparent, var(--color-messing-hell));
+    transform-origin: top;
+    animation: linie 2.4s var(--ease-anker) infinite;
+  }
+  @keyframes linie {
+    0% {
+      transform: scaleY(0);
+      transform-origin: top;
+    }
+    50% {
+      transform: scaleY(1);
+      transform-origin: top;
+    }
+    50.1% {
+      transform-origin: bottom;
+    }
+    100% {
+      transform: scaleY(0);
+      transform-origin: bottom;
+    }
+  }
+  @media (max-height: 640px), (max-aspect-ratio: 19/20) {
+    .hero-runter {
+      display: none;
+    }
+  }
+</style>

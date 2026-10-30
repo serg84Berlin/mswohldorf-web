@@ -1,0 +1,45 @@
+---
+/**
+ * Sichtbarer Platzhalter für Angaben, die noch fehlen.
+ * Alle Vorkommen stehen in OFFENE-ANGABEN.md; `npm run offen` listet sie.
+ *
+ *   <Platzhalter>Preise und Pakete</Platzhalter>
+ *   <Platzhalter inline>Telefonnummer</Platzhalter>
+ */
+interface Props {
+  inline?: boolean;
+  class?: string;
+}
+const { inline = false, class: klasse = '' } = Astro.props;
+const Tag = inline ? 'span' : 'div';
+---
+
+<Tag class:list={['platzhalter', { 'platzhalter-inline': inline }, klasse]} data-platzhalter>
+  <span class="platzhalter-marke">Angabe folgt</span>
+  <span> — bitte von Uli ergänzen: <slot /></span>
+</Tag>
+
+<style>
+  .platzhalter {
+    display: block;
+    border: 1.5px dashed color-mix(in srgb, currentColor 45%, transparent);
+    border-radius: 0.75rem;
+    padding: 0.8rem 1rem;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    background: color-mix(in srgb, currentColor 4%, transparent);
+  }
+  .platzhalter-inline {
+    display: inline;
+    padding: 0.1rem 0.45rem;
+    border-radius: 0.4rem;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+  .platzhalter-marke {
+    font-weight: 650;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+</style>

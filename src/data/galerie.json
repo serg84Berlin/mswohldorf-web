@@ -1,0 +1,4 @@
+{
+  "hinweis": "Wird von scripts/alte-seite-holen.mjs gefüllt (Galerie der bisherigen Website). Je Bild: datei (relativ zu src/assets/galerie), alt, titel, anlaesse (Slugs aus src/data/anlaesse.ts) und optional hero: true.",
+  "bilder": []
+}

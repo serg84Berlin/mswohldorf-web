@@ -1,0 +1,4 @@
+{
+  "hinweis": "Wird von scripts/alte-seite-holen.mjs gefüllt (PDFs unter public/pdf/). Je Eintrag: datei, titel.",
+  "eintraege": []
+}

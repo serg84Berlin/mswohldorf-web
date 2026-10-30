@@ -1,0 +1,138 @@
+---
+import { ANLAESSE } from '../data/anlaesse';
+import { BETREIBER, KONTAKT, LIEGEPLATZ, KARTEN_LINKS, FAKTEN } from '../config';
+import Logo from './Logo.astro';
+import Symbol from './Symbol.astro';
+import Platzhalter from './Platzhalter.astro';
+import Welle from './Welle.astro';
+
+interface Props {
+  /** Farbe des Abschnitts über dem Footer (für den Wellenübergang). */
+  von?: string;
+}
+const { von = 'var(--color-schaum)' } = Astro.props;
+const jahr = new Date().getFullYear();
+---
+
+<footer class="auf-dunkel bg-nacht text-nebel">
+  <Welle von={von} nach="var(--color-nacht)" />
+  <div class="seite-breite grid gap-12 pt-10 pb-14 md:grid-cols-12 md:gap-8 lg:pt-14">
+    <div class="md:col-span-12 lg:col-span-4">
+      <a href="/" class="inline-flex items-center gap-3 text-schaum">
+        <Logo class="size-11" />
+        <span class="font-display text-2xl font-semibold">MS Wohldorf</span>
+      </a>
+      <p class="mt-5 max-w-sm leading-relaxed">
+        Ehemalige HADAG-Hafenfähre von {FAKTEN.baujahr}, {FAKTEN.umbau} umgebaut — heute Ihr Ort für Veranstaltungen mit bis
+        zu {FAKTEN.maxGaeste} Gästen.
+      </p>
+      <a href="/anfrage/" class="knopf knopf-messing mt-6" data-magnet>Anfrage stellen <Symbol name="pfeil" /></a>
+    </div>
+
+    <div class="md:col-span-4 lg:col-span-3">
+      <h2 class="eyebrow mb-4 !font-sans">Kontakt</h2>
+      <ul class="grid gap-3">
+        <li>
+          <a class="inline-flex items-center gap-2.5 text-schaum hover:text-messing-hell" href={`mailto:${KONTAKT.mail}`}>
+            <Symbol name="mail" class="size-5 text-messing-hell" />{KONTAKT.mail}
+          </a>
+        </li>
+        <li class="inline-flex items-start gap-2.5">
+          <Symbol name="telefon" class="mt-0.5 size-5 shrink-0 text-messing-hell" />
+          {
+            KONTAKT.telefon ? (
+              <a class="text-schaum hover:text-messing-hell" href={`tel:${KONTAKT.telefonLink}`}>
+                {KONTAKT.telefon}
+              </a>
+            ) : (
+              <Platzhalter inline>Telefon (und ggf. Fax) wie auf der bisherigen Seite</Platzhalter>
+            )
+          }
+        </li>
+      </ul>
+      <p class="mt-4 text-sm">Betreiber: {BETREIBER.firma}, {BETREIBER.ort}</p>
+    </div>
+
+    <div class="md:col-span-4 lg:col-span-3">
+      <h2 class="eyebrow mb-4 !font-sans">Liegeplatz</h2>
+      <address class="not-italic leading-relaxed text-schaum">
+        MS Wohldorf<br />
+        {LIEGEPLATZ.strasse}<br />
+        {LIEGEPLATZ.plz} {LIEGEPLATZ.ort}
+      </address>
+      <ul class="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm">
+        <li><a class="textlink" href={KARTEN_LINKS.google} rel="noopener" target="_blank">Google Maps<span class="sr-only"> (öffnet neues Fenster)</span></a></li>
+        <li><a class="textlink" href={KARTEN_LINKS.apple} rel="noopener" target="_blank">Apple Karten<span class="sr-only"> (öffnet neues Fenster)</span></a></li>
+        <li><a class="textlink" href={KARTEN_LINKS.osm} rel="noopener" target="_blank">OpenStreetMap<span class="sr-only"> (öffnet neues Fenster)</span></a></li>
+      </ul>
+    </div>
+
+    <nav id="fuss-navigation" aria-label="Seiten" class="md:col-span-4 lg:col-span-2">
+      <h2 class="eyebrow mb-4 !font-sans">Seiten</h2>
+      <ul class="grid gap-2 text-[0.95rem]">
+        {ANLAESSE.map((a) => <li><a class="hover:text-messing-hell" href={`/anlaesse/${a.slug}/`}>{a.kartenTitel}</a></li>)}
+        <li class="mt-2"><a class="hover:text-messing-hell" href="/geschichte/">Geschichte</a></li>
+        <li><a class="hover:text-messing-hell" href="/galerie/">Galerie</a></li>
+        <li><a class="hover:text-messing-hell" href="/anfrage/">Anfrage</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="border-t border-white/10">
+    <div class="seite-breite flex flex-col gap-4 py-6 text-sm md:flex-row md:items-center md:justify-between">
+      <p>© {jahr} {BETREIBER.firma}</p>
+      <ul class="flex flex-wrap items-center gap-x-6 gap-y-3">
+        <li><a class="hover:text-messing-hell" href="/impressum/">Impressum</a></li>
+        <li><a class="hover:text-messing-hell" href="/datenschutz/">Datenschutz</a></li>
+        <li class="nur-js">
+          <button type="button" class="schalter" aria-pressed="false" data-bewegung-schalter>
+            <span class="schalter-bahn" aria-hidden="true"><span class="schalter-knopf"></span></span>
+            Bewegung reduzieren
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style>
+  :global(html:not(.js)) .nur-js {
+    display: none;
+  }
+  .schalter {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    min-height: 2.75rem;
+    padding: 0.25rem 0.1rem;
+    color: var(--color-schaum);
+    border-radius: 999px;
+  }
+  .schalter-bahn {
+    position: relative;
+    width: 2.6rem;
+    height: 1.5rem;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.16);
+    border: 1px solid rgb(255 255 255 / 0.3);
+    transition: background-color 0.25s;
+  }
+  .schalter-knopf {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: calc(1.5rem - 6px);
+    height: calc(1.5rem - 6px);
+    border-radius: 999px;
+    background: var(--color-schaum);
+    transition: transform 0.3s var(--ease-welle);
+  }
+  .schalter[aria-pressed='true'] .schalter-bahn {
+    background: var(--color-messing);
+    border-color: var(--color-messing);
+  }
+  .schalter[aria-pressed='true'] .schalter-knopf {
+    transform: translateX(1.1rem);
+    background: var(--color-tiefe);
+  }
+</style>

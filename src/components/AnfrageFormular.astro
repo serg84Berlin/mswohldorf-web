@@ -1,0 +1,384 @@
+---
+/**
+ * Anfrageformular. Sendet JSON an PUBLIC_ANFRAGE_URL (Vertrag: README →
+ * „Anfrage-Schnittstelle"). Ohne URL: Vorschau-Hinweis + Mail-Link.
+ * Ohne JavaScript: Der Browser öffnet das Mailprogramm (mailto-Formular).
+ */
+import { ANFRAGE_URL, ANLAESSE_AUSWAHL, KONTAKT, FAKTEN } from '../config';
+import type { AnlassWert } from '../data/typen';
+import Symbol from './Symbol.astro';
+
+interface Props {
+  /** Eindeutiges Kürzel, falls mehrere Formulare auf einer Seite stehen. */
+  id?: string;
+  kompakt?: boolean;
+  vorauswahl?: AnlassWert;
+}
+const { id = 'anfrage', kompakt = false, vorauswahl } = Astro.props;
+const f = (name: string) => `${id}-${name}`;
+const mailto = `mailto:${KONTAKT.mail}?subject=${encodeURIComponent('Anfrage MS Wohldorf')}`;
+---
+
+<form
+  class:list={['anfrage-formular', { kompakt }]}
+  id={id}
+  data-anfrage
+  data-ziel={ANFRAGE_URL}
+  data-mail={KONTAKT.mail}
+  action={mailto}
+  method="post"
+  enctype="text/plain"
+  novalidate
+  aria-labelledby={`${f('titel')}`}
+>
+  <h2 id={f('titel')} class="sr-only">Anfrageformular</h2>
+
+  <noscript>
+    <p class="formular-hinweis">
+      JavaScript ist ausgeschaltet: „Anfrage senden" öffnet Ihr E-Mail-Programm mit Ihren Angaben. Sie können uns auch direkt
+      schreiben: <a class="underline" href={`mailto:${KONTAKT.mail}`}>{KONTAKT.mail}</a>.
+    </p>
+  </noscript>
+
+  {
+    !ANFRAGE_URL && (
+      <p class="formular-hinweis vorschau" data-vorschau-hinweis>
+        <Symbol name="hinweis" class="size-5 shrink-0" />
+        <span>
+          <strong>Vorschau:</strong> Das Formular ist noch nicht verbunden. Bitte schreiben Sie an{' '}
+          <a class="underline" href={`mailto:${KONTAKT.mail}`}>{KONTAKT.mail}</a>
+        </span>
+      </p>
+    )
+  }
+
+  <div class="fehler-liste" role="alert" tabindex="-1" data-fehlerliste hidden>
+    <p class="font-semibold">Bitte prüfen Sie Ihre Angaben:</p>
+    <ul data-fehlerliste-punkte></ul>
+  </div>
+
+  <div class="felder">
+    <div class="feld feld-halb">
+      <label for={f('anlass')}>Anlass <span class="pflicht" aria-hidden="true">*</span></label>
+      <div class="auswahl">
+        <select id={f('anlass')} name="anlass" required aria-describedby={f('anlass-fehler')}>
+          <option value="" selected={!vorauswahl}>Bitte wählen</option>
+          {ANLAESSE_AUSWAHL.map((a) => <option value={a} selected={a === vorauswahl}>{a}</option>)}
+        </select>
+      </div>
+      <p class="feld-fehler" id={f('anlass-fehler')} hidden></p>
+    </div>
+
+    <div class="feld feld-halb">
+      <label for={f('gaeste')}>Gäste <span class="feld-zusatz">(1–{FAKTEN.maxGaeste}, optional)</span></label>
+      <input id={f('gaeste')} name="gaeste" type="number" inputmode="numeric" min="1" max={FAKTEN.maxGaeste} step="1" aria-describedby={f('gaeste-fehler')} />
+      <p class="feld-fehler" id={f('gaeste-fehler')} hidden></p>
+    </div>
+
+    <div class="feld feld-halb">
+      <label for={f('datum')}>Wunschdatum <span class="feld-zusatz">(optional)</span></label>
+      <input id={f('datum')} name="datum" type="date" aria-describedby={f('datum-fehler')} />
+      <p class="feld-fehler" id={f('datum-fehler')} hidden></p>
+    </div>
+
+    {
+      !kompakt && (
+        <div class="feld feld-halb">
+          <label for={f('ausweichdatum')}>
+            Ausweichdatum <span class="feld-zusatz">(optional)</span>
+          </label>
+          <input id={f('ausweichdatum')} name="ausweichdatum" type="date" aria-describedby={f('ausweichdatum-fehler')} />
+          <p class="feld-fehler" id={f('ausweichdatum-fehler')} hidden />
+        </div>
+      )
+    }
+
+    <div class="feld feld-halb">
+      <label for={f('name')}>Name <span class="pflicht" aria-hidden="true">*</span></label>
+      <input id={f('name')} name="name" type="text" autocomplete="name" required maxlength="120" aria-describedby={f('name-fehler')} />
+      <p class="feld-fehler" id={f('name-fehler')} hidden></p>
+    </div>
+
+    <div class="feld feld-halb">
+      <label for={f('email')}>E-Mail <span class="pflicht" aria-hidden="true">*</span></label>
+      <input id={f('email')} name="email" type="email" autocomplete="email" required maxlength="200" aria-describedby={f('email-fehler')} />
+      <p class="feld-fehler" id={f('email-fehler')} hidden></p>
+    </div>
+
+    {
+      !kompakt && (
+        <div class="feld feld-halb">
+          <label for={f('telefon')}>
+            Telefon <span class="feld-zusatz">(optional)</span>
+          </label>
+          <input id={f('telefon')} name="telefon" type="tel" autocomplete="tel" maxlength="40" aria-describedby={f('telefon-fehler')} />
+          <p class="feld-fehler" id={f('telefon-fehler')} hidden />
+        </div>
+      )
+    }
+
+    {
+      kompakt && (
+        <details class="feld feld-ganz mehr-angaben">
+          <summary>Weitere Angaben (optional): Ausweichdatum, Telefon</summary>
+          <div class="felder mt-4">
+            <div class="feld feld-halb">
+              <label for={f('ausweichdatum')}>
+                Ausweichdatum <span class="feld-zusatz">(optional)</span>
+              </label>
+              <input id={f('ausweichdatum')} name="ausweichdatum" type="date" aria-describedby={f('ausweichdatum-fehler')} />
+              <p class="feld-fehler" id={f('ausweichdatum-fehler')} hidden />
+            </div>
+            <div class="feld feld-halb">
+              <label for={f('telefon')}>
+                Telefon <span class="feld-zusatz">(optional)</span>
+              </label>
+              <input id={f('telefon')} name="telefon" type="tel" autocomplete="tel" maxlength="40" aria-describedby={f('telefon-fehler')} />
+              <p class="feld-fehler" id={f('telefon-fehler')} hidden />
+            </div>
+          </div>
+        </details>
+      )
+    }
+
+    <div class="feld feld-ganz">
+      <label for={f('nachricht')}>Ihre Nachricht <span class="pflicht" aria-hidden="true">*</span></label>
+      <textarea id={f('nachricht')} name="nachricht" rows={kompakt ? 4 : 6} required maxlength="4000" aria-describedby={`${f('nachricht-hilfe')} ${f('nachricht-fehler')}`}></textarea>
+      <p class="feld-hilfe" id={f('nachricht-hilfe')}>Was planen Sie? Uhrzeit, Ablauf, Wünsche — alles hilft uns.</p>
+      <p class="feld-fehler" id={f('nachricht-fehler')} hidden></p>
+    </div>
+
+    <div class="feld feld-ganz">
+      <div class="einwilligung">
+        <input id={f('einwilligung')} name="einwilligung" type="checkbox" value="ja" required aria-describedby={f('einwilligung-fehler')} />
+        <label for={f('einwilligung')}>
+          Ich bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage verarbeitet werden. Mehr dazu in der{' '}
+          <a href="/datenschutz/#anfrage" class="underline underline-offset-2">Datenschutzerklärung</a>. <span class="pflicht" aria-hidden="true">*</span>
+        </label>
+      </div>
+      <p class="feld-fehler" id={f('einwilligung-fehler')} hidden></p>
+    </div>
+
+    <div class="honig" aria-hidden="true">
+      <label for={f('website')}>Bitte leer lassen</label>
+      <input id={f('website')} name="website" type="text" tabindex="-1" autocomplete="off" />
+    </div>
+    <input type="hidden" name="geladen" value="" data-geladen />
+  </div>
+
+  <div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+    <button type="submit" class="knopf knopf-messing" data-senden data-magnet>
+      <span data-senden-text>Anfrage senden</span>
+      <Symbol name="pfeil" />
+    </button>
+    <p class="text-sm opacity-80"><span class="pflicht" aria-hidden="true">*</span> Pflichtfeld</p>
+  </div>
+
+  <div class="formular-status" role="status" aria-live="polite" data-status></div>
+</form>
+
+<div class="formular-erfolg" tabindex="-1" data-erfolg={id} hidden>
+  <span class="erfolg-symbol" aria-hidden="true"><Symbol name="haken" class="size-8" /></span>
+  <p class="font-display text-2xl">Danke! Ihre Anfrage ist angekommen.</p>
+  <p class="mt-2">Wir melden uns persönlich bei Ihnen.</p>
+</div>
+
+<script>
+  import '../scripts/formular';
+</script>
+
+<style>
+  .anfrage-formular {
+    --rand: rgb(11 26 42 / 0.22);
+    --feld: #fff;
+  }
+  .felder {
+    display: grid;
+    gap: 1.1rem 1rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 640px) {
+    .felder {
+      grid-template-columns: 1fr 1fr;
+    }
+    .feld-ganz {
+      grid-column: 1 / -1;
+    }
+  }
+  .feld label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.4rem;
+  }
+  .feld-zusatz {
+    font-weight: 400;
+    opacity: 0.75;
+  }
+  .pflicht {
+    color: var(--color-messing-dunkel);
+  }
+  .feld input:not([type='checkbox']),
+  .feld select,
+  .feld textarea {
+    width: 100%;
+    min-height: 3rem;
+    padding: 0.7rem 0.9rem;
+    border-radius: 0.75rem;
+    border: 1.5px solid var(--rand);
+    background: var(--feld);
+    color: var(--color-tinte);
+    font: inherit;
+    transition:
+      border-color 0.2s,
+      box-shadow 0.2s;
+  }
+  .feld textarea {
+    resize: vertical;
+    min-height: 7rem;
+  }
+  .feld input:focus-visible,
+  .feld select:focus-visible,
+  .feld textarea:focus-visible {
+    outline: none;
+    border-color: var(--color-petrol);
+    box-shadow: 0 0 0 4px rgb(43 122 138 / 0.25);
+  }
+  .feld [aria-invalid='true'] {
+    border-color: #b42318 !important;
+    box-shadow: 0 0 0 3px rgb(180 35 24 / 0.15);
+  }
+  .auswahl {
+    position: relative;
+  }
+  .auswahl select {
+    appearance: none;
+    padding-right: 2.5rem;
+  }
+  .auswahl::after {
+    content: '';
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    width: 0.55rem;
+    height: 0.55rem;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: translateY(-70%) rotate(45deg);
+    pointer-events: none;
+  }
+  .feld-hilfe {
+    margin-top: 0.35rem;
+    font-size: 0.85rem;
+    opacity: 0.8;
+  }
+  .feld-fehler {
+    margin-top: 0.35rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #b42318;
+  }
+  .einwilligung {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+  .einwilligung input {
+    width: 1.35rem;
+    height: 1.35rem;
+    margin-top: 0.15rem;
+    flex: none;
+    accent-color: var(--color-petrol);
+  }
+  .einwilligung label {
+    font-weight: 400;
+    margin: 0;
+    line-height: 1.5;
+  }
+  .mehr-angaben summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--color-petrol);
+    padding: 0.4rem 0;
+  }
+  .honig {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .formular-hinweis {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+    padding: 0.85rem 1rem;
+    margin-bottom: 1.4rem;
+    border-radius: 0.8rem;
+    background: rgb(15 76 92 / 0.08);
+    border: 1px solid rgb(15 76 92 / 0.25);
+    font-size: 0.95rem;
+  }
+  .formular-hinweis.vorschau {
+    background: #fff4e8;
+    border-color: #e3a36b;
+    color: #6b2c05;
+  }
+  .fehler-liste {
+    padding: 1rem 1.1rem;
+    margin-bottom: 1.4rem;
+    border-radius: 0.8rem;
+    background: #fef3f2;
+    border: 1.5px solid #b42318;
+    color: #7a271a;
+  }
+  .fehler-liste ul {
+    margin-top: 0.4rem;
+    list-style: disc;
+    padding-left: 1.2rem;
+  }
+  .fehler-liste a {
+    text-decoration: underline;
+  }
+  .formular-status:not(:empty) {
+    margin-top: 1.25rem;
+    padding: 1rem 1.1rem;
+    border-radius: 0.8rem;
+    background: #fff4e8;
+    border: 1px solid #e3a36b;
+    color: #6b2c05;
+  }
+  .formular-status :global(a) {
+    text-decoration: underline;
+    font-weight: 600;
+  }
+  [data-senden][aria-busy='true'] {
+    opacity: 0.75;
+    cursor: progress;
+  }
+  .formular-erfolg {
+    padding: 2rem 1.5rem;
+    border-radius: 1.2rem;
+    background: rgb(15 76 92 / 0.08);
+    border: 1px solid rgb(15 76 92 / 0.3);
+    text-align: center;
+  }
+  .erfolg-symbol {
+    display: inline-grid;
+    place-items: center;
+    width: 4rem;
+    height: 4rem;
+    margin-bottom: 1rem;
+    border-radius: 999px;
+    background: var(--color-petrol);
+    color: var(--color-schaum);
+    animation: erfolg 0.8s var(--ease-welle) both;
+  }
+  @keyframes erfolg {
+    from {
+      transform: scale(0.4) rotate(-20deg);
+      opacity: 0;
+    }
+  }
+</style>

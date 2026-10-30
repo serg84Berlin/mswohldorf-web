@@ -1,0 +1,170 @@
+---
+import { ANLAESSE } from '../data/anlaesse';
+import Symbol from './Symbol.astro';
+
+interface Props {
+  /** Slug, der ausgelassen wird (auf Anlass-Seiten: „Weitere Anlässe"). */
+  ohne?: string;
+  ueberschriftEbene?: 'h2' | 'h3';
+}
+const { ohne, ueberschriftEbene = 'h3' } = Astro.props;
+const liste = ANLAESSE.filter((a) => a.slug !== ohne);
+const H = ueberschriftEbene;
+---
+
+<ul class:list={['karten', { 'karten-vier': liste.length === 4 }]} data-reveal-gruppe>
+  {
+    liste.map((a, i) => (
+      <li data-reveal class="karten-platz">
+        <a href={`/anlaesse/${a.slug}/`} class="anlass-karte auf-dunkel" data-kippen>
+          <span class="karte-schimmer" aria-hidden="true" />
+          <span class="karte-wellen" aria-hidden="true" />
+          <span class="karte-nummer" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+          <span class="karte-symbol">
+            <Symbol name={a.symbol} class="size-6" />
+          </span>
+          <H class="karte-titel">{a.kartenTitel}</H>
+          <p class="karte-text">{a.kartenText}</p>
+          <span class="karte-mehr">
+            Mehr erfahren <Symbol name="pfeil" class="size-4" />
+          </span>
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .karten {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 16.5rem), 1fr));
+  }
+  @media (min-width: 1024px) {
+    .karten {
+      grid-template-columns: repeat(6, 1fr);
+      gap: 1.25rem;
+    }
+    .karten-platz {
+      grid-column: span 2;
+    }
+    .karten-platz:nth-child(4) {
+      grid-column: 2 / span 2;
+    }
+    .karten-vier {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .karten-vier .karten-platz,
+    .karten-vier .karten-platz:nth-child(4) {
+      grid-column: auto;
+    }
+  }
+  .karten-platz {
+    perspective: 1000px;
+  }
+  .anlass-karte {
+    --rx: 0deg;
+    --ry: 0deg;
+    --lx: 50%;
+    --ly: 0%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 16rem;
+    padding: 1.6rem 1.5rem 1.4rem;
+    border-radius: 1.4rem;
+    overflow: hidden;
+    color: var(--color-schaum);
+    background:
+      radial-gradient(130% 90% at 100% 0%, rgb(43 122 138 / 0.45), transparent 55%),
+      linear-gradient(160deg, var(--color-marine), var(--color-tiefe));
+    border: 1px solid rgb(255 255 255 / 0.08);
+    box-shadow: 0 30px 60px -36px rgb(6 18 31 / 0.7);
+    transform: rotateX(var(--rx)) rotateY(var(--ry));
+    transform-style: preserve-3d;
+    transition:
+      transform 0.6s var(--ease-welle),
+      box-shadow 0.4s;
+  }
+  .anlass-karte.kippt {
+    transition:
+      transform 0.12s linear,
+      box-shadow 0.4s;
+  }
+  .anlass-karte:hover,
+  .anlass-karte:focus-visible {
+    box-shadow: 0 40px 70px -34px rgb(6 18 31 / 0.85);
+  }
+  .karte-schimmer {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    background: radial-gradient(420px circle at var(--lx) var(--ly), rgb(224 184 114 / 0.28), transparent 45%);
+    transition: opacity 0.4s;
+    pointer-events: none;
+  }
+  .anlass-karte:hover .karte-schimmer {
+    opacity: 1;
+  }
+  .karte-wellen {
+    position: absolute;
+    right: -10%;
+    bottom: -18%;
+    width: 75%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: repeating-radial-gradient(circle, rgb(224 184 114 / 0.14) 0 1px, transparent 1px 14px);
+    transform: translateZ(10px);
+    transition: transform 0.8s var(--ease-welle);
+  }
+  .anlass-karte:hover .karte-wellen {
+    transform: translateZ(10px) scale(1.12);
+  }
+  .karte-nummer {
+    position: absolute;
+    top: 1.3rem;
+    right: 1.5rem;
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    color: rgb(224 184 114 / 0.75);
+  }
+  .karte-symbol {
+    display: inline-grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.9rem;
+    color: var(--color-tiefe);
+    background: var(--color-messing-hell);
+    transform: translateZ(40px);
+  }
+  .karte-titel {
+    margin-top: 1.4rem;
+    font-size: 1.5rem;
+    line-height: 1.15;
+    transform: translateZ(30px);
+  }
+  .karte-text {
+    margin-top: 0.6rem;
+    color: var(--color-nebel);
+    line-height: 1.55;
+    transform: translateZ(20px);
+  }
+  .karte-mehr {
+    margin-top: auto;
+    padding-top: 1.4rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 600;
+    color: var(--color-messing-hell);
+    transform: translateZ(25px);
+  }
+  .karte-mehr :global(svg) {
+    transition: transform 0.4s var(--ease-welle);
+  }
+  .anlass-karte:hover .karte-mehr :global(svg) {
+    transform: translateX(5px);
+  }
+</style>

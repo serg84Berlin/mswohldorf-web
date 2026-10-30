@@ -1,0 +1,151 @@
+---
+/**
+ * Masonry-Galerie. Jede Kachel ist ein Link auf das große Bild (funktioniert
+ * ohne JS); mit JS öffnet sie die Lightbox (Tastatur, Wischen).
+ * Fehlen noch Fotos, füllen gestaltete „Foto folgt"-Kacheln das Raster.
+ */
+import { Picture } from 'astro:assets';
+import type { Foto } from '../data/bilder';
+import { grosseQuellen } from '../lib/bildquellen';
+
+interface Props {
+  fotos: Foto[];
+  /** Mindestanzahl Kacheln (Rest = „Foto folgt"). */
+  mindestens?: number;
+  sammlung?: string;
+  class?: string;
+}
+const { fotos, mindestens = 0, sammlung = 'galerie', class: klasse = '' } = Astro.props;
+const eintraege = await Promise.all(fotos.map(async (f) => ({ foto: f, gross: await grosseQuellen(f.bild) })));
+const fehlend = Math.max(0, mindestens - fotos.length);
+const formen = ['quer', 'quadrat', 'quer', 'hoch', 'quadrat', 'quer'];
+---
+
+<ul class:list={['galerie-raster', klasse]} data-lightbox-sammlung={sammlung} data-reveal-gruppe>
+  {
+    eintraege.map(({ foto, gross }, i) => (
+      <li class="galerie-eintrag" data-reveal>
+        <a
+          href={gross.src}
+          class="galerie-kachel wellenbild"
+          data-lightbox-bild
+          data-avif={gross.avif}
+          data-webp={gross.webp}
+          data-src={gross.src}
+          data-breite={gross.breite}
+          data-hoehe={gross.hoehe}
+          data-alt={foto.alt}
+          data-titel={foto.titel ?? ''}
+          aria-label={`Bild ${i + 1} groß anzeigen: ${foto.alt}`}
+        >
+          <Picture src={foto.bild} alt={foto.alt} formats={['avif', 'webp']} widths={[360, 560, 820]} sizes="(min-width: 1024px) 24rem, (min-width: 640px) 45vw, 92vw" loading="lazy" decoding="async" />
+          {foto.titel && <span class="kachel-titel" aria-hidden="true">{foto.titel}</span>}
+        </a>
+      </li>
+    ))
+  }
+  {
+    Array.from({ length: fehlend }, (_, i) => (
+      <li class:list={['galerie-eintrag kachel-leer', `form-${formen[i % formen.length]}`]} aria-hidden="true" data-reveal>
+        <span class="kachel-leer-innen">
+          <svg viewBox="0 0 40 40" class="size-8 opacity-60" aria-hidden="true"><path d="M5 26c3 0 3-2 6-2s3 2 6 2 3-2 6-2 3 2 6 2 3-2 6-2" fill="none" stroke="currentColor" stroke-width="1.5" /><circle cx="27" cy="13" r="4" fill="none" stroke="currentColor" stroke-width="1.5" /></svg>
+          <span>Foto folgt</span>
+        </span>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .galerie-raster {
+    columns: 2 10rem;
+    column-gap: 0.75rem;
+  }
+  @media (min-width: 768px) {
+    .galerie-raster {
+      columns: 3 14rem;
+      column-gap: 1rem;
+    }
+  }
+  .galerie-eintrag {
+    break-inside: avoid;
+    margin-bottom: 0.75rem;
+  }
+  @media (min-width: 768px) {
+    .galerie-eintrag {
+      margin-bottom: 1rem;
+    }
+  }
+  .galerie-kachel {
+    position: relative;
+    display: block;
+    border-radius: 1rem;
+    overflow: hidden;
+    background: var(--color-marine);
+    box-shadow: 0 18px 40px -28px rgb(6 18 31 / 0.6);
+    transform: translateZ(0);
+  }
+  .galerie-kachel :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition:
+      transform 1.2s var(--ease-welle),
+      filter 0.3s;
+  }
+  .galerie-kachel:hover :global(img),
+  .galerie-kachel:focus-visible :global(img) {
+    transform: scale(1.045);
+  }
+  .kachel-titel {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: 2.5rem 0.9rem 0.8rem;
+    font-size: 0.85rem;
+    line-height: 1.35;
+    color: var(--color-schaum);
+    background: linear-gradient(to top, rgb(6 18 31 / 0.85), transparent);
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+      opacity 0.35s,
+      transform 0.5s var(--ease-welle);
+  }
+  .galerie-kachel:hover .kachel-titel,
+  .galerie-kachel:focus-visible .kachel-titel {
+    opacity: 1;
+    transform: none;
+  }
+  @media (hover: none) {
+    .kachel-titel {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .kachel-leer-innen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    border-radius: 1rem;
+    border: 1.5px dashed rgb(15 76 92 / 0.35);
+    color: var(--color-petrol);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background:
+      repeating-linear-gradient(135deg, rgb(15 76 92 / 0.05) 0 10px, transparent 10px 20px),
+      var(--color-sand-hell);
+  }
+  .form-hoch .kachel-leer-innen {
+    aspect-ratio: 3 / 4;
+  }
+  .form-quer .kachel-leer-innen {
+    aspect-ratio: 4 / 3;
+  }
+  .form-quadrat .kachel-leer-innen {
+    aspect-ratio: 1;
+  }
+</style>

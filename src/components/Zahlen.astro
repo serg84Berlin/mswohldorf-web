@@ -1,0 +1,56 @@
+---
+import { FAKTEN } from '../config';
+
+const jahre = new Date().getFullYear() - FAKTEN.baujahr;
+const zahlen = [
+  { wert: FAKTEN.baujahr, start: 1900, titel: 'Baujahr', text: `als ${FAKTEN.herkunft}` },
+  { wert: FAKTEN.maxGaeste, start: 0, titel: 'Gäste', text: 'finden an Bord Platz' },
+  { wert: FAKTEN.umbau, start: 1959, titel: 'Umbau', text: 'für ein neues Kapitel' },
+  { wert: jahre, start: 0, titel: 'Jahre', text: 'Schiffsgeschichte' },
+];
+---
+
+<section class="zahlen auf-dunkel" aria-labelledby="zahlen-titel">
+  <div class="seite-breite py-16 lg:py-20">
+    <h2 id="zahlen-titel" class="sr-only">Die MS Wohldorf in Zahlen</h2>
+    <ul class="grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-4" data-reveal-gruppe>
+      {
+        zahlen.map((z) => (
+          <li class="zahl" data-reveal>
+            <p class="zahl-wert font-display">
+              <span class="sr-only">{z.wert}</span>
+              <span aria-hidden="true" data-zaehler={z.wert} data-start={z.start}>
+                {z.wert}
+              </span>
+            </p>
+            <p class="mt-2 text-sm font-semibold tracking-[0.16em] text-messing-hell uppercase">{z.titel}</p>
+            <p class="mt-1 text-nebel">{z.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .zahlen {
+    background: var(--color-tiefe);
+    color: var(--color-schaum);
+  }
+  .zahl {
+    position: relative;
+    padding-left: 1.1rem;
+    border-left: 1px solid rgb(224 184 114 / 0.35);
+  }
+  .zahl-wert {
+    font-size: clamp(2.6rem, 1.6rem + 3.6vw, 4.6rem);
+    line-height: 1;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums lining-nums;
+    letter-spacing: -0.02em;
+    background: linear-gradient(180deg, var(--color-schaum), var(--color-messing-hell));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+</style>

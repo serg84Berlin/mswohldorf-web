@@ -1,0 +1,71 @@
+---
+/**
+ * Impressum. Der vollständige Text der bisherigen Website konnte beim Bau
+ * nicht abgerufen werden (Host im Netz gesperrt) — fehlende Angaben sind
+ * Platzhalter und MÜSSEN vor dem Livegang 1:1 aus dem alten Impressum
+ * übernommen werden. „TMG" ist durch „§ 5 DDG" ersetzt.
+ */
+import Basis from '../layouts/Basis.astro';
+import SeitenKopf from '../components/SeitenKopf.astro';
+import Platzhalter from '../components/Platzhalter.astro';
+import { BETREIBER, KONTAKT } from '../config';
+---
+
+<Basis titel="Impressum" beschreibung="Impressum der Website der MS Wohldorf — Anbieterkennzeichnung der Finanzelot GmbH & Co. KG nach § 5 DDG." fussVon="var(--color-schaum)">
+  <SeitenKopf eyebrow="Rechtliches" titel="Impressum" />
+  <section class="bg-schaum">
+    <div class="seite-breite fliesstext max-w-3xl py-12 lg:py-16">
+      <h2>Angaben gemäß § 5 DDG</h2>
+      <p>
+        <strong>{BETREIBER.firma}</strong><br />
+        <Platzhalter inline>Straße und Hausnummer, PLZ Ort (wie im bisherigen Impressum)</Platzhalter>
+      </p>
+
+      <h3>Vertreten durch</h3>
+      <p><Platzhalter inline>persönlich haftende Gesellschafterin (Firma, Sitz, Register) und deren Geschäftsführung</Platzhalter></p>
+
+      <h3>Kontakt</h3>
+      <p>
+        Telefon: {KONTAKT.telefon ?? <Platzhalter inline>Telefonnummer</Platzhalter>}<br />
+        Telefax: {KONTAKT.fax ?? <Platzhalter inline>Faxnummer (falls weiter genutzt)</Platzhalter>}<br />
+        E-Mail: <a href={`mailto:${KONTAKT.mail}`}>{KONTAKT.mail}</a>
+      </p>
+
+      <h3>Registereintrag</h3>
+      <p><Platzhalter inline>Registergericht und Registernummer (HRA) der KG sowie der Komplementärin (HRB)</Platzhalter></p>
+
+      <h3>Umsatzsteuer-Identifikationsnummer</h3>
+      <p><Platzhalter inline>USt-IdNr. gemäß § 27a UStG (falls vorhanden)</Platzhalter></p>
+
+      <h3>Weitere Pflichtangaben</h3>
+      <Platzhalter>
+        Alle weiteren Angaben aus dem bisherigen Impressum unverändert übernehmen (z. B. Aufsichtsbehörde, Erlaubnisse,
+        Berufsrecht, Vermittlerregister — je nachdem, was dort steht).
+      </Platzhalter>
+
+      <h3>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h3>
+      <p><Platzhalter inline>Name und Anschrift</Platzhalter></p>
+
+      <h3>Verbraucherstreitbeilegung</h3>
+      <Platzhalter>
+        Aussage aus dem bisherigen Impressum übernehmen (Teilnahme an Streitbeilegungsverfahren ja/nein). Hinweis: Die
+        EU-Plattform zur Online-Streitbeilegung (OS-Plattform) wurde am 20.07.2025 eingestellt — ein Link darauf gehört nicht mehr
+        ins Impressum.
+      </Platzhalter>
+
+      <h3>Bildnachweise</h3>
+      <p>
+        Standbilder aus den Videos „MS Wohldorf 2024" (YouTube-Kanal Finanzelot) und „Wohldorf 2017 Einlaufen im Sandtorhafen"
+        (YouTube-Kanal ulrichritter). Galerie-Fotos: <Platzhalter inline>Fotografin/Fotograf bzw. Rechteinhaber</Platzhalter>.
+        Kartenausschnitt: © OpenStreetMap-Mitwirkende,
+        <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">ODbL</a>.
+      </p>
+    </div>
+  </section>
+</Basis>
+
+<style>
+  .bg-schaum {
+    background: var(--color-schaum);
+  }
+</style>

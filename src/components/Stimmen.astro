@@ -1,0 +1,77 @@
+---
+import { STIMMEN } from '../data/stimmen';
+import Symbol from './Symbol.astro';
+import Platzhalter from './Platzhalter.astro';
+---
+
+<section class="stimmen" aria-labelledby="stimmen-titel">
+  <div class="seite-breite py-20 lg:py-28">
+    <div class="max-w-2xl" data-reveal>
+      <p class="eyebrow">Stimmen</p>
+      <h2 id="stimmen-titel" class="titel-mittel mt-4 text-tiefe">Was Gäste über die Wohldorf sagen.</h2>
+    </div>
+    {
+      STIMMEN.length > 0 ? (
+        <ul class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3" data-reveal-gruppe>
+          {STIMMEN.map((s) => (
+            <li data-reveal>
+              <figure class="stimme">
+                <Symbol name="zitat" class="size-8 text-messing" />
+                <blockquote class="mt-4 font-display text-xl leading-snug text-tiefe">„{s.zitat}"</blockquote>
+                <figcaption class="mt-5 text-sm">
+                  <span class="font-semibold text-tiefe">{s.name}</span>
+                  {s.zusatz && <span class="block text-grau">{s.zusatz}</span>}
+                </figcaption>
+              </figure>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div class="mt-10 grid gap-5 md:grid-cols-3" aria-hidden="false">
+          <Platzhalter class="md:col-span-3 text-tinte">
+            Kundenstimmen von der bisherigen Website wörtlich übernehmen (Zitat, Name/Firma) — die alte Seite war beim Bau nicht erreichbar.
+            Eintragen in src/data/stimmen.ts.
+          </Platzhalter>
+          {[0, 1, 2].map(() => (
+            <div class="stimme stimme-leer" aria-hidden="true">
+              <Symbol name="zitat" class="size-8 text-messing" />
+              <span class="leer-zeile w-11/12" />
+              <span class="leer-zeile w-10/12" />
+              <span class="leer-zeile w-7/12" />
+              <span class="leer-zeile mt-6 w-4/12" />
+            </div>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .stimmen {
+    background: var(--color-sand-hell);
+  }
+  .text-tiefe {
+    color: var(--color-tiefe);
+  }
+  .stimme {
+    height: 100%;
+    padding: 1.8rem 1.6rem;
+    border-radius: 1.3rem;
+    background: var(--color-schaum);
+    border: 1px solid rgb(11 26 42 / 0.08);
+    box-shadow: 0 24px 50px -36px rgb(6 18 31 / 0.4);
+  }
+  .stimme-leer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    opacity: 0.55;
+  }
+  .leer-zeile {
+    display: block;
+    height: 0.7rem;
+    border-radius: 999px;
+    background: rgb(11 26 42 / 0.1);
+  }
+</style>
