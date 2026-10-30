@@ -1,0 +1,1021 @@
+{
+  "zeit": "2026-10-30T20:39:45.441Z",
+  "pruefungen": [
+    {
+      "name": "/ @390: Status 200",
+      "ok": true,
+      "info": "200"
+    },
+    {
+      "name": "/ @390: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/ @390: keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/ @390: kein waagerechtes Scrollen",
+      "ok": true,
+      "info": "0px"
+    },
+    {
+      "name": "/anlaesse/firmenevent/ @390: Status 200",
+      "ok": true,
+      "info": "200"
+    },
+    {
+      "name": "/anlaesse/firmenevent/ @390: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/anlaesse/firmenevent/ @390: keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/anlaesse/firmenevent/ @390: kein waagerechtes Scrollen",
+      "ok": true,
+      "info": "0px"
+    },
+    {
+      "name": "/anlaesse/workshop-seminar/ @390: Status 200",
+      "ok": true,
+      "info": "200"
+    },
+    {
+      "name": "/anlaesse/workshop-seminar/ @390: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/anlaesse/workshop-seminar/ @390: keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/anlaesse/workshop-seminar/ @390: kein waagerechtes Scrollen",
+      "ok": true,
+      "info": "0px"
+    },
+    {
+      "name": "/anlaesse/film-und-foto/ @390: Status 200",
+      "ok": true,
+      "info": "200"
+    },
+    {
+      "name": "/anlaesse/film-und-foto/ @390: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/anlaesse/film-und-foto/ @390: keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/anlaesse/film-und-foto/ @390: kein waagerechtes Scrollen",
+      "ok": true,
+      "info": "0px"
+    },
+    {
+      "name": "/anlaesse/lesung-ausstellung/ @390: Status 200",
+      "ok": true,
+      "info": "200"
+    },
+    {
+      "name": "/anlaesse/lesung-ausstellung/ @390: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/anlaesse/lesung-ausstellung/ @390: keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/anlaesse/lesung-ausstellung/ @390: kein waagerechtes Scrollen",
+      "ok": true,
+      "info": "0px"
+    },
+    {
+      "name": "/anlaesse/private-feier/ @390: Status 200",
+      "ok": true,
+      "info": "200"
+    },
+    {
+      "name": "/anlaesse/private-feier/ @390: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/anlaesse/private-feier/ @390: keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/anlaesse/private-feier/ @390: kein waagerechtes Scrollen",
+      "ok": true,
+      "info": "0px"
+    },
+    {
+      "name": "/geschichte/ @390: Status 200",
+      "ok": true,
+      "info": "200"
+    },
+    {
+      "name": "/geschichte/ @390: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/geschichte/ @390: keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/geschichte/ @390: kein waagerechtes Scrollen",
+      "ok": true,
+      "info": "0px"
+    },
+    {
+      "name": "/galerie/ @390: Status 200",
+      "ok": true,
+      "info": "200"
+    },
+    {
+      "name": "/galerie/ @390: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/galerie/ @390: keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/galerie/ @390: kein waagerechtes Scrollen",
+      "ok": true,
+      "info": "0px"
+    },
+    {
+      "name": "/anfrage/ @390: Status 200",
+      "ok": true,
+      "info": "200"
+    },
+    {
+      "name": "/anfrage/ @390: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/anfrage/ @390: keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/anfrage/ @390: kein waagerechtes Scrollen",
+      "ok": true,
+      "info": "0px"
+    },
+    {
+      "name": "/impressum/ @390: Status 200",
+      "ok": true,
+      "info": "200"
+    },
+    {
+      "name": "/impressum/ @390: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/impressum/ @390: keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/impressum/ @390: kein waagerechtes Scrollen",
+      "ok": true,
+      "info": "0px"
+    },
+    {
+      "name": "/datenschutz/ @390: Status 200",
+      "ok": true,
+      "info": "200"
+    },
+    {
+      "name": "/datenschutz/ @390: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/datenschutz/ @390: keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/datenschutz/ @390: kein waagerechtes Scrollen",
+      "ok": true,
+      "info": "0px"
+    },
+    {
+      "name": "/gibt-es-nicht/ @390: Status 404",
+      "ok": true,
+      "info": "404"
+    },
+    {
+      "name": "/gibt-es-nicht/ @390: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/gibt-es-nicht/ @390: keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/gibt-es-nicht/ @390: kein waagerechtes Scrollen",
+      "ok": true,
+      "info": "0px"
+    },
+    {
+      "name": "/ @1440: Status 200",
+      "ok": true,
+      "info": "200"
+    },
+    {
+      "name": "/ @1440: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/ @1440: keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/ @1440: kein waagerechtes Scrollen",
+      "ok": true,
+      "info": "0px"
+    },
+    {
+      "name": "/anlaesse/firmenevent/ @1440: Status 200",
+      "ok": true,
+      "info": "200"
+    },
+    {
+      "name": "/anlaesse/firmenevent/ @1440: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/anlaesse/firmenevent/ @1440: keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/anlaesse/firmenevent/ @1440: kein waagerechtes Scrollen",
+      "ok": true,
+      "info": "0px"
+    },
+    {
+      "name": "/anlaesse/workshop-seminar/ @1440: Status 200",
+      "ok": true,
+      "info": "200"
+    },
+    {
+      "name": "/anlaesse/workshop-seminar/ @1440: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/anlaesse/workshop-seminar/ @1440: keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/anlaesse/workshop-seminar/ @1440: kein waagerechtes Scrollen",
+      "ok": true,
+      "info": "0px"
+    },
+    {
+      "name": "/anlaesse/film-und-foto/ @1440: Status 200",
+      "ok": true,
+      "info": "200"
+    },
+    {
+      "name": "/anlaesse/film-und-foto/ @1440: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/anlaesse/film-und-foto/ @1440: keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/anlaesse/film-und-foto/ @1440: kein waagerechtes Scrollen",
+      "ok": true,
+      "info": "0px"
+    },
+    {
+      "name": "/anlaesse/lesung-ausstellung/ @1440: Status 200",
+      "ok": true,
+      "info": "200"
+    },
+    {
+      "name": "/anlaesse/lesung-ausstellung/ @1440: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/anlaesse/lesung-ausstellung/ @1440: keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/anlaesse/lesung-ausstellung/ @1440: kein waagerechtes Scrollen",
+      "ok": true,
+      "info": "0px"
+    },
+    {
+      "name": "/anlaesse/private-feier/ @1440: Status 200",
+      "ok": true,
+      "info": "200"
+    },
+    {
+      "name": "/anlaesse/private-feier/ @1440: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/anlaesse/private-feier/ @1440: keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/anlaesse/private-feier/ @1440: kein waagerechtes Scrollen",
+      "ok": true,
+      "info": "0px"
+    },
+    {
+      "name": "/geschichte/ @1440: Status 200",
+      "ok": true,
+      "info": "200"
+    },
+    {
+      "name": "/geschichte/ @1440: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/geschichte/ @1440: keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/geschichte/ @1440: kein waagerechtes Scrollen",
+      "ok": true,
+      "info": "0px"
+    },
+    {
+      "name": "/galerie/ @1440: Status 200",
+      "ok": true,
+      "info": "200"
+    },
+    {
+      "name": "/galerie/ @1440: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/galerie/ @1440: keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/galerie/ @1440: kein waagerechtes Scrollen",
+      "ok": true,
+      "info": "0px"
+    },
+    {
+      "name": "/anfrage/ @1440: Status 200",
+      "ok": true,
+      "info": "200"
+    },
+    {
+      "name": "/anfrage/ @1440: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/anfrage/ @1440: keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/anfrage/ @1440: kein waagerechtes Scrollen",
+      "ok": true,
+      "info": "0px"
+    },
+    {
+      "name": "/impressum/ @1440: Status 200",
+      "ok": true,
+      "info": "200"
+    },
+    {
+      "name": "/impressum/ @1440: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/impressum/ @1440: keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/impressum/ @1440: kein waagerechtes Scrollen",
+      "ok": true,
+      "info": "0px"
+    },
+    {
+      "name": "/datenschutz/ @1440: Status 200",
+      "ok": true,
+      "info": "200"
+    },
+    {
+      "name": "/datenschutz/ @1440: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/datenschutz/ @1440: keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/datenschutz/ @1440: kein waagerechtes Scrollen",
+      "ok": true,
+      "info": "0px"
+    },
+    {
+      "name": "/gibt-es-nicht/ @1440: Status 404",
+      "ok": true,
+      "info": "404"
+    },
+    {
+      "name": "/gibt-es-nicht/ @1440: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/gibt-es-nicht/ @1440: keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/gibt-es-nicht/ @1440: kein waagerechtes Scrollen",
+      "ok": true,
+      "info": "0px"
+    },
+    {
+      "name": "3D-Hero @390: WebGL-Szene läuft",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Zeitleiste @390: angeheftet (sticky) bei Bewegung",
+      "ok": true,
+      "info": "sticky"
+    },
+    {
+      "name": "3D-Hero @1440: WebGL-Szene läuft",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Zeitleiste @1440: angeheftet (sticky) bei Bewegung",
+      "ok": true,
+      "info": "sticky"
+    },
+    {
+      "name": "Reduzierte Bewegung: <html data-bewegung=\"aus\">",
+      "ok": true,
+      "info": "aus"
+    },
+    {
+      "name": "Reduzierte Bewegung: Wellen stehen still",
+      "ok": true,
+      "info": "1e-06s"
+    },
+    {
+      "name": "Reduzierte Bewegung: kein Ken-Burns auf dem Poster",
+      "ok": true,
+      "info": "none"
+    },
+    {
+      "name": "Reduzierte Bewegung: Zeitleiste nicht angeheftet",
+      "ok": true,
+      "info": "static"
+    },
+    {
+      "name": "Reduzierte Bewegung: Inhalte sofort sichtbar",
+      "ok": true,
+      "info": "1"
+    },
+    {
+      "name": "Reduzierte Bewegung: Überschrift ohne Animation",
+      "ok": true,
+      "info": "1e-06s"
+    },
+    {
+      "name": "Reduzierte Bewegung: three.js wird nicht geladen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Reduzierte Bewegung: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Ohne WebGL: Poster mit Ken-Burns, three.js nicht geladen",
+      "ok": true,
+      "info": "ken-burns"
+    },
+    {
+      "name": "Ohne WebGL: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Footer-Schalter: schaltet Bewegung aus und merkt es sich",
+      "ok": true,
+      "info": "{\"b\":\"aus\",\"p\":\"true\",\"s\":\"aus\",\"nachLaden\":\"aus\"}"
+    },
+    {
+      "name": "Karussell: Pfeiltaste dreht weiter",
+      "ok": true,
+      "info": "1 / 10 → 2 / 10"
+    },
+    {
+      "name": "Lightbox: Enter öffnet, → / ← blättern",
+      "ok": true,
+      "info": "Bild 1 von 2 → Bild 2 von 2 → Bild 1 von 2"
+    },
+    {
+      "name": "Lightbox: Esc schließt, Fokus zurück auf die Kachel",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Galerie: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Menü „Anlässe\": Enter öffnet, Tab in die Liste, Esc schließt mit Fokus zurück",
+      "ok": true,
+      "info": "true /anlaesse/firmenevent/ false true"
+    },
+    {
+      "name": "Mobilmenü: öffnet per Tastatur, Fokus im Menü, Rest inert; Esc schließt",
+      "ok": true,
+      "info": "{\"offen\":true,\"fokusImMenue\":true,\"hauptInert\":true,\"zu\":true,\"fokus\":true,\"inert\":false}"
+    },
+    {
+      "name": "Formular: Vorauswahl aus ?anlass=",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Formular ohne URL: Vorschau-Hinweis sichtbar",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Formular: Prüfung zeigt Fehlerliste, Fokus darauf, Felder markiert",
+      "ok": true,
+      "info": "{\"liste\":true,\"fokus\":true,\"ungueltig\":5,\"text\":\"Bitte geben Sie eine gültige E-Mail-Adresse an, z. B. name@beispiel.de.\"}"
+    },
+    {
+      "name": "Formular: Gäste > 35 wird abgelehnt",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Formular ohne URL: Vorschau-Meldung + Mail-Ersatz",
+      "ok": true,
+      "info": "Vorschau: Das Formular ist noch nicht verbunden. Bitte schreiben Sie an info@finanzelot.de"
+    },
+    {
+      "name": "Formular ohne URL: keine Anfrage nach außen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Formular ohne URL: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Formular verbunden (202): kein Vorschau-Hinweis",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Formular verbunden (202): Meldung „Danke! Ihre Anfrage ist angekommen.\"",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Formular verbunden: JSON entspricht dem Vertrag",
+      "ok": true,
+      "info": "{\"quelle\":\"mswohldorf\",\"anlass\":\"Firmenevent\",\"datum\":\"2027-06-12\",\"ausweichdatum\":\"2027-06-19\",\"gaeste\":24,\"name\":\"Erika Mustermann\",\"email\":\"erika@example.org\",\"telefon\":\"+49 40 123456\",\"nachricht\":\"Sommerfest für unser Team, gern ab 18 Uhr.\",\"einwilligung\":true,\"website\":\"\",\"dauerMs\":2056}"
+    },
+    {
+      "name": "Formular verbunden (202): sonst keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Formular verbunden (202): keine Skriptfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Formular verbunden (400): kein Vorschau-Hinweis",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Formular verbunden (400): Meldung „Diese Adresse nimmt keine E-Mails an.\"",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Formular verbunden (400): Feld E-Mail markiert",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Formular verbunden (400): sonst keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Formular verbunden (400): keine Skriptfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Formular verbunden (429): kein Vorschau-Hinweis",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Formular verbunden (429): Meldung „sehr viele Anfragen\"",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Formular verbunden (429): sonst keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Formular verbunden (429): keine Skriptfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Formular verbunden (503): kein Vorschau-Hinweis",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Formular verbunden (503): Meldung „abgeschaltet\"",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Formular verbunden (503): sonst keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Formular verbunden (503): keine Skriptfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Formular verbunden (Netzfehler): kein Vorschau-Hinweis",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Formular verbunden (Netzfehler): Meldung „nicht erreichen\"",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Formular verbunden (Netzfehler): sonst keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Formular verbunden (Netzfehler): keine Skriptfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Kompaktformular (Start): leere Felder werden null",
+      "ok": true,
+      "info": "{\"quelle\":\"mswohldorf\",\"anlass\":\"Sonstiges\",\"datum\":null,\"ausweichdatum\":null,\"gaeste\":null,\"name\":\"Max Muster\",\"email\":\"max@example.org\",\"telefon\":null,\"nachricht\":\"Kurze Frage zur Verfügbarkeit im Mai.\",\"einwilligung\":true,\"website\":\"\",\"dauerMs\":3832}"
+    },
+    {
+      "name": "axe / @390: keine WCAG-2.2-AA-Verstöße",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "axe /anlaesse/firmenevent/ @390: keine WCAG-2.2-AA-Verstöße",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "axe /anlaesse/workshop-seminar/ @390: keine WCAG-2.2-AA-Verstöße",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "axe /anlaesse/film-und-foto/ @390: keine WCAG-2.2-AA-Verstöße",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "axe /anlaesse/lesung-ausstellung/ @390: keine WCAG-2.2-AA-Verstöße",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "axe /anlaesse/private-feier/ @390: keine WCAG-2.2-AA-Verstöße",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "axe /geschichte/ @390: keine WCAG-2.2-AA-Verstöße",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "axe /galerie/ @390: keine WCAG-2.2-AA-Verstöße",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "axe /anfrage/ @390: keine WCAG-2.2-AA-Verstöße",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "axe /impressum/ @390: keine WCAG-2.2-AA-Verstöße",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "axe /datenschutz/ @390: keine WCAG-2.2-AA-Verstöße",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "axe /gibt-es-nicht/ @390: keine WCAG-2.2-AA-Verstöße",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "axe / @1440: keine WCAG-2.2-AA-Verstöße",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "axe /anlaesse/firmenevent/ @1440: keine WCAG-2.2-AA-Verstöße",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "axe /anlaesse/workshop-seminar/ @1440: keine WCAG-2.2-AA-Verstöße",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "axe /anlaesse/film-und-foto/ @1440: keine WCAG-2.2-AA-Verstöße",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "axe /anlaesse/lesung-ausstellung/ @1440: keine WCAG-2.2-AA-Verstöße",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "axe /anlaesse/private-feier/ @1440: keine WCAG-2.2-AA-Verstöße",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "axe /geschichte/ @1440: keine WCAG-2.2-AA-Verstöße",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "axe /galerie/ @1440: keine WCAG-2.2-AA-Verstöße",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "axe /anfrage/ @1440: keine WCAG-2.2-AA-Verstöße",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "axe /impressum/ @1440: keine WCAG-2.2-AA-Verstöße",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "axe /datenschutz/ @1440: keine WCAG-2.2-AA-Verstöße",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "axe /gibt-es-nicht/ @1440: keine WCAG-2.2-AA-Verstöße",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "JSON-LD: EventVenue/LocalBusiness mit Geo und 35 Gästen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Kanonische URL auf www.mswohldorf.de",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Produktiv-Build ohne noindex",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Sitemap enthält alle 11 Seiten, ohne 404",
+      "ok": true,
+      "info": "11"
+    },
+    {
+      "name": "robots.txt verweist auf Sitemap",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Vorschau-Build: jede Seite noindex,nofollow + Band",
+      "ok": true,
+      "info": "12 Seiten"
+    },
+    {
+      "name": "CSP (verbunden): connect-src enthält das Anfrage-Ziel",
+      "ok": true,
+      "info": ""
+    }
+  ],
+  "gewicht": {
+    "390": {
+      "lcp": {
+        "ms": 184,
+        "element": "SPAN.wort",
+        "url": ""
+      },
+      "ladezeitMsLokal": 195,
+      "beimLadenKB": 155,
+      "nachTypKB": {
+        "stylesheet": 15,
+        "font": 83,
+        "image": 33,
+        "document": 16,
+        "script": 8
+      },
+      "beimLaden": [
+        "stylesheet 9 kB /_astro/Basis.CP7TgkyV.css",
+        "stylesheet 2 kB /_astro/index.PpNcyjiI.css",
+        "stylesheet 1 kB /_astro/Lightbox.tSWfEd92.css",
+        "font 36 kB /_astro/fraunces-latin-wght-normal.ukD16Tqj.woff2",
+        "stylesheet 2 kB /_astro/ZweiKlick.DLyXcA8b.css",
+        "stylesheet 1 kB /_astro/AnfrageFormular.Bq6uzhcP.css",
+        "image 18 kB /_astro/poster-hoch.FK7CNsWj_cV6re.avif",
+        "document 16 kB /",
+        "font 47 kB /_astro/inter-latin-wght-normal.Dx4kXJAl.woff2",
+        "script 1 kB /_astro/Zeitleiste.astro_astro_type_script_index_0_lang.CuK3wq_s.js",
+        "script 2 kB /_astro/Hero.astro_astro_type_script_index_0_lang.B5jupHYU.js",
+        "script 1 kB /_astro/Lightbox.astro_astro_type_script_index_0_lang._f59Zq0z.js",
+        "script 2 kB /_astro/Basis.astro_astro_type_script_index_0_lang.DX37LMHJ.js",
+        "script 3 kB /_astro/AnfrageFormular.astro_astro_type_script_index_0_lang.DMeIQh3h.js",
+        "image 15 kB /_astro/ms-wohldorf-2024.DNJParMR_l2WSa.avif",
+        "script 0 kB /_astro/bewegung.Ci3i6uZa.js"
+      ],
+      "nachgeladen3D": [
+        "script 130 kB /_astro/szene.CkxC-Xqd.js",
+        "image 50 kB /_astro/schiff-freigestellt.DdGuIU0V.webp"
+      ],
+      "nachgeladen3DKB": 180
+    },
+    "1440": {
+      "lcp": {
+        "ms": 188,
+        "element": "SPAN.wort",
+        "url": ""
+      },
+      "ladezeitMsLokal": 187,
+      "beimLadenKB": 238,
+      "nachTypKB": {
+        "stylesheet": 15,
+        "font": 83,
+        "document": 16,
+        "image": 116,
+        "script": 8
+      },
+      "beimLaden": [
+        "stylesheet 9 kB /_astro/Basis.CP7TgkyV.css",
+        "font 36 kB /_astro/fraunces-latin-wght-normal.ukD16Tqj.woff2",
+        "stylesheet 2 kB /_astro/index.PpNcyjiI.css",
+        "stylesheet 2 kB /_astro/ZweiKlick.DLyXcA8b.css",
+        "document 16 kB /",
+        "stylesheet 1 kB /_astro/Lightbox.tSWfEd92.css",
+        "stylesheet 1 kB /_astro/AnfrageFormular.Bq6uzhcP.css",
+        "image 45 kB /_astro/poster-quer.D0oYptdo_2hupnp.avif",
+        "font 47 kB /_astro/inter-latin-wght-normal.Dx4kXJAl.woff2",
+        "script 1 kB /_astro/Zeitleiste.astro_astro_type_script_index_0_lang.CuK3wq_s.js",
+        "script 2 kB /_astro/Hero.astro_astro_type_script_index_0_lang.B5jupHYU.js",
+        "script 3 kB /_astro/AnfrageFormular.astro_astro_type_script_index_0_lang.DMeIQh3h.js",
+        "script 1 kB /_astro/Lightbox.astro_astro_type_script_index_0_lang._f59Zq0z.js",
+        "script 2 kB /_astro/Basis.astro_astro_type_script_index_0_lang.DX37LMHJ.js",
+        "image 33 kB /_astro/ms-wohldorf-2024.DNJParMR_aAIpt.avif",
+        "image 11 kB /_astro/einlaufen-sandtorhafen-2017.C4uSAOB5_2pTnSV.avif",
+        "script 0 kB /_astro/bewegung.Ci3i6uZa.js",
+        "image 26 kB /_astro/ms-wohldorf-2024.DNJParMR_ZmoDdl.avif"
+      ],
+      "nachgeladen3D": [
+        "script 130 kB /_astro/szene.CkxC-Xqd.js",
+        "image 50 kB /_astro/schiff-freigestellt.DdGuIU0V.webp"
+      ],
+      "nachgeladen3DKB": 180
+    }
+  },
+  "axe": {
+    "/@390": [],
+    "/anlaesse/firmenevent/@390": [],
+    "/anlaesse/workshop-seminar/@390": [],
+    "/anlaesse/film-und-foto/@390": [],
+    "/anlaesse/lesung-ausstellung/@390": [],
+    "/anlaesse/private-feier/@390": [],
+    "/geschichte/@390": [],
+    "/galerie/@390": [],
+    "/anfrage/@390": [],
+    "/impressum/@390": [],
+    "/datenschutz/@390": [],
+    "/gibt-es-nicht/@390": [],
+    "/@1440": [],
+    "/anlaesse/firmenevent/@1440": [],
+    "/anlaesse/workshop-seminar/@1440": [],
+    "/anlaesse/film-und-foto/@1440": [],
+    "/anlaesse/lesung-ausstellung/@1440": [],
+    "/anlaesse/private-feier/@1440": [],
+    "/geschichte/@1440": [],
+    "/galerie/@1440": [],
+    "/anfrage/@1440": [],
+    "/impressum/@1440": [],
+    "/datenschutz/@1440": [],
+    "/gibt-es-nicht/@1440": []
+  },
+  "beispielAnfrage": {
+    "quelle": "mswohldorf",
+    "anlass": "Firmenevent",
+    "datum": "2027-06-12",
+    "ausweichdatum": "2027-06-19",
+    "gaeste": 24,
+    "name": "Erika Mustermann",
+    "email": "erika@example.org",
+    "telefon": "+49 40 123456",
+    "nachricht": "Sommerfest für unser Team, gern ab 18 Uhr.",
+    "einwilligung": true,
+    "website": "",
+    "dauerMs": 2056
+  },
+  "ergebnis": {
+    "gesamt": 178,
+    "fehlgeschlagen": 0
+  }
+}
