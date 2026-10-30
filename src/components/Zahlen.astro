@@ -1,0 +1,61 @@
+---
+import { FAKTEN } from '../config';
+
+// 165 m² und 607 Fahrgäste: Presse-PDF „Alles unter einem Dach“, boote, Mai 2019 (alte Website).
+const zahlen = [
+  { wert: FAKTEN.baujahr, start: 1900, einheit: '', titel: 'Baujahr', text: `als ${FAKTEN.herkunft}` },
+  { wert: FAKTEN.maxGaeste, start: 0, einheit: '', titel: 'Gäste', text: 'finden heute an Bord Platz' },
+  { wert: FAKTEN.nutzflaecheM2, start: 0, einheit: ' m²', titel: 'Nutzfläche', text: 'an Bord' },
+  { wert: FAKTEN.fahrgaesteFrueher, start: 0, einheit: '', titel: 'Fahrgäste', text: 'fasste ihr Schiffstyp einst' },
+];
+---
+
+<section class="zahlen auf-dunkel" aria-labelledby="zahlen-titel">
+  <div class="seite-breite py-16 lg:py-20">
+    <h2 id="zahlen-titel" class="sr-only">Die MS Wohldorf in Zahlen</h2>
+    <ul class="grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-4" data-reveal-gruppe>
+      {
+        zahlen.map((z) => (
+          <li class="zahl" data-reveal>
+            <p class="zahl-wert font-display">
+              <span class="sr-only">{z.wert}{z.einheit}</span>
+              <span aria-hidden="true" data-zaehler={z.wert} data-start={z.start}>
+                {z.wert}
+              </span>
+              {z.einheit && <span aria-hidden="true" class="zahl-einheit">{z.einheit}</span>}
+            </p>
+            <p class="mt-2 text-sm font-semibold tracking-[0.16em] text-messing-hell uppercase">{z.titel}</p>
+            <p class="mt-1 text-nebel">{z.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .zahlen {
+    background: var(--color-tiefe);
+    color: var(--color-schaum);
+  }
+  .zahl {
+    position: relative;
+    padding-left: 1.1rem;
+    border-left: 1px solid rgb(224 184 114 / 0.35);
+  }
+  .zahl-einheit {
+    font-size: 0.45em;
+    letter-spacing: 0;
+  }
+  .zahl-wert {
+    font-size: clamp(2.6rem, 1.6rem + 3.6vw, 4.6rem);
+    line-height: 1;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums lining-nums;
+    letter-spacing: -0.02em;
+    background: linear-gradient(180deg, var(--color-schaum), var(--color-messing-hell));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+</style>

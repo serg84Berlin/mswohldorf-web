@@ -1,0 +1,258 @@
+---
+import { Picture } from 'astro:assets';
+import Basis from '../layouts/Basis.astro';
+import Hero from '../components/Hero.astro';
+import Zahlen from '../components/Zahlen.astro';
+import AnlassKarten from '../components/AnlassKarten.astro';
+import Zeitleiste from '../components/Zeitleiste.astro';
+import GalerieRaster from '../components/GalerieRaster.astro';
+import Lightbox from '../components/Lightbox.astro';
+import ZweiKlick from '../components/ZweiKlick.astro';
+import Stimmen from '../components/Stimmen.astro';
+import PresseFilm from '../components/PresseFilm.astro';
+import Anfahrt from '../components/Anfahrt.astro';
+import AnfrageFormular from '../components/AnfrageFormular.astro';
+import Welle from '../components/Welle.astro';
+import Symbol from '../components/Symbol.astro';
+import { FOTOS_START, FOTO_DROHNE_2024 } from '../data/bilder';
+import { FAKTEN, KONTAKT, MEDIEN, SEITE } from '../config';
+
+const eckdaten = [
+  { symbol: 'personen', text: `Bis zu ${FAKTEN.maxGaeste} Gäste` },
+  { symbol: 'anker', text: `HADAG-Fähre von ${FAKTEN.baujahr}, Umbau ${FAKTEN.umbau}` },
+  { symbol: 'feier', text: 'Küche mit Geräten an Bord' },
+  { symbol: 'karte', text: 'Süderelbe, Parkplätze vor der Tür' },
+] as const;
+---
+
+<Basis
+  titel="MS Wohldorf — Eventschiff in Hamburg für bis zu 35 Gäste"
+  beschreibung={SEITE.beschreibung}
+  ueberHero
+  fussVon="var(--color-sand-hell)"
+>
+  <Hero />
+
+  <!-- Kurzvorstellung -->
+  <section id="vorstellung" class="bg-schaum" aria-labelledby="vorstellung-titel">
+    <div class="seite-breite grid gap-12 py-16 lg:grid-cols-[1fr_1.05fr] lg:items-center lg:gap-16 lg:py-24">
+      <div data-reveal="links">
+        <p class="eyebrow">Willkommen an Bord</p>
+        <h2 id="vorstellung-titel" class="titel-mittel mt-4 text-tiefe">Die besondere Location für bis zu {FAKTEN.maxGaeste} Personen.</h2>
+        <div class="lead mt-6 grid gap-4 text-grau">
+          <p>
+            Die MS Wohldorf ist eine ehemalige HADAG-Hafenfähre: {FAKTEN.baujahr} in Dienst gestellt, viele Jahre im Einsatz auf der Elbe
+            und {FAKTEN.umbau} zum Büro- und Veranstaltungsschiff umgebaut. Heute liegt sie auf der Süderelbe — an einer kleinen
+            Privatstraße, mit Parkplätzen vor der Tür.
+          </p>
+          <p>
+            TV-Produktion, Fotoshooting, Lesung, Ausstellung, Präsentation, Brainstorming-Tag oder Business-Essen — oder was Ihnen
+            sonst noch einfällt. Wie es an Bord aussieht, sehen Sie vorab im 3D-Rundgang.
+          </p>
+        </div>
+        <ul class="mt-8 grid gap-3 sm:grid-cols-2" data-reveal-gruppe>
+          {
+            eckdaten.map((e) => (
+              <li class="eckdatum" data-reveal>
+                <Symbol name={e.symbol} class="size-5 shrink-0 text-petrol" />
+                <span>{e.text}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div class="vorstellung-bild" data-reveal="zoom" data-kippen>
+        <Picture
+          src={FOTO_DROHNE_2024.bild}
+          alt={FOTO_DROHNE_2024.alt}
+          formats={['avif', 'webp']}
+          widths={[480, 720, 1000, 1280]}
+          sizes="(min-width: 1024px) 38rem, 100vw"
+          loading="lazy"
+          class="wellenbild-img"
+        />
+        <div class="vorstellung-plakette" aria-hidden="true">
+          <span class="font-display text-3xl leading-none">{FAKTEN.baujahr}</span>
+          <span class="mt-1 text-[0.65rem] font-semibold tracking-[0.2em] uppercase">Baujahr</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Welle von="var(--color-schaum)" nach="var(--color-tiefe)" />
+  <Zahlen />
+  <Welle von="var(--color-tiefe)" nach="var(--color-sand-hell)" />
+
+  <!-- Anlässe -->
+  <section id="anlaesse" class="bg-sand-hell" aria-labelledby="anlaesse-titel">
+    <div class="seite-breite py-16 lg:py-24">
+      <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between" data-reveal>
+        <div class="max-w-2xl">
+          <p class="eyebrow">Anlässe</p>
+          <h2 id="anlaesse-titel" class="titel-mittel mt-4 text-tiefe">Wofür Sie die Wohldorf buchen können.</h2>
+        </div>
+        <p class="max-w-md text-grau">
+          Fünf Wege an Bord — und Raum für Ihre eigene Idee. Wählen Sie Ihren Anlass für Details und passende Bilder.
+        </p>
+      </div>
+      <div class="mt-12">
+        <AnlassKarten />
+      </div>
+    </div>
+  </section>
+
+  <Welle von="var(--color-sand-hell)" nach="var(--color-nacht)" />
+  <Zeitleiste variante="kurz" />
+  <Welle von="var(--color-nacht)" nach="var(--color-schaum)" />
+
+  <!-- Galerie-Teaser -->
+  <section class="bg-schaum" aria-labelledby="galerie-titel">
+    <div class="seite-breite py-16 lg:py-24">
+      <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between" data-reveal>
+        <div class="max-w-2xl">
+          <p class="eyebrow">Galerie</p>
+          <h2 id="galerie-titel" class="titel-mittel mt-4 text-tiefe">Ein erster Blick an Bord.</h2>
+        </div>
+        <a href="/galerie/" class="knopf knopf-dunkel self-start lg:self-auto">Zur Galerie <Symbol name="pfeil" /></a>
+      </div>
+      <GalerieRaster fotos={FOTOS_START} class="mt-12" sammlung="start" />
+    </div>
+  </section>
+
+  <Welle von="var(--color-schaum)" nach="var(--color-tiefe)" />
+
+  <!-- 3D-Rundgang -->
+  <section id="rundgang" class="rundgang auf-dunkel" aria-labelledby="rundgang-titel">
+    <div class="seite-breite grid gap-10 py-16 lg:grid-cols-[0.8fr_1.2fr] lg:items-center lg:gap-14 lg:py-24">
+      <div data-reveal="links">
+        <p class="eyebrow">3D-Rundgang</p>
+        <h2 id="rundgang-titel" class="titel-mittel mt-4 text-schaum">Gehen Sie schon heute an Bord.</h2>
+        <p class="lead mt-6 text-nebel">
+          Im 3D-Rundgang bewegen Sie sich frei durch das Schiff — ideal, um Ablauf, Gästezahl und Motive zu planen.
+        </p>
+        <p class="mt-4 text-nebel">
+          Der Rundgang entstand am früheren Liegeplatz im Sandtorhafen. Er wird von Matterport bereitgestellt und erst nach Ihrem Klick
+          geladen.
+        </p>
+      </div>
+      <div data-reveal="rechts">
+        <ZweiKlick
+          art="matterport"
+          src={`${MEDIEN.matterport}&play=1`}
+          titel="3D-Rundgang durch die MS Wohldorf"
+          anbieter="Matterport"
+          direkt={MEDIEN.matterport}
+          poster={FOTO_DROHNE_2024.bild}
+          format="16 / 10"
+        />
+      </div>
+    </div>
+  </section>
+
+  <Welle von="var(--color-tiefe)" nach="var(--color-sand-hell)" />
+  <Stimmen />
+  <Welle von="var(--color-sand-hell)" nach="var(--color-schaum)" />
+  <PresseFilm />
+  <Welle von="var(--color-schaum)" nach="var(--color-tiefe)" />
+  <Anfahrt />
+  <Welle von="var(--color-tiefe)" nach="var(--color-sand-hell)" />
+
+  <!-- Anfrage -->
+  <section id="anfrage-kurz" class="bg-sand-hell" aria-labelledby="anfrage-kurz-titel" data-anfrage-verbergen>
+    <div class="seite-breite grid gap-12 py-16 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16 lg:py-24">
+      <div data-reveal="links">
+        <p class="eyebrow">Anfrage</p>
+        <h2 id="anfrage-kurz-titel" class="titel-mittel mt-4 text-tiefe">Erzählen Sie uns von Ihrem Anlass.</h2>
+        <p class="lead mt-6 text-grau">Anlass, Wunschtermin und Gästezahl genügen für den Anfang. Wir melden uns persönlich bei Ihnen.</p>
+        <p class="mt-8 text-grau">Lieber direkt? Ihr Ansprechpartner ist {KONTAKT.person}.</p>
+        <a class="mt-2 flex items-center gap-2 text-lg font-semibold text-petrol hover:underline" href={`tel:${KONTAKT.telefonLink}`}>
+          <Symbol name="telefon" class="size-5" />{KONTAKT.telefon}
+        </a>
+        <a class="mt-1 flex items-center gap-2 text-lg font-semibold text-petrol hover:underline" href={`mailto:${KONTAKT.mail}`}>
+          <Symbol name="mail" class="size-5" />{KONTAKT.mail}
+        </a>
+      </div>
+      <div class="formular-karte" data-reveal="rechts">
+        <AnfrageFormular id="anfrage-start" kompakt />
+      </div>
+    </div>
+  </section>
+
+  <Lightbox />
+</Basis>
+
+<style>
+  .bg-schaum {
+    background: var(--color-schaum);
+  }
+  .bg-sand-hell {
+    background: var(--color-sand-hell);
+  }
+  .text-tiefe {
+    color: var(--color-tiefe);
+  }
+  .eckdatum {
+    display: flex;
+    gap: 0.7rem;
+    align-items: flex-start;
+    padding: 0.9rem 1rem;
+    border-radius: 0.9rem;
+    background: #fff;
+    border: 1px solid rgb(11 26 42 / 0.07);
+    color: var(--color-tinte);
+    font-weight: 500;
+  }
+  .vorstellung-bild {
+    --rx: 0deg;
+    --ry: 0deg;
+    position: relative;
+    border-radius: 1.6rem;
+    transform: perspective(1200px) rotateX(var(--rx)) rotateY(var(--ry));
+    transition: transform 0.7s var(--ease-welle);
+    transform-style: preserve-3d;
+  }
+  .vorstellung-bild.kippt {
+    transition: transform 0.12s linear;
+  }
+  .vorstellung-bild :global(picture),
+  .vorstellung-bild :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 1.6rem;
+    box-shadow: 0 50px 90px -50px rgb(6 18 31 / 0.7);
+  }
+  .vorstellung-plakette {
+    position: absolute;
+    left: -0.75rem;
+    bottom: -1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.1rem 1.3rem;
+    border-radius: 1.1rem;
+    background: var(--color-tiefe);
+    color: var(--color-messing-hell);
+    box-shadow: 0 24px 50px -24px rgb(6 18 31 / 0.8);
+    transform: translateZ(60px);
+  }
+  @media (min-width: 1024px) {
+    .vorstellung-plakette {
+      left: -2rem;
+      bottom: -2rem;
+    }
+  }
+  .rundgang {
+    color: var(--color-schaum);
+    background:
+      radial-gradient(70% 70% at 0% 0%, rgb(200 150 62 / 0.12), transparent 60%),
+      var(--color-tiefe);
+  }
+  .formular-karte {
+    padding: clamp(1.25rem, 3vw, 2.25rem);
+    border-radius: 1.6rem;
+    background: var(--color-schaum);
+    border: 1px solid rgb(11 26 42 / 0.08);
+    box-shadow: 0 40px 80px -50px rgb(6 18 31 / 0.5);
+  }
+</style>

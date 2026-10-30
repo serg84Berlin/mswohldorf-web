@@ -1,0 +1,918 @@
+{
+  "hinweis": "Wird von scripts/alte-seite-holen.mjs gefüllt (Galerie der bisherigen Website). Je Bild: datei (relativ zu src/assets/galerie), alt, titel, anlaesse (Slugs aus src/data/anlaesse.ts) und optional hero: true.",
+  "bilder": [
+    {
+      "datei": "images/galerie/04_aussenbereich/wohldorf-schiffs-location-101.jpg",
+      "kategorie": "aussen",
+      "galerie": "Aussenbereich",
+      "altOriginal": "MS Wohldorf - Schiffslocation in Hamburg",
+      "alt": "Der Ponton am Liegeplatz, rechts die weiße Bordwand der Wohldorf.",
+      "groesse": [
+        1004,
+        1500
+      ]
+    },
+    {
+      "datei": "images/galerie/04_aussenbereich/wohldorf-schiffs-location-102.jpg",
+      "kategorie": "aussen",
+      "galerie": "Aussenbereich",
+      "altOriginal": "MS Wohldorf - Schiffslocation in Hamburg",
+      "alt": "Ponton mit orangefarbenen Lukendeckeln, dahinter das grüne Ufer der Süderelbe.",
+      "groesse": [
+        1500,
+        1004
+      ]
+    },
+    {
+      "datei": "images/galerie/04_aussenbereich/wohldorf-schiffs-location-103.jpg",
+      "kategorie": "aussen",
+      "galerie": "Aussenbereich",
+      "altOriginal": "MS Wohldorf - Schiffslocation in Hamburg",
+      "alt": "Ponton an der Bordwand, Blick die Süderelbe hinunter.",
+      "groesse": [
+        1500,
+        1004
+      ]
+    },
+    {
+      "datei": "images/galerie/04_aussenbereich/wohldorf-schiffs-location-104.jpg",
+      "kategorie": "aussen",
+      "galerie": "Aussenbereich",
+      "altOriginal": "MS Wohldorf - Schiffslocation in Hamburg",
+      "alt": "Ponton mit orangefarbenem Container und Lukendeckeln.",
+      "groesse": [
+        1500,
+        1004
+      ]
+    },
+    {
+      "datei": "images/galerie/04_aussenbereich/wohldorf-schiffs-location-105.jpg",
+      "kategorie": "aussen",
+      "galerie": "Aussenbereich",
+      "altOriginal": "MS Wohldorf - Schiffslocation in Hamburg",
+      "alt": "Gangway vom Ufer hinunter zum Ponton.",
+      "groesse": [
+        1500,
+        1004
+      ]
+    },
+    {
+      "datei": "images/galerie/04_aussenbereich/wohldorf-schiffs-location-106.jpg",
+      "kategorie": "aussen",
+      "galerie": "Aussenbereich",
+      "altOriginal": "MS Wohldorf - Schiffslocation in Hamburg",
+      "alt": "Poller am Ponton, dahinter die Süderelbe.",
+      "groesse": [
+        1500,
+        1004
+      ]
+    },
+    {
+      "datei": "images/galerie/04_aussenbereich/wohldorf-schiffs-location-107.jpg",
+      "kategorie": "aussen",
+      "galerie": "Aussenbereich",
+      "altOriginal": "MS Wohldorf - Schiffslocation in Hamburg",
+      "alt": "Zugang zur Gangway am Ufer, im Grünen.",
+      "groesse": [
+        1500,
+        1004
+      ]
+    },
+    {
+      "datei": "images/galerie/04_aussenbereich/wohldorf-schiffs-location-108.jpg",
+      "kategorie": "aussen",
+      "galerie": "Aussenbereich",
+      "altOriginal": "MS Wohldorf - Schiffslocation in Hamburg",
+      "alt": "Dalben in der Süderelbe, im Hintergrund eine Brücke.",
+      "groesse": [
+        1500,
+        1004
+      ]
+    },
+    {
+      "datei": "images/galerie/04_aussenbereich/wohldorf-schiffs-location-109.jpg",
+      "kategorie": "aussen",
+      "galerie": "Aussenbereich",
+      "altOriginal": "MS Wohldorf - Schiffslocation in Hamburg",
+      "alt": "Gangway zwischen Büschen, dahinter das Schiff.",
+      "groesse": [
+        1500,
+        1004
+      ]
+    },
+    {
+      "datei": "images/galerie/04_aussenbereich/wohldorf-schiffs-location-110.jpg",
+      "kategorie": "aussen",
+      "galerie": "Aussenbereich",
+      "altOriginal": "MS Wohldorf - Schiffslocation in Hamburg",
+      "alt": "Dalben mit Seezeichen im Wasser.",
+      "groesse": [
+        1004,
+        1500
+      ]
+    },
+    {
+      "datei": "images/galerie/04_aussenbereich/wohldorf-schiffs-location-111.jpg",
+      "kategorie": "aussen",
+      "galerie": "Aussenbereich",
+      "altOriginal": "MS Wohldorf - Schiffslocation in Hamburg",
+      "alt": "Blick von der Gangway auf ein kleines Boot am Ponton.",
+      "groesse": [
+        1004,
+        1500
+      ]
+    },
+    {
+      "datei": "images/galerie/04_aussenbereich/wohldorf-schiffs-location-112.jpg",
+      "kategorie": "aussen",
+      "galerie": "Aussenbereich",
+      "altOriginal": "MS Wohldorf - Schiffslocation in Hamburg",
+      "alt": "Pontonkante mit Geländer, im Hintergrund Dalben und Brücke.",
+      "groesse": [
+        1500,
+        1004
+      ]
+    },
+    {
+      "datei": "images/galerie/04_aussenbereich/wohldorf-schiffs-location-113.jpg",
+      "kategorie": "aussen",
+      "galerie": "Aussenbereich",
+      "altOriginal": "MS Wohldorf - Schiffslocation in Hamburg",
+      "alt": "Poller und gelbes Geländer am Ponton.",
+      "groesse": [
+        1500,
+        1004
+      ]
+    },
+    {
+      "datei": "images/galerie/04_aussenbereich/wohldorf-schiffs-location-114.jpg",
+      "kategorie": "aussen",
+      "galerie": "Aussenbereich",
+      "altOriginal": "MS Wohldorf - Schiffslocation in Hamburg",
+      "alt": "Der Schriftzug „Wohldorf“ am Bug, davor das Geländer.",
+      "groesse": [
+        1500,
+        1004
+      ]
+    },
+    {
+      "datei": "images/galerie/04_aussenbereich/wohldorf-schiffs-location-115.jpg",
+      "kategorie": "aussen",
+      "galerie": "Aussenbereich",
+      "altOriginal": "MS Wohldorf - Schiffslocation in Hamburg",
+      "alt": "Poller vor der Bordwand mit Bullauge.",
+      "groesse": [
+        1500,
+        1004
+      ]
+    },
+    {
+      "datei": "images/galerie/04_aussenbereich/wohldorf-schiffs-location-116.jpg",
+      "kategorie": "aussen",
+      "galerie": "Aussenbereich",
+      "altOriginal": "MS Wohldorf - Schiffslocation in Hamburg",
+      "alt": "Dalben mit Kormoranen am Ufer.",
+      "groesse": [
+        1500,
+        1004
+      ]
+    },
+    {
+      "datei": "images/galerie/04_aussenbereich/wohldorf-schiffs-location-117.jpg",
+      "kategorie": "aussen",
+      "galerie": "Aussenbereich",
+      "altOriginal": "MS Wohldorf - Schiffslocation in Hamburg",
+      "alt": "Ponton mit Lukendeckeln, rechts das Schiff.",
+      "groesse": [
+        1500,
+        1004
+      ]
+    },
+    {
+      "datei": "images/galerie/04_aussenbereich/wohldorf-schiffs-location-118.jpg",
+      "kategorie": "aussen",
+      "galerie": "Aussenbereich",
+      "altOriginal": "MS Wohldorf - Schiffslocation in Hamburg",
+      "alt": "Die MS Wohldorf längsseits am Ponton an der Süderelbe, mit Hamburg-Flagge am Mast.",
+      "groesse": [
+        1500,
+        1004
+      ]
+    },
+    {
+      "datei": "images/galerie-startseite/wohldorf01.jpg",
+      "kategorie": "startseite",
+      "galerie": "Galerie der Startseite",
+      "altOriginal": "Elbfähre Wohldorf Hamburg Location",
+      "alt": "Arbeitsplatz an Bord: Holztisch mit Schubladen, Drehstuhl und gusseiserner Heizkörper vor den Fensterreihen.",
+      "groesse": [
+        800,
+        533
+      ]
+    },
+    {
+      "datei": "images/galerie-startseite/wohldorf02.jpg",
+      "kategorie": "startseite",
+      "galerie": "Galerie der Startseite",
+      "altOriginal": "Elbfähre Wohldorf Hamburg Location",
+      "alt": "Großer Arbeitstisch mit Industriegestell, Bildschirm und alter Kommode auf hellen Holzdielen.",
+      "groesse": [
+        800,
+        533
+      ]
+    },
+    {
+      "datei": "images/galerie-startseite/wohldorf03.jpg",
+      "kategorie": "startseite",
+      "galerie": "Galerie der Startseite",
+      "altOriginal": "Elbfähre Wohldorf Hamburg Location",
+      "alt": "Zwei Ohrensessel in Samt — rot-blau und blau-grün — vor den Schiffsfenstern.",
+      "groesse": [
+        800,
+        533
+      ]
+    },
+    {
+      "datei": "images/galerie-startseite/wohldorf04.jpg",
+      "kategorie": "startseite",
+      "galerie": "Galerie der Startseite",
+      "altOriginal": "Elbfähre Wohldorf Hamburg Location",
+      "alt": "Alte Industrielampe vor der Teakholztreppe, dahinter Kaffeesäcke als Wandbespannung.",
+      "groesse": [
+        800,
+        533
+      ]
+    },
+    {
+      "datei": "images/galerie-startseite/wohldorf05.jpg",
+      "kategorie": "startseite",
+      "galerie": "Galerie der Startseite",
+      "altOriginal": "Elbfähre Wohldorf Hamburg Location",
+      "alt": "Silbernes Kaffee- und Teeservice auf der Fensterbank.",
+      "groesse": [
+        800,
+        533
+      ]
+    },
+    {
+      "datei": "images/galerie-startseite/wohldorf06.jpg",
+      "kategorie": "startseite",
+      "galerie": "Galerie der Startseite",
+      "altOriginal": "Elbfähre Wohldorf Hamburg Location",
+      "alt": "Kombüse mit petrolfarbener Holzwand, Herd und Arbeitsplatte aus alten Werkbänken.",
+      "groesse": [
+        800,
+        533
+      ]
+    },
+    {
+      "datei": "images/galerie-startseite/wohldorf07.jpg",
+      "kategorie": "startseite",
+      "galerie": "Galerie der Startseite",
+      "altOriginal": "Elbfähre Wohldorf Hamburg Location",
+      "alt": "Heller Flur mit Lamellenschrank und Teakholztür.",
+      "groesse": [
+        800,
+        533
+      ]
+    },
+    {
+      "datei": "images/galerie-startseite/wohldorf08.jpg",
+      "kategorie": "startseite",
+      "galerie": "Galerie der Startseite",
+      "altOriginal": "Elbfähre Wohldorf Hamburg Location",
+      "alt": "Blick zu den Toiletten: Teakholztür mit „H“, Bullauge und blau gestrichene Kabinen.",
+      "groesse": [
+        800,
+        533
+      ]
+    },
+    {
+      "datei": "images/galerie-startseite/wohldorf09.jpg",
+      "kategorie": "startseite",
+      "galerie": "Galerie der Startseite",
+      "altOriginal": "Elbfähre Wohldorf Hamburg Location",
+      "alt": "Herren-WC mit Urinalen aus ehemaligen Bierfässern.",
+      "groesse": [
+        800,
+        533
+      ]
+    },
+    {
+      "datei": "images/galerie/03_innen/wohldorf_innen_01.jpg",
+      "kategorie": "innen",
+      "galerie": "Die MS Wohldorf von innen",
+      "altOriginal": "MS Wohldorf von innen",
+      "alt": "Heller Flur mit Lamellenschrank und Teakholztür.",
+      "groesse": [
+        1000,
+        667
+      ]
+    },
+    {
+      "datei": "images/galerie/03_innen/wohldorf_innen_02.jpg",
+      "kategorie": "innen",
+      "galerie": "Die MS Wohldorf von innen",
+      "altOriginal": "MS Wohldorf von innen",
+      "alt": "Gelb gestrichene Toilette mit Rettungsring und Eimer.",
+      "groesse": [
+        666,
+        1000
+      ]
+    },
+    {
+      "datei": "images/galerie/03_innen/wohldorf_innen_03.jpg",
+      "kategorie": "innen",
+      "galerie": "Die MS Wohldorf von innen",
+      "altOriginal": "MS Wohldorf von innen",
+      "alt": "Toilette mit gelben Wänden und Bullauge.",
+      "groesse": [
+        666,
+        1000
+      ]
+    },
+    {
+      "datei": "images/galerie/03_innen/wohldorf_innen_04.jpg",
+      "kategorie": "innen",
+      "galerie": "Die MS Wohldorf von innen",
+      "altOriginal": "MS Wohldorf von innen",
+      "alt": "Toilette mit blauem Deckel und Bullauge.",
+      "groesse": [
+        666,
+        1000
+      ]
+    },
+    {
+      "datei": "images/galerie/03_innen/wohldorf_innen_05.jpg",
+      "kategorie": "innen",
+      "galerie": "Die MS Wohldorf von innen",
+      "altOriginal": "MS Wohldorf von innen",
+      "alt": "Waschbecken aus Metall vor der Teakholztür, dahinter blau gestrichene Kabinen.",
+      "groesse": [
+        1000,
+        667
+      ]
+    },
+    {
+      "datei": "images/galerie/03_innen/wohldorf_innen_06.jpg",
+      "kategorie": "innen",
+      "galerie": "Die MS Wohldorf von innen",
+      "altOriginal": "MS Wohldorf von innen",
+      "alt": "Herren-WC mit Urinalen aus ehemaligen Bierfässern.",
+      "groesse": [
+        1000,
+        667
+      ]
+    },
+    {
+      "datei": "images/galerie/03_innen/wohldorf_innen_07.jpg",
+      "kategorie": "innen",
+      "galerie": "Die MS Wohldorf von innen",
+      "altOriginal": "MS Wohldorf von innen",
+      "alt": "Kombüse mit Herd, petrolfarbener Holzwand und Arbeitsplatte aus alten Werkbänken.",
+      "groesse": [
+        1000,
+        667
+      ]
+    },
+    {
+      "datei": "images/galerie/03_innen/wohldorf_innen_08.jpg",
+      "kategorie": "innen",
+      "galerie": "Die MS Wohldorf von innen",
+      "altOriginal": "MS Wohldorf von innen",
+      "alt": "Silbernes Kaffee- und Teeservice auf der Fensterbank, draußen die Elbe.",
+      "groesse": [
+        1000,
+        667
+      ]
+    },
+    {
+      "datei": "images/galerie/03_innen/wohldorf_innen_09.jpg",
+      "kategorie": "innen",
+      "galerie": "Die MS Wohldorf von innen",
+      "altOriginal": "MS Wohldorf von innen",
+      "alt": "Waschbecken unter einer Industrielampe vor petrolfarbener Holzwand.",
+      "groesse": [
+        666,
+        1000
+      ]
+    },
+    {
+      "datei": "images/galerie/03_innen/wohldorf_innen_10.jpg",
+      "kategorie": "innen",
+      "galerie": "Die MS Wohldorf von innen",
+      "altOriginal": "MS Wohldorf von innen",
+      "alt": "Industrielampe vor der Teakholztreppe, dahinter Kaffeesäcke als Wandbespannung.",
+      "groesse": [
+        1000,
+        667
+      ]
+    },
+    {
+      "datei": "images/galerie/03_innen/wohldorf_innen_11.jpg",
+      "kategorie": "innen",
+      "galerie": "Die MS Wohldorf von innen",
+      "altOriginal": "MS Wohldorf von innen",
+      "alt": "Industrielampe, Teaktreppe und ein Kühlschrank im Bulli-Design.",
+      "groesse": [
+        1000,
+        667
+      ]
+    },
+    {
+      "datei": "images/galerie/03_innen/wohldorf_innen_12.jpg",
+      "kategorie": "innen",
+      "galerie": "Die MS Wohldorf von innen",
+      "altOriginal": "MS Wohldorf von innen",
+      "alt": "Waschtisch mit Industrielampe vor den Fenstern.",
+      "groesse": [
+        666,
+        1000
+      ]
+    },
+    {
+      "datei": "images/galerie/03_innen/wohldorf_innen_13.jpg",
+      "kategorie": "innen",
+      "galerie": "Die MS Wohldorf von innen",
+      "altOriginal": "MS Wohldorf von innen",
+      "alt": "Kühlschrank im Bulli-Design neben der Treppe.",
+      "groesse": [
+        666,
+        1000
+      ]
+    },
+    {
+      "datei": "images/galerie/03_innen/wohldorf_innen_14.jpg",
+      "kategorie": "innen",
+      "galerie": "Die MS Wohldorf von innen",
+      "altOriginal": "MS Wohldorf von innen",
+      "alt": "Teakholztreppe vor Kaffeesäcken mit Aufdruck.",
+      "groesse": [
+        1000,
+        667
+      ]
+    },
+    {
+      "datei": "images/galerie/03_innen/wohldorf_innen_15.jpg",
+      "kategorie": "innen",
+      "galerie": "Die MS Wohldorf von innen",
+      "altOriginal": "MS Wohldorf von innen",
+      "alt": "Lange Arbeitsplatte aus alten Werkbänken unter der Fensterreihe der Kombüse.",
+      "groesse": [
+        1000,
+        667
+      ]
+    },
+    {
+      "datei": "images/galerie/03_innen/wohldorf_innen_16.jpg",
+      "kategorie": "innen",
+      "galerie": "Die MS Wohldorf von innen",
+      "altOriginal": "MS Wohldorf von innen",
+      "alt": "Kombüse mit Werkbank-Zeile, Bulli-Kühlschrank und Herd vor den Fenstern.",
+      "groesse": [
+        1000,
+        667
+      ]
+    },
+    {
+      "datei": "images/galerie/03_innen/wohldorf_innen_17.jpg",
+      "kategorie": "innen",
+      "galerie": "Die MS Wohldorf von innen",
+      "altOriginal": "MS Wohldorf von innen",
+      "alt": "Alte Kommode aus Holz und Metall unter den Fenstern.",
+      "groesse": [
+        666,
+        1000
+      ]
+    },
+    {
+      "datei": "images/galerie/03_innen/wohldorf_innen_18.jpg",
+      "kategorie": "innen",
+      "galerie": "Die MS Wohldorf von innen",
+      "altOriginal": "MS Wohldorf von innen",
+      "alt": "Höhenverstellbarer Schreibtisch aus Eiche mit Bildschirm, davor Drehhocker.",
+      "groesse": [
+        1000,
+        666
+      ]
+    },
+    {
+      "datei": "images/galerie/03_innen/wohldorf_innen_19.jpg",
+      "kategorie": "innen",
+      "galerie": "Die MS Wohldorf von innen",
+      "altOriginal": "MS Wohldorf von innen",
+      "alt": "Büro auf dem Oberdeck mit Schreibtisch, Hockern und rundum Fenstern.",
+      "groesse": [
+        1000,
+        666
+      ]
+    },
+    {
+      "datei": "images/galerie/03_innen/wohldorf_innen_20.jpg",
+      "kategorie": "innen",
+      "galerie": "Die MS Wohldorf von innen",
+      "altOriginal": "MS Wohldorf von innen",
+      "alt": "Verzierter gusseiserner Heizkörper.",
+      "groesse": [
+        1000,
+        666
+      ]
+    },
+    {
+      "datei": "images/galerie/03_innen/wohldorf_innen_21.jpg",
+      "kategorie": "innen",
+      "galerie": "Die MS Wohldorf von innen",
+      "altOriginal": "MS Wohldorf von innen",
+      "alt": "Zwei Ohrensessel in Samt vor den Schiffsfenstern.",
+      "groesse": [
+        1000,
+        666
+      ]
+    },
+    {
+      "datei": "images/galerie/03_innen/wohldorf_innen_22.jpg",
+      "kategorie": "innen",
+      "galerie": "Die MS Wohldorf von innen",
+      "altOriginal": "MS Wohldorf von innen",
+      "alt": "Stehtisch auf einem Motorrad-Kunstwerk aus Metall.",
+      "groesse": [
+        1000,
+        666
+      ]
+    },
+    {
+      "datei": "images/galerie/03_innen/wohldorf_innen_23.jpg",
+      "kategorie": "innen",
+      "galerie": "Die MS Wohldorf von innen",
+      "altOriginal": "MS Wohldorf von innen",
+      "alt": "Garderobe mit blauen Kleiderbügeln am Fenster.",
+      "groesse": [
+        666,
+        1000
+      ]
+    },
+    {
+      "datei": "images/galerie/03_innen/wohldorf_innen_24.jpg",
+      "kategorie": "innen",
+      "galerie": "Die MS Wohldorf von innen",
+      "altOriginal": "MS Wohldorf von innen",
+      "alt": "Messingfigur eines meditierenden Froschs auf dem Fensterbrett.",
+      "groesse": [
+        1000,
+        666
+      ]
+    },
+    {
+      "datei": "images/galerie/03_innen/wohldorf_innen_25.jpg",
+      "kategorie": "innen",
+      "galerie": "Die MS Wohldorf von innen",
+      "altOriginal": "MS Wohldorf von innen",
+      "alt": "Geöffnete Schatztruhe mit goldenen Münzen.",
+      "groesse": [
+        666,
+        1000
+      ]
+    },
+    {
+      "datei": "images/galerie/03_innen/wohldorf_innen_26.jpg",
+      "kategorie": "innen",
+      "galerie": "Die MS Wohldorf von innen",
+      "altOriginal": "MS Wohldorf von innen",
+      "alt": "Das alte Steuerrad auf der Brücke.",
+      "groesse": [
+        666,
+        1000
+      ]
+    },
+    {
+      "datei": "images/galerie/03_innen/wohldorf_innen_27.jpg",
+      "kategorie": "innen",
+      "galerie": "Die MS Wohldorf von innen",
+      "altOriginal": "MS Wohldorf von innen",
+      "alt": "Aufgerolltes Tau an einer Teakholztür.",
+      "groesse": [
+        666,
+        1000
+      ]
+    },
+    {
+      "datei": "images/galerie/03_innen/wohldorf_innen_28.jpg",
+      "kategorie": "innen",
+      "galerie": "Die MS Wohldorf von innen",
+      "altOriginal": "MS Wohldorf von innen",
+      "alt": "Teakholztür mit Bullauge und ein Klapptisch im hellen Raum.",
+      "groesse": [
+        1000,
+        666
+      ]
+    },
+    {
+      "datei": "images/galerie/03_innen/wohldorf_innen_29.jpg",
+      "kategorie": "innen",
+      "galerie": "Die MS Wohldorf von innen",
+      "altOriginal": "MS Wohldorf von innen",
+      "alt": "Bullauge in dunklem Holz.",
+      "groesse": [
+        666,
+        1000
+      ]
+    },
+    {
+      "datei": "images/galerie/03_innen/wohldorf_innen_30.jpg",
+      "kategorie": "innen",
+      "galerie": "Die MS Wohldorf von innen",
+      "altOriginal": "MS Wohldorf von innen",
+      "alt": "Teakholztür mit Bullauge, davor eine alte Holztruhe.",
+      "groesse": [
+        666,
+        1000
+      ]
+    },
+    {
+      "datei": "images/galerie/03_innen/wohldorf_innen_31.jpg",
+      "kategorie": "innen",
+      "galerie": "Die MS Wohldorf von innen",
+      "altOriginal": "MS Wohldorf von innen",
+      "alt": "Runder Holztisch mit blauen Samtstühlen im verglasten Raum.",
+      "groesse": [
+        666,
+        1000
+      ]
+    },
+    {
+      "datei": "images/galerie/03_innen/wohldorf_innen_32.jpg",
+      "kategorie": "innen",
+      "galerie": "Die MS Wohldorf von innen",
+      "altOriginal": "MS Wohldorf von innen",
+      "alt": "Runder Tisch mit blauen Samtstühlen, rundum Fenster.",
+      "groesse": [
+        666,
+        1000
+      ]
+    },
+    {
+      "datei": "images/galerie/02_ueberfahrt/wohldorf_ueberfahrt-hamburg_01.jpg",
+      "kategorie": "ueberfahrt",
+      "galerie": "Einzug in den Sandtorhafen in Hamburg 2017",
+      "altOriginal": "MS Wohdorf - Einzug in den Sandtorhafen in Hamburg 2017",
+      "alt": "Mai 2017: Die Wohldorf auf der Elbe vor dem Dock „Elbe 17“.",
+      "groesse": [
+        1000,
+        667
+      ]
+    },
+    {
+      "datei": "images/galerie/02_ueberfahrt/wohldorf_ueberfahrt-hamburg_02.jpg",
+      "kategorie": "ueberfahrt",
+      "galerie": "Einzug in den Sandtorhafen in Hamburg 2017",
+      "altOriginal": "MS Wohdorf - Einzug in den Sandtorhafen in Hamburg 2017",
+      "alt": "Die Wohldorf auf der Elbe, im Hintergrund Kräne und das Hafenufer.",
+      "groesse": [
+        1000,
+        667
+      ]
+    },
+    {
+      "datei": "images/galerie/02_ueberfahrt/wohldorf_ueberfahrt-hamburg_03.jpg",
+      "kategorie": "ueberfahrt",
+      "galerie": "Einzug in den Sandtorhafen in Hamburg 2017",
+      "altOriginal": "MS Wohdorf - Einzug in den Sandtorhafen in Hamburg 2017",
+      "alt": "Einfahrt in den Sandtorhafen: Schaulustige auf der Brücke.",
+      "groesse": [
+        1000,
+        667
+      ]
+    },
+    {
+      "datei": "images/galerie/02_ueberfahrt/wohldorf_ueberfahrt-hamburg_04.jpg",
+      "kategorie": "ueberfahrt",
+      "galerie": "Einzug in den Sandtorhafen in Hamburg 2017",
+      "altOriginal": "MS Wohdorf - Einzug in den Sandtorhafen in Hamburg 2017",
+      "alt": "Die Wohldorf passiert die Brücke am Sandtorhafen, oben Zuschauer.",
+      "groesse": [
+        1000,
+        667
+      ]
+    },
+    {
+      "datei": "images/galerie/02_ueberfahrt/wohldorf_ueberfahrt-hamburg_05.jpg",
+      "kategorie": "ueberfahrt",
+      "galerie": "Einzug in den Sandtorhafen in Hamburg 2017",
+      "altOriginal": "MS Wohdorf - Einzug in den Sandtorhafen in Hamburg 2017",
+      "alt": "Die Wohldorf in der Einfahrt zum Sandtorhafen.",
+      "groesse": [
+        667,
+        1000
+      ]
+    },
+    {
+      "datei": "images/galerie/02_ueberfahrt/wohldorf_ueberfahrt-hamburg_06.jpg",
+      "kategorie": "ueberfahrt",
+      "galerie": "Einzug in den Sandtorhafen in Hamburg 2017",
+      "altOriginal": "MS Wohdorf - Einzug in den Sandtorhafen in Hamburg 2017",
+      "alt": "Die Wohldorf nähert sich dem Sandtorhafen, links die Elbphilharmonie.",
+      "groesse": [
+        1000,
+        667
+      ]
+    },
+    {
+      "datei": "images/galerie/02_ueberfahrt/wohldorf_ueberfahrt-hamburg_07.jpg",
+      "kategorie": "ueberfahrt",
+      "galerie": "Einzug in den Sandtorhafen in Hamburg 2017",
+      "altOriginal": "MS Wohdorf - Einzug in den Sandtorhafen in Hamburg 2017",
+      "alt": "Die Wohldorf in der Hafeneinfahrt zwischen Dalben.",
+      "groesse": [
+        1000,
+        667
+      ]
+    },
+    {
+      "datei": "images/galerie/02_ueberfahrt/wohldorf_ueberfahrt-hamburg_08.jpg",
+      "kategorie": "ueberfahrt",
+      "galerie": "Einzug in den Sandtorhafen in Hamburg 2017",
+      "altOriginal": "MS Wohdorf - Einzug in den Sandtorhafen in Hamburg 2017",
+      "alt": "Die Wohldorf vor der Kulisse von Speicher und Elbphilharmonie.",
+      "groesse": [
+        1000,
+        667
+      ]
+    },
+    {
+      "datei": "images/galerie/02_ueberfahrt/wohldorf_ueberfahrt-hamburg_09.jpg",
+      "kategorie": "ueberfahrt",
+      "galerie": "Einzug in den Sandtorhafen in Hamburg 2017",
+      "altOriginal": "MS Wohdorf - Einzug in den Sandtorhafen in Hamburg 2017",
+      "alt": "Die Wohldorf zwischen Elbphilharmonie und Speicher.",
+      "groesse": [
+        667,
+        1000
+      ]
+    },
+    {
+      "datei": "images/galerie/02_ueberfahrt/wohldorf_ueberfahrt-hamburg_10.jpg",
+      "kategorie": "ueberfahrt",
+      "galerie": "Einzug in den Sandtorhafen in Hamburg 2017",
+      "altOriginal": "MS Wohdorf - Einzug in den Sandtorhafen in Hamburg 2017",
+      "alt": "Die Wohldorf vor der Elbphilharmonie.",
+      "groesse": [
+        1000,
+        667
+      ]
+    },
+    {
+      "datei": "images/galerie/02_ueberfahrt/wohldorf_ueberfahrt-hamburg_11.jpg",
+      "kategorie": "ueberfahrt",
+      "galerie": "Einzug in den Sandtorhafen in Hamburg 2017",
+      "altOriginal": "MS Wohdorf - Einzug in den Sandtorhafen in Hamburg 2017",
+      "alt": "Die Wohldorf vor der gläsernen Elbphilharmonie.",
+      "groesse": [
+        667,
+        1000
+      ]
+    },
+    {
+      "datei": "images/galerie/02_ueberfahrt/wohldorf_ueberfahrt-hamburg_12.jpg",
+      "kategorie": "ueberfahrt",
+      "galerie": "Einzug in den Sandtorhafen in Hamburg 2017",
+      "altOriginal": "MS Wohdorf - Einzug in den Sandtorhafen in Hamburg 2017",
+      "alt": "Die Wohldorf unterhalb der Elbphilharmonie.",
+      "groesse": [
+        667,
+        1000
+      ]
+    },
+    {
+      "datei": "images/galerie/02_ueberfahrt/wohldorf_ueberfahrt-hamburg_13.jpg",
+      "kategorie": "ueberfahrt",
+      "galerie": "Einzug in den Sandtorhafen in Hamburg 2017",
+      "altOriginal": "MS Wohdorf - Einzug in den Sandtorhafen in Hamburg 2017",
+      "alt": "Der Sandtorhafen mit Traditionsschiffen, hinten die Elbphilharmonie.",
+      "groesse": [
+        1000,
+        667
+      ]
+    },
+    {
+      "datei": "images/galerie/02_ueberfahrt/wohldorf_ueberfahrt-hamburg_14.jpg",
+      "kategorie": "ueberfahrt",
+      "galerie": "Einzug in den Sandtorhafen in Hamburg 2017",
+      "altOriginal": "MS Wohdorf - Einzug in den Sandtorhafen in Hamburg 2017",
+      "alt": "Ankunft im Sandtorhafen: die Wohldorf mit dem Schlepper „Crusher“ längsseits.",
+      "groesse": [
+        1000,
+        667
+      ]
+    },
+    {
+      "datei": "images/galerie/01_umbau/wohldorf_umbau_01.jpg",
+      "kategorie": "umbau",
+      "galerie": "Der Umbau 2016",
+      "altOriginal": "MS Wohldorf - während des Umbaus",
+      "alt": "Die Wohldorf an Land auf der Werft, Seitenansicht mit rotem Unterwasserschiff.",
+      "groesse": [
+        1000,
+        667
+      ]
+    },
+    {
+      "datei": "images/galerie/01_umbau/wohldorf_umbau_02.jpg",
+      "kategorie": "umbau",
+      "galerie": "Der Umbau 2016",
+      "altOriginal": "MS Wohldorf - während des Umbaus",
+      "alt": "Die Wohldorf auf der Werft, schräg von vorn, daneben ein Kran.",
+      "groesse": [
+        1000,
+        667
+      ]
+    },
+    {
+      "datei": "images/galerie/01_umbau/wohldorf_umbau_03.jpg",
+      "kategorie": "umbau",
+      "galerie": "Der Umbau 2016",
+      "altOriginal": "MS Wohldorf - während des Umbaus",
+      "alt": "Der Bug der aufgebockten Wohldorf von vorn.",
+      "groesse": [
+        1000,
+        667
+      ]
+    },
+    {
+      "datei": "images/galerie/01_umbau/wohldorf_umbau_04.jpg",
+      "kategorie": "umbau",
+      "galerie": "Der Umbau 2016",
+      "altOriginal": "MS Wohldorf - während des Umbaus",
+      "alt": "Unterwasserschiff mit Propeller, von unten gesehen.",
+      "groesse": [
+        568,
+        667
+      ]
+    },
+    {
+      "datei": "images/galerie/01_umbau/wohldorf_umbau_05.jpg",
+      "kategorie": "umbau",
+      "galerie": "Der Umbau 2016",
+      "altOriginal": "MS Wohldorf - während des Umbaus",
+      "alt": "Das rote Unterwasserschiff mit Propeller unter blauem Himmel.",
+      "groesse": [
+        1000,
+        667
+      ]
+    },
+    {
+      "datei": "images/galerie/01_umbau/wohldorf_umbau_06.jpg",
+      "kategorie": "umbau",
+      "galerie": "Der Umbau 2016",
+      "altOriginal": "MS Wohldorf - während des Umbaus",
+      "alt": "Propeller und Ruder in Nahaufnahme.",
+      "groesse": [
+        1000,
+        667
+      ]
+    },
+    {
+      "datei": "images/galerie/01_umbau/wohldorf_umbau_07.jpg",
+      "kategorie": "umbau",
+      "galerie": "Der Umbau 2016",
+      "altOriginal": "MS Wohldorf - während des Umbaus",
+      "alt": "Der Rumpf der aufgebockten Fähre von unten.",
+      "groesse": [
+        667,
+        1000
+      ]
+    },
+    {
+      "datei": "images/galerie/01_umbau/wohldorf_umbau_08.jpg",
+      "kategorie": "umbau",
+      "galerie": "Der Umbau 2016",
+      "altOriginal": "MS Wohldorf - während des Umbaus",
+      "alt": "Bug und Unterwasserschiff im Hochformat.",
+      "groesse": [
+        667,
+        1000
+      ]
+    },
+    {
+      "datei": "images/galerie/01_umbau/wohldorf_umbau_09.jpg",
+      "kategorie": "umbau",
+      "galerie": "Der Umbau 2016",
+      "altOriginal": "MS Wohldorf - während des Umbaus",
+      "alt": "Die Wohldorf auf dem Werftgelände vor der Halle, links ein Kran.",
+      "groesse": [
+        1000,
+        667
+      ]
+    },
+    {
+      "datei": "images/galerie/01_umbau/wohldorf_umbau_10.jpg",
+      "kategorie": "umbau",
+      "galerie": "Der Umbau 2016",
+      "altOriginal": "MS Wohldorf - während des Umbaus",
+      "alt": "Die Wohldorf an Land neben der Werfthalle.",
+      "groesse": [
+        1000,
+        667
+      ]
+    }
+  ]
+}

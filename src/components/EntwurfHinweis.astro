@@ -1,0 +1,34 @@
+---
+/**
+ * Hinweis „Entwurf — vor Veröffentlichung rechtlich prüfen“.
+ * Abschalten: ENTWURF_HINWEIS_ANZEIGEN in src/config.ts auf false.
+ */
+import { ENTWURF_HINWEIS_ANZEIGEN } from '../config';
+import Symbol from './Symbol.astro';
+---
+
+{
+  ENTWURF_HINWEIS_ANZEIGEN && (
+    <div class="entwurf" role="note">
+      <Symbol name="hinweis" class="size-6 shrink-0" />
+      <p>
+        <strong>Entwurf — vor Veröffentlichung rechtlich prüfen.</strong> Dieser Text ist ein sorgfältig erstellter
+        Entwurf, aber keine Rechtsberatung.
+      </p>
+    </div>
+  )
+}
+
+<style>
+  .entwurf {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    border: 2px solid #b4541a;
+    background: #fff4e8;
+    color: #6b2c05;
+    padding: 1rem 1.15rem;
+    border-radius: 0.9rem;
+    margin-bottom: 2rem;
+  }
+</style>

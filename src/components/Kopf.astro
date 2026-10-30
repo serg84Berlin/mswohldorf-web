@@ -1,0 +1,274 @@
+---
+import { ANLAESSE } from '../data/anlaesse';
+import Logo from './Logo.astro';
+import Symbol from './Symbol.astro';
+
+interface Props {
+  ueberHero?: boolean;
+}
+const { ueberHero = false } = Astro.props;
+const pfad = Astro.url.pathname;
+const aktiv = (p: string) => (pfad === p ? 'page' : undefined);
+const anlassAktiv = pfad.startsWith('/anlaesse/');
+---
+
+<header class:list={['kopf auf-dunkel', { 'kopf-ueber-hero': ueberHero }]} data-kopf>
+  <div class="seite-breite flex h-16 items-center justify-between gap-4 lg:h-[4.75rem]">
+    <a href="/" class="marke group">
+      <Logo class="size-9 transition-transform duration-500 group-hover:rotate-[-8deg] lg:size-10" />
+      <span class="flex flex-col leading-none">
+        <span class="font-display text-[1.28rem] font-semibold tracking-tight lg:text-[1.4rem]">MS Wohldorf</span>
+        <span class="mt-1 text-[0.66rem] font-semibold tracking-[0.2em] text-messing-hell uppercase">Eventschiff · Hamburg</span>
+      </span>
+      <span class="sr-only">, zur Startseite</span>
+    </a>
+
+    <nav aria-label="Hauptnavigation" class="hidden lg:block">
+      <ul class="flex items-center gap-1 text-[0.95rem] font-medium">
+        <li class="aufklapp" data-aufklapp>
+          <button type="button" class="navlink" aria-expanded="false" aria-controls="menue-anlaesse" data-aufklapp-knopf aria-current={anlassAktiv ? 'true' : undefined}>
+            Anlässe
+            <svg viewBox="0 0 12 12" class="size-3 transition-transform" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></svg>
+          </button>
+          <ul id="menue-anlaesse" class="aufklapp-liste karte-glas" data-aufklapp-liste>
+            {
+              ANLAESSE.map((a) => (
+                <li>
+                  <a href={`/anlaesse/${a.slug}/`} aria-current={aktiv(`/anlaesse/${a.slug}/`)}>
+                    <Symbol name={a.symbol} class="size-5 text-messing-hell" />
+                    <span>{a.kartenTitel}</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </li>
+        <li><a class="navlink" href="/geschichte/" aria-current={aktiv('/geschichte/')}>Geschichte</a></li>
+        <li><a class="navlink" href="/galerie/" aria-current={aktiv('/galerie/')}>Galerie</a></li>
+        <li><a class="navlink" href="/#anfahrt">Anfahrt</a></li>
+        <li class="ml-3"><a class="knopf knopf-messing !min-h-11 !px-5" href="/anfrage/" aria-current={aktiv('/anfrage/')} data-magnet>Anfrage</a></li>
+      </ul>
+    </nav>
+
+    <a href="#fuss-navigation" class="menue-knopf lg:hidden" aria-expanded="false" aria-controls="mobil-menue" data-menue-knopf role="button">
+      <span class="menue-text">Menü</span>
+      <span class="menue-striche" aria-hidden="true"><span></span><span></span><span></span></span>
+    </a>
+  </div>
+
+  <div id="mobil-menue" class="mobil-menue lg:hidden" data-mobil-menue hidden>
+    <nav aria-label="Hauptnavigation (mobil)" class="seite-breite pt-6 pb-10">
+      <p class="eyebrow mb-3">Anlässe</p>
+      <ul class="grid gap-1">
+        {
+          ANLAESSE.map((a, i) => (
+            <li class="mobil-eintrag" style={`--i:${i}`}>
+              <a href={`/anlaesse/${a.slug}/`} class="mobil-link" aria-current={aktiv(`/anlaesse/${a.slug}/`)}>
+                <Symbol name={a.symbol} class="size-5 text-messing-hell" />
+                {a.kartenTitel}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <ul class="mt-6 grid gap-1 border-t border-white/15 pt-6">
+        <li class="mobil-eintrag" style="--i:5"><a href="/geschichte/" class="mobil-link mobil-gross" aria-current={aktiv('/geschichte/')}>Geschichte</a></li>
+        <li class="mobil-eintrag" style="--i:6"><a href="/galerie/" class="mobil-link mobil-gross" aria-current={aktiv('/galerie/')}>Galerie</a></li>
+        <li class="mobil-eintrag" style="--i:7"><a href="/#anfahrt" class="mobil-link mobil-gross" data-menue-schliessen>Anfahrt</a></li>
+      </ul>
+      <a href="/anfrage/" class="knopf knopf-messing mt-8 w-full">Jetzt anfragen <Symbol name="pfeil" /></a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .kopf {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 60;
+    color: var(--color-schaum);
+    background: color-mix(in srgb, var(--color-tiefe) 92%, transparent);
+    backdrop-filter: blur(14px) saturate(1.3);
+    -webkit-backdrop-filter: blur(14px) saturate(1.3);
+    border-bottom: 1px solid rgb(255 255 255 / 0.08);
+    transition:
+      background-color 0.4s,
+      border-color 0.4s,
+      transform 0.45s var(--ease-welle);
+  }
+  :global(.js) .kopf-ueber-hero:not(.gescrollt):not(.menue-offen) {
+    background: linear-gradient(to bottom, rgb(6 18 31 / 0.55), transparent);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-color: transparent;
+  }
+  .kopf.versteckt {
+    transform: translateY(-100%);
+  }
+  .marke {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    border-radius: 0.5rem;
+  }
+  .navlink {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.6rem 0.85rem;
+    border-radius: 999px;
+    transition: background-color 0.2s;
+  }
+  .navlink::after {
+    content: '';
+    position: absolute;
+    left: 0.85rem;
+    right: 0.85rem;
+    bottom: 0.3rem;
+    height: 1.5px;
+    background: var(--color-messing-hell);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s var(--ease-welle);
+  }
+  .navlink:hover::after,
+  .navlink[aria-current]::after {
+    transform: scaleX(1);
+  }
+  .navlink:hover {
+    background: rgb(255 255 255 / 0.06);
+  }
+
+  .aufklapp {
+    position: relative;
+  }
+  .aufklapp-liste {
+    position: absolute;
+    top: calc(100% + 0.6rem);
+    left: -0.5rem;
+    min-width: 17rem;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    background-color: rgb(10 29 48 / 0.96);
+    box-shadow: 0 24px 50px -20px rgb(0 0 0 / 0.6);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    /* Schließen: unsichtbar erst nach dem Ausblenden; Öffnen: sofort sichtbar
+       (sonst landet ein schnelles Tab noch nicht in der Liste). */
+    transition:
+      opacity 0.25s,
+      transform 0.35s var(--ease-welle),
+      visibility 0s linear 0.25s;
+  }
+  .aufklapp-liste a {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.7rem 0.8rem;
+    border-radius: 0.65rem;
+  }
+  .aufklapp-liste a:hover,
+  .aufklapp-liste a[aria-current] {
+    background: rgb(255 255 255 / 0.07);
+  }
+  .aufklapp.offen .aufklapp-liste,
+  :global(html:not(.js)) .aufklapp:hover .aufklapp-liste,
+  :global(html:not(.js)) .aufklapp:focus-within .aufklapp-liste {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition-delay: 0s;
+  }
+  .aufklapp.offen [data-aufklapp-knopf] svg {
+    transform: rotate(180deg);
+  }
+
+  .menue-knopf {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 2.75rem;
+    padding: 0.4rem 0.4rem 0.4rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid rgb(255 255 255 / 0.22);
+    font-weight: 600;
+    font-size: 0.92rem;
+  }
+  /* Komponenten-Stile liegen außerhalb der Tailwind-Layer und schlagen deshalb
+     Utilities wie lg:hidden — darum hier ausdrücklich. */
+  @media (min-width: 1024px) {
+    .menue-knopf,
+    .mobil-menue {
+      display: none !important;
+    }
+  }
+  .menue-striche {
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 999px;
+    background: var(--color-messing);
+  }
+  .menue-striche span {
+    position: absolute;
+    width: 0.9rem;
+    height: 1.6px;
+    background: var(--color-tiefe);
+    border-radius: 2px;
+    transition:
+      transform 0.35s var(--ease-welle),
+      opacity 0.2s;
+  }
+  .menue-striche span:nth-child(1) {
+    transform: translateY(-4px);
+  }
+  .menue-striche span:nth-child(3) {
+    transform: translateY(4px);
+  }
+  [aria-expanded='true'] .menue-striche span:nth-child(1) {
+    transform: rotate(45deg);
+  }
+  [aria-expanded='true'] .menue-striche span:nth-child(2) {
+    opacity: 0;
+  }
+  [aria-expanded='true'] .menue-striche span:nth-child(3) {
+    transform: rotate(-45deg);
+  }
+
+  .mobil-menue {
+    background: var(--color-tiefe);
+    height: calc(100dvh - 4rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border-top: 1px solid rgb(255 255 255 / 0.1);
+  }
+  .mobil-link {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.7rem 0.25rem;
+    font-size: 1.1rem;
+    border-radius: 0.5rem;
+  }
+  .mobil-gross {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+  }
+  .mobil-link[aria-current] {
+    color: var(--color-messing-hell);
+  }
+  @keyframes eintrag-auf {
+    from {
+      opacity: 0;
+      transform: translateX(-14px);
+    }
+  }
+  .mobil-menue:not([hidden]) .mobil-eintrag {
+    animation: eintrag-auf 0.55s var(--ease-welle) both;
+    animation-delay: calc(var(--i) * 45ms);
+  }
+</style>

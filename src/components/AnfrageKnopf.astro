@@ -1,0 +1,29 @@
+---
+import Symbol from './Symbol.astro';
+---
+
+<a href="/anfrage/" class="anfrage-schwebend knopf knopf-messing" data-anfrage-schwebend data-magnet>
+  <Symbol name="mail" class="size-5" />
+  <span>Anfrage</span>
+</a>
+
+<style>
+  .anfrage-schwebend {
+    position: fixed;
+    right: max(1rem, env(safe-area-inset-right));
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    z-index: 55;
+    box-shadow:
+      0 1px 0 rgb(255 255 255 / 0.35) inset,
+      0 18px 40px -14px rgb(6 18 31 / 0.65);
+    transition:
+      transform 0.5s var(--ease-welle),
+      opacity 0.35s,
+      background-color 0.25s;
+  }
+  :global(.js) .anfrage-schwebend.weg {
+    opacity: 0;
+    transform: translateY(140%);
+    pointer-events: none;
+  }
+</style>

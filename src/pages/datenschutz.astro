@@ -1,0 +1,172 @@
+---
+/**
+ * Datenschutzerklärung — ENTWURF für genau diese Website.
+ * Vor Veröffentlichung rechtlich prüfen; danach ENTWURF_HINWEIS_ANZEIGEN
+ * in src/config.ts auf false setzen.
+ */
+import Basis from '../layouts/Basis.astro';
+import SeitenKopf from '../components/SeitenKopf.astro';
+import EntwurfHinweis from '../components/EntwurfHinweis.astro';
+import Platzhalter from '../components/Platzhalter.astro';
+import { BETREIBER, KONTAKT } from '../config';
+---
+
+<Basis
+  titel="Datenschutzerklärung"
+  beschreibung="Datenschutzerklärung der Website der MS Wohldorf: kein Tracking, keine Cookies, Inhalte Dritter nur nach Klick, Anfrageformular."
+  fussVon="var(--color-schaum)"
+>
+  <SeitenKopf eyebrow="Rechtliches" titel="Datenschutzerklärung" lead="Kurz gesagt: Diese Website setzt keine Cookies, misst keine Besuche und lädt Inhalte Dritter erst, wenn Sie es ausdrücklich wollen." />
+  <section class="bg-schaum">
+    <div class="seite-breite max-w-3xl py-12 lg:py-16">
+      <EntwurfHinweis />
+      <div class="fliesstext">
+        <h2 id="verantwortlicher">1. Verantwortlicher</h2>
+        <p>
+          Verantwortlich für die Datenverarbeitung auf dieser Website ist:<br />
+          <strong>{BETREIBER.firma}</strong>, vertreten durch {BETREIBER.vertreter}<br />
+          {BETREIBER.strasse}, {BETREIBER.plz} {BETREIBER.ort}<br />
+          Telefon: <a href={`tel:${KONTAKT.telefonLink}`}>{KONTAKT.telefon}</a><br />
+          E-Mail: <a href={`mailto:${KONTAKT.mail}`}>{KONTAKT.mail}</a>
+        </p>
+        <p>Einen Datenschutzbeauftragten haben wir <Platzhalter inline>benannt / nicht benannt (nicht verpflichtet) — bitte festlegen</Platzhalter>.</p>
+
+        <h2 id="ueberblick">2. Das Wichtigste vorab</h2>
+        <ul>
+          <li>Wir setzen <strong>keine Cookies</strong> und verwenden <strong>keine Analyse- oder Tracking-Werkzeuge</strong>.</li>
+          <li>Beim Aufruf der Seiten werden <strong>keine Inhalte von Drittanbietern</strong> geladen. Schriften, Bilder und Skripte liegen auf unserem eigenen Webspace.</li>
+          <li>Videos (YouTube), der 3D-Rundgang (Matterport) und die interaktive Karte (OpenStreetMap) werden <strong>erst nach Ihrem Klick</strong> geladen („Zwei-Klick-Lösung“).</li>
+          <li>Ein Cookie-Banner ist deshalb nicht nötig.</li>
+        </ul>
+
+        <h2 id="hosting">3. Hosting und Server-Protokolle</h2>
+        <p>
+          Diese Website wird bei <strong>Netlify, Inc.</strong> (San Francisco, USA) gehostet. Beim Aufruf einer Seite verarbeitet Netlify
+          technisch notwendige Daten: IP-Adresse, Datum und Uhrzeit, aufgerufene Adresse, übertragene Datenmenge, Referrer (die zuvor besuchte
+          Seite), Browser und Betriebssystem sowie den Statuscode der Antwort. Das ist nötig, um die Website auszuliefern, ihre Sicherheit
+          zu gewährleisten und Angriffe abzuwehren.
+        </p>
+        <p>
+          Rechtsgrundlage ist unser berechtigtes Interesse an einem sicheren und funktionsfähigen Internetauftritt (Art. 6 Abs. 1 lit. f
+          DSGVO). Mit Netlify haben wir einen Vertrag über die Auftragsverarbeitung (Art. 28 DSGVO) geschlossen. Da Netlify seinen Sitz in den
+          USA hat, können Daten in die USA übermittelt werden; die Übermittlung stützt sich auf die EU-Standardvertragsklauseln (Art. 46 Abs. 2
+          lit. c DSGVO) <Platzhalter inline>und ggf. die Zertifizierung nach dem EU-U.S. Data Privacy Framework (Art. 45 DSGVO) — bitte prüfen</Platzhalter>.
+        </p>
+        <p>Speicherdauer der Protokolle: <Platzhalter inline>laut Netlify-Vertrag/Tarif prüfen und eintragen</Platzhalter>.</p>
+
+        <h2 id="speicher">4. Cookies und Speicherung auf Ihrem Gerät</h2>
+        <p>
+          Wir setzen keine Cookies. Nur wenn Sie im Seitenfuß den Schalter „Bewegung reduzieren“ benutzen, merkt sich Ihr Browser diese Wahl im
+          lokalen Speicher (localStorage, Eintrag <code>mswohldorf-bewegung</code>). Der Eintrag bleibt auf Ihrem Gerät, wird nicht an uns
+          übertragen und lässt sich über die Browser-Einstellungen jederzeit löschen. Rechtsgrundlage ist § 25 Abs. 2 Nr. 2 TDDDG (unbedingt
+          erforderlich für eine von Ihnen ausdrücklich gewünschte Funktion).
+        </p>
+
+        <h2 id="anfrage">5. Anfrageformular</h2>
+        <p>
+          Wenn Sie uns über das Anfrageformular schreiben, verarbeiten wir die Angaben, die Sie dort machen: Anlass, Wunsch- und
+          Ausweichdatum, Gästezahl, Name, E-Mail-Adresse, Telefonnummer (freiwillig) und Ihre Nachricht. Zum Schutz vor automatisierten
+          Spam-Einsendungen übermittelt das Formular außerdem den Inhalt eines für Menschen unsichtbaren Feldes (normalerweise leer) und die Zeit
+          zwischen dem Laden der Seite und dem Absenden. Wir nutzen dafür keinen Dienst eines Drittanbieters (kein „Captcha“).
+        </p>
+        <p>
+          Die Angaben werden verschlüsselt (HTTPS) an unseren eigenen Server übertragen, der in einem Rechenzentrum in Deutschland (EU) betrieben
+          wird <Platzhalter inline>Hosting-Anbieter des Servers nennen</Platzhalter>, und dort in unserem Kundenverwaltungssystem <strong>Zoho CRM</strong>
+          gespeichert. Zoho CRM betreiben wir im Rechenzentrum der EU <Platzhalter inline>Vertragspartner und Sitz (z. B. Zoho Corporation B.V., Niederlande) prüfen</Platzhalter>;
+          mit Zoho besteht ein Vertrag über die Auftragsverarbeitung (Art. 28 DSGVO).
+        </p>
+        <p>
+          Zweck ist die Bearbeitung Ihrer Anfrage und gegebenenfalls die Vorbereitung eines Vertrags. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b
+          DSGVO (vorvertragliche Maßnahmen auf Ihre Anfrage), für freiwillige Angaben wie die Telefonnummer Ihre Einwilligung (Art. 6 Abs. 1
+          lit. a DSGVO), die Sie jederzeit mit Wirkung für die Zukunft widerrufen können. Die Spam-Prüfung beruht auf unserem berechtigten
+          Interesse an einem missbrauchsfreien Formular (Art. 6 Abs. 1 lit. f DSGVO).
+        </p>
+        <p>
+          Wir löschen Ihre Angaben, wenn Ihre Anfrage erledigt ist und keine gesetzlichen Aufbewahrungspflichten (z. B. nach Handels- und
+          Steuerrecht bei einer Buchung) entgegenstehen. <Platzhalter inline>konkrete Löschfrist für unbeantwortete/abgelehnte Anfragen festlegen</Platzhalter>
+        </p>
+
+        <h2 id="email">6. Kontakt per E-Mail</h2>
+        <p>
+          Schreiben Sie uns eine E-Mail, verarbeiten wir Ihre Adresse und den Inhalt Ihrer Nachricht, um Ihr Anliegen zu beantworten
+          (Art. 6 Abs. 1 lit. b bzw. lit. f DSGVO). Für die Löschung gilt Abschnitt 5 entsprechend.
+        </p>
+
+        <h2 id="einbettungen">7. Inhalte Dritter nur nach Klick (Zwei-Klick-Lösung)</h2>
+        <p>
+          Videos, der 3D-Rundgang und die interaktive Karte stammen von Drittanbietern. Wir zeigen zunächst nur ein Vorschaubild von unserem
+          eigenen Webspace. Erst wenn Sie auf „Inhalt laden“ klicken, baut Ihr Browser eine Verbindung zum jeweiligen Anbieter auf. Dabei
+          erhält der Anbieter mindestens Ihre IP-Adresse, die Adresse unserer Seite und technische Angaben zu Ihrem Browser; der Anbieter kann
+          außerdem eigene Cookies oder ähnliche Techniken einsetzen. Rechtsgrundlage ist Ihre Einwilligung durch den Klick (Art. 6 Abs. 1 lit. a
+          DSGVO, § 25 Abs. 1 TDDDG). Die Einwilligung gilt nur für den einzelnen Inhalt und nur für den aktuellen Seitenaufruf; wir speichern sie
+          nicht.
+        </p>
+        <h3>YouTube</h3>
+        <p>
+          Anbieter: Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Wir binden Videos über die Domain
+          youtube-nocookie.com ein („erweiterter Datenschutzmodus“). Nach dem Klick kann es zu einer Übermittlung an Google LLC in den USA
+          kommen; Google ist nach dem EU-U.S. Data Privacy Framework zertifiziert. Mehr:
+          <a href="https://policies.google.com/privacy?hl=de" target="_blank" rel="noopener">Datenschutzerklärung von Google</a>.
+        </p>
+        <h3>Matterport (3D-Rundgang)</h3>
+        <p>
+          Anbieter: Matterport, Inc., USA. Nach dem Klick werden Daten an Matterport übertragen, auch in die USA
+          <Platzhalter inline>Rechtsgrundlage der Übermittlung (DPF-Zertifizierung) prüfen</Platzhalter>. Mehr:
+          <a href="https://matterport.com/de/legal/privacy-policy" target="_blank" rel="noopener">Datenschutzerklärung von Matterport</a>.
+        </p>
+        <h3>OpenStreetMap (interaktive Karte)</h3>
+        <p>
+          Anbieter: OpenStreetMap Foundation, St John's Innovation Centre, Cowley Road, Cambridge, CB4 0WS, Vereinigtes Königreich. Für das
+          Vereinigte Königreich besteht ein Angemessenheitsbeschluss der EU-Kommission (Art. 45 DSGVO). Das statische Kartenbild auf unserer
+          Seite liegt auf unserem eigenen Webspace; dafür wird keine Verbindung zu OpenStreetMap aufgebaut. Mehr:
+          <a href="https://osmfoundation.org/wiki/Privacy_Policy" target="_blank" rel="noopener">Datenschutzerklärung der OSM Foundation</a>.
+        </p>
+        <h3>Links zu Karten-Apps und Videos</h3>
+        <p>
+          Links zu Google Maps, Apple Karten, OpenStreetMap oder YouTube öffnen die Seiten dieser Anbieter in einem neuen Fenster. Erst dann
+          gelten deren Datenschutzbestimmungen; vorher werden keine Daten übertragen.
+        </p>
+
+        <h2 id="schriften">8. Schriftarten</h2>
+        <p>Die verwendeten Schriften (Fraunces, Inter) liegen auf unserem eigenen Webspace. Es besteht keine Verbindung zu Google Fonts oder anderen Schriftdiensten.</p>
+
+        <h2 id="rechte">9. Ihre Rechte</h2>
+        <p>Sie haben gegenüber uns jederzeit das Recht auf</p>
+        <ul>
+          <li>Auskunft über Ihre gespeicherten Daten (Art. 15 DSGVO),</li>
+          <li>Berichtigung unrichtiger Daten (Art. 16 DSGVO),</li>
+          <li>Löschung (Art. 17 DSGVO) und Einschränkung der Verarbeitung (Art. 18 DSGVO),</li>
+          <li>Datenübertragbarkeit (Art. 20 DSGVO),</li>
+          <li>Widerspruch gegen Verarbeitungen auf Grundlage berechtigter Interessen (Art. 21 DSGVO),</li>
+          <li>Widerruf einer Einwilligung mit Wirkung für die Zukunft (Art. 7 Abs. 3 DSGVO).</li>
+        </ul>
+        <p>Eine formlose Nachricht an <a href={`mailto:${KONTAKT.mail}`}>{KONTAKT.mail}</a> genügt.</p>
+        <p>
+          Sie können sich außerdem bei einer Datenschutz-Aufsichtsbehörde beschweren (Art. 77 DSGVO). Für uns zuständig ist:
+          <strong>Der Hamburgische Beauftragte für Datenschutz und Informationsfreiheit</strong>, Ludwig-Erhard-Straße 22, 20459 Hamburg,
+          <a href="https://datenschutz-hamburg.de" target="_blank" rel="noopener">datenschutz-hamburg.de</a>.
+        </p>
+
+        <h2 id="sicherheit">10. Sicherheit</h2>
+        <p>
+          Alle Seiten und das Formular werden ausschließlich verschlüsselt übertragen (HTTPS/TLS). Eine automatisierte Entscheidungsfindung
+          einschließlich Profiling findet nicht statt.
+        </p>
+
+        <p class="text-sm opacity-75">Stand: Oktober 2026 (Entwurf)</p>
+      </div>
+    </div>
+  </section>
+</Basis>
+
+<style>
+  .bg-schaum {
+    background: var(--color-schaum);
+  }
+  code {
+    font-size: 0.9em;
+    padding: 0.1rem 0.35rem;
+    border-radius: 0.3rem;
+    background: rgb(11 26 42 / 0.06);
+  }
+</style>

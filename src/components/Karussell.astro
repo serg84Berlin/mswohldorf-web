@@ -1,0 +1,163 @@
+---
+/**
+ * 3D-Karussell (Zylinder aus CSS-3D-Transforms). Ziehen, Pfeiltasten,
+ * Knöpfe; jede Fläche öffnet die Lightbox. Nur mit JS und erlaubter
+ * Bewegung — sonst zeigt die Galerie-Seite das normale Raster.
+ */
+import { Picture } from 'astro:assets';
+import type { Foto } from '../data/bilder';
+import { grosseQuellen } from '../lib/bildquellen';
+import Symbol from './Symbol.astro';
+
+interface Props {
+  fotos: Foto[];
+  mindestens?: number;
+}
+const { fotos, mindestens = 10 } = Astro.props;
+const eintraege = await Promise.all(fotos.map(async (f) => ({ foto: f, gross: await grosseQuellen(f.bild) })));
+const anzahl = Math.max(mindestens, eintraege.length);
+const flaechen = Array.from({ length: anzahl }, (_, i) => eintraege[i] ?? null);
+---
+
+<div class="karussell" data-karussell data-lightbox-sammlung="karussell" style={`--anzahl:${anzahl}`}>
+  <div
+    class="k-buehne"
+    tabindex="0"
+    role="region"
+    aria-roledescription="Karussell"
+    aria-label="Fotos der MS Wohldorf im 3D-Karussell. Mit den Pfeiltasten drehen, mit Tab die Bilder ansteuern."
+    data-k-buehne
+  >
+    <div class="k-ring" data-k-ring>
+      {
+        flaechen.map((e, i) =>
+          e ? (
+            <a
+              href={e.gross.src}
+              class="k-flaeche"
+              style={`--i:${i}`}
+              data-k-flaeche
+              data-lightbox-bild
+              data-avif={e.gross.avif}
+              data-webp={e.gross.webp}
+              data-src={e.gross.src}
+              data-breite={e.gross.breite}
+              data-hoehe={e.gross.hoehe}
+              data-alt={e.foto.alt}
+              data-titel={e.foto.titel ? `${e.foto.alt} · ${e.foto.titel}` : e.foto.alt}
+              aria-label={`Bild groß anzeigen: ${e.foto.alt}`}
+            >
+              <Picture src={e.foto.bild} alt="" formats={['webp']} fallbackFormat="webp" widths={[520, 860]} sizes="(min-width: 768px) 34rem, 80vw" quality={74} loading="lazy" draggable="false" />
+            </a>
+          ) : (
+            <span class="k-flaeche k-leer" style={`--i:${i}`} data-k-flaeche aria-hidden="true">
+              <span>Foto folgt</span>
+            </span>
+          ),
+        )
+      }
+    </div>
+  </div>
+  <div class="k-steuerung">
+    <button type="button" class="k-knopf" data-k-zurueck aria-label="Karussell nach links drehen"><Symbol name="links" class="size-6" /></button>
+    <p class="k-zaehler" aria-hidden="true" data-k-zaehler></p>
+    <button type="button" class="k-knopf" data-k-vor aria-label="Karussell nach rechts drehen"><Symbol name="rechts" class="size-6" /></button>
+  </div>
+</div>
+
+<script>
+  import '../scripts/karussell';
+</script>
+
+<style>
+  .karussell {
+    --breite: clamp(12rem, 34vw, 19rem);
+    --schritt: calc(360deg / var(--anzahl));
+    --radius: 30rem;
+    position: relative;
+  }
+  .k-buehne {
+    position: relative;
+    height: calc(var(--breite) * 1.45);
+    perspective: 1500px;
+    perspective-origin: 50% 40%;
+    cursor: grab;
+    touch-action: pan-y;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .k-buehne:active {
+    cursor: grabbing;
+  }
+  .k-ring {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: var(--breite);
+    aspect-ratio: 4 / 5;
+    transform-style: preserve-3d;
+    transform: translate(-50%, -50%) translateZ(calc(-1 * var(--radius))) rotateY(var(--winkel, 0deg));
+  }
+  .k-flaeche {
+    position: absolute;
+    inset: 0;
+    border-radius: 1rem;
+    overflow: hidden;
+    transform: rotateY(calc(var(--i) * var(--schritt))) translateZ(var(--radius));
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    background: var(--color-marine);
+    box-shadow: 0 30px 60px -30px rgb(6 18 31 / 0.6);
+    transition: filter 0.4s;
+  }
+  .k-flaeche :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+  }
+  .k-flaeche:not(.vorn) {
+    filter: brightness(0.78) saturate(0.9);
+  }
+  .k-leer {
+    display: grid;
+    place-items: center;
+    color: var(--color-petrol);
+    font-size: 0.8rem;
+    font-weight: 650;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    background:
+      repeating-linear-gradient(135deg, rgb(15 76 92 / 0.07) 0 10px, transparent 10px 20px),
+      var(--color-sand-hell);
+    border: 1.5px dashed rgb(15 76 92 / 0.35);
+  }
+  .k-steuerung {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    margin-top: 1rem;
+  }
+  .k-knopf {
+    display: inline-grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 999px;
+    background: var(--color-tiefe);
+    color: var(--color-schaum);
+    transition: transform 0.3s var(--ease-welle);
+  }
+  .k-knopf:hover {
+    transform: scale(1.08);
+  }
+  .k-zaehler {
+    min-width: 5rem;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-grau);
+  }
+</style>

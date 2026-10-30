@@ -1,0 +1,143 @@
+---
+/** Anfahrt: statisches Kartenbild (eigene Datei), Links zu Karten-Apps, OSM nur nach Klick. */
+import { Picture } from 'astro:assets';
+import karte from '../assets/karte/anfahrt.png';
+import { LIEGEPLATZ, KARTEN_LINKS } from '../config';
+import Symbol from './Symbol.astro';
+import ZweiKlick from './ZweiKlick.astro';
+
+const koordinaten = `${LIEGEPLATZ.breite.toFixed(6)}, ${LIEGEPLATZ.laenge.toFixed(6)}`;
+---
+
+<section id="anfahrt" class="anfahrt auf-dunkel" aria-labelledby="anfahrt-titel">
+  <div class="seite-breite grid gap-10 py-20 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-14 lg:py-28">
+    <div data-reveal="links">
+      <p class="eyebrow">Anfahrt</p>
+      <h2 id="anfahrt-titel" class="titel-mittel mt-4 text-schaum">So finden Sie an Bord.</h2>
+      <p class="mt-5 text-nebel lead">Die MS Wohldorf liegt {LIEGEPLATZ.beschreibung} — an einer kleinen Privatstraße, mit Parkplätzen vor der Tür.</p>
+
+      <dl class="mt-8 grid gap-5">
+        <div class="anfahrt-zeile">
+          <dt><Symbol name="navi" class="size-5" /> Navi-Adresse</dt>
+          <dd class="text-schaum">{LIEGEPLATZ.navi}</dd>
+        </div>
+        <div class="anfahrt-zeile">
+          <dt><Symbol name="karte" class="size-5" /> Koordinaten</dt>
+          <dd class="text-schaum tabular-nums">{koordinaten}</dd>
+        </div>
+        <div class="anfahrt-zeile">
+          <dt><Symbol name="hinweis" class="size-5" /> Anfahrt</dt>
+          <dd class="text-nebel">{LIEGEPLATZ.hinweis}</dd>
+        </div>
+      </dl>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a class="knopf knopf-messing" href={KARTEN_LINKS.google} target="_blank" rel="noopener" data-magnet>
+          Route in Google Maps <Symbol name="extern" class="size-4" /><span class="sr-only"> (neues Fenster)</span>
+        </a>
+        <a class="knopf knopf-geist text-schaum" href={KARTEN_LINKS.apple} target="_blank" rel="noopener">
+          Apple Karten<span class="sr-only"> (neues Fenster)</span>
+        </a>
+      </div>
+      {
+        !LIEGEPLATZ.barrierefrei && (
+          <p class="barriere mt-8">
+            <Symbol name="hinweis" class="size-5 shrink-0" />
+            <span>
+              <strong>Bitte beachten:</strong> Der Zugang ist nicht barrierefrei.
+            </span>
+          </p>
+        )
+      }
+    </div>
+
+    <div class="grid gap-4" data-reveal="rechts">
+      <figure class="karte-statisch">
+        <Picture
+          src={karte}
+          alt={`Kartenausschnitt: Liegeplatz der MS Wohldorf an der Süderelbe in Finkenriek, Hamburg-Wilhelmsburg (${LIEGEPLATZ.navi}).`}
+          formats={['avif', 'webp']}
+          widths={[480, 800, 1200]}
+          sizes="(min-width: 1024px) 40rem, 100vw"
+          loading="lazy"
+        />
+        <figcaption>
+          Karte: © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener" class="underline">OpenStreetMap-Mitwirkende</a> (ODbL) · statisches Bild, ohne Verbindung zu OSM
+        </figcaption>
+      </figure>
+      <details class="karte-interaktiv">
+        <summary>Interaktive Karte anzeigen</summary>
+        <ZweiKlick
+          art="karte"
+          src={KARTEN_LINKS.osmEinbettung}
+          titel="Interaktive Karte: Liegeplatz der MS Wohldorf"
+          anbieter="OpenStreetMap"
+          direkt={KARTEN_LINKS.osm}
+          format="3 / 2"
+          class="mt-4"
+        />
+      </details>
+    </div>
+  </div>
+</section>
+
+<style>
+  .anfahrt {
+    color: var(--color-schaum);
+    background:
+      radial-gradient(60% 70% at 100% 50%, rgb(43 122 138 / 0.22), transparent 70%),
+      var(--color-tiefe);
+  }
+  .anfahrt-zeile {
+    display: grid;
+    gap: 0.3rem;
+    padding-bottom: 1.1rem;
+    border-bottom: 1px solid rgb(255 255 255 / 0.1);
+  }
+  .anfahrt-zeile dt {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    font-weight: 650;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-messing-hell);
+  }
+  .barriere {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+    padding: 0.9rem 1rem;
+    border-radius: 0.9rem;
+    background: rgb(224 184 114 / 0.12);
+    border: 1px solid rgb(224 184 114 / 0.45);
+    color: var(--color-sand);
+  }
+  .karte-statisch {
+    border-radius: 1.25rem;
+    overflow: hidden;
+    border: 1px solid rgb(255 255 255 / 0.1);
+    box-shadow: 0 40px 80px -40px rgb(0 0 0 / 0.7);
+    background: var(--color-marine);
+  }
+  .karte-statisch :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .karte-statisch figcaption {
+    padding: 0.6rem 0.9rem;
+    font-size: 0.78rem;
+    color: var(--color-nebel);
+  }
+  .karte-interaktiv summary {
+    cursor: pointer;
+    display: inline-flex;
+    padding: 0.5rem 0;
+    font-weight: 600;
+    color: var(--color-messing-hell);
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+</style>

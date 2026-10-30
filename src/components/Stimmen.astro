@@ -1,0 +1,86 @@
+---
+import { Image } from 'astro:assets';
+import { STIMMEN } from '../data/stimmen';
+import Symbol from './Symbol.astro';
+---
+
+<section class="stimmen" aria-labelledby="stimmen-titel">
+  <div class="seite-breite py-20 lg:py-28">
+    <div class="max-w-2xl" data-reveal>
+      <p class="eyebrow">Stimmen</p>
+      <h2 id="stimmen-titel" class="titel-mittel mt-4 text-tiefe">Das sagen unsere Gäste.</h2>
+      <p class="mt-4 text-grau">Zwei Briefe von Partnern der Hamburger Bildungswoche „Wetter.Wasser.Waterkant“, die jedes Jahr an Bord zu Gast war.</p>
+    </div>
+    <ul class="mt-12 grid gap-6 lg:grid-cols-2" data-reveal-gruppe>
+      {
+        STIMMEN.map((s, i) => (
+          <li data-reveal>
+            <figure class="stimme">
+              <Symbol name="zitat" class="size-9 text-messing" />
+              <blockquote class="mt-4 font-display text-[1.35rem] leading-snug text-tiefe">„{s.auszug}“</blockquote>
+              <figcaption class="mt-6 flex items-center gap-4">
+                {s.logo && <Image src={s.logo} alt={s.logoAlt ?? ''} width={56} height={56} class="stimme-logo" loading="lazy" />}
+                <span class="text-sm">
+                  <span class="block font-semibold text-tiefe">{s.name}</span>
+                  {s.zusatz && <span class="block text-grau">{s.zusatz}</span>}
+                  {s.link && (
+                    <a class="textlink" href={s.link.href} target="_blank" rel="noopener">
+                      {s.link.text}
+                      <span class="sr-only"> (neues Fenster)</span>
+                    </a>
+                  )}
+                </span>
+              </figcaption>
+              <details class="stimme-brief">
+                <summary>
+                  Ganzen Brief lesen<span class="sr-only"> von {s.name}</span>
+                </summary>
+                <div class="mt-3 grid gap-3 text-[0.95rem] leading-relaxed text-grau" id={`brief-${i}`}>
+                  {s.absaetze.map((p) => <p>{p}</p>)}
+                </div>
+              </details>
+            </figure>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .stimmen {
+    background: var(--color-sand-hell);
+  }
+  .text-tiefe {
+    color: var(--color-tiefe);
+  }
+  .stimme {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: clamp(1.4rem, 3vw, 2.2rem);
+    border-radius: 1.4rem;
+    background: var(--color-schaum);
+    border: 1px solid rgb(11 26 42 / 0.08);
+    box-shadow: 0 24px 50px -36px rgb(6 18 31 / 0.4);
+  }
+  .stimme :global(.stimme-logo) {
+    width: 3.5rem;
+    height: 3.5rem;
+    object-fit: contain;
+    border-radius: 0.8rem;
+    background: #fff;
+    border: 1px solid rgb(11 26 42 / 0.08);
+    flex: none;
+  }
+  .stimme-brief {
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgb(11 26 42 / 0.1);
+  }
+  .stimme-brief summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--color-petrol);
+  }
+</style>

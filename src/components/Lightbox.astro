@@ -1,0 +1,144 @@
+---
+/** Eine Lightbox pro Seite; Kacheln melden sich über [data-lightbox-bild]. */
+import Symbol from './Symbol.astro';
+---
+
+<dialog class="lightbox" aria-label="Bildansicht" data-lightbox>
+  <div class="lb-kopf">
+    <p class="lb-zaehler" aria-live="polite" data-lb-zaehler></p>
+    <button type="button" class="lb-knopf" data-lb-zu aria-label="Bildansicht schließen">
+      <Symbol name="schliessen" class="size-6" />
+    </button>
+  </div>
+  <div class="lb-buehne" data-lb-buehne>
+    <picture data-lb-bild>
+      <source type="image/avif" />
+      <source type="image/webp" />
+      <img alt="" decoding="async" />
+    </picture>
+  </div>
+  <p class="lb-titel" data-lb-titel></p>
+  <button type="button" class="lb-knopf lb-zurueck" data-lb-zurueck aria-label="Vorheriges Bild">
+    <Symbol name="links" class="size-7" />
+  </button>
+  <button type="button" class="lb-knopf lb-vor" data-lb-vor aria-label="Nächstes Bild">
+    <Symbol name="rechts" class="size-7" />
+  </button>
+</dialog>
+
+<script>
+  import '../scripts/lightbox';
+</script>
+
+<style>
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100dvh;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    color: var(--color-schaum);
+    background: rgb(4 12 21 / 0.96);
+    overflow: hidden;
+  }
+  .lightbox::backdrop {
+    background: rgb(4 12 21 / 0.6);
+    backdrop-filter: blur(6px);
+  }
+  .lightbox[open] {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    animation: lb-auf 0.4s var(--ease-welle);
+  }
+  @keyframes lb-auf {
+    from {
+      opacity: 0;
+    }
+  }
+  .lb-kopf {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: max(0.75rem, env(safe-area-inset-top)) 1rem 0.5rem;
+  }
+  .lb-zaehler {
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    color: var(--color-nebel);
+  }
+  .lb-buehne {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-height: 0;
+    padding: 0 0.5rem;
+    touch-action: pan-y;
+    user-select: none;
+  }
+  .lb-buehne picture,
+  .lb-buehne img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+  .lb-buehne img {
+    width: auto;
+    height: auto;
+    max-height: calc(100dvh - 9rem);
+    object-fit: contain;
+    border-radius: 0.6rem;
+    box-shadow: 0 30px 80px -30px rgb(0 0 0 / 0.8);
+    transition:
+      opacity 0.3s,
+      transform 0.45s var(--ease-welle);
+  }
+  .lb-buehne img.wechselt {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  .lb-titel {
+    min-height: 3rem;
+    padding: 0.75rem 1rem max(1rem, env(safe-area-inset-bottom));
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--color-sand);
+    max-width: 52rem;
+    margin-inline: auto;
+  }
+  .lb-knopf {
+    display: inline-grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.08);
+    border: 1px solid rgb(255 255 255 / 0.16);
+    transition: background-color 0.2s;
+  }
+  .lb-knopf:hover {
+    background: rgb(255 255 255 / 0.16);
+  }
+  .lb-zurueck,
+  .lb-vor {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .lb-zurueck {
+    left: 0.75rem;
+  }
+  .lb-vor {
+    right: 0.75rem;
+  }
+  @media (max-width: 640px) {
+    .lb-zurueck,
+    .lb-vor {
+      top: auto;
+      bottom: max(0.75rem, env(safe-area-inset-bottom));
+      transform: none;
+    }
+  }
+</style>

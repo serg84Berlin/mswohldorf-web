@@ -1,0 +1,299 @@
+---
+/**
+ * Geschichte als Scroll-Erzählung: Der Abschnitt bleibt stehen (sticky),
+ * die Stationen fahren als 3D-Kartenspur seitlich vorbei — angetrieben vom
+ * Scrollen (CSS scroll-timeline, sonst requestAnimationFrame).
+ * Bei reduzierter Bewegung oder ohne JS: ruhige Liste.
+ */
+import { Picture } from 'astro:assets';
+import { STATIONEN } from '../data/geschichte';
+import Symbol from './Symbol.astro';
+import Platzhalter from './Platzhalter.astro';
+
+interface Props {
+  variante?: 'kurz' | 'lang';
+  titelId?: string;
+}
+const { variante = 'kurz', titelId = 'geschichte-titel' } = Astro.props;
+const lang = variante === 'lang';
+const stationen = STATIONEN.filter((s) => lang || !s.nurLang);
+const ZAHLWORT = ['null', 'eine', 'zwei', 'drei', 'vier', 'fünf', 'sechs', 'sieben', 'acht', 'neun', 'zehn'];
+const anzahl = ZAHLWORT[stationen.length] ?? String(stationen.length);
+const Anzahl = anzahl.charAt(0).toUpperCase() + anzahl.slice(1);
+---
+
+<section class="zeitleiste auf-dunkel" aria-labelledby={titelId} data-zeitleiste>
+  <div class="zl-buehne">
+    <div class="zl-spur" data-zl-spur>
+      <div class="zl-intro">
+        <p class="eyebrow">Geschichte</p>
+        <h2 id={titelId} class="titel-mittel mt-4 text-schaum">Von der Hafenfähre zum Ort für Ihren Anlass.</h2>
+        <p class="mt-5 max-w-md text-nebel">
+          {lang ? `${Anzahl} Stationen aus mehr als sechs Jahrzehnten — scrollen Sie sich durch die Zeit.` : `${Anzahl} Stationen, ein Schiff. Scrollen Sie sich durch die Zeit.`}
+        </p>
+        {
+          !lang && (
+            <a href="/geschichte/" class="knopf knopf-geist mt-7 text-schaum">
+              Ganze Geschichte <Symbol name="pfeil" />
+            </a>
+          )
+        }
+        <p class="zl-hinweis mt-8" aria-hidden="true"><Symbol name="pfeilRunter" class="size-4" /> weiter scrollen</p>
+      </div>
+      <ol class="zl-liste">
+        {
+          stationen.map((s, i) => (
+            <li class="zl-karte" data-zl-karte>
+              <div class="zl-karte-innen">
+                <p class="zl-marke font-display">{s.marke}</p>
+                <p class="zl-nr" aria-hidden="true">
+                  {String(i + 1).padStart(2, '0')} / {String(stationen.length).padStart(2, '0')}
+                </p>
+                <h3 class="zl-titel">{s.titel}</h3>
+                {s.foto && (
+                  <div class="zl-bild">
+                    <Picture src={s.foto.bild} alt={s.foto.alt} formats={['avif', 'webp']} widths={[420, 720]} sizes="(min-width: 768px) 26rem, 80vw" quality={68} loading="lazy" />
+                  </div>
+                )}
+                <p class="zl-text">{lang ? s.lang : s.kurz}</p>
+                {s.link && (
+                  <a class="textlink mt-3 inline-flex items-center gap-1.5" href={s.link.href} target="_blank" rel="noopener">
+                    {s.link.text} <Symbol name="extern" class="size-4" />
+                    <span class="sr-only"> (öffnet in neuem Fenster)</span>
+                  </a>
+                )}
+                {lang && s.offen && <Platzhalter class="mt-4 text-nebel">{s.offen}</Platzhalter>}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+    <div class="zl-fortschritt" aria-hidden="true">
+      <div class="seite-breite">
+        <div class="zl-leiste"><span class="zl-balken" data-zl-balken></span></div>
+        <ol class="zl-marken">
+          {stationen.map((s) => <li data-zl-marke>{s.marke}</li>)}
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import '../scripts/zeitleiste';
+</script>
+
+<style>
+  .zeitleiste {
+    --reise: 0px;
+    position: relative;
+    color: var(--color-schaum);
+    background:
+      radial-gradient(70% 60% at 80% 30%, rgb(43 122 138 / 0.25), transparent 60%),
+      radial-gradient(50% 50% at 10% 90%, rgb(200 150 62 / 0.1), transparent 60%),
+      var(--color-nacht);
+  }
+
+  /* ---------- Ruhige Grundform (ohne JS / reduzierte Bewegung) ---------- */
+  .zl-buehne {
+    padding-block: 5rem;
+  }
+  .zl-spur {
+    width: 100%;
+    max-width: 76rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  .zl-liste {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: 2.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+  }
+  .zl-hinweis,
+  .zl-fortschritt {
+    display: none;
+  }
+  .zl-karte-innen {
+    height: 100%;
+    padding: 1.6rem 1.5rem;
+    border-radius: 1.4rem;
+    background: linear-gradient(165deg, rgb(255 255 255 / 0.07), rgb(255 255 255 / 0.02));
+    border: 1px solid rgb(255 255 255 / 0.1);
+  }
+  .zl-marke {
+    font-size: clamp(2.2rem, 1.6rem + 2vw, 3.4rem);
+    line-height: 1;
+    color: var(--color-messing-hell);
+  }
+  .zl-nr {
+    margin-top: 0.6rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: var(--color-nebel);
+  }
+  .zl-titel {
+    margin-top: 0.9rem;
+    font-size: 1.45rem;
+    line-height: 1.2;
+  }
+  .zl-text {
+    margin-top: 0.75rem;
+    color: var(--color-nebel);
+    line-height: 1.6;
+  }
+  .zl-bild {
+    margin-top: 1rem;
+    border-radius: 0.9rem;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+  }
+  .zl-bild :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* ---------- Scroll-Erzählung ---------- */
+  :global(html.js[data-bewegung='an']) .zeitleiste {
+    height: calc(100svh + var(--reise));
+  }
+  :global(html.js[data-bewegung='an']) .zl-buehne {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    overflow: hidden;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    perspective: 1400px;
+  }
+  :global(html.js[data-bewegung='an']) .zl-spur {
+    display: flex;
+    align-items: center;
+    gap: clamp(1.25rem, 3vw, 2.5rem);
+    width: max-content;
+    max-width: none;
+    margin: 0;
+    padding-inline: max(1rem, calc((100vw - 76rem) / 2 + 2rem)) 12vw;
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+  :global(html.js[data-bewegung='an']) .zl-intro {
+    width: min(82vw, 26rem);
+    flex: none;
+  }
+  :global(html.js[data-bewegung='an']) .zl-liste {
+    display: flex;
+    align-items: center;
+    gap: clamp(1.25rem, 3vw, 2.5rem);
+    margin: 0;
+    transform-style: preserve-3d;
+  }
+  :global(html.js[data-bewegung='an']) .zl-karte {
+    width: min(80vw, 27rem);
+    flex: none;
+    transform: rotateY(var(--dreh, 0deg)) translateZ(var(--tiefe, 0px)) scale(var(--gross, 1));
+    opacity: var(--deckung, 1);
+    transition: none;
+  }
+  :global(html.js[data-bewegung='an']) .zl-hinweis {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-messing-hell);
+  }
+  :global(html.js[data-bewegung='an']) .zl-fortschritt {
+    display: block;
+    position: absolute;
+    inset: auto 0 clamp(1rem, 4vh, 2.5rem) 0;
+  }
+  @media (max-height: 560px) {
+    :global(html.js[data-bewegung='an']) .zl-fortschritt {
+      display: none;
+    }
+  }
+  .zl-leiste {
+    height: 2px;
+    background: rgb(255 255 255 / 0.12);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .zl-balken {
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-messing), var(--color-messing-hell));
+    transform-origin: left;
+    transform: scaleX(var(--p, 0));
+  }
+  .zl-marken {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.7rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--color-nebel);
+  }
+  .zl-marken li {
+    transition: color 0.3s;
+  }
+  .zl-marken li.aktiv {
+    color: var(--color-messing-hell);
+  }
+  @media (max-width: 640px) {
+    .zl-marken li:not(.aktiv) {
+      display: none;
+    }
+    .zl-marken {
+      justify-content: flex-end;
+    }
+  }
+
+  /* Wo der Browser es kann: Spur direkt per scroll-timeline bewegen. */
+  @supports (animation-timeline: view()) {
+    :global(html.js[data-bewegung='an']) .zeitleiste {
+      view-timeline-name: --zeitleiste;
+      view-timeline-axis: block;
+    }
+    /* Bewusst Einzel-Eigenschaften statt der Kurzform „animation“: Der
+       CSS-Minifier würde die Zeitachse sonst in die Kurzform falten, wo sie
+       ungültig ist — und die Regel fiele weg. */
+    :global(html.js[data-bewegung='an']) .zl-spur.css-zeitachse {
+      animation-name: zl-fahrt;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: --zeitleiste;
+      animation-range-start: contain 0%;
+      animation-range-end: contain 100%;
+    }
+    :global(html.js[data-bewegung='an']) .zl-balken.css-zeitachse {
+      animation-name: zl-balken;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: --zeitleiste;
+      animation-range-start: contain 0%;
+      animation-range-end: contain 100%;
+    }
+  }
+  @keyframes zl-fahrt {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(calc(-1 * var(--reise)), 0, 0);
+    }
+  }
+  @keyframes zl-balken {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+</style>

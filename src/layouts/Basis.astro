@@ -1,0 +1,160 @@
+---
+import '../styles/global.css';
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import frauncesUrl from '@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2?url';
+import interUrl from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+import Kopf from '../components/Kopf.astro';
+import Fuss from '../components/Fuss.astro';
+import AnfrageKnopf from '../components/AnfrageKnopf.astro';
+import { SEITE, VORSCHAU, KONTAKT, LIEGEPLATZ, FAKTEN, BETREIBER, KARTEN_LINKS } from '../config';
+import { ALTE_BILDER } from '../data/bilder';
+
+interface Props {
+  titel: string;
+  beschreibung: string;
+  /** Bild für Open Graph (Standard: Social-Bild der alten Seite, Wohldorf vor der Elbphilharmonie). */
+  bild?: ImageMetadata;
+  /** Kopfzeile startet durchsichtig über einem dunklen Hero. */
+  ueberHero?: boolean;
+  /** Schwebenden „Anfrage“-Knopf ausblenden (z. B. auf /anfrage/). */
+  ohneAnfrageKnopf?: boolean;
+  /** Zusätzliche strukturierte Daten (JSON-LD) dieser Seite. */
+  strukturiert?: Record<string, unknown>[];
+  /** Farbe des letzten Abschnitts (für die Welle in den Footer). */
+  fussVon?: string;
+}
+
+const { titel, beschreibung, bild = ALTE_BILDER.social, ueberHero = false, ohneAnfrageKnopf = false, strukturiert = [], fussVon } = Astro.props;
+
+const kanonisch = new URL(Astro.url.pathname, SEITE.url).href;
+const ogBild = await getImage({ src: bild, width: 1200, height: 630, fit: 'cover', format: 'jpg', quality: 82 });
+const ogBildUrl = new URL(ogBild.src, SEITE.url).href;
+
+const ort: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': ['EventVenue', 'LocalBusiness'],
+  '@id': `${SEITE.url}/#schiff`,
+  name: SEITE.name,
+  description: SEITE.beschreibung,
+  url: `${SEITE.url}/`,
+  image: ogBildUrl,
+  email: KONTAKT.mail,
+  telephone: KONTAKT.telefon,
+  faxNumber: KONTAKT.fax,
+  maximumAttendeeCapacity: FAKTEN.maxGaeste,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: LIEGEPLATZ.strasse,
+    postalCode: LIEGEPLATZ.plz,
+    addressLocality: LIEGEPLATZ.ort,
+    addressCountry: 'DE',
+  },
+  geo: { '@type': 'GeoCoordinates', latitude: LIEGEPLATZ.breite, longitude: LIEGEPLATZ.laenge },
+  hasMap: KARTEN_LINKS.google,
+  parentOrganization: {
+    '@type': 'Organization',
+    name: BETREIBER.firma,
+    address: { '@type': 'PostalAddress', streetAddress: BETREIBER.strasse, postalCode: BETREIBER.plz, addressLocality: BETREIBER.ort, addressCountry: 'DE' },
+  },
+  amenityFeature: [{ '@type': 'LocationFeatureSpecification', name: 'Küche mit Geräten', value: true }],
+};
+const jsonLd = JSON.stringify([ort, ...strukturiert]).replace(/</g, '\\u003c');
+const seitenTitel = titel.includes(SEITE.name) ? titel : `${titel} | ${SEITE.name}`;
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{seitenTitel}</title>
+    <meta name="description" content={beschreibung} />
+    <link rel="canonical" href={kanonisch} />
+    {VORSCHAU && <meta name="robots" content="noindex,nofollow" />}
+    <meta name="theme-color" content="#0a1d30" />
+    <meta name="color-scheme" content="light" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:site_name" content={SEITE.name} />
+    <meta property="og:title" content={seitenTitel} />
+    <meta property="og:description" content={beschreibung} />
+    <meta property="og:url" content={kanonisch} />
+    <meta property="og:image" content={ogBildUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preload" href={frauncesUrl} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={interUrl} as="font" type="font/woff2" crossorigin />
+
+    <!-- Vor dem ersten Bild: JS-Klasse und Bewegungswunsch setzen (kein Flackern). -->
+    <script is:inline>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add('js');
+        var w = null;
+        try { w = localStorage.getItem('mswohldorf-bewegung'); } catch (e) {}
+        var os = false;
+        try { os = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+        d.setAttribute('data-bewegung', w === 'aus' || w === 'an' ? w : os ? 'aus' : 'an');
+      })();
+    </script>
+    <script type="application/ld+json" set:html={jsonLd} />
+    <slot name="kopf" />
+  </head>
+  <body class="min-h-dvh antialiased">
+    <a class="sprunglink" href="#inhalt">Zum Inhalt springen</a>
+    {VORSCHAU && <div class="vorschau-band" role="note">Vorschau</div>}
+    <Kopf ueberHero={ueberHero} />
+    <main id="inhalt" tabindex="-1">
+      <slot />
+    </main>
+    <Fuss von={fussVon} />
+    {!ohneAnfrageKnopf && <AnfrageKnopf />}
+
+    <!-- Wasser-Verzerrung für Bild-Hover (nur Zeiger-Geräte, nur bei erlaubter Bewegung) -->
+    <svg class="absolute size-0 overflow-hidden" aria-hidden="true" focusable="false">
+      <filter id="filter-wasser" x="-4%" y="-4%" width="108%" height="108%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.008 0.026" numOctaves="2" seed="7" result="rauschen">
+          <animate attributeName="baseFrequency" dur="7s" values="0.008 0.026;0.011 0.034;0.008 0.026" repeatCount="indefinite"></animate>
+        </feTurbulence>
+        <feDisplacementMap in="SourceGraphic" in2="rauschen" scale="9" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+      </filter>
+    </svg>
+
+    <script>
+      import '../scripts/seite';
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  main:focus {
+    outline: none;
+  }
+  .vorschau-band {
+    position: fixed;
+    z-index: 90;
+    top: 1.1rem;
+    left: -2.6rem;
+    width: 10rem;
+    transform: rotate(-45deg);
+    background: #b4541a;
+    color: #fff;
+    text-align: center;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 0.3rem 0;
+    box-shadow: 0 4px 14px rgb(0 0 0 / 0.3);
+    pointer-events: none;
+  }
+</style>

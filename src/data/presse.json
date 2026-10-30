@@ -1,0 +1,26 @@
+{
+  "hinweis": "Von scripts/alte-seite-holen.mjs aus quelle/alte-seite erzeugt; titel/medium/text von Hand gepflegt (bleiben beim nächsten Lauf erhalten). PDFs liegen unter public/pdf/.",
+  "eintraege": [
+    {
+      "datei": "boote_magazin_mai2019.pdf",
+      "titel": "Alles unter einem Dach",
+      "medium": "boote, Mai 2019 (Rubrik Refit)",
+      "text": "Wie aus der ausgemusterten HADAG-Fähre ein Büro- und Veranstaltungsschiff wurde — vom Kauf in Wilhelmshaven bis zum neuen Anstrich in Lauenburg.",
+      "bild": "images/presse_boote.jpg"
+    },
+    {
+      "datei": "umbauen_und_modernisieren.pdf",
+      "titel": "Büro ahoi!",
+      "medium": "Umbauen + Modernisieren (Reportage)",
+      "text": "Vintage-Charme hinter den Fenstern eines „Linienbusses ohne Räder“: Reportage über den Umbau der Wohldorf.",
+      "bild": "images/presse_umbauen_modernisieren.jpg"
+    },
+    {
+      "url": "https://www.bau-welt.de/renovierung/renovierungsideen/buero-ahoi-arbeiten-auf-einer-faehre.html",
+      "titel": "Büro ahoi! Arbeitsplatz auf Wellen",
+      "medium": "bau-welt.de (online)",
+      "text": "Online-Bericht über das Arbeiten an Bord der umgebauten Fähre.",
+      "bild": "images/presse_bauwelt.jpg"
+    }
+  ]
+}

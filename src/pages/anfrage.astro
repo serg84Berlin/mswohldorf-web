@@ -1,0 +1,116 @@
+---
+import Basis from '../layouts/Basis.astro';
+import SeitenKopf from '../components/SeitenKopf.astro';
+import AnfrageFormular from '../components/AnfrageFormular.astro';
+import Symbol from '../components/Symbol.astro';
+import { KONTAKT, FAKTEN } from '../config';
+
+const schritte = [
+  { titel: 'Anfrage senden', text: 'Anlass, Wunschtermin und Gästezahl genügen für den Anfang.' },
+  { titel: 'Persönliche Antwort', text: 'Wir melden uns persönlich bei Ihnen und klären die Details.' },
+  { titel: 'Willkommen an Bord', text: `Ihr Anlass auf der MS Wohldorf — für bis zu ${FAKTEN.maxGaeste} Gäste.` },
+];
+---
+
+<Basis
+  titel="Anfrage — MS Wohldorf, Eventschiff in Hamburg"
+  beschreibung="Fragen Sie die MS Wohldorf für Ihr Firmenevent, Ihren Workshop, Ihren Dreh, Ihre Lesung oder Ihre private Feier an — unverbindlich, für bis zu 35 Gäste."
+  ohneAnfrageKnopf
+  fussVon="var(--color-schaum)"
+>
+  <SeitenKopf eyebrow="Anfrage" titel="Ihre Anfrage für die MS Wohldorf." lead="Erzählen Sie uns, was Sie planen — unverbindlich. Wir melden uns persönlich bei Ihnen." />
+
+  <section class="bg-schaum" aria-label="Formular und Kontakt">
+    <div class="seite-breite grid gap-12 py-12 lg:grid-cols-[1.35fr_0.65fr] lg:gap-14 lg:py-16">
+      <div class="formular-karte" data-reveal>
+        <AnfrageFormular id="anfrage-seite" />
+      </div>
+      <aside class="grid content-start gap-8" aria-label="So geht es weiter" data-reveal="rechts">
+        <div>
+          <h2 class="font-display text-2xl text-tiefe">So geht es weiter</h2>
+          <ol class="mt-5 grid gap-5">
+            {
+              schritte.map((s, i) => (
+                <li class="schritt">
+                  <span class="schritt-nr" aria-hidden="true">{i + 1}</span>
+                  <span>
+                    <span class="block font-semibold text-tiefe">{s.titel}</span>
+                    <span class="block text-grau">{s.text}</span>
+                  </span>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+        <div class="kontakt-kasten">
+          <h2 class="font-display text-xl text-tiefe">Lieber direkt?</h2>
+          <p class="mt-2 text-grau">Ihr Ansprechpartner: {KONTAKT.person}</p>
+          <a class="mt-3 flex items-center gap-2 font-semibold text-petrol hover:underline" href={`tel:${KONTAKT.telefonLink}`}>
+            <Symbol name="telefon" class="size-5" />{KONTAKT.telefon}
+          </a>
+          <a class="mt-2 flex items-center gap-2 font-semibold text-petrol hover:underline" href={`mailto:${KONTAKT.mail}`}>
+            <Symbol name="mail" class="size-5" />{KONTAKT.mail}
+          </a>
+        </div>
+        <a href="/#rundgang" class="rundgang-link">
+          <Symbol name="wuerfel" class="size-6 text-messing-hell" />
+          <span>
+            <span class="block font-semibold">Vorab an Bord?</span>
+            <span class="block text-sm text-nebel">Zum 3D-Rundgang</span>
+          </span>
+        </a>
+      </aside>
+    </div>
+  </section>
+</Basis>
+
+<style>
+  .bg-schaum {
+    background: var(--color-schaum);
+  }
+  .text-tiefe {
+    color: var(--color-tiefe);
+  }
+  .formular-karte {
+    align-self: start;
+    padding: clamp(1.25rem, 3vw, 2.5rem);
+    border-radius: 1.6rem;
+    background: #fff;
+    border: 1px solid rgb(11 26 42 / 0.08);
+    box-shadow: 0 40px 80px -50px rgb(6 18 31 / 0.45);
+  }
+  .schritt {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .schritt-nr {
+    display: inline-grid;
+    place-items: center;
+    flex: none;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 999px;
+    background: var(--color-tiefe);
+    color: var(--color-messing-hell);
+    font-family: var(--font-display);
+  }
+  .kontakt-kasten {
+    padding: 1.4rem;
+    border-radius: 1.2rem;
+    background: var(--color-sand-hell);
+  }
+  .rundgang-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem 1.3rem;
+    border-radius: 1.2rem;
+    background: var(--color-tiefe);
+    color: var(--color-schaum);
+    transition: transform 0.4s var(--ease-welle);
+  }
+  .rundgang-link:hover {
+    transform: translateY(-3px);
+  }
+</style>
