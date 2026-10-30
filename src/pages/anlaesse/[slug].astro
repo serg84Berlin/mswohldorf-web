@@ -9,7 +9,7 @@ import Platzhalter from '../../components/Platzhalter.astro';
 import Symbol from '../../components/Symbol.astro';
 import Welle from '../../components/Welle.astro';
 import { ANLAESSE, type Anlass } from '../../data/anlaesse';
-import { fotosFuerAnlass, ANZAHL_UEBERNOMMEN } from '../../data/bilder';
+import { fotosFuerAnlass } from '../../data/bilder';
 import { SEITE } from '../../config';
 
 export const getStaticPaths = (() => ANLAESSE.map((a) => ({ params: { slug: a.slug }, props: { anlass: a } }))) satisfies GetStaticPaths;
@@ -18,7 +18,7 @@ interface Props {
   anlass: Anlass;
 }
 const { anlass: a } = Astro.props;
-const fotos = fotosFuerAnlass(a.slug, 6);
+const fotos = fotosFuerAnlass(a.slug);
 const symbole = ['personen', 'anker', 'wuerfel', 'karte'] as const;
 const brotkrumen = {
   '@context': 'https://schema.org',
@@ -67,17 +67,42 @@ const brotkrumen = {
     <div class="seite-breite pb-14 lg:pb-20">
       <div class="offen-kasten" data-reveal>
         <h2 id="offen-titel" class="font-display text-2xl text-tiefe">Gut zu wissen</h2>
-        <p class="mt-2 text-grau">Diese Details klären wir gern persönlich mit Ihnen:</p>
         <ul class="mt-5 grid gap-3 md:grid-cols-2">
           {
-            a.offen.map((o) => (
-              <li>
-                <Platzhalter class="text-tinte">{o}</Platzhalter>
+            a.wissen.map((w) => (
+              <li class="wissen">
+                <Symbol name="haken" class="mt-0.5 size-5 shrink-0 text-petrol" />
+                <span>{w}</span>
               </li>
             ))
           }
         </ul>
+        {
+          a.offen.length > 0 && (
+            <>
+              <p class="mt-6 text-grau">Diese Details klären wir gern persönlich mit Ihnen:</p>
+              <ul class="mt-3 grid gap-3 md:grid-cols-2">
+                {a.offen.map((o) => (
+                  <li>
+                    <Platzhalter class="text-tinte">{o}</Platzhalter>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )
+        }
       </div>
+      {
+        a.zitat && (
+          <figure class="anlass-zitat mt-8" data-reveal>
+            <Symbol name="zitat" class="size-8 text-messing" />
+            <blockquote class="mt-3 font-display text-xl leading-snug text-tiefe">„{a.zitat.text}“</blockquote>
+            <figcaption class="mt-3 text-sm text-grau">
+              <span class="font-semibold text-tiefe">{a.zitat.name}</span> · {a.zitat.zusatz}
+            </figcaption>
+          </figure>
+        )
+      }
     </div>
   </section>
 
@@ -89,8 +114,7 @@ const brotkrumen = {
         <h2 id="bilder-titel" class="titel-mittel text-tiefe">Eindrücke</h2>
         <a href="/galerie/" class="textlink font-semibold">Alle Fotos ansehen</a>
       </div>
-      {ANZAHL_UEBERNOMMEN === 0 && <Platzhalter class="mt-6 text-tinte">Passende Fotos für „{a.kartenTitel}" aus der bisherigen Galerie auswählen (src/data/galerie.json → anlaesse).</Platzhalter>}
-      <GalerieRaster fotos={fotos} mindestens={3} class="mt-10" sammlung={`anlass-${a.slug}`} />
+      <GalerieRaster fotos={fotos} class="mt-10" sammlung={`anlass-${a.slug}`} />
 
       <div class="cta-band auf-dunkel mt-16" data-reveal="zoom" data-anfrage-verbergen>
         <div>
@@ -140,6 +164,21 @@ const brotkrumen = {
     border-radius: 0.8rem;
     background: var(--color-tiefe);
     color: var(--color-messing-hell);
+  }
+  .wissen {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+    padding: 0.8rem 1rem;
+    border-radius: 0.75rem;
+    background: var(--color-schaum);
+    border: 1px solid rgb(11 26 42 / 0.07);
+  }
+  .anlass-zitat {
+    padding: clamp(1.25rem, 3vw, 2rem);
+    border-radius: 1.4rem;
+    border-left: 4px solid var(--color-messing);
+    background: #fff;
   }
   .offen-kasten {
     padding: clamp(1.25rem, 3vw, 2rem);

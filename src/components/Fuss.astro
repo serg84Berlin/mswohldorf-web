@@ -3,7 +3,6 @@ import { ANLAESSE } from '../data/anlaesse';
 import { BETREIBER, KONTAKT, LIEGEPLATZ, KARTEN_LINKS, FAKTEN } from '../config';
 import Logo from './Logo.astro';
 import Symbol from './Symbol.astro';
-import Platzhalter from './Platzhalter.astro';
 import Welle from './Welle.astro';
 
 interface Props {
@@ -31,24 +30,19 @@ const jahr = new Date().getFullYear();
 
     <div class="md:col-span-4 lg:col-span-3">
       <h2 class="eyebrow mb-4 !font-sans">Kontakt</h2>
+      <p class="mb-3 font-semibold text-schaum">{KONTAKT.person}</p>
       <ul class="grid gap-3">
+        <li>
+          <a class="inline-flex items-center gap-2.5 text-schaum hover:text-messing-hell" href={`tel:${KONTAKT.telefonLink}`}>
+            <Symbol name="telefon" class="size-5 text-messing-hell" />{KONTAKT.telefon}
+          </a>
+        </li>
         <li>
           <a class="inline-flex items-center gap-2.5 text-schaum hover:text-messing-hell" href={`mailto:${KONTAKT.mail}`}>
             <Symbol name="mail" class="size-5 text-messing-hell" />{KONTAKT.mail}
           </a>
         </li>
-        <li class="inline-flex items-start gap-2.5">
-          <Symbol name="telefon" class="mt-0.5 size-5 shrink-0 text-messing-hell" />
-          {
-            KONTAKT.telefon ? (
-              <a class="text-schaum hover:text-messing-hell" href={`tel:${KONTAKT.telefonLink}`}>
-                {KONTAKT.telefon}
-              </a>
-            ) : (
-              <Platzhalter inline>Telefon (und ggf. Fax) wie auf der bisherigen Seite</Platzhalter>
-            )
-          }
-        </li>
+        <li class="text-sm">Telefax: {KONTAKT.fax}</li>
       </ul>
       <p class="mt-4 text-sm">Betreiber: {BETREIBER.firma}, {BETREIBER.ort}</p>
     </div>

@@ -8,16 +8,16 @@ import Kopf from '../components/Kopf.astro';
 import Fuss from '../components/Fuss.astro';
 import AnfrageKnopf from '../components/AnfrageKnopf.astro';
 import { SEITE, VORSCHAU, KONTAKT, LIEGEPLATZ, FAKTEN, BETREIBER, KARTEN_LINKS } from '../config';
-import { FOTO_DROHNE_2024 } from '../data/bilder';
+import { ALTE_BILDER } from '../data/bilder';
 
 interface Props {
   titel: string;
   beschreibung: string;
-  /** Bild für Open Graph (Standard: Drohnenbild der Wohldorf). */
+  /** Bild für Open Graph (Standard: Social-Bild der alten Seite, Wohldorf vor der Elbphilharmonie). */
   bild?: ImageMetadata;
   /** Kopfzeile startet durchsichtig über einem dunklen Hero. */
   ueberHero?: boolean;
-  /** Schwebenden „Anfrage"-Knopf ausblenden (z. B. auf /anfrage/). */
+  /** Schwebenden „Anfrage“-Knopf ausblenden (z. B. auf /anfrage/). */
   ohneAnfrageKnopf?: boolean;
   /** Zusätzliche strukturierte Daten (JSON-LD) dieser Seite. */
   strukturiert?: Record<string, unknown>[];
@@ -25,7 +25,7 @@ interface Props {
   fussVon?: string;
 }
 
-const { titel, beschreibung, bild = FOTO_DROHNE_2024.bild, ueberHero = false, ohneAnfrageKnopf = false, strukturiert = [], fussVon } = Astro.props;
+const { titel, beschreibung, bild = ALTE_BILDER.social, ueberHero = false, ohneAnfrageKnopf = false, strukturiert = [], fussVon } = Astro.props;
 
 const kanonisch = new URL(Astro.url.pathname, SEITE.url).href;
 const ogBild = await getImage({ src: bild, width: 1200, height: 630, fit: 'cover', format: 'jpg', quality: 82 });
@@ -40,7 +40,8 @@ const ort: Record<string, unknown> = {
   url: `${SEITE.url}/`,
   image: ogBildUrl,
   email: KONTAKT.mail,
-  ...(KONTAKT.telefon ? { telephone: KONTAKT.telefon } : {}),
+  telephone: KONTAKT.telefon,
+  faxNumber: KONTAKT.fax,
   maximumAttendeeCapacity: FAKTEN.maxGaeste,
   address: {
     '@type': 'PostalAddress',
@@ -51,7 +52,12 @@ const ort: Record<string, unknown> = {
   },
   geo: { '@type': 'GeoCoordinates', latitude: LIEGEPLATZ.breite, longitude: LIEGEPLATZ.laenge },
   hasMap: KARTEN_LINKS.google,
-  parentOrganization: { '@type': 'Organization', name: BETREIBER.firma },
+  parentOrganization: {
+    '@type': 'Organization',
+    name: BETREIBER.firma,
+    address: { '@type': 'PostalAddress', streetAddress: BETREIBER.strasse, postalCode: BETREIBER.plz, addressLocality: BETREIBER.ort, addressCountry: 'DE' },
+  },
+  amenityFeature: [{ '@type': 'LocationFeatureSpecification', name: 'Küche mit Geräten', value: true }],
 };
 const jsonLd = JSON.stringify([ort, ...strukturiert]).replace(/</g, '\\u003c');
 const seitenTitel = titel.includes(SEITE.name) ? titel : `${titel} | ${SEITE.name}`;

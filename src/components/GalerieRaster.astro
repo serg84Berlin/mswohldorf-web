@@ -2,7 +2,7 @@
 /**
  * Masonry-Galerie. Jede Kachel ist ein Link auf das große Bild (funktioniert
  * ohne JS); mit JS öffnet sie die Lightbox (Tastatur, Wischen).
- * Fehlen noch Fotos, füllen gestaltete „Foto folgt"-Kacheln das Raster.
+ * Fehlen noch Fotos, füllen gestaltete „Foto folgt“-Kacheln das Raster.
  */
 import { Picture } from 'astro:assets';
 import type { Foto } from '../data/bilder';
@@ -10,7 +10,7 @@ import { grosseQuellen } from '../lib/bildquellen';
 
 interface Props {
   fotos: Foto[];
-  /** Mindestanzahl Kacheln (Rest = „Foto folgt"). */
+  /** Mindestanzahl Kacheln (Rest = „Foto folgt“). */
   mindestens?: number;
   sammlung?: string;
   class?: string;
@@ -35,11 +35,11 @@ const formen = ['quer', 'quadrat', 'quer', 'hoch', 'quadrat', 'quer'];
           data-breite={gross.breite}
           data-hoehe={gross.hoehe}
           data-alt={foto.alt}
-          data-titel={foto.titel ?? ''}
-          aria-label={`Bild ${i + 1} groß anzeigen: ${foto.alt}`}
+          data-titel={foto.titel ? `${foto.alt} · ${foto.titel}` : foto.alt}
+          aria-label={`Foto ${i + 1} groß anzeigen: ${foto.alt}`}
         >
-          <Picture src={foto.bild} alt={foto.alt} formats={['avif', 'webp']} widths={[360, 560, 820]} sizes="(min-width: 1024px) 24rem, (min-width: 640px) 45vw, 92vw" loading="lazy" decoding="async" />
-          {foto.titel && <span class="kachel-titel" aria-hidden="true">{foto.titel}</span>}
+          <Picture src={foto.bild} alt={foto.alt} formats={['webp']} fallbackFormat="webp" widths={[420, 760]} sizes="(min-width: 1024px) 24rem, (min-width: 640px) 45vw, 92vw" quality={74} loading="lazy" decoding="async" />
+          <span class="kachel-titel" aria-hidden="true">{foto.alt}</span>
         </a>
       </li>
     ))

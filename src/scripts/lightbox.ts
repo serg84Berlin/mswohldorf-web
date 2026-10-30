@@ -17,7 +17,9 @@ if (dialog) {
   let ausloeser: HTMLElement | null = null;
 
   const setzeQuellen = (el: HTMLElement) => {
-    avif.srcset = el.dataset.avif ?? '';
+    // Leeres srcset: Quelle wird übersprungen (Galerie-Fotos gibt es nur als WebP).
+    if (el.dataset.avif) avif.srcset = el.dataset.avif;
+    else avif.removeAttribute('srcset');
     webp.srcset = el.dataset.webp ?? '';
     avif.sizes = webp.sizes = '100vw';
     bild.src = el.dataset.src ?? '';
@@ -40,6 +42,7 @@ if (dialog) {
       setzeQuellen(el);
       zaehler.textContent = `Bild ${index + 1} von ${liste.length}`;
       titel.textContent = el.dataset.titel || el.dataset.alt || '';
+      titel.hidden = !titel.textContent;
       bild.classList.remove('wechselt');
       bild.style.transform = '';
     };

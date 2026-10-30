@@ -7,8 +7,9 @@ heute Eventschiff in Hamburg für bis zu 35 Gäste. Ersetzt https://www.mswohldo
 keine externen Anfragen beim Seitenaufruf — Inhalte Dritter (YouTube, Matterport,
 OpenStreetMap) erst nach Klick.
 
-> Stand: Vorschau. Vor dem Livegang: [OFFENE-ANGABEN.md](OFFENE-ANGABEN.md) abarbeiten
-> (Impressum, Telefon, Liegeplatz, Datenschutz-Prüfung, Formular-URL). Was woher stammt:
+> Stand: Vorschau. Inhalte der alten Seite sind übernommen (Quelle der Wahrheit:
+> `quelle/alte-seite/`). Vor dem Livegang: [OFFENE-ANGABEN.md](OFFENE-ANGABEN.md) abarbeiten
+> (rechtliche Prüfung von Impressum und Datenschutz, Formular-URL, DNS). Was woher stammt:
 > [INHALT.md](INHALT.md).
 
 ## Schnellstart
@@ -47,15 +48,17 @@ Inhalte stehen getrennt vom Layout:
 | `src/config.ts` | Kontakt, Liegeplatz, Fakten, Medien-IDs, Formular-Auswahl, Schalter `ENTWURF_HINWEIS_ANZEIGEN` |
 | `src/data/anlaesse.ts` | die fünf Anlass-Seiten (Texte, SEO, offene Punkte) |
 | `src/data/geschichte.ts` | Stationen der Zeitleiste |
-| `src/data/galerie.json`, `src/assets/galerie/` | Galerie (von `npm run alte-seite` gefüllt) |
-| `src/data/presse.json`, `public/pdf/` | Presse-PDFs |
-| `src/data/stimmen.ts` | Kundenstimmen |
+| `quelle/alte-seite/` | die alte Website: HTML, alle Fotos, PDFs, Favicons (Quelle der Wahrheit, wird direkt eingebunden) |
+| `src/data/galerie.json` | Foto-Katalog mit Alt-Texten (erzeugt von `npm run alte-seite`, Alt-Texte von Hand gepflegt) |
+| `src/data/bilder.ts` | welches Foto wo erscheint (Start, Karussell, Anlass-Seiten, Galerie-Abschnitte) |
+| `src/data/presse.json`, `public/pdf/` | Presse |
+| `src/data/stimmen.ts` | Kundenstimmen (wörtlich) |
 
 ## Skripte
 
 | Befehl | Zweck |
 |---|---|
-| `npm run alte-seite` | Übernimmt Galerie, PDFs, Welle, Favicons und Texte der alten Seite (`--quelle=<URL\|Ordner>`, `--trocken`). Hinter einem Proxy `NODE_USE_ENV_PROXY=1` setzen. |
+| `npm run alte-seite` | Liest `quelle/alte-seite/` (offline) und erzeugt Foto-Katalog, Presse-Liste, `public/pdf/`, `public/alt/` und `quelle/alte-seite/texte.md`. Erkennt alle Galerien (auch `galerie//03_innen`, `thumb_`/`thumb-`). Mit `--quelle=https://…` würde es die Live-Seite spiegeln (Hosting gekündigt); `--trocken` zeigt nur an. |
 | `npm run poster` | Rendert das Hero-Poster (quer/hoch) aus der 3D-Szene. Ablauf: `npm run build && npm run poster && npm run build`. Braucht Playwright + Chromium. |
 | `npm run pruefen` | Alle Prüfungen (siehe unten). |
 | `npm run offen` | Listet alle Platzhalter im Quelltext. |
@@ -164,10 +167,10 @@ Kamera hinab und nach vorn.
 
 ## Checkliste Livegang
 
-- [ ] Inhalte der alten Seite übernommen: `npm run alte-seite`, Ergebnis in `quelle/alte-seite/texte.md` gesichtet (INHALT.md).
-- [ ] **Impressum** vollständig und 1:1 aus dem alten Impressum (OFFENE-ANGABEN.md Nr. 1); Telefon/Fax in `src/config.ts`.
+- [x] Inhalte der alten Seite übernommen (`quelle/alte-seite/`, INHALT.md).
+- [ ] **Impressum** rechtlich geprüft (OFFENE-ANGABEN.md Nr. 1: Komplementärin, USt-IdNr., Haftungstext).
 - [ ] **Platzhalter** gefüllt: `npm run offen` meldet nur noch, was bewusst offen bleibt.
-- [ ] **Liegeplatz** bestätigt (Finkenriek vs. Sandtorhafen).
+- [ ] Angaben aus der Presse 2019 bestätigt (OFFENE-ANGABEN.md, Abschnitt C).
 - [ ] **Datenschutz** rechtlich geprüft, Platzhalter darin gefüllt, dann in `src/config.ts` `ENTWURF_HINWEIS_ANZEIGEN = false`.
 - [ ] **Formular** verbunden: `PUBLIC_ANFRAGE_URL` gesetzt, Server erlaubt CORS für `https://www.mswohldorf.de`, Testanfrage kommt in Zoho CRM an.
 - [ ] Hero-Foto entschieden; bei neuem Foto `scripts/schiff-freistellen.mjs` + `npm run poster`.

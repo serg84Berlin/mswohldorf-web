@@ -1,5 +1,5 @@
 /**
- * Zwei-Klick: Erst der Klick auf „Inhalt laden" erzeugt das iframe.
+ * Zwei-Klick: Erst der Klick auf „Inhalt laden“ erzeugt das iframe.
  * Bis dahin geht keine einzige Anfrage an den Anbieter.
  */
 document.querySelectorAll<HTMLElement>('[data-zweiklick]').forEach((box) => {

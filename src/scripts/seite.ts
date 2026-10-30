@@ -1,7 +1,7 @@
 /**
  * Kleine Helfer für jede Seite: Kopfzeile & Menüs, Scroll-Reveal, Zähler,
  * Karten-Neigung, magnetische Knöpfe, schwebender Anfrage-Knopf.
- * Ohne Bibliotheken; alles respektiert „Bewegung reduzieren".
+ * Ohne Bibliotheken; alles respektiert „Bewegung reduzieren“.
  */
 import { bewegungErlaubt, beiBewegungsWechsel, initBewegung } from './bewegung';
 
@@ -35,7 +35,7 @@ function initKopf() {
   kopf.addEventListener('focusin', () => kopf.classList.remove('versteckt'));
   pruefe();
 
-  // Aufklappmenü „Anlässe" (Desktop)
+  // Aufklappmenü „Anlässe“ (Desktop)
   kopf.querySelectorAll<HTMLElement>('[data-aufklapp]').forEach((li) => {
     const knopf = li.querySelector<HTMLButtonElement>('[data-aufklapp-knopf]');
     if (!knopf) return;
@@ -107,7 +107,8 @@ function initKopf() {
 function initReveal() {
   const elemente = document.querySelectorAll<HTMLElement>('[data-reveal]');
   document.querySelectorAll<HTMLElement>('[data-reveal-gruppe]').forEach((gruppe) => {
-    gruppe.querySelectorAll<HTMLElement>('[data-reveal]').forEach((el, i) => el.style.setProperty('--verzoegerung', `${i * 90}ms`));
+    // Gestaffelt, aber höchstens ~0,5 s (lange Galerien sollen nicht „nachtröpfeln“).
+    gruppe.querySelectorAll<HTMLElement>('[data-reveal]').forEach((el, i) => el.style.setProperty('--verzoegerung', `${(i % 6) * 90}ms`));
   });
   if (!('IntersectionObserver' in window)) {
     elemente.forEach((el) => el.classList.add('sichtbar'));

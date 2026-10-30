@@ -41,13 +41,13 @@ const woerter = titel.split(' ');
   </div>
 
   <div class="seite-breite hero-inhalt">
-    <p class="eyebrow hero-auf" style="--i:0">MS Wohldorf · Eventschiff in Hamburg</p>
+    <p class="eyebrow hero-auf" style="--i:0">MS Wohldorf · Schiffslocation an der Süderelbe</p>
     <h1 id="hero-titel" class="titel-gross wort-animiert mt-4 max-w-[13ch] text-schaum">
       {woerter.map((w, i) => <span class="wort" style={`--i:${i}`}>{w}{i < woerter.length - 1 ? ' ' : ''}</span>)}
     </h1>
     <p class="lead hero-auf mt-6 max-w-xl text-sand" style="--i:6">
-      Gebaut {FAKTEN.baujahr} als HADAG-Hafenfähre, {FAKTEN.umbau} umgebaut: Die MS Wohldorf ist heute Bühne für Firmenevents,
-      Workshops, Drehs, Lesungen und private Feiern — für bis zu {FAKTEN.maxGaeste} Gäste.
+      {FAKTEN.baujahr} als HADAG-Hafenfähre in Dienst gestellt, {FAKTEN.umbau} umgebaut: Die MS Wohldorf ist heute Bühne für
+      Firmenevents, Workshops, Drehs, Lesungen und private Feiern — für bis zu {FAKTEN.maxGaeste} Gäste.
     </p>
     <div class="hero-auf mt-9 flex flex-wrap gap-3" style="--i:7">
       <a href="/anfrage/" class="knopf knopf-messing" data-magnet>Unverbindlich anfragen <Symbol name="pfeil" /></a>

@@ -44,10 +44,10 @@ const flaechen = Array.from({ length: anzahl }, (_, i) => eintraege[i] ?? null);
               data-breite={e.gross.breite}
               data-hoehe={e.gross.hoehe}
               data-alt={e.foto.alt}
-              data-titel={e.foto.titel ?? ''}
+              data-titel={e.foto.titel ? `${e.foto.alt} · ${e.foto.titel}` : e.foto.alt}
               aria-label={`Bild groß anzeigen: ${e.foto.alt}`}
             >
-              <Picture src={e.foto.bild} alt="" formats={['avif', 'webp']} widths={[560, 860, 1100]} sizes="(min-width: 768px) 40rem, 90vw" loading="lazy" draggable="false" />
+              <Picture src={e.foto.bild} alt="" formats={['webp']} fallbackFormat="webp" widths={[520, 860]} sizes="(min-width: 768px) 34rem, 80vw" quality={74} loading="lazy" draggable="false" />
             </a>
           ) : (
             <span class="k-flaeche k-leer" style={`--i:${i}`} data-k-flaeche aria-hidden="true">

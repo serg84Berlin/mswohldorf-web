@@ -5,7 +5,6 @@ import karte from '../assets/karte/anfahrt.png';
 import { LIEGEPLATZ, KARTEN_LINKS } from '../config';
 import Symbol from './Symbol.astro';
 import ZweiKlick from './ZweiKlick.astro';
-import Platzhalter from './Platzhalter.astro';
 
 const koordinaten = `${LIEGEPLATZ.breite.toFixed(6)}, ${LIEGEPLATZ.laenge.toFixed(6)}`;
 ---
@@ -15,7 +14,7 @@ const koordinaten = `${LIEGEPLATZ.breite.toFixed(6)}, ${LIEGEPLATZ.laenge.toFixe
     <div data-reveal="links">
       <p class="eyebrow">Anfahrt</p>
       <h2 id="anfahrt-titel" class="titel-mittel mt-4 text-schaum">So finden Sie an Bord.</h2>
-      <p class="mt-5 text-nebel lead">Die MS Wohldorf liegt {LIEGEPLATZ.beschreibung}.</p>
+      <p class="mt-5 text-nebel lead">Die MS Wohldorf liegt {LIEGEPLATZ.beschreibung} — an einer kleinen Privatstraße, mit Parkplätzen vor der Tür.</p>
 
       <dl class="mt-8 grid gap-5">
         <div class="anfahrt-zeile">
@@ -27,7 +26,7 @@ const koordinaten = `${LIEGEPLATZ.breite.toFixed(6)}, ${LIEGEPLATZ.laenge.toFixe
           <dd class="text-schaum tabular-nums">{koordinaten}</dd>
         </div>
         <div class="anfahrt-zeile">
-          <dt><Symbol name="hinweis" class="size-5" /> Hinweis</dt>
+          <dt><Symbol name="hinweis" class="size-5" /> Anfahrt</dt>
           <dd class="text-nebel">{LIEGEPLATZ.hinweis}</dd>
         </div>
       </dl>
@@ -40,7 +39,16 @@ const koordinaten = `${LIEGEPLATZ.breite.toFixed(6)}, ${LIEGEPLATZ.laenge.toFixe
           Apple Karten<span class="sr-only"> (neues Fenster)</span>
         </a>
       </div>
-      <Platzhalter class="mt-8 text-nebel">Liegeplatz bestätigen (alte Seite: Sandtorhafen 2017; Navi-Hinweis: Finkenriek). Anreise mit Bus/Bahn, Barrierefreiheit des Zugangs.</Platzhalter>
+      {
+        !LIEGEPLATZ.barrierefrei && (
+          <p class="barriere mt-8">
+            <Symbol name="hinweis" class="size-5 shrink-0" />
+            <span>
+              <strong>Bitte beachten:</strong> Der Zugang ist nicht barrierefrei.
+            </span>
+          </p>
+        )
+      }
     </div>
 
     <div class="grid gap-4" data-reveal="rechts">
@@ -95,6 +103,16 @@ const koordinaten = `${LIEGEPLATZ.breite.toFixed(6)}, ${LIEGEPLATZ.laenge.toFixe
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--color-messing-hell);
+  }
+  .barriere {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+    padding: 0.9rem 1rem;
+    border-radius: 0.9rem;
+    background: rgb(224 184 114 / 0.12);
+    border: 1px solid rgb(224 184 114 / 0.45);
+    color: var(--color-sand);
   }
   .karte-statisch {
     border-radius: 1.25rem;

@@ -1,7 +1,7 @@
 ---
 /**
  * Anfrageformular. Sendet JSON an PUBLIC_ANFRAGE_URL (Vertrag: README →
- * „Anfrage-Schnittstelle"). Ohne URL: Vorschau-Hinweis + Mail-Link.
+ * „Anfrage-Schnittstelle“). Ohne URL: Vorschau-Hinweis + Mail-Link.
  * Ohne JavaScript: Der Browser öffnet das Mailprogramm (mailto-Formular).
  */
 import { ANFRAGE_URL, ANLAESSE_AUSWAHL, KONTAKT, FAKTEN } from '../config';
@@ -35,7 +35,7 @@ const mailto = `mailto:${KONTAKT.mail}?subject=${encodeURIComponent('Anfrage MS 
 
   <noscript>
     <p class="formular-hinweis">
-      JavaScript ist ausgeschaltet: „Anfrage senden" öffnet Ihr E-Mail-Programm mit Ihren Angaben. Sie können uns auch direkt
+      JavaScript ist ausgeschaltet: „Anfrage senden“ öffnet Ihr E-Mail-Programm mit Ihren Angaben. Sie können uns auch direkt
       schreiben: <a class="underline" href={`mailto:${KONTAKT.mail}`}>{KONTAKT.mail}</a>.
     </p>
   </noscript>

@@ -1,78 +1,119 @@
 ---
+import { Picture } from 'astro:assets';
 import { MEDIEN } from '../config';
-import { FOTO_DROHNE_2024, FOTO_SANDTORHAFEN_2017 } from '../data/bilder';
+import { FOTO_DROHNE_2024, FOTO_SANDTORHAFEN_2017, ALTE_BILDER, altesBild } from '../data/bilder';
 import presse from '../data/presse.json';
 import ZweiKlick from './ZweiKlick.astro';
 import Symbol from './Symbol.astro';
-import Platzhalter from './Platzhalter.astro';
 
+interface Props {
+  /** Die beiden YouTube-Videos zeigen (auf /geschichte/ stehen sie schon). */
+  mitVideos?: boolean;
+}
+const { mitVideos = true } = Astro.props;
 const poster = [FOTO_DROHNE_2024, FOTO_SANDTORHAFEN_2017];
-const eintraege = (presse as { eintraege: { datei: string; titel: string }[] }).eintraege;
+interface Eintrag {
+  datei?: string;
+  url?: string;
+  titel: string;
+  medium: string;
+  text: string;
+  bild?: string;
+}
+const eintraege = (presse as { eintraege: Eintrag[] }).eintraege.map((e) => ({
+  ...e,
+  href: e.datei ? `/pdf/${e.datei}` : e.url!,
+  art: e.datei ? 'PDF' : 'Online',
+  vorschau: e.bild ? altesBild(e.bild) : null,
+}));
 ---
 
 <section class="presse" aria-labelledby="presse-titel">
   <div class="seite-breite py-20 lg:py-28">
     <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between" data-reveal>
       <div class="max-w-2xl">
-        <p class="eyebrow">Film &amp; Presse</p>
+        <p class="eyebrow">Film, TV &amp; Presse</p>
         <h2 id="presse-titel" class="titel-mittel mt-4 text-tiefe">Die Wohldorf in Bewegtbild und Presse.</h2>
       </div>
-      <p class="max-w-md text-grau">Videos werden erst nach Ihrem Klick von YouTube geladen (über youtube-nocookie.com).</p>
+      {mitVideos && <p class="max-w-md text-grau">Videos werden erst nach Ihrem Klick von YouTube geladen (über youtube-nocookie.com).</p>}
     </div>
 
-    <div class="mt-12 grid gap-6 lg:grid-cols-2" data-reveal-gruppe>
-      {
-        MEDIEN.videos.map((v, i) => (
-          <div data-reveal>
-            <ZweiKlick
-              art="youtube"
-              src={`https://www.youtube-nocookie.com/embed/${v.id}?autoplay=1&rel=0&modestbranding=1`}
-              titel={v.titel}
-              anbieter="YouTube"
-              direkt={`https://www.youtube.com/watch?v=${v.id}`}
-              poster={poster[i].bild}
-              posterAlt=""
-            />
-            <p class="mt-3 text-sm text-grau">
-              „{v.titel}" · YouTube-Kanal {v.kanal}
-            </p>
-          </div>
-        ))
-      }
-    </div>
+    {
+      mitVideos && (
+        <div class="mt-12 grid gap-6 lg:grid-cols-2" data-reveal-gruppe>
+          {MEDIEN.videos.map((v, i) => (
+            <div data-reveal>
+              <ZweiKlick
+                art="youtube"
+                src={`https://www.youtube-nocookie.com/embed/${v.id}?autoplay=1&rel=0&modestbranding=1`}
+                titel={v.titel}
+                anbieter="YouTube"
+                direkt={`https://www.youtube.com/watch?v=${v.id}`}
+                poster={poster[i].bild}
+                posterAlt=""
+              />
+              <p class="mt-3 text-sm text-grau">
+                „{v.titel}“ · YouTube-Kanal {v.kanal}
+              </p>
+            </div>
+          ))}
+        </div>
+      )
+    }
 
-    <div class="mt-12 grid gap-6 lg:grid-cols-[1fr_1fr]">
-      <a href={MEDIEN.malizia.url} target="_blank" rel="noopener" class="malizia-karte" data-reveal>
+    <div class="mt-12 grid gap-6 lg:grid-cols-2">
+      <a href={MEDIEN.tv.url} target="_blank" rel="noopener" class="medien-karte tv-karte" data-reveal>
+        <span class="tv-bild">
+          <Picture src={ALTE_BILDER.tv} alt="" formats={['avif', 'webp']} widths={[480, 760]} sizes="(min-width: 1024px) 34rem, 92vw" quality={66} loading="lazy" />
+          <span class="tv-quelle">Standbild: NDR</span>
+        </span>
+        <span class="block p-6">
+          <span class="eyebrow">Im Fernsehen</span>
+          <span class="mt-2 block font-display text-2xl leading-tight text-tiefe">{MEDIEN.tv.sendung}</span>
+          <span class="mt-2 block text-grau">
+            Die Wohldorf als „Statist“ in {MEDIEN.tv.folge} ({MEDIEN.tv.sender}).
+          </span>
+          <span class="mt-4 inline-flex items-center gap-2 font-semibold text-petrol">
+            Zur NDR-Mediathek <Symbol name="extern" class="size-4" /><span class="sr-only"> (neues Fenster)</span>
+          </span>
+        </span>
+      </a>
+      <a href={MEDIEN.malizia.url} target="_blank" rel="noopener" class="medien-karte p-6" data-reveal>
         <span class="eyebrow">Segelsport</span>
         <span class="mt-3 block font-display text-2xl leading-tight text-tiefe">Basislager für Boris Herrmann</span>
-        <span class="mt-3 block text-grau">Video von {MEDIEN.malizia.kanal}: „{MEDIEN.malizia.titel}"</span>
+        <span class="mt-3 block text-grau">Malizia Ocean Festival — Vorbereitung auf die Schiffstaufe. Das offizielle Video von {MEDIEN.malizia.kanal}.</span>
         <span class="mt-5 inline-flex items-center gap-2 font-semibold text-petrol">
           Auf YouTube ansehen <Symbol name="extern" class="size-4" /><span class="sr-only"> (neues Fenster)</span>
         </span>
       </a>
-      <div class="presse-liste" data-reveal>
-        <h3 class="font-display text-2xl text-tiefe">Presseberichte</h3>
-        {
-          eintraege.length > 0 ? (
-            <ul class="mt-4 grid gap-2">
-              {eintraege.map((e) => (
-                <li>
-                  <a class="pdf-link" href={`/pdf/${e.datei}`} target="_blank" rel="noopener">
-                    <Symbol name="dokument" class="size-5 shrink-0 text-petrol" />
-                    <span>{e.titel}</span>
-                    <span class="ml-auto text-xs text-grau">PDF</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <Platzhalter class="mt-4 text-tinte">
-              Presse-PDFs der bisherigen Website (Ordner ./pdf/) mit Titel, Medium und Datum — werden mit „npm run alte-seite" übernommen.
-            </Platzhalter>
-          )
-        }
-      </div>
     </div>
+
+    <h3 class="mt-16 font-display text-2xl text-tiefe" data-reveal>Presse zu den Umbauarbeiten</h3>
+    <ul class="mt-6 grid gap-5 md:grid-cols-3" data-reveal-gruppe>
+      {
+        eintraege.map((e) => (
+          <li data-reveal>
+            <a class="medien-karte presse-karte" href={e.href} target="_blank" rel="noopener">
+              {e.vorschau && (
+                <span class="presse-bild">
+                  <Picture src={e.vorschau} alt="" formats={['avif', 'webp']} widths={[280]} sizes="18rem" loading="lazy" />
+                </span>
+              )}
+              <span class="block p-5">
+                <span class="text-xs font-semibold tracking-[0.14em] text-messing-dunkel uppercase">{e.medium}</span>
+                <span class="mt-2 block font-display text-xl leading-tight text-tiefe">„{e.titel}“</span>
+                <span class="mt-2 block text-sm text-grau">{e.text}</span>
+                <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-petrol">
+                  <Symbol name={e.art === 'PDF' ? 'dokument' : 'extern'} class="size-4" />
+                  {e.art === 'PDF' ? 'PDF ansehen' : 'Online lesen'}
+                  <span class="sr-only"> (neues Fenster)</span>
+                </span>
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </div>
 </section>
 
@@ -83,34 +124,47 @@ const eintraege = (presse as { eintraege: { datei: string; titel: string }[] }).
   .text-tiefe {
     color: var(--color-tiefe);
   }
-  .malizia-karte,
-  .presse-liste {
+  .medien-karte {
     display: block;
     height: 100%;
-    padding: 1.8rem 1.6rem;
+    overflow: hidden;
     border-radius: 1.3rem;
     background: var(--color-sand-hell);
     border: 1px solid rgb(11 26 42 / 0.08);
-  }
-  .malizia-karte {
     transition:
       transform 0.5s var(--ease-welle),
       box-shadow 0.4s;
   }
-  .malizia-karte:hover {
+  .medien-karte:hover {
     transform: translateY(-4px);
     box-shadow: 0 30px 60px -40px rgb(6 18 31 / 0.6);
   }
-  .pdf-link {
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    padding: 0.75rem 0.9rem;
-    border-radius: 0.75rem;
-    background: var(--color-schaum);
-    border: 1px solid rgb(11 26 42 / 0.08);
+  .tv-bild {
+    position: relative;
+    display: block;
+    aspect-ratio: 16 / 8;
+    overflow: hidden;
   }
-  .pdf-link:hover {
-    border-color: var(--color-petrol);
+  .tv-bild :global(img),
+  .presse-bild :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .tv-quelle {
+    position: absolute;
+    right: 0.6rem;
+    bottom: 0.5rem;
+    font-size: 0.7rem;
+    color: #fff;
+    background: rgb(6 18 31 / 0.6);
+    padding: 0.1rem 0.4rem;
+    border-radius: 0.3rem;
+  }
+  .presse-bild {
+    display: block;
+    aspect-ratio: 273 / 200;
+    background: #fff;
+    overflow: hidden;
   }
 </style>

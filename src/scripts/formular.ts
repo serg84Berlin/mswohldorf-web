@@ -112,7 +112,7 @@ document.querySelectorAll<HTMLFormElement>('form[data-anfrage]').forEach((form) 
         ausgabe.textContent = satz;
         ausgabe.hidden = false;
       }
-      // Feld in zugeklappten „Weitere Angaben" sichtbar machen
+      // Feld in zugeklappten „Weitere Angaben“ sichtbar machen
       const details = el.closest('details');
       if (details) details.open = true;
     } else {
@@ -156,7 +156,7 @@ document.querySelectorAll<HTMLFormElement>('form[data-anfrage]').forEach((form) 
   };
 
   // Nach dem ersten Absenden: Fehler verschwinden, sobald das Feld stimmt —
-  // schon beim Tippen. Nicht bei „focusout": Sonst verschiebt sich das Layout
+  // schon beim Tippen. Nicht bei „focusout“: Sonst verschiebt sich das Layout
   // genau in dem Moment, in dem man das nächste Feld anklickt.
   const nachpruefen = (e: Event) => {
     const el = e.target as HTMLInputElement;

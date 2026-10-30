@@ -1,0 +1,277 @@
+# Alte Seite — Textblöcke
+
+Quelle: quelle/alte-seite/index.html
+Erzeugt: 2026-10-30T20:57:18.578Z
+
+## Prüfliste
+
+- „1959": gefunden
+- „2016": gefunden
+- „2017": gefunden
+- „35": gefunden
+- „HADAG": gefunden
+- „Sandtorhafen": gefunden
+- „Süderelbe": gefunden
+- „Herrmann": gefunden
+- „matterport": gefunden
+- „TMG": gefunden
+- „Navi": gefunden
+- „Telefon": gefunden
+- „Telefax": gefunden
+- „Impressum": gefunden
+- „barrierefrei": gefunden
+
+## Galerien
+
+- aussen: 18 Bilder
+- startseite: 9 Bilder
+- innen: 32 Bilder
+- ueberfahrt: 14 Bilder
+- umbau: 10 Bilder
+
+## Eingebettetes und Links
+
+- iframe: https://www.youtube.com/embed/HvahxVqWtg0 („YouTube video player")
+- iframe: https://my.matterport.com/show/?m=9eU3eAd8TLz („Rundgang auf der MS Wohldorf im Hamburger Sandtorhafen")
+- iframe: https://www.youtube.com/embed/2ksTeXx8_DA („YouTube video player")
+- Link: https://maps.app.goo.gl/QADHpQzDErV4gBtJ9
+- Link: https://www.ndr.de/fernsehen/sendungen/pfefferkoerner/folgen/Die-Pfefferkoerner-Staffel-19-Folge-246-Spaetfolgen,folgen810.html
+- Link: https://www.youtube.com/watch?v=ABHuBRonV4k
+- Link: https://www2023.de/
+- Link: https://oneearth-oneocean.com/
+- Link: https://www.elbdampfer-hamburg.de/lebenslauf-hadag-hafenfaehre-wohldorf-23917/
+- Link: https://www.bau-welt.de/renovierung/renovierungsideen/buero-ahoi-arbeiten-auf-einer-faehre.html
+- Link: tel: 4940277347
+- Link: mailto:info@finanzelot.de
+- Link: http://www.andreaklick.com
+- Link: https://de.sendinblue.com/newsletter-software/
+- Link: https://de.sendinblue.com/datenschutz-uebersicht/
+- Link: https://policies.google.com/privacy?hl=de
+- Link: https://zoom.us/de-de/privacy.html
+
+## Textblöcke in Reihenfolge
+
+- **h1**: MS Wohldorf
+- **h2**: Schiffslocation / Hamburg Süderelbe
+- **h2**: Sie suchen die perfekte Location / für Ihre Veranstaltung / mit bis zu 35 Personen?
+- **p**: Dann sind Sie hier richtig!
+- **p**: TV Produktion, Foto Shootings, Lesungen, Ausstellungen, / Präsentationen, Brainstorming Tage, Basislager, / Buisness-Essen / (Küche mit Geräten ist vorhanden)
+- **p**: oder was Ihnen sonst noch so einfällt!
+- **p**: Auf der Süderelbe - an einer kleinen Privatstraße mit Parkplätzen vor der Tür - liegt die alte Elbfähre MS Wohldorf / und wartet auf Ihren Besuch.
+- **h1**: MS Wohldorf Impressionen
+- **h2**: Aussenbereich
+- **h2**: Sie finden uns hier:
+- **h3**: MS Wohldorf  / Die Koordinaten:  / 53.474464814706096, 10.013551864414687 / Dichteste Adresse für ein Navi / Finkenrieker Hauptdeich 14
+- **p**: Achtung: Der Zugang ist nicht barrierefrei!
+- **h2**: Die MS Wohldorf im TV
+- **p**: wir freuen uns sehr, dass die MS Wohldorf als "Statist" für eine Folge in "die Pfefferkörner" mit dabei / sein durfte: Staffel 19 - Folge 246: Spätfolgen / » NDR-Mediathek
+- **h1**: MS Wohldorf Impressionen
+- **h2**: Die MS Wohldorf als Basislager für Broris Herrmann
+- **p**: Malizia Ocean Festival  / Vorbereitung auf die Schiffstaufe / » Das offizielle Video hier auf Youtube zu finden
+- **h2**: Die MS Wohldorf von innen
+- **h2**: Einzug in den Sandtorhafen in Hamburg 2017
+- **h2**: Der Umbau 2016
+- **h2**: Das sagen unsere Kunden
+- **p**: Jürgen Becker | Netzwerkmanager KLIMA
+- **p**: Organisation der Wetter.Wasser.Waterkant.2023 || https://www2023.de
+- **p**: Sehr geehrter Herr Ritter, / wir bedanken uns ganz herzlich dafür, dass wir nun schon im vierten Jahr mit einem Herzstück unseres Bildungsprojekt "Wetter.Wasser.Waterkant" / bei Ihnen auf der alten HADAG-Fähre Wohldorf zu Gast sein durften. Wie bereits jeweils in den letzten Septemberwochen der Jahre 2020, 2021 und / 2022, so haben wir und der gemeinnützige Kieler Verein One Earth - One Ocean über eine Woche Ihre Gastfreundschaft und das spezielle Ambiente auf / der Wohldorf sehr genossen und einen tollen äußeren Rahmen für die Mikroplastik-Analyse-Workshops und auch die "nebenan" stattfindenden Besichtigungen / des Müllsammelschiffs "SeeKuh" bekommen. / Wir freuen uns besonders, dass Sie uns als einem öffentlich geförderten Bildungsprojekt mit begrenztem Budget diese zu unserem Bildungsauftrag / besonders gut passende Räumlichkeit zu einem Sonderpreis zur Verfügung stellen. Dies kommt unmittelbar vielen Hamburger Schulklassen zugute. / Damit bringen Sie auch Ihre Verbundenheit mit dem Standort Traditionsschiffhafen im Sandtorhafen zum Ausdruck, denn Sie tragen zur Lebendigkeit / des Ortes bei und haben allein in dieser letzten September-Woche des Jahres 2023 weit über 500 Hamburger Schüler:innen einen beeindruckenden und / nachhaltigen Aufenthalt im Sandtorhafen ermöglicht - die junge Generation hatte einen tollen Anlass, diesen schönen maritimen Ort zu entdecken.
+- **p**: Nochmals herzlichen Dank für Ihre Gastfreundschaft und Zusammenarbeit, die weit über das einfach Zurverfügung-Stellen der Räumlichkeit hinausgeht. / Wir fühlen uns bei Ihnen sehr gut aufgehoben und bedanken uns ausdrücklich auch für Ihr finanzielles Entgegenkommen, ohne das ein Zustandekommen / dieses Bildungs-Events nicht möglich wäre. Wir wissen dies sehr zu schätzen, erwarten wie in jedem Jahr Ihre Rechnung an den Verein Klimabotschafter / und freuen uns bereits auf unsere nächste gemeinsame Bildungswoche Wetter.Wasser.Waterkant.2024 in der letzten September-Woche im Jahr 2024.
+- **p**: Ich freue mich über unsere Kooperation / und bin sehr zuversichtlich, dass wir diese im Jahr 2024 fortsetzen können.
+- **p**: Dr. Rüdiger Stöhr | One Earth - One Ocean e.V.
+- **p**: oneearth-oneocean.com
+- **p**: Lieber Uli, / nun hab ich meinen Workshop „Plastikflut in der Elbe“ bereits zum vierten Male an Bord der / MS Wohldorf in Deinen Räumlichkeiten geben dürfen. Damit haben sich in diesem Jahr im / Rahmen der Hamburger Bildungswoche 92 Schülerinnen und Schüler mit dem Thema / „Mikroplastik in der Elbe und im täglichen Umgang“ auseinandergesetzt. / Seit Beginn dieses Bildungsangebotes sind die von One Earth – One Ocean e.V. (oeoo) / angebotenen Workshops eines der Highlights im Programm von Wetter.Wasser.Waterkant, der / Hamburger Bildungswoche. Bei der Anmeldung sind die Plätze für die Workshops binnen / kürzester Zeit ausgebucht und von der Nachfrage her mehrfach überbucht. Die Kombination / aus der Besonderheit des Lernortes an Bord der MS Wohldorf und den hands on Workshop- / Inhalten machen gemeinsam den Erfolg dieser Veranstaltung aus. / Dabei ist die 1959 gebaute ehemalige HADAG Hafenfähre eines der letzten sichtbaren / Zeitzeugnisse dieses Schiffstyps aus dem aufstrebenden Hamburg zu Zeiten der / Wirtschaftswunderjahre und stellt damit im Hamburger Traditionshafen einen markanten / Punkt dieser Epoche dar. / Die MS Wohldorf ist für meine Workshops der ideale Ort, da das Schiff geschützte / Räumlichkeiten für die Seewasser Filtrationsarbeiten, die Versammlung ganzer Klassen und / auch Bereiche für Gruppenarbeit bietet. / Daher möchte ich Dir, lieber Uli, für Dein Engagement für die Hamburger Bildungswoche und / die Bereitstellung des Schiffes für die Workshops danken und möchte hier auch meine / Hoffnung ausdrücken, dass auch in Zukunft dieser außergewöhnliche Lernort weiterhin genutzt / werden kann.
+- **h2**: Die MS Wohldorf
+- **p**: Die Elbfähre MS Wohldorf (eigentlich DES für Diesel Elektrisches Schiff) überquerte viele Jahren die Elbe in Hamburg. / Sie war eine wichtige Verbindung für Pendler, / Touristen und Einheimische. Die Fähre wurde im Jahr 1959 in Betrieb genommen und hat seitdem viele Veränderungen / und Modernisierungen durchgemacht. Bis Sommer 2024 war sie immernoch Bestandteil des Hamburger Hafens jedoch im Ruhestand / und dient als Büro und Veranstaltungsschiff. Das ist auch weiterhin ihre Aufgabe, jedoch fernab des ganzen Trubels auf der / Süderelbe.
+- **h2**: Presse zu den Umbauarbeiten
+- **h2**: Einfahrt in den Sandtorhafen
+- **h3**: Mai 2017
+- **h2**: Kontakt
+- **p**: Ulrich Ritter
+- **p**: Telefon: +49 40 277347  / Telefax: +49 40 277387 / Mail: info@finanzelot.de
+- **h1**: Impressum
+- **h3**: Angaben gemäß § 5 TMG
+- **p**: Finanzelot GmbH & Co. KG / Moorfleeter Deich 344 / 22113 Hamburg
+- **p**: Handelsregister: 124152 / Registergericht: Hamburg
+- **p**: Vertreten durch den persönlich haftenden Gesellschafter: / Ulrich Ritter, Moorfleeter Deich 344, 22113 Hamburg
+- **p**: Geschäftsführer: Ulrich Ritter
+- **p**: Handelsregister: HRA 124152 / Registergericht: Hamburg
+- **h3**: Kontakt
+- **p**: Telefon: +49 40 277347  / Telefax: +49 40 277387 / Mail: info@finanzelot.de
+- **h3**: Postadresse
+- **p**: Postfach 110689 / 20406 Hamburg
+- **h3**: Umsatzsteuer-ID
+- **p**: Umsatzsteuer-Identifikationsnummer gemäß §27 a Umsatzsteuergesetz: / DE3223275031
+- **h3**: Bildnachweis
+- **p**: Wohldorf: Andrea Klick  / Hintergründe: Midjourney
+- **h3**: Streitschlichtung
+- **p**: Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS)  / bereit: https://ec.europa.eu/consumers/odr. / Unsere E-Mail-Adresse finden Sie oben im Impressum.
+- **p**: Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer  / Verbraucherschlichtungsstelle teilzunehmen.
+- **h3**: Haftung für Inhalte
+- **p**: Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den  / allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch  / nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach  / Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. / Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen  / Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt  / der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden  / Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.
+- **h3**: Haftung für Links
+- **p**: Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar.
+- **p**: Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.
+- **h3**: Urheberrecht
+- **p**: Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet.
+- **p**: Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.
+- **h1**: Datenschutzerklärung
+- **h2**: 1. Datenschutz auf einen Blick
+- **h3**: Allgemeine Hinweise
+- **p**: Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können. Ausführliche Informationen zum Thema Datenschutz entnehmen Sie unserer unter diesem Text aufgeführten Datenschutzerklärung.
+- **h3**: Datenerfassung auf dieser Website
+- **h4**: Wer ist verantwortlich für die Datenerfassung auf dieser Website?
+- **p**: Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem Abschnitt „Hinweis zur Verantwortlichen Stelle“ in dieser Datenschutzerklärung entnehmen.
+- **h4**: Wie erfassen wir Ihre Daten?
+- **p**: Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen. Hierbei kann es sich z. B. um Daten handeln, die Sie in ein Kontaktformular eingeben.
+- **p**: Andere Daten werden automatisch oder nach Ihrer Einwilligung beim Besuch der Website durch unsere IT-Systeme erfasst. Das sind vor allem technische Daten (z. B. Internetbrowser, Betriebssystem oder Uhrzeit des Seitenaufrufs). Die Erfassung dieser Daten erfolgt automatisch, sobald Sie diese Website betreten.
+- **h4**: Wofür nutzen wir Ihre Daten?
+- **p**: Ein Teil der Daten wird erhoben, um eine fehlerfreie Bereitstellung der Website zu gewährleisten. Andere Daten können zur Analyse Ihres Nutzerverhaltens verwendet werden.
+- **h4**: Welche Rechte haben Sie bezüglich Ihrer Daten?
+- **p**: Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten personenbezogenen Daten zu erhalten. Sie haben außerdem ein Recht, die Berichtigung oder Löschung dieser Daten zu verlangen. Wenn Sie eine Einwilligung zur Datenverarbeitung erteilt haben, können Sie diese Einwilligung jederzeit für die Zukunft widerrufen. Außerdem haben Sie das Recht, unter bestimmten Umständen die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen. Des Weiteren steht Ihnen ein Beschwerderecht bei der zuständigen Aufsichtsbehörde zu.
+- **p**: Hierzu sowie zu weiteren Fragen zum Thema Datenschutz können Sie sich jederzeit an uns wenden.
+- **h3**: Analyse-Tools und Tools von Drittanbietern
+- **p**: Beim Besuch dieser Website kann Ihr Surf-Verhalten statistisch ausgewertet werden. Das geschieht vor allem mit sogenannten Analyseprogrammen.
+- **p**: Detaillierte Informationen zu diesen Analyseprogrammen finden Sie in der folgenden Datenschutzerklärung.
+- **h2**: 2. Hosting
+- **p**: Wir hosten die Inhalte unserer Website bei folgendem Anbieter:
+- **h3**: Externes Hosting
+- **p**: Diese Website wird extern gehostet. Die personenbezogenen Daten, die auf dieser Website erfasst werden, werden auf den Servern des Hosters / der Hoster gespeichert. Hierbei kann es sich v. a. um IP-Adressen, Kontaktanfragen, Meta- und Kommunikationsdaten, Vertragsdaten, Kontaktdaten, Namen, Websitezugriffe und sonstige Daten, die über eine Website generiert werden, handeln.
+- **p**: Das externe Hosting erfolgt zum Zwecke der Vertragserfüllung gegenüber unseren potenziellen und bestehenden Kunden (Art. 6 Abs. 1 lit. b DSGVO) und im Interesse einer sicheren, schnellen und effizienten Bereitstellung unseres Online-Angebots durch einen professionellen Anbieter (Art. 6 Abs. 1 lit. f DSGVO). Sofern eine entsprechende Einwilligung abgefragt wurde, erfolgt die Verarbeitung ausschließlich auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TTDSG, soweit die Einwilligung die Speicherung von Cookies oder den Zugriff auf Informationen im Endgerät des Nutzers (z. B. Device-Fingerprinting) im Sinne des TTDSG umfasst. Die Einwilligung ist jederzeit widerrufbar.
+- **p**: Unser(e) Hoster wird bzw. werden Ihre Daten nur insoweit verarbeiten, wie dies zur Erfüllung seiner Leistungspflichten erforderlich ist und unsere Weisungen in Bezug auf diese Daten befolgen.
+- **p**: Wir setzen folgende(n) Hoster ein:
+- **p**: Webspace-Verkauf.de ISP e.K. / Lichtenfelser Strasse 17 a / 96271 Grub am Forst / Deutschland
+- **h4**: Auftragsverarbeitung
+- **p**: Wir haben einen Vertrag über Auftragsverarbeitung (AVV) zur Nutzung des oben genannten Dienstes geschlossen. Hierbei handelt es sich um einen datenschutzrechtlich vorgeschriebenen Vertrag, der gewährleistet, dass dieser die personenbezogenen Daten unserer Websitebesucher nur nach unseren Weisungen und unter Einhaltung der DSGVO verarbeitet.
+- **h2**: 3. Allgemeine Hinweise und Pflichtinformationen
+- **h3**: Datenschutz
+- **p**: Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend den gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.
+- **p**: Wenn Sie diese Website benutzen, werden verschiedene personenbezogene Daten erhoben. Personenbezogene Daten sind Daten, mit denen Sie persönlich identifiziert werden können. Die vorliegende Datenschutzerklärung erläutert, welche Daten wir erheben und wofür wir sie nutzen. Sie erläutert auch, wie und zu welchem Zweck das geschieht.
+- **p**: Wir weisen darauf hin, dass die Datenübertragung im Internet (z. B. bei der Kommunikation per E-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich.
+- **h3**: Hinweis zur verantwortlichen Stelle
+- **p**: Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:
+- **p**: Ulrich Ritter / Postfach 110689  / 20406 Hamburg
+- **p**: Telefon: 040 / 277347 / E-Mail: ritter@finanzelot.de
+- **p**: Verantwortliche Stelle ist die natürliche oder juristische Person, die allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten (z. B. Namen, E-Mail-Adressen o. Ä.) entscheidet.
+- **h3**: Speicherdauer
+- **p**: Soweit innerhalb dieser Datenschutzerklärung keine speziellere Speicherdauer genannt wurde, verbleiben Ihre personenbezogenen Daten bei uns, bis der Zweck für die Datenverarbeitung entfällt. Wenn Sie ein berechtigtes Löschersuchen geltend machen oder eine Einwilligung zur Datenverarbeitung widerrufen, werden Ihre Daten gelöscht, sofern wir keine anderen rechtlich zulässigen Gründe für die Speicherung Ihrer personenbezogenen Daten haben (z. B. steuer- oder handelsrechtliche Aufbewahrungsfristen); im letztgenannten Fall erfolgt die Löschung nach Fortfall dieser Gründe.
+- **h3**: Allgemeine Hinweise zu den Rechtsgrundlagen der Datenverarbeitung auf dieser Website
+- **p**: Sofern Sie in die Datenverarbeitung eingewilligt haben, verarbeiten wir Ihre personenbezogenen Daten auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO bzw. Art. 9 Abs. 2 lit. a DSGVO, sofern besondere Datenkategorien nach Art. 9 Abs. 1 DSGVO verarbeitet werden. Im Falle einer ausdrücklichen Einwilligung in die Übertragung personenbezogener Daten in Drittstaaten erfolgt die Datenverarbeitung außerdem auf Grundlage von Art. 49 Abs. 1 lit. a DSGVO. Sofern Sie in die Speicherung von Cookies oder in den Zugriff auf Informationen in Ihr Endgerät (z. B. via Device-Fingerprinting) eingewilligt haben, erfolgt die Datenverarbeitung zusätzlich auf Grundlage von § 25 Abs. 1 TTDSG. Die Einwilligung ist jederzeit widerrufbar. Sind Ihre Daten zur Vertragserfüllung oder zur Durchführung vorvertraglicher Maßnahmen erforderlich, verarbeiten wir Ihre Daten auf Grundlage des Art. 6 Abs. 1 lit. b DSGVO. Des Weiteren verarbeiten wir Ihre Daten, sofern diese zur Erfüllung einer rechtlichen Verpflichtung erforderlich sind auf Grundlage von Art. 6 Abs. 1 lit. c DSGVO. Die Datenverarbeitung kann ferner auf Grundlage unseres berechtigten Interesses nach Art. 6 Abs. 1 lit. f DSGVO erfolgen. Über die jeweils im Einzelfall einschlägigen Rechtsgrundlagen wird in den folgenden Absätzen dieser Datenschutzerklärung informiert.
+- **h3**: Hinweis zur Datenweitergabe in die USA und sonstige Drittstaaten
+- **p**: Wir verwenden unter anderem Tools von Unternehmen mit Sitz in den USA oder sonstigen datenschutzrechtlich nicht sicheren Drittstaaten. Wenn diese Tools aktiv sind, können Ihre personenbezogene Daten in diese Drittstaaten übertragen und dort verarbeitet werden. Wir weisen darauf hin, dass in diesen Ländern kein mit der EU vergleichbares Datenschutzniveau garantiert werden kann. Beispielsweise sind US-Unternehmen dazu verpflichtet, personenbezogene Daten an Sicherheitsbehörden herauszugeben, ohne dass Sie als Betroffener hiergegen gerichtlich vorgehen könnten. Es kann daher nicht ausgeschlossen werden, dass US-Behörden (z. B. Geheimdienste) Ihre auf US-Servern befindlichen Daten zu Überwachungszwecken verarbeiten, auswerten und dauerhaft speichern. Wir haben auf diese Verarbeitungstätigkeiten keinen Einfluss.
+- **h3**: Widerruf Ihrer Einwilligung zur Datenverarbeitung
+- **p**: Viele Datenverarbeitungsvorgänge sind nur mit Ihrer ausdrücklichen Einwilligung möglich. Sie können eine bereits erteilte Einwilligung jederzeit widerrufen. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Datenverarbeitung bleibt vom Widerruf unberührt.
+- **h3**: Widerspruchsrecht gegen die Datenerhebung in besonderen Fällen sowie gegen Direktwerbung (Art. 21 DSGVO)
+- **p**: WENN DIE DATENVERARBEITUNG AUF GRUNDLAGE VON ART. 6 ABS. 1 LIT. E ODER F DSGVO ERFOLGT, HABEN SIE JEDERZEIT DAS RECHT, AUS GRÜNDEN, DIE SICH AUS IHRER BESONDEREN SITUATION ERGEBEN, GEGEN DIE VERARBEITUNG IHRER PERSONENBEZOGENEN DATEN WIDERSPRUCH EINZULEGEN; DIES GILT AUCH FÜR EIN AUF DIESE BESTIMMUNGEN GESTÜTZTES PROFILING. DIE JEWEILIGE RECHTSGRUNDLAGE, AUF DENEN EINE VERARBEITUNG BERUHT, ENTNEHMEN SIE DIESER DATENSCHUTZERKLÄRUNG. WENN SIE WIDERSPRUCH EINLEGEN, WERDEN WIR IHRE BETROFFENEN PERSONENBEZOGENEN DATEN NICHT MEHR VERARBEITEN, ES SEI DENN, WIR KÖNNEN ZWINGENDE SCHUTZWÜRDIGE GRÜNDE FÜR DIE VERARBEITUNG NACHWEISEN, DIE IHRE INTERESSEN, RECHTE UND FREIHEITEN ÜBERWIEGEN ODER DIE VERARBEITUNG DIENT DER GELTENDMACHUNG, AUSÜBUNG ODER VERTEIDIGUNG VON RECHTSANSPRÜCHEN (WIDERSPRUCH NACH ART. 21 ABS. 1 DSGVO).
+- **p**: WERDEN IHRE PERSONENBEZOGENEN DATEN VERARBEITET, UM DIREKTWERBUNG ZU BETREIBEN, SO HABEN SIE DAS RECHT, JEDERZEIT WIDERSPRUCH GEGEN DIE VERARBEITUNG SIE BETREFFENDER PERSONENBEZOGENER DATEN ZUM ZWECKE DERARTIGER WERBUNG EINZULEGEN; DIES GILT AUCH FÜR DAS PROFILING, SOWEIT ES MIT SOLCHER DIREKTWERBUNG IN VERBINDUNG STEHT. WENN SIE WIDERSPRECHEN, WERDEN IHRE PERSONENBEZOGENEN DATEN ANSCHLIESSEND NICHT MEHR ZUM ZWECKE DER DIREKTWERBUNG VERWENDET (WIDERSPRUCH NACH ART. 21 ABS. 2 DSGVO).
+- **h3**: Beschwerderecht bei der zuständigen Aufsichtsbehörde
+- **p**: Im Falle von Verstößen gegen die DSGVO steht den Betroffenen ein Beschwerderecht bei einer Aufsichtsbehörde, insbesondere in dem Mitgliedstaat ihres gewöhnlichen Aufenthalts, ihres Arbeitsplatzes oder des Orts des mutmaßlichen Verstoßes zu. Das Beschwerderecht besteht unbeschadet anderweitiger verwaltungsrechtlicher oder gerichtlicher Rechtsbehelfe.
+- **h3**: Recht auf Datenübertragbarkeit
+- **p**: Sie haben das Recht, Daten, die wir auf Grundlage Ihrer Einwilligung oder in Erfüllung eines Vertrags automatisiert verarbeiten, an sich oder an einen Dritten in einem gängigen, maschinenlesbaren Format aushändigen zu lassen. Sofern Sie die direkte Übertragung der Daten an einen anderen Verantwortlichen verlangen, erfolgt dies nur, soweit es technisch machbar ist.
+- **h3**: Auskunft, Löschung und Berichtigung
+- **p**: Sie haben im Rahmen der geltenden gesetzlichen Bestimmungen jederzeit das Recht auf unentgeltliche Auskunft über Ihre gespeicherten personenbezogenen Daten, deren Herkunft und Empfänger und den Zweck der Datenverarbeitung und ggf. ein Recht auf Berichtigung oder Löschung dieser Daten. Hierzu sowie zu weiteren Fragen zum Thema personenbezogene Daten können Sie sich jederzeit an uns wenden.
+- **h3**: Recht auf Einschränkung der Verarbeitung
+- **p**: Sie haben das Recht, die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen. Hierzu können Sie sich jederzeit an uns wenden. Das Recht auf Einschränkung der Verarbeitung besteht in folgenden Fällen:
+- **li**: Wenn Sie die Richtigkeit Ihrer bei uns gespeicherten personenbezogenen Daten bestreiten, benötigen wir in der Regel Zeit, um dies zu überprüfen. Für die Dauer der Prüfung haben Sie das Recht, die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen.
+- **li**: Wenn die Verarbeitung Ihrer personenbezogenen Daten unrechtmäßig geschah/geschieht, können Sie statt der Löschung die Einschränkung der Datenverarbeitung verlangen.
+- **li**: Wenn wir Ihre personenbezogenen Daten nicht mehr benötigen, Sie sie jedoch zur Ausübung, Verteidigung oder Geltendmachung von Rechtsansprüchen benötigen, haben Sie das Recht, statt der Löschung die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen.
+- **li**: Wenn Sie einen Widerspruch nach Art. 21 Abs. 1 DSGVO eingelegt haben, muss eine Abwägung zwischen Ihren und unseren Interessen vorgenommen werden. Solange noch nicht feststeht, wessen Interessen überwiegen, haben Sie das Recht, die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen.
+- **p**: Wenn Sie die Verarbeitung Ihrer personenbezogenen Daten eingeschränkt haben, dürfen diese Daten – von ihrer Speicherung abgesehen – nur mit Ihrer Einwilligung oder zur Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen oder zum Schutz der Rechte einer anderen natürlichen oder juristischen Person oder aus Gründen eines wichtigen öffentlichen Interesses der Europäischen Union oder eines Mitgliedstaats verarbeitet werden.
+- **h3**: SSL- bzw. TLS-Verschlüsselung
+- **p**: Diese Seite nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte, wie zum Beispiel Bestellungen oder Anfragen, die Sie an uns als Seitenbetreiber senden, eine SSL- bzw. TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von „http://“ auf „https://“ wechselt und an dem Schloss-Symbol in Ihrer Browserzeile.
+- **p**: Wenn die SSL- bzw. TLS-Verschlüsselung aktiviert ist, können die Daten, die Sie an uns übermitteln, nicht von Dritten mitgelesen werden.
+- **h3**: Widerspruch gegen Werbe-E-Mails
+- **p**: Der Nutzung von im Rahmen der Impressumspflicht veröffentlichten Kontaktdaten zur Übersendung von nicht ausdrücklich angeforderter Werbung und Informationsmaterialien wird hiermit widersprochen. Die Betreiber der Seiten behalten sich ausdrücklich rechtliche Schritte im Falle der unverlangten Zusendung von Werbeinformationen, etwa durch Spam-E-Mails, vor.
+- **h2**: 4. Datenerfassung auf dieser Website
+- **h3**: Cookies
+- **p**: Unsere Internetseiten verwenden so genannte „Cookies“. Cookies sind kleine Datenpakete und richten auf Ihrem Endgerät keinen Schaden an. Sie werden entweder vorübergehend für die Dauer einer Sitzung (Session-Cookies) oder dauerhaft (permanente Cookies) auf Ihrem Endgerät gespeichert. Session-Cookies werden nach Ende Ihres Besuchs automatisch gelöscht. Permanente Cookies bleiben auf Ihrem Endgerät gespeichert, bis Sie diese selbst löschen oder eine automatische Löschung durch Ihren Webbrowser erfolgt.
+- **p**: Teilweise können auch Cookies von Drittunternehmen auf Ihrem Endgerät gespeichert werden, wenn Sie unsere Seite betreten (Third-Party-Cookies). Diese ermöglichen uns oder Ihnen die Nutzung bestimmter Dienstleistungen des Drittunternehmens (z. B. Cookies zur Abwicklung von Zahlungsdienstleistungen).
+- **p**: Cookies haben verschiedene Funktionen. Zahlreiche Cookies sind technisch notwendig, da bestimmte Websitefunktionen ohne diese nicht funktionieren würden (z. B. die Warenkorbfunktion oder die Anzeige von Videos). Andere Cookies dienen dazu, das Nutzerverhalten auszuwerten oder Werbung anzuzeigen.
+- **p**: Cookies, die zur Durchführung des elektronischen Kommunikationsvorgangs, zur Bereitstellung bestimmter, von Ihnen erwünschter Funktionen (z. B. für die Warenkorbfunktion) oder zur Optimierung der Website (z. B. Cookies zur Messung des Webpublikums) erforderlich sind (notwendige Cookies), werden auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO gespeichert, sofern keine andere Rechtsgrundlage angegeben wird. Der Websitebetreiber hat ein berechtigtes Interesse an der Speicherung von notwendigen Cookies zur technisch fehlerfreien und optimierten Bereitstellung seiner Dienste. Sofern eine Einwilligung zur Speicherung von Cookies und vergleichbaren Wiedererkennungstechnologien abgefragt wurde, erfolgt die Verarbeitung ausschließlich auf Grundlage dieser Einwilligung (Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TTDSG); die Einwilligung ist jederzeit widerrufbar.
+- **p**: Sie können Ihren Browser so einstellen, dass Sie über das Setzen von Cookies informiert werden und Cookies nur im Einzelfall erlauben, die Annahme von Cookies für bestimmte Fälle oder generell ausschließen sowie das automatische Löschen der Cookies beim Schließen des Browsers aktivieren. Bei der Deaktivierung von Cookies kann die Funktionalität dieser Website eingeschränkt sein.
+- **p**: Soweit Cookies von Drittunternehmen oder zu Analysezwecken eingesetzt werden, werden wir Sie hierüber im Rahmen dieser Datenschutzerklärung gesondert informieren und ggf. eine Einwilligung abfragen.
+- **h3**: Server-Log-Dateien
+- **p**: Der Provider der Seiten erhebt und speichert automatisch Informationen in so genannten Server-Log-Dateien, die Ihr Browser automatisch an uns übermittelt. Dies sind:
+- **li**: Browsertyp und Browserversion
+- **li**: verwendetes Betriebssystem
+- **li**: Referrer URL
+- **li**: Hostname des zugreifenden Rechners
+- **li**: Uhrzeit der Serveranfrage
+- **li**: IP-Adresse
+- **p**: Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen.
+- **p**: Die Erfassung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Der Websitebetreiber hat ein berechtigtes Interesse an der technisch fehlerfreien Darstellung und der Optimierung seiner Website – hierzu müssen die Server-Log-Files erfasst werden.
+- **h3**: Kontaktformular
+- **p**: Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.
+- **p**: Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher Maßnahmen erforderlich ist. In allen übrigen Fällen beruht die Verarbeitung auf unserem berechtigten Interesse an der effektiven Bearbeitung der an uns gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO) oder auf Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO) sofern diese abgefragt wurde; die Einwilligung ist jederzeit widerrufbar.
+- **p**: Die von Ihnen im Kontaktformular eingegebenen Daten verbleiben bei uns, bis Sie uns zur Löschung auffordern, Ihre Einwilligung zur Speicherung widerrufen oder der Zweck für die Datenspeicherung entfällt (z. B. nach abgeschlossener Bearbeitung Ihrer Anfrage). Zwingende gesetzliche Bestimmungen – insbesondere Aufbewahrungsfristen – bleiben unberührt.
+- **h3**: Anfrage per E-Mail, Telefon oder Telefax
+- **p**: Wenn Sie uns per E-Mail, Telefon oder Telefax kontaktieren, wird Ihre Anfrage inklusive aller daraus hervorgehenden personenbezogenen Daten (Name, Anfrage) zum Zwecke der Bearbeitung Ihres Anliegens bei uns gespeichert und verarbeitet. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.
+- **p**: Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher Maßnahmen erforderlich ist. In allen übrigen Fällen beruht die Verarbeitung auf unserem berechtigten Interesse an der effektiven Bearbeitung der an uns gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO) oder auf Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO) sofern diese abgefragt wurde; die Einwilligung ist jederzeit widerrufbar.
+- **p**: Die von Ihnen an uns per Kontaktanfragen übersandten Daten verbleiben bei uns, bis Sie uns zur Löschung auffordern, Ihre Einwilligung zur Speicherung widerrufen oder der Zweck für die Datenspeicherung entfällt (z. B. nach abgeschlossener Bearbeitung Ihres Anliegens). Zwingende gesetzliche Bestimmungen – insbesondere gesetzliche Aufbewahrungsfristen – bleiben unberührt.
+- **h3**: Kommentarfunktion auf dieser Website
+- **p**: Für die Kommentarfunktion auf dieser Seite werden neben Ihrem Kommentar auch Angaben zum Zeitpunkt der Erstellung des Kommentars, Ihre E-Mail-Adresse und, wenn Sie nicht anonym posten, der von Ihnen gewählte Nutzername gespeichert.
+- **h4**: Speicherung der IP-Adresse
+- **p**: Unsere Kommentarfunktion speichert die IP-Adressen der Nutzer, die Kommentare verfassen. Da wir Kommentare auf dieser Website nicht vor der Freischaltung prüfen, benötigen wir diese Daten, um im Falle von Rechtsverletzungen wie Beleidigungen oder Propaganda gegen den Verfasser vorgehen zu können.
+- **h4**: Speicherdauer der Kommentare
+- **p**: Die Kommentare und die damit verbundenen Daten werden gespeichert und verbleiben auf dieser Website, bis der kommentierte Inhalt vollständig gelöscht wurde oder die Kommentare aus rechtlichen Gründen gelöscht werden müssen (z. B. beleidigende Kommentare).
+- **h4**: Rechtsgrundlage
+- **p**: Die Speicherung der Kommentare erfolgt auf Grundlage Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Sie können eine von Ihnen erteilte Einwilligung jederzeit widerrufen. Dazu reicht eine formlose Mitteilung per E-Mail an uns. Die Rechtmäßigkeit der bereits erfolgten Datenverarbeitungsvorgänge bleibt vom Widerruf unberührt.
+- **h2**: 5. Analyse-Tools und Werbung
+- **h3**: Matomo
+- **p**: Diese Website benutzt den Open Source Webanalysedienst Matomo.
+- **p**: Mit Hilfe von Matomo sind wir in der Lage Daten über die Nutzung unserer Website durch die Websitebesucher zu erfassen und zu analysieren. Hierdurch können wir u. a. herausfinden, wann welche Seitenaufrufe getätigt wurden und aus welcher Region sie kommen. Außerdem erfassen wir verschiedene Logdateien (z. B. IP-Adresse, Referrer, verwendete Browser und Betriebssysteme) und können messen, ob unsere Websitebesucher bestimmte Aktionen durchführen (z. B. Klicks, Käufe u. Ä.).
+- **p**: Die Nutzung dieses Analyse-Tools erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Der Websitebetreiber hat ein berechtigtes Interesse an der Analyse des Nutzerverhaltens, um sowohl sein Webangebot als auch seine Werbung zu optimieren. Sofern eine entsprechende Einwilligung abgefragt wurde, erfolgt die Verarbeitung ausschließlich auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TTDSG, soweit die Einwilligung die Speicherung von Cookies oder den Zugriff auf Informationen im Endgerät des Nutzers (z. B. Device-Fingerprinting) im Sinne des TTDSG umfasst. Die Einwilligung ist jederzeit widerrufbar.
+- **h4**: Hosting
+- **p**: Wir hosten Matomo ausschließlich auf unseren eigenen Servern, sodass alle Analysedaten bei uns verbleiben und nicht weitergegeben werden.
+- **h2**: 6. Newsletter
+- **h3**: Newsletterdaten
+- **p**: Wenn Sie den auf der Website angebotenen Newsletter beziehen möchten, benötigen wir von Ihnen eine E-Mail-Adresse sowie Informationen, welche uns die Überprüfung gestatten, dass Sie der Inhaber der angegebenen E-Mail-Adresse und mit dem Empfang des Newsletters einverstanden sind. Weitere Daten werden nicht bzw. nur auf freiwilliger Basis erhoben. Für die Abwicklung der Newsletter nutzen wir Newsletterdiensteanbieter, die nachfolgend beschrieben werden.
+- **h3**: Sendinblue
+- **p**: Diese Website nutzt Sendinblue für den Versand von Newslettern. Anbieter ist die Sendinblue GmbH, Köpenicker Straße 126, 10179 Berlin, Deutschland.
+- **p**: Sendinblue ist ein Dienst, mit dem u.a. der Versand von Newslettern organisiert und analysiert werden kann. Die von Ihnen zum Zwecke des Newsletterbezugs eingegeben Daten werden auf den Servern von Sendinblue in Deutschland gespeichert.
+- **h4**: Datenanalyse durch Sendinblue
+- **p**: Mit Hilfe von Sendinblue ist es uns möglich, unsere Newsletter-Kampagnen zu analysieren. So können wir z. B. sehen, ob eine Newsletter-Nachricht geöffnet und welche Links ggf. angeklickt wurden. Auf diese Weise können wir u.a. feststellen, welche Links besonders oft angeklickt wurden.
+- **p**: Außerdem können wir erkennen, ob nach dem Öffnen/ Anklicken bestimmte vorher definierte Aktionen durchgeführt wurden (Conversion-Rate). Wir können so z. B. erkennen, ob Sie nach dem Anklicken des Newsletters einen Kauf getätigt haben.
+- **p**: Sendinblue ermöglicht es uns auch, die Newsletter-Empfänger anhand verschiedener Kategorien zu unterteilen („clustern“). Dabei lassen sich die Newsletterempfänger z. B. nach Alter, Geschlecht oder Wohnort unterteilen. Auf diese Weise lassen sich die Newsletter besser an die jeweiligen Zielgruppen anpassen.
+- **p**: Wenn Sie keine Analyse durch Sendinblue wollen, müssen Sie den Newsletter abbestellen. Hierfür stellen wir in jeder Newsletternachricht einen entsprechenden Link zur Verfügung.
+- **p**: Ausführliche Informationen zum zu den Funktionen von Sendinblue entnehmen Sie folgendem Link: https://de.sendinblue.com/newsletter-software/.
+- **h4**: Rechtsgrundlage
+- **p**: Die Datenverarbeitung erfolgt auf Grundlage Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Sie können diese Einwilligung jederzeit widerrufen. Die Rechtmäßigkeit der bereits erfolgten Datenverarbeitungsvorgänge bleibt vom Widerruf unberührt.
+- **h4**: Speicherdauer
+- **p**: Die von Ihnen zum Zwecke des Newsletter-Bezugs bei uns hinterlegten Daten werden von uns bis zu Ihrer Austragung aus dem Newsletter bei uns bzw. dem Newsletterdiensteanbieter gespeichert und nach der Abbestellung des Newsletters aus der Newsletterverteilerliste gelöscht. Daten, die zu anderen Zwecken bei uns gespeichert wurden, bleiben hiervon unberührt.
+- **p**: Nach Ihrer Austragung aus der Newsletterverteilerliste wird Ihre E-Mail-Adresse bei uns bzw. dem Newsletterdiensteanbieter ggf. in einer Blacklist gespeichert, sofern dies zur Verhinderung künftiger Mailings erforderlich ist. Die Daten aus der Blacklist werden nur für diesen Zweck verwendet und nicht mit anderen Daten zusammengeführt. Dies dient sowohl Ihrem Interesse als auch unserem Interesse an der Einhaltung der gesetzlichen Vorgaben beim Versand von Newslettern (berechtigtes Interesse im Sinne des Art. 6 Abs. 1 lit. f DSGVO). Die Speicherung in der Blacklist ist zeitlich nicht befristet. Sie können der Speicherung widersprechen, sofern Ihre Interessen unser berechtigtes Interesse überwiegen.
+- **p**: Näheres entnehmen Sie den Datenschutzbestimmungen von Sendinblue unter: https://de.sendinblue.com/datenschutz-uebersicht/.
+- **h4**: Auftragsverarbeitung
+- **p**: Wir haben einen Vertrag über Auftragsverarbeitung (AVV) zur Nutzung des oben genannten Dienstes geschlossen. Hierbei handelt es sich um einen datenschutzrechtlich vorgeschriebenen Vertrag, der gewährleistet, dass dieser die personenbezogenen Daten unserer Websitebesucher nur nach unseren Weisungen und unter Einhaltung der DSGVO verarbeitet.
+- **h2**: 7. Plugins und Tools
+- **h3**: YouTube mit erweitertem Datenschutz
+- **p**: Diese Website bindet Videos der Website YouTube ein. Betreiber der Seiten ist die Google Ireland Limited („Google“), Gordon House, Barrow Street, Dublin 4, Irland.
+- **p**: Wir nutzen YouTube im erweiterten Datenschutzmodus. Dieser Modus bewirkt laut YouTube, dass YouTube keine Informationen über die Besucher auf dieser Website speichert, bevor diese sich das Video ansehen. Die Weitergabe von Daten an YouTube-Partner wird durch den erweiterten Datenschutzmodus hingegen nicht zwingend ausgeschlossen. So stellt YouTube – unabhängig davon, ob Sie sich ein Video ansehen – eine Verbindung zum Google DoubleClick-Netzwerk her.
+- **p**: Sobald Sie ein YouTube-Video auf dieser Website starten, wird eine Verbindung zu den Servern von YouTube hergestellt. Dabei wird dem YouTube-Server mitgeteilt, welche unserer Seiten Sie besucht haben. Wenn Sie in Ihrem YouTube-Account eingeloggt sind, ermöglichen Sie YouTube, Ihr Surfverhalten direkt Ihrem persönlichen Profil zuzuordnen. Dies können Sie verhindern, indem Sie sich aus Ihrem YouTube-Account ausloggen.
+- **p**: Des Weiteren kann YouTube nach Starten eines Videos verschiedene Cookies auf Ihrem Endgerät speichern oder vergleichbare Wiedererkennungstechnologien (z. B. Device-Fingerprinting) einsetzen. Auf diese Weise kann YouTube Informationen über Besucher dieser Website erhalten. Diese Informationen werden u. a. verwendet, um Videostatistiken zu erfassen, die Anwenderfreundlichkeit zu verbessern und Betrugsversuchen vorzubeugen.
+- **p**: Gegebenenfalls können nach dem Start eines YouTube-Videos weitere Datenverarbeitungsvorgänge ausgelöst werden, auf die wir keinen Einfluss haben.
+- **p**: Die Nutzung von YouTube erfolgt im Interesse einer ansprechenden Darstellung unserer Online-Angebote. Dies stellt ein berechtigtes Interesse im Sinne von Art. 6 Abs. 1 lit. f DSGVO dar. Sofern eine entsprechende Einwilligung abgefragt wurde, erfolgt die Verarbeitung ausschließlich auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TTDSG, soweit die Einwilligung die Speicherung von Cookies oder den Zugriff auf Informationen im Endgerät des Nutzers (z. B. Device-Fingerprinting) im Sinne des TTDSG umfasst. Die Einwilligung ist jederzeit widerrufbar.
+- **p**: Weitere Informationen über Datenschutz bei YouTube finden Sie in deren Datenschutzerklärung unter: https://policies.google.com/privacy?hl=de.
+- **h2**: 8. eCommerce und Zahlungsanbieter
+- **h3**: Verarbeiten von Kunden- und Vertragsdaten
+- **p**: Wir erheben, verarbeiten und nutzen personenbezogene Kunden- und Vertragsdaten zur Begründung, inhaltlichen Ausgestaltung und Änderung unserer Vertragsbeziehungen. Personenbezogene Daten über die Inanspruchnahme dieser Website (Nutzungsdaten) erheben, verarbeiten und nutzen wir nur, soweit dies erforderlich ist, um dem Nutzer die Inanspruchnahme des Dienstes zu ermöglichen oder abzurechnen. Rechtsgrundlage hierfür ist Art. 6 Abs. 1 lit. b DSGVO.
+- **p**: Die erhobenen Kundendaten werden nach Abschluss des Auftrags oder Beendigung der Geschäftsbeziehung und Ablauf der ggf. bestehenden gesetzlichen Aufbewahrungsfristen gelöscht. Gesetzliche Aufbewahrungsfristen bleiben unberührt.
+- **h2**: 9. Audio- und Videokonferenzen
+- **h4**: Datenverarbeitung
+- **p**: Für die Kommunikation mit unseren Kunden setzen wir unter anderen Online-Konferenz-Tools ein. Die im Einzelnen von uns genutzten Tools sind unten aufgelistet. Wenn Sie mit uns per Video- oder Audiokonferenz via Internet kommunizieren, werden Ihre personenbezogenen Daten von uns und dem Anbieter des jeweiligen Konferenz-Tools erfasst und verarbeitet.
+- **p**: Die Konferenz-Tools erfassen dabei alle Daten, die Sie zur Nutzung der Tools bereitstellen/einsetzen (E-Mail-Adresse und/oder Ihre Telefonnummer). Ferner verarbeiten die Konferenz-Tools die Dauer der Konferenz, Beginn und Ende (Zeit) der Teilnahme an der Konferenz, Anzahl der Teilnehmer und sonstige „Kontextinformationen“ im Zusammenhang mit dem Kommunikationsvorgang (Metadaten).
+- **p**: Des Weiteren verarbeitet der Anbieter des Tools alle technischen Daten, die zur Abwicklung der Online-Kommunikation erforderlich sind. Dies umfasst insbesondere IP-Adressen, MAC-Adressen, Geräte-IDs, Gerätetyp, Betriebssystemtyp und -version, Client-Version, Kameratyp, Mikrofon oder Lautsprecher sowie die Art der Verbindung.
+- **p**: Sofern innerhalb des Tools Inhalte ausgetauscht, hochgeladen oder in sonstiger Weise bereitgestellt werden, werden diese ebenfalls auf den Servern der Tool-Anbieter gespeichert. Zu solchen Inhalten zählen insbesondere Cloud-Aufzeichnungen, Chat-/ Sofortnachrichten, Voicemails hochgeladene Fotos und Videos, Dateien, Whiteboards und andere Informationen, die während der Nutzung des Dienstes geteilt werden.
+- **p**: Bitte beachten Sie, dass wir nicht vollumfänglich Einfluss auf die Datenverarbeitungsvorgänge der verwendeten Tools haben. Unsere Möglichkeiten richten sich maßgeblich nach der Unternehmenspolitik des jeweiligen Anbieters. Weitere Hinweise zur Datenverarbeitung durch die Konferenztools entnehmen Sie den Datenschutzerklärungen der jeweils eingesetzten Tools, die wir unter diesem Text aufgeführt haben.
+- **h4**: Zweck und Rechtsgrundlagen
+- **p**: Die Konferenz-Tools werden genutzt, um mit angehenden oder bestehenden Vertragspartnern zu kommunizieren oder bestimmte Leistungen gegenüber unseren Kunden anzubieten (Art. 6 Abs. 1 lit. b DSGVO). Des Weiteren dient der Einsatz der Tools der allgemeinen Vereinfachung und Beschleunigung der Kommunikation mit uns bzw. unserem Unternehmen (berechtigtes Interesse im Sinne von Art. 6 Abs. 1 lit. f DSGVO). Soweit eine Einwilligung abgefragt wurde, erfolgt der Einsatz der betreffenden Tools auf Grundlage dieser Einwilligung; die Einwilligung ist jederzeit mit Wirkung für die Zukunft widerrufbar.
+- **h4**: Speicherdauer
+- **p**: Die unmittelbar von uns über die Video- und Konferenz-Tools erfassten Daten werden von unseren Systemen gelöscht, sobald Sie uns zur Löschung auffordern, Ihre Einwilligung zur Speicherung widerrufen oder der Zweck für die Datenspeicherung entfällt. Gespeicherte Cookies verbleiben auf Ihrem Endgerät, bis Sie sie löschen. Zwingende gesetzliche Aufbewahrungsfristen bleiben unberührt.
+- **p**: Auf die Speicherdauer Ihrer Daten, die von den Betreibern der Konferenz-Tools zu eigenen Zwecken gespeichert werden, haben wir keinen Einfluss. Für Einzelheiten dazu informieren Sie sich bitte direkt bei den Betreibern der Konferenz-Tools.
+- **h4**: Eingesetzte Konferenz-Tools
+- **p**: Wir setzen folgende Konferenz-Tools ein:
+- **h3**: Zoom
+- **p**: Wir nutzen Zoom. Anbieter dieses Dienstes ist die Zoom Communications Inc., San Jose, 55 Almaden Boulevard, 6th Floor, San Jose, CA 95113, USA. Details zur Datenverarbeitung entnehmen Sie der Datenschutzerklärung von Zoom: https://zoom.us/de-de/privacy.html.
+- **p**: Die Datenübertragung in die USA wird auf die Standardvertragsklauseln der EU-Kommission gestützt. Details finden Sie hier: https://zoom.us/de-de/privacy.html.
+- **h4**: Auftragsverarbeitung
+- **p**: Wir haben einen Vertrag über Auftragsverarbeitung (AVV) zur Nutzung des oben genannten Dienstes geschlossen. Hierbei handelt es sich um einen datenschutzrechtlich vorgeschriebenen Vertrag, der gewährleistet, dass dieser die personenbezogenen Daten unserer Websitebesucher nur nach unseren Weisungen und unter Einhaltung der DSGVO verarbeitet.
+- **p**: 2026 Finanzelot

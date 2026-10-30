@@ -16,6 +16,10 @@ interface Props {
 }
 const { variante = 'kurz', titelId = 'geschichte-titel' } = Astro.props;
 const lang = variante === 'lang';
+const stationen = STATIONEN.filter((s) => lang || !s.nurLang);
+const ZAHLWORT = ['null', 'eine', 'zwei', 'drei', 'vier', 'fünf', 'sechs', 'sieben', 'acht', 'neun', 'zehn'];
+const anzahl = ZAHLWORT[stationen.length] ?? String(stationen.length);
+const Anzahl = anzahl.charAt(0).toUpperCase() + anzahl.slice(1);
 ---
 
 <section class="zeitleiste auf-dunkel" aria-labelledby={titelId} data-zeitleiste>
@@ -25,7 +29,7 @@ const lang = variante === 'lang';
         <p class="eyebrow">Geschichte</p>
         <h2 id={titelId} class="titel-mittel mt-4 text-schaum">Von der Hafenfähre zum Ort für Ihren Anlass.</h2>
         <p class="mt-5 max-w-md text-nebel">
-          {lang ? 'Sechs Stationen aus mehr als sechs Jahrzehnten — scrollen Sie sich durch die Zeit.' : 'Sechs Stationen, ein Schiff. Scrollen Sie sich durch die Zeit.'}
+          {lang ? `${Anzahl} Stationen aus mehr als sechs Jahrzehnten — scrollen Sie sich durch die Zeit.` : `${Anzahl} Stationen, ein Schiff. Scrollen Sie sich durch die Zeit.`}
         </p>
         {
           !lang && (
@@ -38,24 +42,24 @@ const lang = variante === 'lang';
       </div>
       <ol class="zl-liste">
         {
-          STATIONEN.map((s, i) => (
+          stationen.map((s, i) => (
             <li class="zl-karte" data-zl-karte>
               <div class="zl-karte-innen">
                 <p class="zl-marke font-display">{s.marke}</p>
                 <p class="zl-nr" aria-hidden="true">
-                  {String(i + 1).padStart(2, '0')} / {String(STATIONEN.length).padStart(2, '0')}
+                  {String(i + 1).padStart(2, '0')} / {String(stationen.length).padStart(2, '0')}
                 </p>
                 <h3 class="zl-titel">{s.titel}</h3>
                 {s.foto && (
                   <div class="zl-bild">
-                    <Picture src={s.foto.bild} alt={s.foto.alt} formats={['avif', 'webp']} widths={[400, 640]} sizes="(min-width: 768px) 26rem, 80vw" loading="lazy" />
+                    <Picture src={s.foto.bild} alt={s.foto.alt} formats={['avif', 'webp']} widths={[420, 720]} sizes="(min-width: 768px) 26rem, 80vw" quality={68} loading="lazy" />
                   </div>
                 )}
                 <p class="zl-text">{lang ? s.lang : s.kurz}</p>
                 {s.link && (
                   <a class="textlink mt-3 inline-flex items-center gap-1.5" href={s.link.href} target="_blank" rel="noopener">
                     {s.link.text} <Symbol name="extern" class="size-4" />
-                    <span class="sr-only">(öffnet YouTube in neuem Fenster)</span>
+                    <span class="sr-only"> (öffnet in neuem Fenster)</span>
                   </a>
                 )}
                 {lang && s.offen && <Platzhalter class="mt-4 text-nebel">{s.offen}</Platzhalter>}
@@ -69,7 +73,7 @@ const lang = variante === 'lang';
       <div class="seite-breite">
         <div class="zl-leiste"><span class="zl-balken" data-zl-balken></span></div>
         <ol class="zl-marken">
-          {STATIONEN.map((s) => <li data-zl-marke>{s.marke}</li>)}
+          {stationen.map((s) => <li data-zl-marke>{s.marke}</li>)}
         </ol>
       </div>
     </div>
@@ -256,7 +260,7 @@ const lang = variante === 'lang';
       view-timeline-name: --zeitleiste;
       view-timeline-axis: block;
     }
-    /* Bewusst Einzel-Eigenschaften statt der Kurzform „animation": Der
+    /* Bewusst Einzel-Eigenschaften statt der Kurzform „animation“: Der
        CSS-Minifier würde die Zeitachse sonst in die Kurzform falten, wo sie
        ungültig ist — und die Regel fiele weg. */
     :global(html.js[data-bewegung='an']) .zl-spur.css-zeitachse {

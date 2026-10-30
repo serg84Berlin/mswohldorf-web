@@ -24,10 +24,10 @@ import { BETREIBER, KONTAKT } from '../config';
         <h2 id="verantwortlicher">1. Verantwortlicher</h2>
         <p>
           Verantwortlich für die Datenverarbeitung auf dieser Website ist:<br />
-          <strong>{BETREIBER.firma}</strong><br />
-          <Platzhalter inline>Anschrift wie im Impressum</Platzhalter><br />
-          E-Mail: <a href={`mailto:${KONTAKT.mail}`}>{KONTAKT.mail}</a><br />
-          Telefon: {KONTAKT.telefon ?? <Platzhalter inline>Telefonnummer</Platzhalter>}
+          <strong>{BETREIBER.firma}</strong>, vertreten durch {BETREIBER.vertreter}<br />
+          {BETREIBER.strasse}, {BETREIBER.plz} {BETREIBER.ort}<br />
+          Telefon: <a href={`tel:${KONTAKT.telefonLink}`}>{KONTAKT.telefon}</a><br />
+          E-Mail: <a href={`mailto:${KONTAKT.mail}`}>{KONTAKT.mail}</a>
         </p>
         <p>Einen Datenschutzbeauftragten haben wir <Platzhalter inline>benannt / nicht benannt (nicht verpflichtet) — bitte festlegen</Platzhalter>.</p>
 
@@ -35,7 +35,7 @@ import { BETREIBER, KONTAKT } from '../config';
         <ul>
           <li>Wir setzen <strong>keine Cookies</strong> und verwenden <strong>keine Analyse- oder Tracking-Werkzeuge</strong>.</li>
           <li>Beim Aufruf der Seiten werden <strong>keine Inhalte von Drittanbietern</strong> geladen. Schriften, Bilder und Skripte liegen auf unserem eigenen Webspace.</li>
-          <li>Videos (YouTube), der 3D-Rundgang (Matterport) und die interaktive Karte (OpenStreetMap) werden <strong>erst nach Ihrem Klick</strong> geladen („Zwei-Klick-Lösung").</li>
+          <li>Videos (YouTube), der 3D-Rundgang (Matterport) und die interaktive Karte (OpenStreetMap) werden <strong>erst nach Ihrem Klick</strong> geladen („Zwei-Klick-Lösung“).</li>
           <li>Ein Cookie-Banner ist deshalb nicht nötig.</li>
         </ul>
 
@@ -56,7 +56,7 @@ import { BETREIBER, KONTAKT } from '../config';
 
         <h2 id="speicher">4. Cookies und Speicherung auf Ihrem Gerät</h2>
         <p>
-          Wir setzen keine Cookies. Nur wenn Sie im Seitenfuß den Schalter „Bewegung reduzieren" benutzen, merkt sich Ihr Browser diese Wahl im
+          Wir setzen keine Cookies. Nur wenn Sie im Seitenfuß den Schalter „Bewegung reduzieren“ benutzen, merkt sich Ihr Browser diese Wahl im
           lokalen Speicher (localStorage, Eintrag <code>mswohldorf-bewegung</code>). Der Eintrag bleibt auf Ihrem Gerät, wird nicht an uns
           übertragen und lässt sich über die Browser-Einstellungen jederzeit löschen. Rechtsgrundlage ist § 25 Abs. 2 Nr. 2 TDDDG (unbedingt
           erforderlich für eine von Ihnen ausdrücklich gewünschte Funktion).
@@ -67,7 +67,7 @@ import { BETREIBER, KONTAKT } from '../config';
           Wenn Sie uns über das Anfrageformular schreiben, verarbeiten wir die Angaben, die Sie dort machen: Anlass, Wunsch- und
           Ausweichdatum, Gästezahl, Name, E-Mail-Adresse, Telefonnummer (freiwillig) und Ihre Nachricht. Zum Schutz vor automatisierten
           Spam-Einsendungen übermittelt das Formular außerdem den Inhalt eines für Menschen unsichtbaren Feldes (normalerweise leer) und die Zeit
-          zwischen dem Laden der Seite und dem Absenden. Wir nutzen dafür keinen Dienst eines Drittanbieters (kein „Captcha").
+          zwischen dem Laden der Seite und dem Absenden. Wir nutzen dafür keinen Dienst eines Drittanbieters (kein „Captcha“).
         </p>
         <p>
           Die Angaben werden verschlüsselt (HTTPS) an unseren eigenen Server übertragen, der in einem Rechenzentrum in Deutschland (EU) betrieben
@@ -95,7 +95,7 @@ import { BETREIBER, KONTAKT } from '../config';
         <h2 id="einbettungen">7. Inhalte Dritter nur nach Klick (Zwei-Klick-Lösung)</h2>
         <p>
           Videos, der 3D-Rundgang und die interaktive Karte stammen von Drittanbietern. Wir zeigen zunächst nur ein Vorschaubild von unserem
-          eigenen Webspace. Erst wenn Sie auf „Inhalt laden" klicken, baut Ihr Browser eine Verbindung zum jeweiligen Anbieter auf. Dabei
+          eigenen Webspace. Erst wenn Sie auf „Inhalt laden“ klicken, baut Ihr Browser eine Verbindung zum jeweiligen Anbieter auf. Dabei
           erhält der Anbieter mindestens Ihre IP-Adresse, die Adresse unserer Seite und technische Angaben zu Ihrem Browser; der Anbieter kann
           außerdem eigene Cookies oder ähnliche Techniken einsetzen. Rechtsgrundlage ist Ihre Einwilligung durch den Klick (Art. 6 Abs. 1 lit. a
           DSGVO, § 25 Abs. 1 TDDDG). Die Einwilligung gilt nur für den einzelnen Inhalt und nur für den aktuellen Seitenaufruf; wir speichern sie
@@ -104,7 +104,7 @@ import { BETREIBER, KONTAKT } from '../config';
         <h3>YouTube</h3>
         <p>
           Anbieter: Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Wir binden Videos über die Domain
-          youtube-nocookie.com ein („erweiterter Datenschutzmodus"). Nach dem Klick kann es zu einer Übermittlung an Google LLC in den USA
+          youtube-nocookie.com ein („erweiterter Datenschutzmodus“). Nach dem Klick kann es zu einer Übermittlung an Google LLC in den USA
           kommen; Google ist nach dem EU-U.S. Data Privacy Framework zertifiziert. Mehr:
           <a href="https://policies.google.com/privacy?hl=de" target="_blank" rel="noopener">Datenschutzerklärung von Google</a>.
         </p>

@@ -1,5 +1,5 @@
 /**
- * „Bewegung reduzieren": ein Zustand für die ganze Seite.
+ * „Bewegung reduzieren“: ein Zustand für die ganze Seite.
  * <html data-bewegung="an|aus"> wird schon im <head> gesetzt (Basis.astro):
  * gespeicherte Wahl aus dem Footer-Schalter, sonst der Wunsch des Systems.
  */

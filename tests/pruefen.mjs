@@ -116,12 +116,14 @@ for (const [breite, viewport] of Object.entries(GROESSEN)) {
 for (const [breite, viewport] of Object.entries(GROESSEN)) {
   const { ctx } = await kontext(haupt, { viewport, deviceScaleFactor: 1 });
   const seite = await ctx.newPage();
-  for (const pfad of ['/', '/anlaesse/firmenevent/', '/galerie/', '/anfrage/']) {
+  for (const pfad of ['/', '/anlaesse/firmenevent/', '/galerie/', '/anfrage/', '/geschichte/']) {
     await seite.goto(haupt.url + pfad, { waitUntil: 'networkidle' });
     await durchscrollen(seite);
     if (pfad === '/') await seite.waitForSelector('[data-hero-leinwand][data-bereit]', { timeout: 30000 }).catch(() => {});
     await seite.waitForTimeout(2200);
-    await seite.screenshot({ path: join(BILDER, `${name(pfad)}-${breite}.png`), fullPage: true });
+    // Zusatzseiten als JPEG (sehr lange Seiten wären als PNG viele MB groß)
+    const jpeg = pfad === '/geschichte/';
+    await seite.screenshot({ path: join(BILDER, `${name(pfad)}-${breite}.${jpeg ? 'jpg' : 'png'}`), fullPage: true, ...(jpeg ? { type: 'jpeg', quality: 80 } : {}) });
   }
   // Hero mit WebGL (Ausschnitt Bildschirm)
   await seite.goto(haupt.url + '/', { waitUntil: 'networkidle' });
@@ -233,6 +235,9 @@ for (const [breite, viewport] of Object.entries(GROESSEN)) {
   await seite.screenshot({ path: join(BILDER, 'galerie-karussell-1440.png') });
   // Raster + Lightbox
   await seite.click('[data-ansicht="raster"]');
+  await durchscrollen(seite);
+  await seite.waitForTimeout(800);
+  await seite.screenshot({ path: join(BILDER, 'galerie-alle-1440.jpg'), fullPage: true, type: 'jpeg', quality: 80 });
   const kachel = seite.locator('[data-ansicht-flaeche="raster"] [data-lightbox-bild]').first();
   await kachel.focus();
   await seite.keyboard.press('Enter');

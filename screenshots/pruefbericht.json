@@ -1,5 +1,5 @@
 {
-  "zeit": "2026-10-30T20:39:45.441Z",
+  "zeit": "2026-10-30T21:20:12.545Z",
   "pruefungen": [
     {
       "name": "/ @390: Status 200",
@@ -559,12 +559,12 @@
     {
       "name": "Karussell: Pfeiltaste dreht weiter",
       "ok": true,
-      "info": "1 / 10 → 2 / 10"
+      "info": "1 / 12 → 2 / 12"
     },
     {
       "name": "Lightbox: Enter öffnet, → / ← blättern",
       "ok": true,
-      "info": "Bild 1 von 2 → Bild 2 von 2 → Bild 1 von 2"
+      "info": "Bild 1 von 18 → Bild 2 von 18 → Bild 1 von 18"
     },
     {
       "name": "Lightbox: Esc schließt, Fokus zurück auf die Kachel",
@@ -634,7 +634,7 @@
     {
       "name": "Formular verbunden: JSON entspricht dem Vertrag",
       "ok": true,
-      "info": "{\"quelle\":\"mswohldorf\",\"anlass\":\"Firmenevent\",\"datum\":\"2027-06-12\",\"ausweichdatum\":\"2027-06-19\",\"gaeste\":24,\"name\":\"Erika Mustermann\",\"email\":\"erika@example.org\",\"telefon\":\"+49 40 123456\",\"nachricht\":\"Sommerfest für unser Team, gern ab 18 Uhr.\",\"einwilligung\":true,\"website\":\"\",\"dauerMs\":2056}"
+      "info": "{\"quelle\":\"mswohldorf\",\"anlass\":\"Firmenevent\",\"datum\":\"2027-06-12\",\"ausweichdatum\":\"2027-06-19\",\"gaeste\":24,\"name\":\"Erika Mustermann\",\"email\":\"erika@example.org\",\"telefon\":\"+49 40 123456\",\"nachricht\":\"Sommerfest für unser Team, gern ab 18 Uhr.\",\"einwilligung\":true,\"website\":\"\",\"dauerMs\":2001}"
     },
     {
       "name": "Formular verbunden (202): sonst keine externen Anfragen",
@@ -734,7 +734,7 @@
     {
       "name": "Kompaktformular (Start): leere Felder werden null",
       "ok": true,
-      "info": "{\"quelle\":\"mswohldorf\",\"anlass\":\"Sonstiges\",\"datum\":null,\"ausweichdatum\":null,\"gaeste\":null,\"name\":\"Max Muster\",\"email\":\"max@example.org\",\"telefon\":null,\"nachricht\":\"Kurze Frage zur Verfügbarkeit im Mai.\",\"einwilligung\":true,\"website\":\"\",\"dauerMs\":3832}"
+      "info": "{\"quelle\":\"mswohldorf\",\"anlass\":\"Sonstiges\",\"datum\":null,\"ausweichdatum\":null,\"gaeste\":null,\"name\":\"Max Muster\",\"email\":\"max@example.org\",\"telefon\":null,\"nachricht\":\"Kurze Frage zur Verfügbarkeit im Mai.\",\"einwilligung\":true,\"website\":\"\",\"dauerMs\":4293}"
     },
     {
       "name": "axe / @390: keine WCAG-2.2-AA-Verstöße",
@@ -895,36 +895,36 @@
   "gewicht": {
     "390": {
       "lcp": {
-        "ms": 184,
+        "ms": 200,
         "element": "SPAN.wort",
         "url": ""
       },
-      "ladezeitMsLokal": 195,
-      "beimLadenKB": 155,
+      "ladezeitMsLokal": 222,
+      "beimLadenKB": 159,
       "nachTypKB": {
         "stylesheet": 15,
         "font": 83,
+        "document": 20,
         "image": 33,
-        "document": 16,
         "script": 8
       },
       "beimLaden": [
-        "stylesheet 9 kB /_astro/Basis.CP7TgkyV.css",
-        "stylesheet 2 kB /_astro/index.PpNcyjiI.css",
-        "stylesheet 1 kB /_astro/Lightbox.tSWfEd92.css",
+        "stylesheet 9 kB /_astro/Basis.CUuUUsDd.css",
+        "stylesheet 2 kB /_astro/index.CWSy5AMa.css",
         "font 36 kB /_astro/fraunces-latin-wght-normal.ukD16Tqj.woff2",
-        "stylesheet 2 kB /_astro/ZweiKlick.DLyXcA8b.css",
+        "stylesheet 1 kB /_astro/Lightbox.tSWfEd92.css",
+        "stylesheet 2 kB /_astro/PresseFilm.Pvwx6IJs.css",
         "stylesheet 1 kB /_astro/AnfrageFormular.Bq6uzhcP.css",
+        "document 20 kB /",
         "image 18 kB /_astro/poster-hoch.FK7CNsWj_cV6re.avif",
-        "document 16 kB /",
         "font 47 kB /_astro/inter-latin-wght-normal.Dx4kXJAl.woff2",
-        "script 1 kB /_astro/Zeitleiste.astro_astro_type_script_index_0_lang.CuK3wq_s.js",
         "script 2 kB /_astro/Hero.astro_astro_type_script_index_0_lang.B5jupHYU.js",
-        "script 1 kB /_astro/Lightbox.astro_astro_type_script_index_0_lang._f59Zq0z.js",
-        "script 2 kB /_astro/Basis.astro_astro_type_script_index_0_lang.DX37LMHJ.js",
+        "script 1 kB /_astro/Lightbox.astro_astro_type_script_index_0_lang.CHIQJIXZ.js",
+        "script 1 kB /_astro/Zeitleiste.astro_astro_type_script_index_0_lang.CuK3wq_s.js",
+        "script 2 kB /_astro/Basis.astro_astro_type_script_index_0_lang.BqySre5_.js",
         "script 3 kB /_astro/AnfrageFormular.astro_astro_type_script_index_0_lang.DMeIQh3h.js",
-        "image 15 kB /_astro/ms-wohldorf-2024.DNJParMR_l2WSa.avif",
-        "script 0 kB /_astro/bewegung.Ci3i6uZa.js"
+        "script 0 kB /_astro/bewegung.Ci3i6uZa.js",
+        "image 15 kB /_astro/ms-wohldorf-2024.DNJParMR_l2WSa.avif"
       ],
       "nachgeladen3D": [
         "script 130 kB /_astro/szene.CkxC-Xqd.js",
@@ -934,38 +934,40 @@
     },
     "1440": {
       "lcp": {
-        "ms": 188,
+        "ms": 232,
         "element": "SPAN.wort",
         "url": ""
       },
-      "ladezeitMsLokal": 187,
-      "beimLadenKB": 238,
+      "ladezeitMsLokal": 244,
+      "beimLadenKB": 287,
       "nachTypKB": {
         "stylesheet": 15,
         "font": 83,
-        "document": 16,
-        "image": 116,
+        "image": 161,
+        "document": 20,
         "script": 8
       },
       "beimLaden": [
-        "stylesheet 9 kB /_astro/Basis.CP7TgkyV.css",
+        "stylesheet 9 kB /_astro/Basis.CUuUUsDd.css",
+        "stylesheet 2 kB /_astro/index.CWSy5AMa.css",
         "font 36 kB /_astro/fraunces-latin-wght-normal.ukD16Tqj.woff2",
-        "stylesheet 2 kB /_astro/index.PpNcyjiI.css",
-        "stylesheet 2 kB /_astro/ZweiKlick.DLyXcA8b.css",
-        "document 16 kB /",
         "stylesheet 1 kB /_astro/Lightbox.tSWfEd92.css",
+        "stylesheet 2 kB /_astro/PresseFilm.Pvwx6IJs.css",
         "stylesheet 1 kB /_astro/AnfrageFormular.Bq6uzhcP.css",
         "image 45 kB /_astro/poster-quer.D0oYptdo_2hupnp.avif",
         "font 47 kB /_astro/inter-latin-wght-normal.Dx4kXJAl.woff2",
+        "document 20 kB /",
+        "script 1 kB /_astro/Lightbox.astro_astro_type_script_index_0_lang.CHIQJIXZ.js",
+        "script 3 kB /_astro/AnfrageFormular.astro_astro_type_script_index_0_lang.DMeIQh3h.js",
         "script 1 kB /_astro/Zeitleiste.astro_astro_type_script_index_0_lang.CuK3wq_s.js",
         "script 2 kB /_astro/Hero.astro_astro_type_script_index_0_lang.B5jupHYU.js",
-        "script 3 kB /_astro/AnfrageFormular.astro_astro_type_script_index_0_lang.DMeIQh3h.js",
-        "script 1 kB /_astro/Lightbox.astro_astro_type_script_index_0_lang._f59Zq0z.js",
-        "script 2 kB /_astro/Basis.astro_astro_type_script_index_0_lang.DX37LMHJ.js",
-        "image 33 kB /_astro/ms-wohldorf-2024.DNJParMR_aAIpt.avif",
-        "image 11 kB /_astro/einlaufen-sandtorhafen-2017.C4uSAOB5_2pTnSV.avif",
+        "script 2 kB /_astro/Basis.astro_astro_type_script_index_0_lang.BqySre5_.js",
         "script 0 kB /_astro/bewegung.Ci3i6uZa.js",
-        "image 26 kB /_astro/ms-wohldorf-2024.DNJParMR_ZmoDdl.avif"
+        "image 33 kB /_astro/ms-wohldorf-2024.DNJParMR_aAIpt.avif",
+        "image 16 kB /_astro/wohldorf_umbau_02.BNiLy2o-_VJHC1.avif",
+        "image 26 kB /_astro/wohldorf_ueberfahrt-hamburg_10.D2-zLw___Z1zPcLo.avif",
+        "image 17 kB /_astro/ndr-pfefferkoerner-wohldorf.D3RUWIWy_Z1IjjCJ.avif",
+        "image 23 kB /_astro/ms-wohldorf-2024.DNJParMR_Z1vq09s.avif"
       ],
       "nachgeladen3D": [
         "script 130 kB /_astro/szene.CkxC-Xqd.js",
@@ -1012,7 +1014,7 @@
     "nachricht": "Sommerfest für unser Team, gern ab 18 Uhr.",
     "einwilligung": true,
     "website": "",
-    "dauerMs": 2056
+    "dauerMs": 2001
   },
   "ergebnis": {
     "gesamt": 178,

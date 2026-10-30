@@ -4,46 +4,52 @@ import SeitenKopf from '../components/SeitenKopf.astro';
 import GalerieRaster from '../components/GalerieRaster.astro';
 import Karussell from '../components/Karussell.astro';
 import Lightbox from '../components/Lightbox.astro';
-import Platzhalter from '../components/Platzhalter.astro';
 import Symbol from '../components/Symbol.astro';
-import { FOTOS, ANZAHL_UEBERNOMMEN } from '../data/bilder';
+import { FOTOS_KARUSSELL, GALERIE_ABSCHNITTE, ANZAHL_FOTOS, foto } from '../data/bilder';
 ---
 
 <Basis
   titel="Galerie — Fotos der MS Wohldorf in Hamburg"
-  beschreibung="Fotos der MS Wohldorf: die historische Hamburger Hafenfähre von 1959 an ihrem Liegeplatz und im Sandtorhafen. Eindrücke für Ihr Event an Bord."
+  beschreibung={`${ANZAHL_FOTOS} Fotos der MS Wohldorf: Außenbereich an der Süderelbe, Innenräume, der Einzug in den Sandtorhafen 2017 und der Umbau 2016.`}
+  bild={foto('wohldorf_innen_21').bild}
   fussVon="var(--color-schaum)"
 >
-  <SeitenKopf eyebrow="Galerie" titel="Die MS Wohldorf in Bildern." lead="Drehen Sie das Karussell, öffnen Sie ein Foto groß — oder wechseln Sie zur klassischen Rasteransicht." />
+  <SeitenKopf eyebrow="Galerie" titel="Die MS Wohldorf in Bildern." lead="Drehen Sie das Karussell der Höhepunkte, öffnen Sie ein Foto groß — oder stöbern Sie in allen Galerien." />
 
   <section class="bg-schaum" aria-labelledby="fotos-titel">
     <div class="seite-breite py-12 lg:py-16">
       <div class="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-        <h2 id="fotos-titel" class="font-display text-2xl text-tiefe">{FOTOS.length} {FOTOS.length === 1 ? 'Foto' : 'Fotos'}</h2>
+        <h2 id="fotos-titel" class="font-display text-2xl text-tiefe">{ANZAHL_FOTOS} Fotos</h2>
         <div class="ansicht nur-js" role="group" aria-label="Ansicht wählen">
           <button type="button" class="ansicht-knopf" aria-pressed="true" data-ansicht="karussell">
             <Symbol name="karussell" class="size-5" /> 3D-Karussell
           </button>
           <button type="button" class="ansicht-knopf" aria-pressed="false" data-ansicht="raster">
-            <Symbol name="raster" class="size-5" /> Raster
+            <Symbol name="raster" class="size-5" /> Alle Galerien
           </button>
         </div>
       </div>
 
-      {
-        ANZAHL_UEBERNOMMEN === 0 && (
-          <Platzhalter class="mt-6 text-tinte">
-            Die Fotos der bisherigen Galerie (images/galerie/…) werden mit „npm run alte-seite" übernommen — die alte Seite war beim Bau
-            nicht erreichbar. Bis dahin zeigt die Galerie zwei Standbilder aus den eigenen Videos.
-          </Platzhalter>
-        )
-      }
-
       <div class="mt-10" data-ansicht-flaeche="karussell" hidden>
-        <Karussell fotos={FOTOS} mindestens={10} />
+        <Karussell fotos={FOTOS_KARUSSELL} mindestens={FOTOS_KARUSSELL.length} />
+        <p class="mt-6 text-center text-sm text-grau">Höhepunkte aus allen Galerien · Alle {ANZAHL_FOTOS} Fotos unter „Alle Galerien“</p>
       </div>
       <div class="mt-10" data-ansicht-flaeche="raster">
-        <GalerieRaster fotos={FOTOS} mindestens={9} sammlung="raster" />
+        <nav aria-label="Galerien" class="galerie-sprung">
+          {GALERIE_ABSCHNITTE.map((a) => <a href={`#${a.id}`}>{a.titel} <span class="text-grau">({a.fotos.length})</span></a>)}
+        </nav>
+        {
+          GALERIE_ABSCHNITTE.map((a) => (
+            <section class="galerie-abschnitt" id={a.id} aria-labelledby={`${a.id}-titel`}>
+              <h3 id={`${a.id}-titel`} class="font-display text-[1.7rem] leading-tight text-tiefe">
+                {a.titel}
+              </h3>
+              <p class="mt-2 text-grau">{a.text}</p>
+              <GalerieRaster fotos={a.fotos} class="mt-6" sammlung={`galerie-${a.id}`} />
+            </section>
+          ))
+        }
+        <p class="mt-10 text-sm text-grau">Fotos: Andrea Klick · Standbilder aus den eigenen Videos der Wohldorf</p>
       </div>
     </div>
   </section>
@@ -62,7 +68,8 @@ import { FOTOS, ANZAHL_UEBERNOMMEN } from '../data/bilder';
     window.dispatchEvent(new Event('resize'));
   };
   knoepfe.forEach((k) => k.addEventListener('click', () => setze(k.dataset.ansicht!)));
-  setze(bewegungErlaubt() ? 'karussell' : 'raster');
+  // Sprungmarke (#innen …) oder reduzierte Bewegung → gleich die Galerien zeigen
+  setze(bewegungErlaubt() && !location.hash ? 'karussell' : 'raster');
   beiBewegungsWechsel((an) => {
     if (!an) setze('raster');
   });
@@ -98,6 +105,26 @@ import { FOTOS, ANZAHL_UEBERNOMMEN } from '../data/bilder';
   .ansicht-knopf[aria-pressed='true'] {
     background: var(--color-tiefe);
     color: var(--color-schaum);
+  }
+  .galerie-sprung {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .galerie-sprung a {
+    padding: 0.5rem 0.95rem;
+    border-radius: 999px;
+    background: var(--color-sand-hell);
+    border: 1px solid rgb(11 26 42 / 0.08);
+    font-weight: 600;
+    font-size: 0.92rem;
+  }
+  .galerie-sprung a:hover {
+    border-color: var(--color-petrol);
+  }
+  .galerie-abschnitt + .galerie-abschnitt {
+    margin-top: 3.5rem;
   }
   :global(html:not(.js)) .nur-js {
     display: none;
