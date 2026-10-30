@@ -1,0 +1,35 @@
+{
+  "name": "mswohldorf-web",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.23.4"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "pruefen": "node tests/pruefen.mjs",
+    "poster": "node scripts/poster-aufnehmen.mjs",
+    "alte-seite": "node scripts/alte-seite-holen.mjs",
+    "offen": "node scripts/offene-angaben.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "3.7.4",
+    "@fontsource-variable/fraunces": "5.3.0",
+    "@fontsource-variable/inter": "5.3.0",
+    "@tailwindcss/vite": "4.3.3",
+    "astro": "7.4.4",
+    "sharp": "0.35.5",
+    "tailwindcss": "4.3.3",
+    "three": "0.187.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.12",
+    "@types/three": "0.187.0",
+    "axe-core": "4.14.0",
+    "typescript": "6.0.3"
+  }
+}

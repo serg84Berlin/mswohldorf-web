@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.astro/
+.netlify/
+.env
+.env.*
+!.env.beispiel
+npm-debug.log*
+.DS_Store
+/test-ergebnisse/
+dist-test/
+dist-vorschau/
