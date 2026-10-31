@@ -11,6 +11,10 @@
   ASTRO_TELEMETRY_DISABLED = "1"
 
 # Deploy-Previews und Branch-Deploys sind immer Vorschau: noindex + Band.
+# Production baut ohne PUBLIC_VORSCHAU und bricht ab, solange rechtliche
+# Angaben offen sind (integrationen/livegang-sperre.mjs). Bis zum Livegang
+# PUBLIC_VORSCHAU=1 für Production in der Netlify-Oberfläche setzen — README,
+# „Bis zum Livegang: Production als Vorschau“.
 [context.deploy-preview.environment]
   PUBLIC_VORSCHAU = "1"
 

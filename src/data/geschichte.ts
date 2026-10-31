@@ -17,6 +17,7 @@ export interface Station {
   lang: string;
   foto?: Foto;
   link?: { href: string; text: string; extern?: boolean };
+  /** Fehlende Angabe: in der Vorschau als Platzhalter-Kasten auf /geschichte/, in Produktion weggelassen. */
   offen?: string;
   nurLang?: boolean;
 }

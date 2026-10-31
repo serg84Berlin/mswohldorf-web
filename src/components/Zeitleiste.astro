@@ -62,7 +62,12 @@ const Anzahl = anzahl.charAt(0).toUpperCase() + anzahl.slice(1);
                     <span class="sr-only"> (öffnet in neuem Fenster)</span>
                   </a>
                 )}
-                {lang && s.offen && <Platzhalter class="mt-4 text-nebel">{s.offen}</Platzhalter>}
+                {/* Offener Punkt zur Geschichte: nur in der Vorschau; in Produktion fällt er weg (ersatz=""). */}
+                {lang && s.offen && (
+                  <Platzhalter class="mt-4 text-nebel" ersatz="">
+                    {s.offen}
+                  </Platzhalter>
+                )}
               </div>
             </li>
           ))

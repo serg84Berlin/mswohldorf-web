@@ -7,7 +7,9 @@
  *         Pfefferkörner, Kundenstimmen (Bildungswoche).
  *   P19 = Presse-PDFs der alten Website (2019): Raumaufteilung, Heizung,
  *         Raumhöhe, nicht mehr aus eigener Kraft fahrtüchtig, kleinere Feiern.
- * Was fehlt, steht in `offen` und erscheint als Platzhalter.
+ * Was fehlt, steht in `offen`: In der Vorschau (PUBLIC_VORSCHAU=1) erscheint
+ * jeder Punkt als Platzhalter-Kasten, im Produktions-Build stattdessen EIN Satz
+ * aus `offenKurz` („… stimmen wir individuell mit Ihnen ab — sprechen Sie uns an.“).
  */
 import type { AnlassWert } from './typen';
 
@@ -25,8 +27,15 @@ export interface Anlass {
   vorteile: { titel: string; text: string }[];
   /** Belegte Hinweise („Gut zu wissen“). */
   wissen: string[];
-  /** Fehlende Angaben → Platzhalter. */
+  /** Fehlende Angaben → in der Vorschau je ein Platzhalter-Kasten. */
   offen: string[];
+  /**
+   * Die offenen Punkte in wenigen Worten, für den Produktions-Build. Daraus wird
+   * EIN Satz: „{offenKurz} stimmen wir individuell mit Ihnen ab — sprechen Sie
+   * uns an.“ Also eine Aufzählung, die vorn im Satz stehen kann (Akkusativ).
+   * Wird nur gezeigt, solange `offen` nicht leer ist.
+   */
+  offenKurz: string;
   zitat?: { text: string; name: string; zusatz: string };
   symbol: 'firma' | 'workshop' | 'kamera' | 'buch' | 'feier';
 }
@@ -72,6 +81,7 @@ export const ANLAESSE: Anlass[] = [
       'Technik: Musik/Beschallung, Präsentationstechnik, WLAN',
       'Mögliche Uhrzeiten, Lautstärke und Saison',
     ],
+    offenKurz: 'Preise und Pakete, Catering, Technik und Uhrzeiten',
     symbol: 'firma',
   },
   {
@@ -102,6 +112,7 @@ export const ANLAESSE: Anlass[] = [
       'Tagespauschalen und Preise',
       'Verpflegung während des Workshops',
     ],
+    offenKurz: 'Bestuhlung, Präsentationstechnik, Verpflegung und Tagespauschalen',
     zitat: {
       text: 'Die MS Wohldorf ist für meine Workshops der ideale Ort, da das Schiff geschützte Räumlichkeiten für die Seewasser Filtrationsarbeiten, die Versammlung ganzer Klassen und auch Bereiche für Gruppenarbeit bietet.',
       name: 'Dr. Rüdiger Stöhr',
@@ -141,6 +152,7 @@ export const ANLAESSE: Anlass[] = [
       'Stromanschluss an Bord (Leistung für Licht und Technik)',
       'Drehgenehmigung am Liegeplatz / Ansprechpartner',
     ],
+    offenKurz: 'Konditionen für Drehtage, Strom für Licht und Technik sowie die Drehgenehmigung am Liegeplatz',
     symbol: 'kamera',
   },
   {
@@ -171,6 +183,7 @@ export const ANLAESSE: Anlass[] = [
       'Konditionen für Kulturveranstaltungen',
       'Öffentliche Veranstaltungen mit Ticketverkauf möglich?',
     ],
+    offenKurz: 'Hängemöglichkeiten, Licht und Ton sowie die Konditionen',
     symbol: 'buch',
   },
   {
@@ -191,6 +204,7 @@ export const ANLAESSE: Anlass[] = [
     vorteile: [vorteil.gaeste, vorteil.kueche, vorteil.geschichte, vorteil.parken],
     wissen: ['Die Wohldorf ist für kleinere Feiern gemacht — Techno- und Disco-Partys passen nicht an Bord.', wissen.kueche, wissen.liegeschiff, wissen.barriere],
     offen: ['Preise für private Feiern', 'Catering und Getränke', 'Musik, Lautstärke und späteste Uhrzeit', 'Dekoration: Was ist möglich?'],
+    offenKurz: 'Preise, Catering und Getränke, Musik und Dekoration',
     symbol: 'feier',
   },
 ];

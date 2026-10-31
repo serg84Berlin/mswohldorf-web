@@ -10,7 +10,7 @@ import Symbol from '../../components/Symbol.astro';
 import Welle from '../../components/Welle.astro';
 import { ANLAESSE, type Anlass } from '../../data/anlaesse';
 import { fotosFuerAnlass } from '../../data/bilder';
-import { SEITE } from '../../config';
+import { SEITE, VORSCHAU } from '../../config';
 
 export const getStaticPaths = (() => ANLAESSE.map((a) => ({ params: { slug: a.slug }, props: { anlass: a } }))) satisfies GetStaticPaths;
 
@@ -77,19 +77,23 @@ const brotkrumen = {
             ))
           }
         </ul>
+        {/* Offene Punkte: Vorschau → je ein Platzhalter-Kasten; Produktion → EIN Satz (src/data/anlaesse.ts, offenKurz). */}
         {
-          a.offen.length > 0 && (
-            <>
-              <p class="mt-6 text-grau">Diese Details klären wir gern persönlich mit Ihnen:</p>
-              <ul class="mt-3 grid gap-3 md:grid-cols-2">
-                {a.offen.map((o) => (
-                  <li>
-                    <Platzhalter class="text-tinte">{o}</Platzhalter>
-                  </li>
-                ))}
-              </ul>
-            </>
-          )
+          a.offen.length > 0 &&
+            (VORSCHAU ? (
+              <>
+                <p class="mt-6 text-grau">Diese Details klären wir gern persönlich mit Ihnen:</p>
+                <ul class="mt-3 grid gap-3 md:grid-cols-2">
+                  {a.offen.map((o) => (
+                    <li>
+                      <Platzhalter class="text-tinte">{o}</Platzhalter>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            ) : (
+              <p class="mt-6 text-grau" data-platzhalter-ersatz>{a.offenKurz} stimmen wir individuell mit Ihnen ab — <a class="textlink" href={`/anfrage/?anlass=${a.slug}`}>sprechen Sie uns an</a>.</p>
+            ))
         }
       </div>
       {

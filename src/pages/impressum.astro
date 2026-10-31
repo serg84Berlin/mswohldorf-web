@@ -4,10 +4,16 @@
  * Geändert: „§ 5 TMG“ → „§ 5 DDG“; Verweise auf das aufgehobene TMG im
  * Haftungsteil entfernt; Link auf die eingestellte EU-OS-Plattform entfernt;
  * Bildnachweis an die neue Seite angepasst. Alles andere wörtlich.
- * Vor dem Livegang rechtlich prüfen (OFFENE-ANGABEN.md).
+ * Vor dem Livegang rechtlich prüfen (OFFENE-ANGABEN.md, Abschnitt A).
+ *
+ * Die offenen Prüfpunkte stehen als rechtliche Platzhalter (`pflicht`) an Ort
+ * und Stelle: In der Vorschau als Kasten, im Produktions-Build bricht der Build
+ * ab, solange einer übrig ist (integrationen/livegang-sperre.mjs). Ist ein
+ * Punkt geklärt: Angabe korrigieren und den Platzhalter löschen.
  */
 import Basis from '../layouts/Basis.astro';
 import SeitenKopf from '../components/SeitenKopf.astro';
+import Platzhalter from '../components/Platzhalter.astro';
 import { BETREIBER, KONTAKT } from '../config';
 ---
 
@@ -30,6 +36,10 @@ import { BETREIBER, KONTAKT } from '../config';
         {BETREIBER.vertreter}, {BETREIBER.strasse}, {BETREIBER.plz} {BETREIBER.ort}
       </p>
       <p>Geschäftsführer: {BETREIBER.vertreter}</p>
+      <Platzhalter pflicht>
+        Vertretung prüfen (OFFENE-ANGABEN.md Nr. 1a): Persönlich haftende Gesellschafterin einer GmbH & Co. KG ist in der Regel die
+        Komplementär-GmbH — dann gehören deren Firma, Sitz, Registergericht und HRB-Nummer sowie ihre Geschäftsführung hierher.
+      </Platzhalter>
 
       <h3>Kontakt</h3>
       <p>
@@ -47,7 +57,7 @@ import { BETREIBER, KONTAKT } from '../config';
       <h3>Umsatzsteuer-ID</h3>
       <p>
         Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br />
-        {BETREIBER.ustId}
+        {BETREIBER.ustId} <Platzhalter inline pflicht>Nummer hat 10 statt 9 Ziffern — bitte prüfen (OFFENE-ANGABEN.md Nr. 1b)</Platzhalter>
       </p>
 
       <h3>Bildnachweis</h3>
@@ -56,11 +66,18 @@ import { BETREIBER, KONTAKT } from '../config';
         Sandtorhafen, Mai 2017" (YouTube-Kanal ulrichritter). Standbild „Die Pfefferkörner“: NDR. Kartenausschnitt: © OpenStreetMap-Mitwirkende,
         <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">ODbL</a>.
       </p>
+      <Platzhalter pflicht>
+        Bildrechte bestätigen (OFFENE-ANGABEN.md Nr. 9): Dürfen das NDR-Standbild („Die Pfefferkörner“), die Presse-Ausschnitte und die
+        zwei Video-Standbilder wie auf der alten Seite verwendet werden?
+      </Platzhalter>
 
       <h3>Streitschlichtung</h3>
       <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
 
       <h3>Haftung für Inhalte</h3>
+      <Platzhalter pflicht>
+        Haftungstext prüfen (OFFENE-ANGABEN.md Nr. 1c): Die Verweise auf das aufgehobene TMG wurden entfernt — soll der Text so bleiben?
+      </Platzhalter>
       <p>
         Als Diensteanbieter sind wir für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Wir sind als
         Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu

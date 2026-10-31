@@ -1,0 +1,23 @@
+---
+/**
+ * Prüfseite: nur INHALTLICHE Platzhalter, in allen Spielarten.
+ * Produktion: neutraler Text, Build läuft durch. Vorschau: Kästen.
+ */
+import Platzhalter from '../../../../src/components/Platzhalter.astro';
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <title>Prüfung inhaltliche Platzhalter</title>
+  </head>
+  <body>
+    <p id="inline-standard">Der Preis für den Abend ist <Platzhalter inline>Preis pro Abend</Platzhalter>.</p>
+    <p id="inline-ersatz">Feiern können Sie bis <Platzhalter inline ersatz="nach Absprache">späteste Uhrzeit</Platzhalter>.</p>
+    <div id="block-standard"><Platzhalter>Catering-Partner</Platzhalter></div>
+    <div id="block-anfrage"><Platzhalter anfrage="/anfrage/?anlass=private-feier">Dekoration</Platzhalter></div>
+    <div id="block-ersatz"><Platzhalter ersatz="Die Bestuhlung richten wir nach Ihrem Wunsch.">Bestuhlung</Platzhalter></div>
+    <div id="block-leer"><Platzhalter ersatz="">Jahr des Basislagers</Platzhalter></div>
+  </body>
+</html>

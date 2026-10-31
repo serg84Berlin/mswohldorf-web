@@ -2,14 +2,28 @@
 /**
  * Hinweis „Entwurf — vor Veröffentlichung rechtlich prüfen“.
  * Abschalten: ENTWURF_HINWEIS_ANZEIGEN in src/config.ts auf false.
+ *
+ * Im Produktions-Build (ohne PUBLIC_VORSCHAU=1) trägt der Hinweis
+ * `data-livegang-sperre`: Der Build bricht dann ab
+ * (integrationen/livegang-sperre.mjs), damit die Datenschutzerklärung nicht
+ * versehentlich als Entwurf live geht. In der Vorschau bleibt er nur sichtbar.
  */
-import { ENTWURF_HINWEIS_ANZEIGEN } from '../config';
+import { ENTWURF_HINWEIS_ANZEIGEN, VORSCHAU } from '../config';
 import Symbol from './Symbol.astro';
+
+interface Props {
+  /** Standard: der Schalter in src/config.ts (Prop nur für die Prüfungen). */
+  anzeigen?: boolean;
+}
+const { anzeigen = ENTWURF_HINWEIS_ANZEIGEN } = Astro.props;
+const sperre = VORSCHAU
+  ? undefined
+  : `Entwurf-Hinweis ist an — nach der rechtlichen Prüfung in src/config.ts ENTWURF_HINWEIS_ANZEIGEN = false setzen`;
 ---
 
 {
-  ENTWURF_HINWEIS_ANZEIGEN && (
-    <div class="entwurf" role="note">
+  anzeigen && (
+    <div class="entwurf" role="note" data-entwurf-hinweis data-livegang-sperre={sperre}>
       <Symbol name="hinweis" class="size-6 shrink-0" />
       <p>
         <strong>Entwurf — vor Veröffentlichung rechtlich prüfen.</strong> Dieser Text ist ein sorgfältig erstellter

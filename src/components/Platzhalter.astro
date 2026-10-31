@@ -1,23 +1,73 @@
 ---
 /**
- * Sichtbarer Platzhalter für Angaben, die noch fehlen.
- * Alle Vorkommen stehen in OFFENE-ANGABEN.md; `npm run offen` listet sie.
+ * Platzhalter für Angaben, die noch fehlen. Zwei Arten:
+ *
+ * INHALTLICH (Standard) — Preise, Technik, Catering, Bestuhlung …
+ *   Die Seite darf ohne diese Angaben live gehen.
+ *   - Vorschau-Build (PUBLIC_VORSCHAU=1): gestrichelter Kasten
+ *     „Angabe folgt — bitte von Uli ergänzen: …“.
+ *   - Produktions-Build: neutraler, kundentauglicher Text statt des Kastens.
+ *     Inline: „auf Anfrage“. Block: „Details dazu stimmen wir gern persönlich
+ *     mit Ihnen ab — fragen Sie einfach an.“ (mit Link auf die Anfrage, Ziel per
+ *     `anfrage`). Passt das nicht in den Satz: eigener Text per `ersatz`;
+ *     `ersatz=""` zeigt in Produktion gar nichts.
+ *
+ * RECHTLICH (`pflicht`) — Impressum, Datenschutz, Bildrechte.
+ *   Darf NIE unbemerkt fehlen: immer als Kasten sichtbar. Im Produktions-Build
+ *   trägt der Kasten `data-livegang-sperre`, und der Build bricht mit Seite und
+ *   Text ab (integrationen/livegang-sperre.mjs). Ein Ersatztext ist bewusst
+ *   nicht vorgesehen.
  *
  *   <Platzhalter>Preise und Pakete</Platzhalter>
- *   <Platzhalter inline>Telefonnummer</Platzhalter>
+ *   <Platzhalter inline ersatz="nach Absprache">späteste Uhrzeit</Platzhalter>
+ *   <Platzhalter inline pflicht>Löschfrist festlegen</Platzhalter>
+ *
+ * Alle Vorkommen stehen in OFFENE-ANGABEN.md; `npm run offen` listet sie
+ * (Pflicht zuerst).
  */
+import { VORSCHAU } from '../config';
+
 interface Props {
   inline?: boolean;
+  /** Rechtliche Pflichtangabe: sperrt den Produktions-Build, solange sie fehlt. */
+  pflicht?: boolean;
+  /** Nur inhaltlich: Text im Produktions-Build statt des Standards; `""` = nichts anzeigen. */
+  ersatz?: string;
+  /** Nur inhaltlich, Block ohne `ersatz`: Ziel des Anfrage-Links im Standardsatz. */
+  anfrage?: string;
   class?: string;
 }
-const { inline = false, class: klasse = '' } = Astro.props;
+const { inline = false, pflicht = false, ersatz, anfrage = '/anfrage/', class: klasse = '' } = Astro.props;
 const Tag = inline ? 'span' : 'div';
+
+/** Kasten: in der Vorschau immer, rechtliche Platzhalter auch in Produktion. */
+const kasten = VORSCHAU || pflicht;
+const inhalt = kasten && Astro.slots.has('default') ? await Astro.slots.render('default') : '';
+/** Klartext für die Build-Meldung (ohne Tags, Entitäten aufgelöst). */
+const klartext = inhalt
+  .replace(/<[^>]*>/g, '')
+  .replace(/&(amp|quot|lt|gt|#39|#34|#38);/g, (_, e: string) => ({ amp: '&', quot: '"', lt: '<', gt: '>', '#39': "'", '#34': '"', '#38': '&' })[e] ?? _)
+  .replace(/\s+/g, ' ')
+  .trim();
+const sperre = pflicht && !VORSCHAU ? klartext || 'rechtlicher Platzhalter ohne Text' : undefined;
 ---
 
-<Tag class:list={['platzhalter', { 'platzhalter-inline': inline }, klasse]} data-platzhalter>
-  <span class="platzhalter-marke">Angabe folgt</span>
-  <span> — bitte von Uli ergänzen: <slot /></span>
-</Tag>
+{
+  kasten ? (
+    <Tag
+      class:list={['platzhalter', { 'platzhalter-inline': inline, 'platzhalter-pflicht': pflicht }, klasse]}
+      data-platzhalter={pflicht ? 'pflicht' : 'inhalt'}
+      data-livegang-sperre={sperre}
+    >
+      <span class="platzhalter-marke">{pflicht ? 'Angabe folgt · Pflicht' : 'Angabe folgt'}</span>
+      <span> — bitte von Uli ergänzen: <Fragment set:html={inhalt} /></span>
+    </Tag>
+  ) : ersatz === '' ? null : inline ? (
+    <span class={klasse || undefined} data-platzhalter-ersatz>{ersatz ?? 'auf Anfrage'}</span>
+  ) : (
+    <p class={klasse || undefined} data-platzhalter-ersatz>{ersatz ?? <>Details dazu stimmen wir gern persönlich mit Ihnen ab — <a class="textlink" href={anfrage}>fragen Sie einfach an</a>.</>}</p>
+  )
+}
 
 <style>
   .platzhalter {
@@ -35,6 +85,11 @@ const Tag = inline ? 'span' : 'div';
     border-radius: 0.4rem;
     box-decoration-break: clone;
     -webkit-box-decoration-break: clone;
+  }
+  /* Rechtliche Lücke: Rahmen in der Warnfarbe des Entwurf-Hinweises. */
+  .platzhalter-pflicht {
+    border-color: #b4541a;
+    background: #fff4e8;
   }
   .platzhalter-marke {
     font-weight: 650;
