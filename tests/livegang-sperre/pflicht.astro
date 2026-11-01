@@ -1,0 +1,22 @@
+---
+/**
+ * Prüfseite /pflicht/ (nur mit PRUEF_MIT_PFLICHT=1): rechtliche Platzhalter
+ * und der Entwurf-Hinweis. Ein Produktions-Build damit muss scheitern und
+ * Seite und Texte nennen.
+ */
+import Platzhalter from '../../src/components/Platzhalter.astro';
+import EntwurfHinweis from '../../src/components/EntwurfHinweis.astro';
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <title>Prüfung rechtliche Platzhalter</title>
+  </head>
+  <body>
+    <EntwurfHinweis anzeigen />
+    <p>Löschfrist: <Platzhalter inline pflicht>Prüf-Löschfrist für Anfragen festlegen</Platzhalter>.</p>
+    <Platzhalter pflicht>Prüf-Impressum: Firma & Sitz der Komplementärin „angeben“</Platzhalter>
+  </body>
+</html>

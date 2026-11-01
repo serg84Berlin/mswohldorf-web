@@ -1,24 +1,32 @@
 /**
  * Prüfungen vor jedem Commit (Playwright + Chromium, ohne Testframework):
  *
- *   npm run build                                       → dist/
- *   PUBLIC_ANFRAGE_URL=https://anfrage.example.test/v1/anfrage \
+ *   npm run build                                       → dist/ (Produktion)
+ *   PUBLIC_VORSCHAU=1 PUBLIC_ANFRAGE_URL=https://anfrage.example.test/v1/anfrage \
  *     npx astro build --outDir dist-test                → dist-test/ (Formular verbunden)
  *   PUBLIC_VORSCHAU=1 npx astro build --outDir dist-vorschau
  *   npm run pruefen
  *
+ * `npm run build` endet mit „LIVEGANG GESPERRT“, solange rechtliche Angaben
+ * offen sind (integrationen/livegang-sperre.mjs) — das ist erwartet. Die Sperre
+ * greift erst nach dem Schreiben, dist/ ist also vollständig und wird geprüft.
+ *
  * Prüft: Konsolenfehler, keine externen Anfragen beim Laden (Abfangen aller
  * Requests), Lightbox per Tastatur, reduzierte Bewegung, Formular (Vorschau,
  * Prüfung, 202/400/429/503/Netzfehler mit gemockter Antwort, JSON-Vertrag),
- * Barrierefreiheit (axe-core, WCAG 2.2 AA), Seitengewicht von „/".
+ * Barrierefreiheit (axe-core, WCAG 2.2 AA), Seitengewicht von „/",
+ * Platzhalter (Vorschau: Kästen; Produktion: neutraler Text) und die
+ * Livegang-Sperre (eigenes kleines Prüfprojekt tests/livegang-sperre/).
  * Screenshots → screenshots/, Messwerte → screenshots/pruefbericht.json.
  */
+import { spawnSync } from 'node:child_process';
 import { createRequire } from 'node:module';
-import { mkdir, readFile, writeFile, readdir } from 'node:fs/promises';
-import { dirname, join, resolve } from 'node:path';
+import { mkdir, readFile, writeFile, readdir, rm } from 'node:fs/promises';
+import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { gzipSync } from 'node:zlib';
 import { starteServer } from './server.mjs';
+import { seitenPfad, sperrGruende } from '../integrationen/livegang-sperre.mjs';
 
 const require = createRequire(import.meta.url);
 const { chromium } = require('playwright');
@@ -505,7 +513,7 @@ for (const [breite, viewport] of Object.entries(GROESSEN)) {
   const ort = ld.flat().find((x) => Array.isArray(x['@type']) && x['@type'].includes('EventVenue'));
   pruefe('JSON-LD: EventVenue/LocalBusiness mit Geo und 35 Gästen', ort?.maximumAttendeeCapacity === 35 && ort?.geo?.latitude > 53 && ort['@type'].includes('LocalBusiness'));
   pruefe('Kanonische URL auf www.mswohldorf.de', html.includes('<link rel="canonical" href="https://www.mswohldorf.de/">'));
-  pruefe('Produktiv-Build ohne noindex', !html.includes('noindex'));
+  pruefe('Produktiv-Build ohne noindex (dist/ aus „npm run build“, nicht mit PUBLIC_VORSCHAU=1)', !html.includes('noindex'));
   const sitemap = await readFile(join(PROJEKT, 'dist/sitemap-0.xml'), 'utf8');
   pruefe('Sitemap enthält alle 11 Seiten, ohne 404', (sitemap.match(/<loc>/g) ?? []).length === 11 && !sitemap.includes('404'), String((sitemap.match(/<loc>/g) ?? []).length));
   const robots = await readFile(join(PROJEKT, 'dist/robots.txt'), 'utf8');
@@ -521,6 +529,165 @@ for (const [breite, viewport] of Object.entries(GROESSEN)) {
   pruefe('Vorschau-Build: jede Seite noindex,nofollow + Band', vorschau.length >= 12 && vorschau.every((h) => h.includes('<meta name="robots" content="noindex,nofollow">') && h.includes('vorschau-band')), `${vorschau.length} Seiten`);
   const kopf = await readFile(join(PROJEKT, 'dist-test/_headers'), 'utf8');
   pruefe('CSP (verbunden): connect-src enthält das Anfrage-Ziel', kopf.includes("connect-src 'self' https://anfrage.example.test"));
+}
+
+/* ------------------------------------------------------------------
+   10. Platzhalter und Livegang-Sperre
+       a) Vorschau (dist-vorschau): offene Angaben als gestrichelte Kästen
+       b) Produktion (dist): „Angabe folgt“/„bitte von Uli ergänzen“ nur noch
+          in rechtlichen Kästen — und jeder davon sperrt den Build; die
+          offen-Listen der Anlässe sind EIN Satz mit Anfrage-Link
+       c) Prüfprojekt tests/livegang-sperre/ (unabhängig vom Stand der Website):
+          Produktion ohne rechtlichen Rest läuft durch und zeigt neutralen Text,
+          mit rechtlichem Rest scheitert sie mit Seite + Text, Vorschau läuft durch
+   ------------------------------------------------------------------ */
+{
+  const zaehle = (text, teil) => text.split(teil).length - 1;
+  const klartext = (html) => html.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+  async function htmlSeiten(ordner) {
+    const seiten = new Map();
+    const sammle = async (o) => {
+      for (const e of await readdir(o, { withFileTypes: true })) {
+        if (e.isDirectory()) await sammle(join(o, e.name));
+        else if (e.name.endsWith('.html')) seiten.set(seitenPfad(relative(ordner, join(o, e.name))), await readFile(join(o, e.name), 'utf8'));
+      }
+    };
+    await sammle(ordner);
+    return seiten;
+  }
+  const vorschauSeiten = await htmlSeiten(join(PROJEKT, 'dist-vorschau'));
+  const produktion = await htmlSeiten(join(PROJEKT, 'dist'));
+
+  // a) Vorschau: Kästen sichtbar, gestrichelt, mit „Angabe folgt — bitte von Uli ergänzen“
+  const vorschau = await starteServer({ ordner: join(PROJEKT, 'dist-vorschau'), port: 4402 });
+  const { ctx } = await kontext(vorschau, { viewport: GROESSEN[1440], reducedMotion: 'reduce' });
+  const seite = await ctx.newPage();
+  let kaestenGesamt = 0;
+  for (const pfad of SEITEN.filter((p) => p !== '/gibt-es-nicht/')) {
+    await seite.goto(vorschau.url + pfad, { waitUntil: 'networkidle' });
+    const z = await seite.evaluate(() => {
+      const k = [...document.querySelectorAll('[data-platzhalter]')];
+      return {
+        kaesten: k.length,
+        pflicht: k.filter((e) => e.dataset.platzhalter === 'pflicht').length,
+        sichtbar: k.every((e) => e.getClientRects().length > 0 && getComputedStyle(e).visibility !== 'hidden'),
+        gestrichelt: k.every((e) => getComputedStyle(e).borderTopStyle === 'dashed'),
+        text: k.every((e) => e.textContent.includes('Angabe folgt') && e.textContent.includes('bitte von Uli ergänzen')),
+        ersatz: document.querySelectorAll('[data-platzhalter-ersatz]').length,
+        sperre: document.querySelectorAll('[data-livegang-sperre]').length,
+      };
+    });
+    kaestenGesamt += z.kaesten;
+    if (z.kaesten + z.ersatz + z.sperre > 0) {
+      pruefe(`Vorschau ${pfad}: ${z.kaesten} Platzhalter als gestrichelte Kästen (${z.pflicht} rechtlich), kein Ersatztext, keine Sperre`, z.sichtbar && z.gestrichelt && z.text && z.ersatz === 0 && z.sperre === 0, JSON.stringify(z));
+    }
+    if (pfad === '/anlaesse/firmenevent/' && z.kaesten > 0) await seite.locator('.offen-kasten').screenshot({ path: join(BILDER, 'platzhalter-vorschau-1440.png') });
+  }
+  console.log(`ℹ Vorschau: ${kaestenGesamt} Platzhalter-Kästen auf allen Seiten zusammen.`);
+  await ctx.close();
+  await vorschau.schliesse();
+
+  // b) Produktion: Platzhaltertext nur in rechtlichen Kästen, jeder davon sperrt den Build
+  const livegang = [];
+  const inhaltKasten = [];
+  const fremderText = [];
+  const ohneSperre = [];
+  for (const [pfad, html] of produktion) {
+    const pflicht = zaehle(html, 'data-platzhalter="pflicht"');
+    const entwurf = (html.match(/\sdata-entwurf-hinweis[\s>]/g) ?? []).length;
+    const gruende = sperrGruende(html);
+    livegang.push(...gruende.map((grund) => ({ seite: pfad, grund })));
+    if (zaehle(html, 'data-platzhalter="inhalt"') > 0) inhaltKasten.push(pfad);
+    // Jeder rechtliche Kasten enthält beide Wendungen genau einmal — mehr Treffer = Platzhaltertext außerhalb.
+    if (zaehle(html, 'Angabe folgt') !== pflicht || zaehle(html, 'bitte von Uli ergänzen') !== pflicht) fremderText.push(pfad);
+    if (gruende.length !== pflicht + entwurf) ohneSperre.push(`${pfad} (${gruende.length} Sperren für ${pflicht} Kästen + ${entwurf} Entwurf)`);
+  }
+  pruefe(`Produktion: keine inhaltlichen Platzhalter-Kästen (${produktion.size} Seiten)`, inhaltKasten.length === 0, inhaltKasten.join(' '));
+  pruefe('Produktion: „Angabe folgt“/„bitte von Uli ergänzen“ nur in rechtlichen Kästen, Seiten ohne rechtlichen Rest ganz ohne', fremderText.length === 0, fremderText.join(' '));
+  pruefe('Produktion: jeder rechtliche Rest (Platzhalter, Entwurf-Hinweis) sperrt den Build', ohneSperre.length === 0, ohneSperre.join(' | '));
+  for (const pfad of SEITEN.filter((p) => p.startsWith('/anlaesse/'))) {
+    const slug = pfad.split('/')[2];
+    const offen = zaehle(vorschauSeiten.get(pfad) ?? '', 'data-platzhalter="inhalt"');
+    const html = produktion.get(pfad) ?? '';
+    const saetze = [...html.matchAll(/<p\b[^>]*\sdata-platzhalter-ersatz\b[^>]*>([\s\S]*?)<\/p>/g)];
+    const satz = saetze.length === 1 ? klartext(saetze[0][1]) : '';
+    const ok =
+      offen === 0
+        ? saetze.length === 0
+        : saetze.length === 1 &&
+          /^[A-ZÄÖÜ].+ stimmen wir individuell mit Ihnen ab — sprechen Sie uns an\.$/.test(satz) &&
+          !/\s[.,;:]|\s{2}/.test(satz) &&
+          saetze[0][1].includes(`href="/anfrage/?anlass=${slug}"`) &&
+          !html.includes('Diese Details klären wir gern persönlich');
+    pruefe(`Produktion ${pfad}: ${offen} offene Punkte → ein Satz mit Anfrage-Link`, ok, satz || `${saetze.length} Sätze`);
+  }
+  {
+    const { ctx: p } = await kontext(haupt, { viewport: GROESSEN[1440], reducedMotion: 'reduce' });
+    const s = await p.newPage();
+    await s.goto(haupt.url + '/anlaesse/firmenevent/', { waitUntil: 'networkidle' });
+    await s.locator('.offen-kasten').screenshot({ path: join(BILDER, 'platzhalter-produktion-1440.png') });
+    await p.close();
+  }
+  bericht.livegang = { gesperrt: livegang.length > 0, stellen: livegang };
+  console.log(
+    livegang.length
+      ? `ℹ Livegang gesperrt (erwartet, solange rechtliche Angaben offen sind): ${livegang.length} Stelle(n) in dist/ — „npm run build“ bricht ab:\n${livegang.map((f) => `    ${f.seite}  ${f.grund}`).join('\n')}`
+      : 'ℹ Keine rechtlichen Reste in dist/ — der Produktions-Build läuft durch.',
+  );
+
+  // c) Prüfprojekt: echte Komponente + echte Sperre, eigene Seiten
+  const ASTRO = join(PROJEKT, 'node_modules/astro/bin/astro.mjs');
+  async function baue(fall, zusatz) {
+    const ausgabe = join(PROJEKT, 'test-ergebnisse/livegang-sperre', fall);
+    await rm(ausgabe, { recursive: true, force: true });
+    const env = { ...process.env, ASTRO_TELEMETRY_DISABLED: '1', PRUEF_AUSGABE: ausgabe };
+    for (const k of ['PUBLIC_VORSCHAU', 'PUBLIC_ANFRAGE_URL', 'PRUEF_MIT_PFLICHT']) delete env[k];
+    const r = spawnSync(process.execPath, [ASTRO, 'build', '--root', join(PROJEKT, 'tests/livegang-sperre')], { cwd: PROJEKT, env: { ...env, ...zusatz }, encoding: 'utf8', timeout: 180000 });
+    const lies = (datei) => readFile(join(ausgabe, datei), 'utf8').catch(() => '');
+    return { code: r.status, log: `${r.stdout ?? ''}${r.stderr ?? ''}`.replace(/\x1b\[[0-9;]*m/g, ''), start: await lies('index.html'), pflicht: await lies('pflicht/index.html') };
+  }
+  const absatz = (html, id) => klartext(html.match(new RegExp(`<(p|div) id="${id}">([\\s\\S]*?)</\\1>`))?.[2] ?? '');
+
+  const a = await baue('produktion-ohne-pflicht', {});
+  pruefe('Sperre (Prüfprojekt): Produktion nur mit inhaltlichen Platzhaltern läuft durch', a.code === 0 && a.log.includes('Livegang frei'), `Exit ${a.code}`);
+  const erwartet = {
+    'inline-standard': 'Der Preis für den Abend ist auf Anfrage.',
+    'inline-ersatz': 'Feiern können Sie bis nach Absprache.',
+    'block-standard': 'Details dazu stimmen wir gern persönlich mit Ihnen ab — fragen Sie einfach an.',
+    'block-anfrage': 'Details dazu stimmen wir gern persönlich mit Ihnen ab — fragen Sie einfach an.',
+    'block-ersatz': 'Die Bestuhlung richten wir nach Ihrem Wunsch.',
+    'block-leer': '',
+  };
+  const abweichung = Object.entries(erwartet)
+    .filter(([id, satz]) => absatz(a.start, id) !== satz)
+    .map(([id]) => `${id}: „${absatz(a.start, id)}“`);
+  pruefe(
+    'Platzhalter in Produktion: neutraler Text je Spielart (inline „auf Anfrage“, Block mit Anfrage-Link, eigener Ersatz, leer)',
+    abweichung.length === 0 && a.start.includes('href="/anfrage/"') && a.start.includes('href="/anfrage/?anlass=private-feier"'),
+    abweichung.join(' | '),
+  );
+  pruefe('Platzhalter in Produktion: kein „Angabe folgt“, kein „bitte von Uli ergänzen“, kein Kasten', a.start.length > 0 && !/Angabe folgt|bitte von Uli ergänzen|data-platzhalter=|data-livegang-sperre/.test(a.start));
+
+  const b = await baue('produktion-mit-pflicht', { PRUEF_MIT_PFLICHT: '1' });
+  const nennt = ['LIVEGANG GESPERRT', '3 rechtliche Angabe(n)', '/pflicht/', 'Prüf-Löschfrist für Anfragen festlegen', 'Prüf-Impressum: Firma & Sitz der Komplementärin „angeben“', 'Entwurf-Hinweis ist an', 'PUBLIC_VORSCHAU=1'];
+  const fehlt = nennt.filter((t) => !b.log.includes(t));
+  pruefe('Sperre (Prüfprojekt): Produktion mit rechtlichem Platzhalter + Entwurf-Hinweis scheitert und nennt Seite und Text', typeof b.code === 'number' && b.code !== 0 && fehlt.length === 0, `Exit ${b.code}${fehlt.length ? `; fehlt in der Meldung: ${fehlt.join(', ')}` : ''}`);
+
+  const c = await baue('vorschau-mit-pflicht', { PRUEF_MIT_PFLICHT: '1', PUBLIC_VORSCHAU: '1' });
+  const cz = {
+    exit: c.code,
+    inhalt: zaehle(c.start, 'data-platzhalter="inhalt"'),
+    pflicht: zaehle(c.pflicht, 'data-platzhalter="pflicht"'),
+    entwurf: c.pflicht.includes('data-entwurf-hinweis'),
+    sperre: zaehle(c.start + c.pflicht, 'data-livegang-sperre'),
+    ersatz: zaehle(c.start, 'data-platzhalter-ersatz'),
+    uli: zaehle(c.start + c.pflicht, 'bitte von Uli ergänzen'),
+  };
+  pruefe(
+    'Sperre (Prüfprojekt): Vorschau mit rechtlichem Rest läuft durch und zeigt alle Kästen',
+    c.code === 0 && cz.inhalt === 6 && cz.pflicht === 2 && cz.entwurf && cz.sperre === 0 && cz.ersatz === 0 && cz.uli === 8 && c.log.includes('Vorschau-Build: 3 rechtliche Stelle(n)'),
+    JSON.stringify(cz),
+  );
 }
 
 await browser.close();

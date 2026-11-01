@@ -1,5 +1,5 @@
 {
-  "zeit": "2026-10-30T21:20:12.545Z",
+  "zeit": "2026-10-31T21:28:25.146Z",
   "pruefungen": [
     {
       "name": "/ @390: Status 200",
@@ -634,7 +634,7 @@
     {
       "name": "Formular verbunden: JSON entspricht dem Vertrag",
       "ok": true,
-      "info": "{\"quelle\":\"mswohldorf\",\"anlass\":\"Firmenevent\",\"datum\":\"2027-06-12\",\"ausweichdatum\":\"2027-06-19\",\"gaeste\":24,\"name\":\"Erika Mustermann\",\"email\":\"erika@example.org\",\"telefon\":\"+49 40 123456\",\"nachricht\":\"Sommerfest für unser Team, gern ab 18 Uhr.\",\"einwilligung\":true,\"website\":\"\",\"dauerMs\":2001}"
+      "info": "{\"quelle\":\"mswohldorf\",\"anlass\":\"Firmenevent\",\"datum\":\"2027-06-12\",\"ausweichdatum\":\"2027-06-19\",\"gaeste\":24,\"name\":\"Erika Mustermann\",\"email\":\"erika@example.org\",\"telefon\":\"+49 40 123456\",\"nachricht\":\"Sommerfest für unser Team, gern ab 18 Uhr.\",\"einwilligung\":true,\"website\":\"\",\"dauerMs\":2025}"
     },
     {
       "name": "Formular verbunden (202): sonst keine externen Anfragen",
@@ -734,7 +734,7 @@
     {
       "name": "Kompaktformular (Start): leere Felder werden null",
       "ok": true,
-      "info": "{\"quelle\":\"mswohldorf\",\"anlass\":\"Sonstiges\",\"datum\":null,\"ausweichdatum\":null,\"gaeste\":null,\"name\":\"Max Muster\",\"email\":\"max@example.org\",\"telefon\":null,\"nachricht\":\"Kurze Frage zur Verfügbarkeit im Mai.\",\"einwilligung\":true,\"website\":\"\",\"dauerMs\":4293}"
+      "info": "{\"quelle\":\"mswohldorf\",\"anlass\":\"Sonstiges\",\"datum\":null,\"ausweichdatum\":null,\"gaeste\":null,\"name\":\"Max Muster\",\"email\":\"max@example.org\",\"telefon\":null,\"nachricht\":\"Kurze Frage zur Verfügbarkeit im Mai.\",\"einwilligung\":true,\"website\":\"\",\"dauerMs\":6402}"
     },
     {
       "name": "axe / @390: keine WCAG-2.2-AA-Verstöße",
@@ -867,7 +867,7 @@
       "info": ""
     },
     {
-      "name": "Produktiv-Build ohne noindex",
+      "name": "Produktiv-Build ohne noindex (dist/ aus „npm run build“, nicht mit PUBLIC_VORSCHAU=1)",
       "ok": true,
       "info": ""
     },
@@ -890,39 +890,139 @@
       "name": "CSP (verbunden): connect-src enthält das Anfrage-Ziel",
       "ok": true,
       "info": ""
+    },
+    {
+      "name": "Vorschau /anlaesse/firmenevent/: 4 Platzhalter als gestrichelte Kästen (0 rechtlich), kein Ersatztext, keine Sperre",
+      "ok": true,
+      "info": "{\"kaesten\":4,\"pflicht\":0,\"sichtbar\":true,\"gestrichelt\":true,\"text\":true,\"ersatz\":0,\"sperre\":0}"
+    },
+    {
+      "name": "Vorschau /anlaesse/workshop-seminar/: 4 Platzhalter als gestrichelte Kästen (0 rechtlich), kein Ersatztext, keine Sperre",
+      "ok": true,
+      "info": "{\"kaesten\":4,\"pflicht\":0,\"sichtbar\":true,\"gestrichelt\":true,\"text\":true,\"ersatz\":0,\"sperre\":0}"
+    },
+    {
+      "name": "Vorschau /anlaesse/film-und-foto/: 3 Platzhalter als gestrichelte Kästen (0 rechtlich), kein Ersatztext, keine Sperre",
+      "ok": true,
+      "info": "{\"kaesten\":3,\"pflicht\":0,\"sichtbar\":true,\"gestrichelt\":true,\"text\":true,\"ersatz\":0,\"sperre\":0}"
+    },
+    {
+      "name": "Vorschau /anlaesse/lesung-ausstellung/: 4 Platzhalter als gestrichelte Kästen (0 rechtlich), kein Ersatztext, keine Sperre",
+      "ok": true,
+      "info": "{\"kaesten\":4,\"pflicht\":0,\"sichtbar\":true,\"gestrichelt\":true,\"text\":true,\"ersatz\":0,\"sperre\":0}"
+    },
+    {
+      "name": "Vorschau /anlaesse/private-feier/: 4 Platzhalter als gestrichelte Kästen (0 rechtlich), kein Ersatztext, keine Sperre",
+      "ok": true,
+      "info": "{\"kaesten\":4,\"pflicht\":0,\"sichtbar\":true,\"gestrichelt\":true,\"text\":true,\"ersatz\":0,\"sperre\":0}"
+    },
+    {
+      "name": "Vorschau /impressum/: 4 Platzhalter als gestrichelte Kästen (4 rechtlich), kein Ersatztext, keine Sperre",
+      "ok": true,
+      "info": "{\"kaesten\":4,\"pflicht\":4,\"sichtbar\":true,\"gestrichelt\":true,\"text\":true,\"ersatz\":0,\"sperre\":0}"
+    },
+    {
+      "name": "Vorschau /datenschutz/: 7 Platzhalter als gestrichelte Kästen (7 rechtlich), kein Ersatztext, keine Sperre",
+      "ok": true,
+      "info": "{\"kaesten\":7,\"pflicht\":7,\"sichtbar\":true,\"gestrichelt\":true,\"text\":true,\"ersatz\":0,\"sperre\":0}"
+    },
+    {
+      "name": "Produktion: keine inhaltlichen Platzhalter-Kästen (12 Seiten)",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Produktion: „Angabe folgt“/„bitte von Uli ergänzen“ nur in rechtlichen Kästen, Seiten ohne rechtlichen Rest ganz ohne",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Produktion: jeder rechtliche Rest (Platzhalter, Entwurf-Hinweis) sperrt den Build",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Produktion /anlaesse/firmenevent/: 4 offene Punkte → ein Satz mit Anfrage-Link",
+      "ok": true,
+      "info": "Preise und Pakete, Catering, Technik und Uhrzeiten stimmen wir individuell mit Ihnen ab — sprechen Sie uns an."
+    },
+    {
+      "name": "Produktion /anlaesse/workshop-seminar/: 4 offene Punkte → ein Satz mit Anfrage-Link",
+      "ok": true,
+      "info": "Bestuhlung, Präsentationstechnik, Verpflegung und Tagespauschalen stimmen wir individuell mit Ihnen ab — sprechen Sie uns an."
+    },
+    {
+      "name": "Produktion /anlaesse/film-und-foto/: 3 offene Punkte → ein Satz mit Anfrage-Link",
+      "ok": true,
+      "info": "Konditionen für Drehtage, Strom für Licht und Technik sowie die Drehgenehmigung am Liegeplatz stimmen wir individuell mit Ihnen ab — sprechen Sie uns an."
+    },
+    {
+      "name": "Produktion /anlaesse/lesung-ausstellung/: 4 offene Punkte → ein Satz mit Anfrage-Link",
+      "ok": true,
+      "info": "Hängemöglichkeiten, Licht und Ton sowie die Konditionen stimmen wir individuell mit Ihnen ab — sprechen Sie uns an."
+    },
+    {
+      "name": "Produktion /anlaesse/private-feier/: 4 offene Punkte → ein Satz mit Anfrage-Link",
+      "ok": true,
+      "info": "Preise, Catering und Getränke, Musik und Dekoration stimmen wir individuell mit Ihnen ab — sprechen Sie uns an."
+    },
+    {
+      "name": "Sperre (Prüfprojekt): Produktion nur mit inhaltlichen Platzhaltern läuft durch",
+      "ok": true,
+      "info": "Exit 0"
+    },
+    {
+      "name": "Platzhalter in Produktion: neutraler Text je Spielart (inline „auf Anfrage“, Block mit Anfrage-Link, eigener Ersatz, leer)",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Platzhalter in Produktion: kein „Angabe folgt“, kein „bitte von Uli ergänzen“, kein Kasten",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Sperre (Prüfprojekt): Produktion mit rechtlichem Platzhalter + Entwurf-Hinweis scheitert und nennt Seite und Text",
+      "ok": true,
+      "info": "Exit 1"
+    },
+    {
+      "name": "Sperre (Prüfprojekt): Vorschau mit rechtlichem Rest läuft durch und zeigt alle Kästen",
+      "ok": true,
+      "info": "{\"exit\":0,\"inhalt\":6,\"pflicht\":2,\"entwurf\":true,\"sperre\":0,\"ersatz\":0,\"uli\":8}"
     }
   ],
   "gewicht": {
     "390": {
       "lcp": {
-        "ms": 200,
+        "ms": 204,
         "element": "SPAN.wort",
         "url": ""
       },
-      "ladezeitMsLokal": 222,
+      "ladezeitMsLokal": 221,
       "beimLadenKB": 159,
       "nachTypKB": {
-        "stylesheet": 15,
         "font": 83,
-        "document": 20,
+        "stylesheet": 15,
         "image": 33,
+        "document": 20,
         "script": 8
       },
       "beimLaden": [
+        "font 36 kB /_astro/fraunces-latin-wght-normal.ukD16Tqj.woff2",
         "stylesheet 9 kB /_astro/Basis.CUuUUsDd.css",
         "stylesheet 2 kB /_astro/index.CWSy5AMa.css",
-        "font 36 kB /_astro/fraunces-latin-wght-normal.ukD16Tqj.woff2",
         "stylesheet 1 kB /_astro/Lightbox.tSWfEd92.css",
         "stylesheet 2 kB /_astro/PresseFilm.Pvwx6IJs.css",
         "stylesheet 1 kB /_astro/AnfrageFormular.Bq6uzhcP.css",
-        "document 20 kB /",
         "image 18 kB /_astro/poster-hoch.FK7CNsWj_cV6re.avif",
         "font 47 kB /_astro/inter-latin-wght-normal.Dx4kXJAl.woff2",
-        "script 2 kB /_astro/Hero.astro_astro_type_script_index_0_lang.B5jupHYU.js",
-        "script 1 kB /_astro/Lightbox.astro_astro_type_script_index_0_lang.CHIQJIXZ.js",
+        "document 20 kB /",
         "script 1 kB /_astro/Zeitleiste.astro_astro_type_script_index_0_lang.CuK3wq_s.js",
-        "script 2 kB /_astro/Basis.astro_astro_type_script_index_0_lang.BqySre5_.js",
         "script 3 kB /_astro/AnfrageFormular.astro_astro_type_script_index_0_lang.DMeIQh3h.js",
+        "script 2 kB /_astro/Hero.astro_astro_type_script_index_0_lang.B5jupHYU.js",
+        "script 2 kB /_astro/Basis.astro_astro_type_script_index_0_lang.BqySre5_.js",
+        "script 1 kB /_astro/Lightbox.astro_astro_type_script_index_0_lang.CHIQJIXZ.js",
         "script 0 kB /_astro/bewegung.Ci3i6uZa.js",
         "image 15 kB /_astro/ms-wohldorf-2024.DNJParMR_l2WSa.avif"
       ],
@@ -934,34 +1034,34 @@
     },
     "1440": {
       "lcp": {
-        "ms": 232,
+        "ms": 240,
         "element": "SPAN.wort",
         "url": ""
       },
-      "ladezeitMsLokal": 244,
+      "ladezeitMsLokal": 255,
       "beimLadenKB": 287,
       "nachTypKB": {
-        "stylesheet": 15,
         "font": 83,
+        "stylesheet": 15,
         "image": 161,
         "document": 20,
         "script": 8
       },
       "beimLaden": [
-        "stylesheet 9 kB /_astro/Basis.CUuUUsDd.css",
-        "stylesheet 2 kB /_astro/index.CWSy5AMa.css",
         "font 36 kB /_astro/fraunces-latin-wght-normal.ukD16Tqj.woff2",
+        "font 47 kB /_astro/inter-latin-wght-normal.Dx4kXJAl.woff2",
+        "stylesheet 9 kB /_astro/Basis.CUuUUsDd.css",
         "stylesheet 1 kB /_astro/Lightbox.tSWfEd92.css",
         "stylesheet 2 kB /_astro/PresseFilm.Pvwx6IJs.css",
+        "stylesheet 2 kB /_astro/index.CWSy5AMa.css",
         "stylesheet 1 kB /_astro/AnfrageFormular.Bq6uzhcP.css",
         "image 45 kB /_astro/poster-quer.D0oYptdo_2hupnp.avif",
-        "font 47 kB /_astro/inter-latin-wght-normal.Dx4kXJAl.woff2",
         "document 20 kB /",
-        "script 1 kB /_astro/Lightbox.astro_astro_type_script_index_0_lang.CHIQJIXZ.js",
-        "script 3 kB /_astro/AnfrageFormular.astro_astro_type_script_index_0_lang.DMeIQh3h.js",
         "script 1 kB /_astro/Zeitleiste.astro_astro_type_script_index_0_lang.CuK3wq_s.js",
         "script 2 kB /_astro/Hero.astro_astro_type_script_index_0_lang.B5jupHYU.js",
+        "script 1 kB /_astro/Lightbox.astro_astro_type_script_index_0_lang.CHIQJIXZ.js",
         "script 2 kB /_astro/Basis.astro_astro_type_script_index_0_lang.BqySre5_.js",
+        "script 3 kB /_astro/AnfrageFormular.astro_astro_type_script_index_0_lang.DMeIQh3h.js",
         "script 0 kB /_astro/bewegung.Ci3i6uZa.js",
         "image 33 kB /_astro/ms-wohldorf-2024.DNJParMR_aAIpt.avif",
         "image 16 kB /_astro/wohldorf_umbau_02.BNiLy2o-_VJHC1.avif",
@@ -1014,10 +1114,63 @@
     "nachricht": "Sommerfest für unser Team, gern ab 18 Uhr.",
     "einwilligung": true,
     "website": "",
-    "dauerMs": 2001
+    "dauerMs": 2025
+  },
+  "livegang": {
+    "gesperrt": true,
+    "stellen": [
+      {
+        "seite": "/datenschutz/",
+        "grund": "Entwurf-Hinweis ist an — nach der rechtlichen Prüfung in src/config.ts ENTWURF_HINWEIS_ANZEIGEN = false setzen"
+      },
+      {
+        "seite": "/datenschutz/",
+        "grund": "benannt / nicht benannt (nicht verpflichtet) — bitte festlegen"
+      },
+      {
+        "seite": "/datenschutz/",
+        "grund": "und ggf. die Zertifizierung nach dem EU-U.S. Data Privacy Framework (Art. 45 DSGVO) — bitte prüfen"
+      },
+      {
+        "seite": "/datenschutz/",
+        "grund": "laut Netlify-Vertrag/Tarif prüfen und eintragen"
+      },
+      {
+        "seite": "/datenschutz/",
+        "grund": "Hosting-Anbieter des Servers nennen"
+      },
+      {
+        "seite": "/datenschutz/",
+        "grund": "Vertragspartner und Sitz (z. B. Zoho Corporation B.V., Niederlande) prüfen"
+      },
+      {
+        "seite": "/datenschutz/",
+        "grund": "konkrete Löschfrist für unbeantwortete/abgelehnte Anfragen festlegen"
+      },
+      {
+        "seite": "/datenschutz/",
+        "grund": "Rechtsgrundlage der Übermittlung (DPF-Zertifizierung) prüfen"
+      },
+      {
+        "seite": "/impressum/",
+        "grund": "Vertretung prüfen (OFFENE-ANGABEN.md Nr. 1a): Persönlich haftende Gesellschafterin einer GmbH & Co. KG ist in der Regel die Komplementär-GmbH — dann gehören deren Firma, Sitz, Registergericht und HRB-Nummer sowie ihre Geschäftsführung hierher."
+      },
+      {
+        "seite": "/impressum/",
+        "grund": "Nummer hat 10 statt 9 Ziffern — bitte prüfen (OFFENE-ANGABEN.md Nr. 1b)"
+      },
+      {
+        "seite": "/impressum/",
+        "grund": "Bildrechte bestätigen (OFFENE-ANGABEN.md Nr. 9): Dürfen das NDR-Standbild („Die Pfefferkörner“), die Presse-Ausschnitte und die zwei Video-Standbilder wie auf der alten Seite verwendet werden?"
+      },
+      {
+        "seite": "/impressum/",
+        "grund": "Haftungstext prüfen (OFFENE-ANGABEN.md Nr. 1c): Die Verweise auf das aufgehobene TMG wurden entfernt — soll der Text so bleiben?"
+      }
+    ]
   },
   "ergebnis": {
-    "gesamt": 178,
+    "gesamt": 198,
     "fehlgeschlagen": 0
   }
 }

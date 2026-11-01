@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import sicherheitsHeader from './integrationen/sicherheits-header.mjs';
+import livegangSperre from './integrationen/livegang-sperre.mjs';
 
 export default defineConfig({
   site: 'https://www.mswohldorf.de',
@@ -17,6 +18,9 @@ export default defineConfig({
       i18n: undefined,
     }),
     sicherheitsHeader(),
+    // Muss die letzte bleiben: bricht einen Produktions-Build mit offenen
+    // rechtlichen Angaben ab, nachdem dist/ vollständig geschrieben ist.
+    livegangSperre(),
   ],
   vite: {
     plugins: [tailwindcss()],

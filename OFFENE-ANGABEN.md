@@ -1,8 +1,20 @@
 # Offene Angaben
 
-Was auf der Seite noch als gestrichelter Kasten „Angabe folgt — bitte von Uli ergänzen: …"
-erscheint (`<Platzhalter>`), und was vor dem Livegang geklärt sein muss. Aktuelle Liste
-aus dem Quelltext: `npm run offen`. **Livegang-Blocker** sind mit ⛔ markiert.
+Was auf der Seite noch fehlt (`<Platzhalter>` bzw. die `offen`-Listen der Anlässe) und was vor
+dem Livegang geklärt sein muss. Aktuelle Liste aus dem Quelltext: `npm run offen` (Pflicht
+zuerst). **Livegang-Blocker** sind mit ⛔ markiert.
+
+Zwei Arten (Einzelheiten: README, „Platzhalter und Livegang-Sperre"):
+
+- **Rechtlich — `pflicht`** (Abschnitt A): In der Vorschau (`PUBLIC_VORSCHAU=1`) als Kasten
+  „Angabe folgt · Pflicht — bitte von Uli ergänzen: …". Im Produktions-Build **bricht der Build
+  ab** und nennt Seite und Text — ebenso, solange `ENTWURF_HINWEIS_ANZEIGEN = true` ist. So kann
+  keine rechtliche Lücke unbemerkt live gehen. Geklärt → Text korrigieren, Platzhalter löschen.
+- **Inhaltlich** (Abschnitte B–D): In der Vorschau als gestrichelter Kasten „Angabe folgt — bitte
+  von Uli ergänzen: …". Im Produktions-Build steht dort neutraler Text („auf Anfrage", „Details
+  dazu stimmen wir gern persönlich mit Ihnen ab — fragen Sie einfach an."); die `offen`-Liste
+  eines Anlasses wird zu einem Satz aus `offenKurz` („… stimmen wir individuell mit Ihnen ab —
+  sprechen Sie uns an."). **Die Seite kann also live gehen, bevor diese Angaben da sind.**
 
 ## Erledigt durch die Übernahme der alten Seite (30.10.2026)
 
@@ -16,21 +28,29 @@ Geschichte (DES, Typ III, Restaurantschiff, Hausboot, Kauf 2016, Umbau in Finken
 Fahrten: laut Presse 2019 fährt das Schiff nicht mehr aus eigener Kraft — die Seite
 spricht deshalb von Veranstaltungen am Liegeplatz.
 
-## A. Rechtliches ⛔
+## A. Rechtliches ⛔ — sperrt den Produktions-Build
+
+Jeder Punkt hier steht als `<Platzhalter pflicht>` im Quelltext (bzw. Nr. 2 als Schalter
+`ENTWURF_HINWEIS_ANZEIGEN`). Solange einer übrig ist, scheitert der Produktions-Build. Bis dahin
+läuft Production auf Netlify mit `PUBLIC_VORSCHAU=1` (README, „Bis zum Livegang").
 
 | Nr. | Was | Wo |
 |---|---|---|
-| 1 ⛔ | **Impressum rechtlich prüfen.** Wörtlich übernommen, aber: (a) Die alte Seite nennt als „persönlich haftenden Gesellschafter" Ulrich Ritter. Bei einer GmbH & Co. KG ist das in der Regel die Komplementär-GmbH — dann gehören deren Firma, Sitz, Registergericht und HRB-Nummer sowie ihre Geschäftsführung ins Impressum. (b) Die USt-IdNr. `DE3223275031` hat 10 statt 9 Ziffern — bitte prüfen. (c) Im Haftungsteil wurden die Verweise auf das aufgehobene TMG entfernt; prüfen, ob der Text so bleiben soll. | `src/config.ts` (`BETREIBER`), `src/pages/impressum.astro` |
-| 2 ⛔ | **Datenschutz-Entwurf rechtlich prüfen**, dann `ENTWURF_HINWEIS_ANZEIGEN = false`. | `src/config.ts` |
-| 3 | Datenschutz: Datenschutzbeauftragter benannt oder nicht? Die alte Erklärung nannte als verantwortliche Stelle Ulrich Ritter persönlich (Postfach 110689) mit `ritter@finanzelot.de`; der Entwurf nennt die Finanzelot GmbH & Co. KG mit `info@finanzelot.de` — welche Adresse soll für Datenschutzanfragen gelten? | `src/pages/datenschutz.astro` |
-| 4 | Netlify: AV-Vertrag, Rechtsgrundlage USA (SCC, ggf. DPF), Speicherdauer der Server-Logs | dito |
-| 5 | Hosting-Anbieter des eigenen Anfrage-Servers (Merlin, Deutschland) | dito |
-| 6 | Zoho CRM: Vertragspartner und Sitz (EU-Rechenzentrum), AV-Vertrag | dito |
-| 7 | Löschfrist für unbeantwortete/abgelehnte Anfragen | dito |
-| 8 | Matterport: Rechtsgrundlage der USA-Übermittlung | dito |
-| 9 | Bildrechte: NDR-Standbild („Die Pfefferkörner"), Presse-Ausschnitte und die zwei Video-Standbilder wie auf der alten Seite verwenden? | `src/data/bilder.ts`, `PresseFilm.astro` |
+| 1 ⛔ | **Impressum rechtlich prüfen.** Wörtlich übernommen, aber: (a) Die alte Seite nennt als „persönlich haftenden Gesellschafter" Ulrich Ritter. Bei einer GmbH & Co. KG ist das in der Regel die Komplementär-GmbH — dann gehören deren Firma, Sitz, Registergericht und HRB-Nummer sowie ihre Geschäftsführung ins Impressum. (b) Die USt-IdNr. `DE3223275031` hat 10 statt 9 Ziffern — bitte prüfen. (c) Im Haftungsteil wurden die Verweise auf das aufgehobene TMG entfernt; prüfen, ob der Text so bleiben soll. | `src/config.ts` (`BETREIBER`), `src/pages/impressum.astro` — je ein `pflicht`-Platzhalter für (a), (b), (c) |
+| 2 ⛔ | **Datenschutz-Entwurf rechtlich prüfen**, dann `ENTWURF_HINWEIS_ANZEIGEN = false` (sonst bricht der Produktions-Build ab; mit `false` entfällt auch „(Entwurf)" beim Stand). | `src/config.ts` |
+| 3 ⛔ | Datenschutz: Datenschutzbeauftragter benannt oder nicht? Die alte Erklärung nannte als verantwortliche Stelle Ulrich Ritter persönlich (Postfach 110689) mit `ritter@finanzelot.de`; der Entwurf nennt die Finanzelot GmbH & Co. KG mit `info@finanzelot.de` — welche Adresse soll für Datenschutzanfragen gelten? (Die Adressfrage hat keinen eigenen Platzhalter; sie gehört zur Prüfung in Nr. 2.) | `src/pages/datenschutz.astro` — `pflicht`-Platzhalter |
+| 4 ⛔ | Netlify: AV-Vertrag, Rechtsgrundlage USA (SCC, ggf. DPF), Speicherdauer der Server-Logs | dito — zwei `pflicht`-Platzhalter |
+| 5 ⛔ | Hosting-Anbieter des eigenen Anfrage-Servers (Merlin, Deutschland) | dito — `pflicht` |
+| 6 ⛔ | Zoho CRM: Vertragspartner und Sitz (EU-Rechenzentrum), AV-Vertrag | dito — `pflicht` |
+| 7 ⛔ | Löschfrist für unbeantwortete/abgelehnte Anfragen | dito — `pflicht` |
+| 8 ⛔ | Matterport: Rechtsgrundlage der USA-Übermittlung | dito — `pflicht` |
+| 9 ⛔ | Bildrechte: NDR-Standbild („Die Pfefferkörner"), Presse-Ausschnitte und die zwei Video-Standbilder wie auf der alten Seite verwenden? | `src/data/bilder.ts`, `PresseFilm.astro`; `pflicht`-Platzhalter im Bildnachweis von `src/pages/impressum.astro` |
 
-## B. Angaben für Anlässe (auch auf der alten Seite nicht vorhanden)
+## B. Angaben für Anlässe (auch auf der alten Seite nicht vorhanden) — inhaltlich, kein Blocker
+
+In Produktion zeigt jede Anlass-Seite statt der Liste einen Satz aus `offenKurz`. Ist ein Punkt
+geklärt: Angabe in `absaetze`/`wissen` aufnehmen, ihn aus `offen` streichen und `offenKurz`
+anpassen (sind alle geklärt, `offen: []` — dann entfällt der Satz).
 
 | Nr. | Was | Wo |
 |---|---|---|
@@ -43,7 +63,7 @@ spricht deshalb von Veranstaltungen am Liegeplatz.
 | 16 | **Kultur**: Hängemöglichkeiten, öffentliche Veranstaltungen mit Ticketverkauf? | dito |
 | 17 | **Dekoration** bei privaten Feiern | dito |
 
-## C. Bitte bestätigen (aus Presse 2019 übernommen, nicht von der alten Website selbst)
+## C. Bitte bestätigen (aus Presse 2019 übernommen, nicht von der alten Website selbst) — kein Blocker
 
 Diese Angaben stehen auf der Seite, stammen aber aus den Presse-PDFs von 2019 — vor dem
 Umzug auf die Süderelbe. Bitte kurz bestätigen oder korrigieren:
@@ -58,7 +78,10 @@ Umzug auf die Süderelbe. Bitte kurz bestätigen oder korrigieren:
 | 23 | 165 m² Nutzfläche (Zitat Ritter) und 607 Fahrgäste (Typ-III-Serie) | Zahlen, Steckbrief |
 | 24 | Toiletten: Die Innen-Fotos zeigen WCs an Bord — darf die Seite „Toiletten an Bord" sagen? (steht bisher nicht drin) | — |
 
-## D. Geschichte
+## D. Geschichte — kein Blocker
+
+Fehlt eine Angabe zu einer Station, kann sie als `offen: '…'` in `src/data/geschichte.ts`
+stehen: in der Vorschau als Kasten auf /geschichte/, in Produktion fällt sie weg.
 
 | Nr. | Was | Wo |
 |---|---|---|

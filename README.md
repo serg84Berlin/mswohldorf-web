@@ -10,7 +10,9 @@ OpenStreetMap) erst nach Klick.
 > Stand: Vorschau. Inhalte der alten Seite sind übernommen (Quelle der Wahrheit:
 > `quelle/alte-seite/`). Vor dem Livegang: [OFFENE-ANGABEN.md](OFFENE-ANGABEN.md) abarbeiten
 > (rechtliche Prüfung von Impressum und Datenschutz, Formular-URL, DNS). Was woher stammt:
-> [INHALT.md](INHALT.md).
+> [INHALT.md](INHALT.md). Fehlende **inhaltliche** Angaben (Preise, Technik, Catering …)
+> halten den Livegang nicht auf; fehlende **rechtliche** sperren den Produktions-Build
+> (siehe [Platzhalter und Livegang-Sperre](#platzhalter-und-livegang-sperre)).
 
 ## Schnellstart
 
@@ -32,7 +34,7 @@ Environment variables*. Beide werden **beim Bauen** eingesetzt — nach einer Ä
 | Variable | Bedeutung |
 |---|---|
 | `PUBLIC_ANFRAGE_URL` | Ziel des Anfrageformulars (`POST`, JSON, https). **Leer** = das Formular zeigt „Vorschau: Das Formular ist noch nicht verbunden …" mit Mail-Link und sendet nichts. Der Ursprung landet automatisch in der CSP (`connect-src`). Ungültige oder `http://`-Adressen brechen den Build ab. |
-| `PUBLIC_VORSCHAU` | `1` = Vorschau-Build: jede Seite bekommt `<meta name="robots" content="noindex,nofollow">` und ein „Vorschau"-Band. Auf Netlify für Deploy-Previews und Branch-Deploys automatisch gesetzt (`netlify.toml`). |
+| `PUBLIC_VORSCHAU` | `1` = Vorschau-Build: jede Seite bekommt `<meta name="robots" content="noindex,nofollow">` und ein „Vorschau"-Band, **alle Platzhalter erscheinen als gestrichelter Kasten**, die Livegang-Sperre ist aus. Auf Netlify für Deploy-Previews und Branch-Deploys automatisch gesetzt (`netlify.toml`); für *Production* bis zum Livegang von Hand (siehe [Bis zum Livegang](#bis-zum-livegang-production-als-vorschau)). **Leer** = Produktions-Build: inhaltliche Platzhalter als neutraler Text, offene rechtliche Angaben **brechen den Build ab**. |
 
 ## Seiten
 
@@ -54,6 +56,47 @@ Inhalte stehen getrennt vom Layout:
 | `src/data/presse.json`, `public/pdf/` | Presse |
 | `src/data/stimmen.ts` | Kundenstimmen (wörtlich) |
 
+## Platzhalter und Livegang-Sperre
+
+Was noch fehlt, steht als `<Platzhalter>` im Quelltext (`src/components/Platzhalter.astro`)
+oder in den `offen`-Listen der Anlässe (`src/data/anlaesse.ts`). Es gibt zwei Arten:
+
+| | **inhaltlich** (Standard) | **rechtlich** (`<Platzhalter pflicht>`) |
+|---|---|---|
+| Wofür | Preise, Technik, Catering, Bestuhlung … (OFFENE-ANGABEN.md B–D) | Impressum, Datenschutz, Bildrechte (OFFENE-ANGABEN.md A) |
+| Vorschau (`PUBLIC_VORSCHAU=1`) | gestrichelter Kasten „Angabe folgt — bitte von Uli ergänzen: …" | Kasten „Angabe folgt · Pflicht — …" (orange) |
+| Produktion | neutraler Text: inline „auf Anfrage", als Block „Details dazu stimmen wir gern persönlich mit Ihnen ab — fragen Sie einfach an." (mit Link auf `/anfrage/`); je Stelle anpassbar mit `ersatz="…"` (`ersatz=""` = nichts zeigen) und `anfrage="/anfrage/?anlass=…"` | **Build bricht ab** mit Seite und Text |
+
+Die `offen`-Listen der Anlässe werden in Produktion nicht als Liste gezeigt, sondern als **ein
+Satz** aus dem Feld `offenKurz`: „Preise und Pakete, Catering, Technik und Uhrzeiten stimmen
+wir individuell mit Ihnen ab — sprechen Sie uns an." (Link auf die Anfrage mit Anlass).
+
+**Livegang-Sperre** (`integrationen/livegang-sperre.mjs`, letzte Integration in
+`astro.config.mjs`): Nach dem Bau durchsucht sie alle HTML-Seiten. Steht im Produktions-Build
+noch ein rechtlicher Platzhalter oder der Entwurf-Hinweis der Datenschutzerklärung
+(`ENTWURF_HINWEIS_ANZEIGEN = true`), endet `npm run build` mit Fehler:
+
+```
+[ERROR] [mswohldorf-livegang-sperre] LIVEGANG GESPERRT — 12 rechtliche Angabe(n) offen. …
+  /datenschutz/  Entwurf-Hinweis ist an — nach der rechtlichen Prüfung in src/config.ts ENTWURF_HINWEIS_ANZEIGEN = false setzen
+  /datenschutz/  benannt / nicht benannt (nicht verpflichtet) — bitte festlegen
+  /impressum/    Nummer hat 10 statt 9 Ziffern — bitte prüfen (OFFENE-ANGABEN.md Nr. 1b)
+  …
+```
+
+Warum Abbruch statt Warnung, auch beim Entwurf-Hinweis: Eine Warnung in einem erfolgreichen
+Netlify-Build liest niemand — die Seite wäre trotzdem veröffentlicht. Ein Abbruch kostet nichts,
+denn Netlify veröffentlicht einen gescheiterten Build nicht und zeigt weiter den letzten guten
+Stand; wer die Seite trotzdem zeigen will, baut ausdrücklich als Vorschau (`PUBLIC_VORSCHAU=1`,
+noindex + Band). Die Sperre greift erst, nachdem `dist/` vollständig geschrieben ist — so lässt
+sich der Produktionsstand lokal trotzdem prüfen (`npm run pruefen`).
+
+Ist ein rechtlicher Punkt geklärt: Text im Quelltext korrigieren und den Platzhalter löschen
+(nicht in einen inhaltlichen umwandeln). `npm run offen` zeigt, was noch fehlt.
+
+`npm run dev` zeigt die Seite wie in Produktion (neutraler Text, rechtliche Kästen sichtbar,
+keine Sperre); alle Kästen lokal: `PUBLIC_VORSCHAU=1 npm run dev`.
+
 ## Skripte
 
 | Befehl | Zweck |
@@ -61,18 +104,22 @@ Inhalte stehen getrennt vom Layout:
 | `npm run alte-seite` | Liest `quelle/alte-seite/` (offline) und erzeugt Foto-Katalog, Presse-Liste, `public/pdf/`, `public/alt/` und `quelle/alte-seite/texte.md`. Erkennt alle Galerien (auch `galerie//03_innen`, `thumb_`/`thumb-`). Mit `--quelle=https://…` würde es die Live-Seite spiegeln (Hosting gekündigt); `--trocken` zeigt nur an. |
 | `npm run poster` | Rendert das Hero-Poster (quer/hoch) aus der 3D-Szene. Ablauf: `npm run build && npm run poster && npm run build`. Braucht Playwright + Chromium. |
 | `npm run pruefen` | Alle Prüfungen (siehe unten). |
-| `npm run offen` | Listet alle Platzhalter im Quelltext. |
+| `npm run offen` | Listet alle offenen Angaben im Quelltext — zuerst **Pflicht** (rechtliche Platzhalter und `ENTWURF_HINWEIS_ANZEIGEN = true`; sperren den Produktions-Build), dann **inhaltlich** (Platzhalter ohne `pflicht`, `offen`-Listen). |
 | `node scripts/karte-erzeugen.mjs` | Erzeugt die statische Anfahrtskarte neu (OSM-Kacheln, einmalig). |
 | `node scripts/schiff-freistellen.mjs <foto> <ziel.webp>` | Stellt das Schiff für die 3D-Bühne frei (Maske passt zum aktuellen Foto). |
 
 ## Prüfungen
 
 ```bash
-npm run build
-PUBLIC_ANFRAGE_URL=https://anfrage.example.test/v1/anfrage npx astro build --outDir dist-test
+npm run build      # Produktion → dist/ (endet mit „LIVEGANG GESPERRT", solange rechtliche Angaben offen sind — erwartet)
+PUBLIC_VORSCHAU=1 PUBLIC_ANFRAGE_URL=https://anfrage.example.test/v1/anfrage npx astro build --outDir dist-test
 PUBLIC_VORSCHAU=1 npx astro build --outDir dist-vorschau
 npm run pruefen    # Playwright (global installiert, require('playwright')) + Chromium
 ```
+
+Solange rechtliche Angaben fehlen, scheitert nur `npm run build` — mit der Liste der offenen
+Stellen. `dist/` ist trotzdem vollständig (die Sperre läuft zuletzt) und wird geprüft. Die
+Formular-Prüfungen (`dist-test/`) brauchen keinen Produktions-Build und laufen deshalb als Vorschau.
 
 `tests/pruefen.mjs` liefert `dist/` wie Netlify aus (`tests/server.mjs`: Header aus
 `netlify.toml` und `dist/_headers`, also mit echter CSP) und prüft u. a.: keine
@@ -80,8 +127,15 @@ Konsolenfehler, **keine externen Anfragen** (alle Requests werden abgefangen), k
 seitliches Scrollen bei 390 px, Lightbox/Karussell/Menüs per Tastatur, reduzierte Bewegung
 (OS-Einstellung und Footer-Schalter), Rückfall ohne WebGL, Formular (Prüfung, Vorschau ohne
 URL, 202/400/429/503/Netzfehler mit gemockter Antwort, JSON-Vertrag), axe-core (WCAG 2.2 A/AA)
-auf allen Seiten in beiden Breiten, SEO-Grundlagen, Vorschau-Build, Seitengewicht.
-Ergebnisse und Screenshots: `screenshots/` (`pruefbericht.json`).
+auf allen Seiten in beiden Breiten, SEO-Grundlagen, Vorschau-Build, Seitengewicht,
+**Platzhalter**: Vorschau zeigt gestrichelte Kästen; Produktion enthält „Angabe folgt"/„bitte von
+Uli ergänzen" nur noch in rechtlichen Kästen, und jeder davon sperrt den Build; die `offen`-Listen
+sind je ein Satz mit Anfrage-Link. Die **Livegang-Sperre** selbst prüft ein kleines eigenes
+Astro-Projekt (`tests/livegang-sperre/`, unabhängig vom Stand der Website): Produktion nur mit
+inhaltlichen Platzhaltern läuft durch und zeigt den neutralen Text, mit rechtlichem Platzhalter
+oder Entwurf-Hinweis scheitert sie mit Seite und Text, als Vorschau läuft sie durch.
+Ergebnisse und Screenshots: `screenshots/` (`pruefbericht.json`, dort auch `livegang`: offene
+rechtliche Stellen), Ausgaben des Prüfprojekts in `test-ergebnisse/`.
 
 ## Anfrage-Schnittstelle (Vertrag mit dem Server)
 
@@ -162,19 +216,39 @@ Kamera hinab und nach vorn.
 
 1. Repository bei Netlify verbinden (*Add new site → Import an existing project*).
    Build-Befehl, Ordner und Node-Version kommen aus `netlify.toml`.
-2. Umgebungsvariablen setzen (`PUBLIC_ANFRAGE_URL`; `PUBLIC_VORSCHAU` nur für Vorschauen).
-3. Deploy auslösen, Vorschau-URL prüfen (Band „Vorschau" erscheint nur bei Previews).
+2. Umgebungsvariablen setzen (`PUBLIC_ANFRAGE_URL`; `PUBLIC_VORSCHAU` siehe unten).
+3. Deploy auslösen, Vorschau-URL prüfen (Band „Vorschau" erscheint nur bei Vorschau-Builds).
+
+### Bis zum Livegang: Production als Vorschau
+
+`netlify.toml` setzt `PUBLIC_VORSCHAU = "1"` nur für Deploy-Previews und Branch-Deploys. Der
+**Production**-Kontext (mswohldorf.netlify.app) baut ohne — und scheitert deshalb an der
+Livegang-Sperre, solange Impressum und Datenschutz nicht fertig sind. Netlify zeigt dann weiter
+den letzten erfolgreichen Stand; neue Commits auf `main` kommen nicht an.
+
+Damit mswohldorf.netlify.app bis dahin die aktuelle Vorschau zeigt:
+
+1. Netlify → *Site configuration → Environment variables → Add a variable*:
+   Key `PUBLIC_VORSCHAU`, Value `1`, *Scopes*: Builds; *Deploy contexts*: nur **Production**
+   (bei „Different value for each deploy context" nur das Feld *Production* füllen).
+2. *Deploys → Trigger deploy → Deploy site*. Ergebnis: Build läuft durch, jede Seite hat
+   noindex und das Band „Vorschau", offene Angaben sind als Kästen sichtbar.
+3. **Zum Livegang** (Impressum und Datenschutz fertig, `npm run offen` meldet keine Pflicht
+   mehr): die Variable für Production **löschen** und neu deployen. Jetzt prüft die Sperre —
+   läuft der Build durch, ist die Seite ohne noindex und ohne Band live.
 
 ## Checkliste Livegang
 
 - [x] Inhalte der alten Seite übernommen (`quelle/alte-seite/`, INHALT.md).
-- [ ] **Impressum** rechtlich geprüft (OFFENE-ANGABEN.md Nr. 1: Komplementärin, USt-IdNr., Haftungstext).
-- [ ] **Platzhalter** gefüllt: `npm run offen` meldet nur noch, was bewusst offen bleibt.
+- [ ] **Impressum** rechtlich geprüft (OFFENE-ANGABEN.md Nr. 1: Komplementärin, USt-IdNr., Haftungstext) und Bildrechte bestätigt (Nr. 9); die `pflicht`-Platzhalter in `src/pages/impressum.astro` gelöscht.
+- [ ] **Datenschutz** rechtlich geprüft, `pflicht`-Platzhalter darin gefüllt und gelöscht, dann in `src/config.ts` `ENTWURF_HINWEIS_ANZEIGEN = false`.
+- [ ] `npm run offen` meldet **0 Pflicht**. Inhaltliche Punkte (Preise, Technik, Catering …) dürfen offen bleiben — die Seite zeigt dort „auf Anfrage" bzw. „… stimmen wir individuell mit Ihnen ab".
+- [ ] `npm run build` **ohne** `PUBLIC_VORSCHAU` läuft durch (keine „LIVEGANG GESPERRT"-Meldung).
 - [ ] Angaben aus der Presse 2019 bestätigt (OFFENE-ANGABEN.md, Abschnitt C).
-- [ ] **Datenschutz** rechtlich geprüft, Platzhalter darin gefüllt, dann in `src/config.ts` `ENTWURF_HINWEIS_ANZEIGEN = false`.
 - [ ] **Formular** verbunden: `PUBLIC_ANFRAGE_URL` gesetzt, Server erlaubt CORS für `https://www.mswohldorf.de`, Testanfrage kommt in Zoho CRM an.
 - [ ] Hero-Foto entschieden; bei neuem Foto `scripts/schiff-freistellen.mjs` + `npm run poster`.
 - [ ] `npm run build` und `npm run pruefen` grün.
+- [ ] Netlify: `PUBLIC_VORSCHAU` für **Production** gelöscht (siehe [Bis zum Livegang](#bis-zum-livegang-production-als-vorschau)), Deploy erfolgreich, kein „Vorschau"-Band auf mswohldorf.netlify.app.
 - [ ] **DNS umstellen**: In Netlify *Domain management* `www.mswohldorf.de` als Primärdomain und `mswohldorf.de` hinzufügen. Beim bisherigen DNS-Anbieter: `www` als `CNAME` auf `<site>.netlify.app`, die Apex-Domain per `A`-Record auf Netlifys Load-Balancer-IP (aktuellen Wert in Netlify anzeigen lassen) — oder die Nameserver zu Netlify DNS umziehen. TTL vorher senken. Netlify stellt das TLS-Zertifikat (Let's Encrypt) automatisch aus und leitet `mswohldorf.de` → `www` um.
 - [ ] Nach der Umstellung: https erzwingen (Netlify, Standard), alte Adressen testen (`/index.html`, `/kontakt`), `https://www.mswohldorf.de/sitemap-index.xml` in der Google Search Console einreichen.
 - [ ] Erst nach einigen Tagen stabilen Betriebs HSTS mit `preload` erwägen.
@@ -184,7 +258,7 @@ Kamera hinab und nach vorn.
 ```
 astro.config.mjs            Astro + Tailwind (Vite), Sitemap, CSP-Integration
 netlify.toml                Build, Header, Cache, Weiterleitungen
-integrationen/              Build-Integration: dist/_headers mit CSP
+integrationen/              Build-Integrationen: dist/_headers mit CSP, Livegang-Sperre
 src/config.ts               zentrale Angaben und Schalter
 src/layouts/Basis.astro     <head> (SEO, OG, JSON-LD, Fonts), Kopf, Fuß, Filter
 src/components/             Hero, Welle, Zeitleiste, Galerie, Lightbox, Karussell,
@@ -193,6 +267,6 @@ src/scripts/                kleine Module: seite, bewegung, formular, lightbox,
                             karussell, zeitleiste, zweiklick, hero/start + hero/szene
 src/pages/                  Seiten (Anlass-Seiten aus src/data/anlaesse.ts)
 scripts/                    Werkzeuge (alte Seite, Poster, Karte, Freistellen, Platzhalter)
-tests/                      Prüfserver + Prüfungen (Playwright)
+tests/                      Prüfserver + Prüfungen (Playwright), Prüfprojekt livegang-sperre/
 screenshots/                Ergebnisse der letzten Prüfung
 ```

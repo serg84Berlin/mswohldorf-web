@@ -1,15 +1,22 @@
 /**
  * Zentrale Angaben der Website — an EINER Stelle.
  *
- * Alles, was hier `null` ist, ist noch nicht bekannt und erscheint auf der
- * Seite als Platzhalter (siehe OFFENE-ANGABEN.md). Nichts davon erfinden.
+ * Was noch nicht bekannt ist, erscheint auf der Seite als Platzhalter
+ * (src/components/Platzhalter.astro, siehe OFFENE-ANGABEN.md). Nichts davon erfinden.
  */
 
 /** Datenschutz-Seite: Hinweis „Entwurf — vor Veröffentlichung rechtlich prüfen“.
- *  Nach der rechtlichen Prüfung auf `false` setzen. */
+ *  Nach der rechtlichen Prüfung auf `false` setzen. Steht er auf `true`, bricht
+ *  ein Produktions-Build ab (integrationen/livegang-sperre.mjs) — kein Livegang
+ *  mit einer Entwurfs-Datenschutzerklärung aus Versehen. */
 export const ENTWURF_HINWEIS_ANZEIGEN = true;
 
-/** Vorschau-Build (`PUBLIC_VORSCHAU=1`): noindex,nofollow + „Vorschau“-Band. */
+/**
+ * Vorschau-Build (`PUBLIC_VORSCHAU=1`): noindex,nofollow + „Vorschau“-Band,
+ * alle Platzhalter als Kasten, Livegang-Sperre aus.
+ * Ohne: Produktions-Build — inhaltliche Platzhalter als neutraler Text,
+ * rechtliche (`pflicht`) und der Entwurf-Hinweis sperren den Build.
+ */
 export const VORSCHAU = import.meta.env.PUBLIC_VORSCHAU === '1';
 
 /** Ziel des Anfrageformulars. Kein Standardwert im Code. */

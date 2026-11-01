@@ -3,12 +3,16 @@
  * Datenschutzerklärung — ENTWURF für genau diese Website.
  * Vor Veröffentlichung rechtlich prüfen; danach ENTWURF_HINWEIS_ANZEIGEN
  * in src/config.ts auf false setzen.
+ *
+ * Alle Platzhalter hier sind rechtlich (`pflicht`): Solange einer davon oder
+ * der Entwurf-Hinweis übrig ist, bricht der Produktions-Build ab
+ * (integrationen/livegang-sperre.mjs). Die Vorschau zeigt sie als Kasten.
  */
 import Basis from '../layouts/Basis.astro';
 import SeitenKopf from '../components/SeitenKopf.astro';
 import EntwurfHinweis from '../components/EntwurfHinweis.astro';
 import Platzhalter from '../components/Platzhalter.astro';
-import { BETREIBER, KONTAKT } from '../config';
+import { BETREIBER, ENTWURF_HINWEIS_ANZEIGEN, KONTAKT } from '../config';
 ---
 
 <Basis
@@ -29,7 +33,7 @@ import { BETREIBER, KONTAKT } from '../config';
           Telefon: <a href={`tel:${KONTAKT.telefonLink}`}>{KONTAKT.telefon}</a><br />
           E-Mail: <a href={`mailto:${KONTAKT.mail}`}>{KONTAKT.mail}</a>
         </p>
-        <p>Einen Datenschutzbeauftragten haben wir <Platzhalter inline>benannt / nicht benannt (nicht verpflichtet) — bitte festlegen</Platzhalter>.</p>
+        <p>Einen Datenschutzbeauftragten haben wir <Platzhalter inline pflicht>benannt / nicht benannt (nicht verpflichtet) — bitte festlegen</Platzhalter>.</p>
 
         <h2 id="ueberblick">2. Das Wichtigste vorab</h2>
         <ul>
@@ -50,9 +54,9 @@ import { BETREIBER, KONTAKT } from '../config';
           Rechtsgrundlage ist unser berechtigtes Interesse an einem sicheren und funktionsfähigen Internetauftritt (Art. 6 Abs. 1 lit. f
           DSGVO). Mit Netlify haben wir einen Vertrag über die Auftragsverarbeitung (Art. 28 DSGVO) geschlossen. Da Netlify seinen Sitz in den
           USA hat, können Daten in die USA übermittelt werden; die Übermittlung stützt sich auf die EU-Standardvertragsklauseln (Art. 46 Abs. 2
-          lit. c DSGVO) <Platzhalter inline>und ggf. die Zertifizierung nach dem EU-U.S. Data Privacy Framework (Art. 45 DSGVO) — bitte prüfen</Platzhalter>.
+          lit. c DSGVO) <Platzhalter inline pflicht>und ggf. die Zertifizierung nach dem EU-U.S. Data Privacy Framework (Art. 45 DSGVO) — bitte prüfen</Platzhalter>.
         </p>
-        <p>Speicherdauer der Protokolle: <Platzhalter inline>laut Netlify-Vertrag/Tarif prüfen und eintragen</Platzhalter>.</p>
+        <p>Speicherdauer der Protokolle: <Platzhalter inline pflicht>laut Netlify-Vertrag/Tarif prüfen und eintragen</Platzhalter>.</p>
 
         <h2 id="speicher">4. Cookies und Speicherung auf Ihrem Gerät</h2>
         <p>
@@ -71,8 +75,8 @@ import { BETREIBER, KONTAKT } from '../config';
         </p>
         <p>
           Die Angaben werden verschlüsselt (HTTPS) an unseren eigenen Server übertragen, der in einem Rechenzentrum in Deutschland (EU) betrieben
-          wird <Platzhalter inline>Hosting-Anbieter des Servers nennen</Platzhalter>, und dort in unserem Kundenverwaltungssystem <strong>Zoho CRM</strong>
-          gespeichert. Zoho CRM betreiben wir im Rechenzentrum der EU <Platzhalter inline>Vertragspartner und Sitz (z. B. Zoho Corporation B.V., Niederlande) prüfen</Platzhalter>;
+          wird <Platzhalter inline pflicht>Hosting-Anbieter des Servers nennen</Platzhalter>, und dort in unserem Kundenverwaltungssystem <strong>Zoho CRM</strong>
+          gespeichert. Zoho CRM betreiben wir im Rechenzentrum der EU <Platzhalter inline pflicht>Vertragspartner und Sitz (z. B. Zoho Corporation B.V., Niederlande) prüfen</Platzhalter>;
           mit Zoho besteht ein Vertrag über die Auftragsverarbeitung (Art. 28 DSGVO).
         </p>
         <p>
@@ -83,7 +87,7 @@ import { BETREIBER, KONTAKT } from '../config';
         </p>
         <p>
           Wir löschen Ihre Angaben, wenn Ihre Anfrage erledigt ist und keine gesetzlichen Aufbewahrungspflichten (z. B. nach Handels- und
-          Steuerrecht bei einer Buchung) entgegenstehen. <Platzhalter inline>konkrete Löschfrist für unbeantwortete/abgelehnte Anfragen festlegen</Platzhalter>
+          Steuerrecht bei einer Buchung) entgegenstehen. <Platzhalter inline pflicht>konkrete Löschfrist für unbeantwortete/abgelehnte Anfragen festlegen</Platzhalter>
         </p>
 
         <h2 id="email">6. Kontakt per E-Mail</h2>
@@ -111,7 +115,7 @@ import { BETREIBER, KONTAKT } from '../config';
         <h3>Matterport (3D-Rundgang)</h3>
         <p>
           Anbieter: Matterport, Inc., USA. Nach dem Klick werden Daten an Matterport übertragen, auch in die USA
-          <Platzhalter inline>Rechtsgrundlage der Übermittlung (DPF-Zertifizierung) prüfen</Platzhalter>. Mehr:
+          <Platzhalter inline pflicht>Rechtsgrundlage der Übermittlung (DPF-Zertifizierung) prüfen</Platzhalter>. Mehr:
           <a href="https://matterport.com/de/legal/privacy-policy" target="_blank" rel="noopener">Datenschutzerklärung von Matterport</a>.
         </p>
         <h3>OpenStreetMap (interaktive Karte)</h3>
@@ -153,7 +157,7 @@ import { BETREIBER, KONTAKT } from '../config';
           einschließlich Profiling findet nicht statt.
         </p>
 
-        <p class="text-sm opacity-75">Stand: Oktober 2026 (Entwurf)</p>
+        <p class="text-sm opacity-75">Stand: Oktober 2026{ENTWURF_HINWEIS_ANZEIGEN && ' (Entwurf)'}</p>
       </div>
     </div>
   </section>
