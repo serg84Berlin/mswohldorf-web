@@ -50,6 +50,8 @@ const SEITEN = [
   '/anlaesse/film-und-foto/',
   '/anlaesse/lesung-ausstellung/',
   '/anlaesse/private-feier/',
+  '/offsite-hamburg/',
+  '/haeufige-fragen/',
   '/geschichte/',
   '/galerie/',
   '/anfrage/',
@@ -515,7 +517,15 @@ for (const [breite, viewport] of Object.entries(GROESSEN)) {
   pruefe('Kanonische URL auf www.mswohldorf.de', html.includes('<link rel="canonical" href="https://www.mswohldorf.de/">'));
   pruefe('Produktiv-Build ohne noindex (dist/ aus „npm run build“, nicht mit PUBLIC_VORSCHAU=1)', !html.includes('noindex'));
   const sitemap = await readFile(join(PROJEKT, 'dist/sitemap-0.xml'), 'utf8');
-  pruefe('Sitemap enthält alle 11 Seiten, ohne 404', (sitemap.match(/<loc>/g) ?? []).length === 11 && !sitemap.includes('404'), String((sitemap.match(/<loc>/g) ?? []).length));
+  const seitenOhne404 = SEITEN.filter((p) => p !== '/gibt-es-nicht/');
+  const fehlen = seitenOhne404.filter((p) => !sitemap.includes(`<loc>https://www.mswohldorf.de${p}</loc>`));
+  pruefe(`Sitemap enthält alle ${seitenOhne404.length} Seiten, ohne 404`, (sitemap.match(/<loc>/g) ?? []).length === seitenOhne404.length && fehlen.length === 0 && !sitemap.includes('404'), `${(sitemap.match(/<loc>/g) ?? []).length} Einträge, fehlen: ${fehlen.join(', ') || '–'}`);
+  const faqHtml = await readFile(join(PROJEKT, 'dist/haeufige-fragen/index.html'), 'utf8');
+  const faq = [...faqHtml.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => JSON.parse(m[1])).flat().find((x) => x['@type'] === 'FAQPage');
+  const sichtbareFragen = (faqHtml.match(/<details class="frage/g) ?? []).length;
+  pruefe('FAQPage-Schema: jede sichtbare Frage auch im Schema', faq?.mainEntity?.length > 0 && faq.mainEntity.length === sichtbareFragen && faq.mainEntity.every((q) => q.name && q.acceptedAnswer?.text), `${faq?.mainEntity?.length} im Schema, ${sichtbareFragen} sichtbar`);
+  const llms = await readFile(join(PROJEKT, 'dist/llms.txt'), 'utf8');
+  pruefe('llms.txt: Titel, Eckdaten, Fragen und Links auf www.mswohldorf.de', llms.startsWith('# MS Wohldorf') && llms.includes('bis zu 35 Personen') && llms.includes('## Häufige Fragen') && llms.includes('https://www.mswohldorf.de/offsite-hamburg/'));
   const robots = await readFile(join(PROJEKT, 'dist/robots.txt'), 'utf8');
   pruefe('robots.txt verweist auf Sitemap', robots.includes('Sitemap: https://www.mswohldorf.de/sitemap-index.xml'));
   const vorschau = [];

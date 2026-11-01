@@ -41,6 +41,8 @@ Zwei Tippfehler in der alten HTML löst das Skript auf: `wohldorf_innen_17jpg` �
 | Q6 | eigene 3D-Szene | Hero-Poster | `src/assets/hero/poster-*.jpg` |
 | Q7 | OpenStreetMap (ODbL) | statische Anfahrtskarte | `src/assets/karte/anfahrt.png` |
 | Q8 | neu gestaltet | Bildmarke, Favicon | `Logo.astro`, `public/favicon.svg` |
+| Q9 | Routenberechnung OSRM (router.project-osrm.org), 01.11.2026 | Hamburg Hbf → Liegeplatz 11 km, Flughafen → Liegeplatz 20 km (Fahrzeiten ohne Verkehr, auf der Seite als Spanne) | `src/data/anreise.ts` |
+| Q10 | DB-Korridorsanierung Hamburg–Berlin 2026 (deutschebahn.com), giga.de | ICE Berlin Hbf → Hamburg Hbf „knapp zwei Stunden“ (rund 107 Min.; DB nennt keine feste Zeit) | `src/data/anreise.ts` |
 
 **3D-Hero:** Die Schiffsebene bleibt das freigestellte Standbild aus dem Video 2024. Geprüft
 wurden alle Außenfotos der alten Seite: Auf `wohldorf-schiffs-location-118` verdeckt der

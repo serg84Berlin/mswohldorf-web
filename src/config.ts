@@ -30,18 +30,29 @@ export const SEITE = {
     'Die MS Wohldorf: ehemalige HADAG-Hafenfähre von 1959, 2016 umgebaut — heute Eventschiff in Hamburg für bis zu 35 Gäste. Für Firmenevents, Workshops, Film- und Fotoproduktionen, Lesungen, Ausstellungen und private Feiern.',
 } as const;
 
-/** Impressum-Angaben wie auf der bisherigen Website (quelle/alte-seite/texte.md). */
+/**
+ * Impressum-Angaben. Anschrift und Postfach wie auf der bisherigen Website
+ * (quelle/alte-seite/texte.md); Komplementärin, Registergericht und USt-IdNr.
+ * wie im Impressum von finanzelot.de (abgerufen 01.11.2026, von Sergiy
+ * freigegeben). Die USt-IdNr. der alten Seite (DE3223275031) war ungültig.
+ */
 export const BETREIBER = {
   firma: 'Finanzelot GmbH & Co. KG',
   strasse: 'Moorfleeter Deich 344',
   plz: '22113',
   ort: 'Hamburg',
   postfach: 'Postfach 110689, 20406 Hamburg',
-  vertreter: 'Ulrich Ritter',
-  registergericht: 'Hamburg',
+  registergericht: 'Amtsgericht Hamburg',
   register: 'HRA 124152',
-  /** So auf der alten Seite — hat 10 statt 9 Ziffern, bitte prüfen (OFFENE-ANGABEN.md). */
-  ustId: 'DE3223275031',
+  /** Persönlich haftende Gesellschafterin (Komplementärin). */
+  komplementaerin: {
+    firma: 'Finanzelot Verwaltungs GmbH',
+    registergericht: 'Amtsgericht Hamburg',
+    register: 'HRB 154872',
+    geschaeftsfuehrer: 'Ulrich Ritter',
+  },
+  /** Laut VIES gültig (geprüft 01.11.2026). */
+  ustId: 'DE326098307',
 } as const;
 
 export const KONTAKT = {

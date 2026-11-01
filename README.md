@@ -41,7 +41,9 @@ Environment variables*. Beide werden **beim Bauen** eingesetzt — nach einer Ä
 `/` (Hero, Kurzvorstellung, Zahlen, Anlässe, Geschichte, Galerie, 3D-Rundgang, Stimmen,
 Film & Presse, Anfahrt, Anfrage) · `/anlaesse/firmenevent/` · `/anlaesse/workshop-seminar/` ·
 `/anlaesse/film-und-foto/` · `/anlaesse/lesung-ausstellung/` · `/anlaesse/private-feier/` ·
-`/geschichte/` · `/galerie/` · `/anfrage/` · `/impressum/` · `/datenschutz/` · `404`
+`/offsite-hamburg/` · `/haeufige-fragen/` · `/geschichte/` · `/galerie/` · `/anfrage/` · `/impressum/` ·
+`/datenschutz/` · `404` · `/llms.txt` (für KI-Assistenten, aus denselben Daten erzeugt).
+Plan für Reichweite und Leads: [REICHWEITE.md](REICHWEITE.md).
 
 Inhalte stehen getrennt vom Layout:
 
@@ -55,6 +57,8 @@ Inhalte stehen getrennt vom Layout:
 | `src/data/bilder.ts` | welches Foto wo erscheint (Start, Karussell, Anlass-Seiten, Galerie-Abschnitte) |
 | `src/data/presse.json`, `public/pdf/` | Presse |
 | `src/data/stimmen.ts` | Kundenstimmen (wörtlich) |
+| `src/data/fragen.ts` | Häufige Fragen (Seite, FAQPage-Schema, llms.txt) — nur belegte Antworten |
+| `src/data/anreise.ts` | Anreise für Teams von außerhalb (Quellen im Kopf der Datei) |
 
 ## Platzhalter und Livegang-Sperre
 

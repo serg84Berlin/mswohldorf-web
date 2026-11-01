@@ -65,8 +65,10 @@ const jahr = new Date().getFullYear();
       <h2 class="eyebrow mb-4 !font-sans">Seiten</h2>
       <ul class="grid gap-2 text-[0.95rem]">
         {ANLAESSE.map((a) => <li><a class="hover:text-messing-hell" href={`/anlaesse/${a.slug}/`}>{a.kartenTitel}</a></li>)}
-        <li class="mt-2"><a class="hover:text-messing-hell" href="/geschichte/">Geschichte</a></li>
+        <li class="mt-2"><a class="hover:text-messing-hell" href="/offsite-hamburg/">Offsite in Hamburg</a></li>
+        <li><a class="hover:text-messing-hell" href="/geschichte/">Geschichte</a></li>
         <li><a class="hover:text-messing-hell" href="/galerie/">Galerie</a></li>
+        <li><a class="hover:text-messing-hell" href="/haeufige-fragen/">Häufige Fragen</a></li>
         <li><a class="hover:text-messing-hell" href="/anfrage/">Anfrage</a></li>
       </ul>
     </nav>

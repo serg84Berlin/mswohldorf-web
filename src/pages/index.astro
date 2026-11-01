@@ -98,6 +98,14 @@ const eckdaten = [
       <div class="mt-12">
         <AnlassKarten />
       </div>
+      <a href="/offsite-hamburg/" class="offsite-band mt-8" data-reveal>
+        <span class="offsite-symbol" aria-hidden="true"><Symbol name="kalender" class="size-6" /></span>
+        <span class="grow">
+          <span class="block font-semibold text-tiefe">Team aus Berlin oder Norddeutschland?</span>
+          <span class="block text-grau">Knapp zwei Stunden mit dem ICE — so planen Sie Ihr Offsite an der Elbe.</span>
+        </span>
+        <Symbol name="pfeil" class="size-5 shrink-0 text-petrol" />
+      </a>
     </div>
   </section>
 
@@ -141,6 +149,7 @@ const eckdaten = [
           src={`${MEDIEN.matterport}&play=1`}
           titel="3D-Rundgang durch die MS Wohldorf"
           anbieter="Matterport"
+          zusatz="Matterport sitzt in den USA, wo kein dem EU-Recht gleichwertiges Datenschutzniveau garantiert ist."
           direkt={MEDIEN.matterport}
           poster={FOTO_DROHNE_2024.bild}
           format="16 / 10"
@@ -254,5 +263,32 @@ const eckdaten = [
     background: var(--color-schaum);
     border: 1px solid rgb(11 26 42 / 0.08);
     box-shadow: 0 40px 80px -50px rgb(6 18 31 / 0.5);
+  }
+  .offsite-band {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.1rem 1.3rem;
+    border-radius: 1.1rem;
+    background: #fff;
+    border: 1px solid rgb(11 26 42 / 0.08);
+    box-shadow: 0 20px 40px -34px rgb(6 18 31 / 0.5);
+    transition:
+      transform 0.35s var(--ease-welle),
+      box-shadow 0.35s var(--ease-welle);
+  }
+  .offsite-band:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 26px 50px -34px rgb(6 18 31 / 0.6);
+  }
+  .offsite-symbol {
+    display: inline-grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 0.8rem;
+    background: var(--color-tiefe);
+    color: var(--color-messing-hell);
   }
 </style>

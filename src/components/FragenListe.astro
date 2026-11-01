@@ -1,0 +1,112 @@
+---
+/**
+ * Häufige Fragen als aufklappbare Liste (<details>, ohne JavaScript, per
+ * Tastatur bedienbar). Daten: src/data/fragen.ts.
+ */
+import type { Frage } from '../data/fragen';
+import Symbol from './Symbol.astro';
+
+interface Props {
+  fragen: Frage[];
+  /** Erste Frage aufgeklappt zeigen. */
+  ersteOffen?: boolean;
+  class?: string;
+}
+const { fragen, ersteOffen = false, class: klasse = '' } = Astro.props;
+---
+
+<div class:list={['fragen', klasse]} data-reveal-gruppe>
+  {
+    fragen.map((f, i) => (
+      <details class="frage" id={`frage-${f.id}`} open={ersteOffen && i === 0} data-reveal>
+        <summary>
+          <span class="frage-text">{f.frage}</span>
+          <span class="frage-zeichen" aria-hidden="true" />
+        </summary>
+        <div class="frage-antwort">
+          <p>{f.antwort}</p>
+          {f.link && (
+            <a class="textlink mt-3 inline-flex items-center gap-1.5 font-semibold" href={f.link.href}>
+              {f.link.text} <Symbol name="pfeil" class="size-4" />
+            </a>
+          )}
+        </div>
+      </details>
+    ))
+  }
+</div>
+
+<style>
+  .fragen {
+    display: grid;
+    gap: 0.75rem;
+  }
+  .frage {
+    border-radius: 1.1rem;
+    background: #fff;
+    border: 1px solid rgb(11 26 42 / 0.08);
+    box-shadow: 0 18px 40px -36px rgb(6 18 31 / 0.55);
+    transition:
+      border-color 0.3s,
+      box-shadow 0.3s;
+  }
+  .frage[open] {
+    border-color: color-mix(in srgb, var(--color-messing) 55%, transparent);
+    box-shadow: 0 22px 46px -34px rgb(6 18 31 / 0.6);
+  }
+  summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.1rem 1.25rem;
+    cursor: pointer;
+    list-style: none;
+    font-weight: 600;
+    color: var(--color-tiefe);
+    font-size: 1.05rem;
+    line-height: 1.4;
+    border-radius: inherit;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  summary:focus-visible {
+    outline: 3px solid var(--color-messing);
+    outline-offset: 2px;
+  }
+  .frage-zeichen {
+    position: relative;
+    flex-shrink: 0;
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 999px;
+    background: var(--color-tiefe);
+  }
+  .frage-zeichen::before,
+  .frage-zeichen::after {
+    content: '';
+    position: absolute;
+    inset: 50% auto auto 50%;
+    width: 0.8rem;
+    height: 2px;
+    margin: -1px 0 0 -0.4rem;
+    border-radius: 2px;
+    background: var(--color-messing-hell);
+    transition: transform 0.35s var(--ease-welle);
+  }
+  .frage-zeichen::after {
+    transform: rotate(90deg);
+  }
+  .frage[open] .frage-zeichen::after {
+    transform: rotate(0deg);
+  }
+  .frage-antwort {
+    padding: 0 1.25rem 1.25rem;
+    color: var(--color-grau);
+    line-height: 1.65;
+  }
+  :global([data-bewegung='aus']) .frage-zeichen::after {
+    transition: none;
+  }
+</style>

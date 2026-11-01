@@ -43,10 +43,15 @@ npm run pruefen                              # Playwright-Prüfungen gegen dist/
 
 ## Stand (01.11.2026)
 
-- Gemerged: PR #1 (neue Seite, Inhalte der alten Seite) und PR #2 (Platzhalter-Arten, Livegang-Sperre).
+- Gemerged: PR #1 (neue Seite, Inhalte der alten Seite), PR #2 (Platzhalter-Arten, Livegang-Sperre),
+  PR #3 (diese Datei).
 - Netlify Production baut als Vorschau (`PUBLIC_VORSCHAU=1` für Production gesetzt): noindex + Band.
+- Rechtliches: 10 von 12 Pflicht-Punkten geklärt (Angaben von Sergiy, Impressum von finanzelot.de).
+- Reichweite und Leads: Plan und Entscheidungen in `REICHWEITE.md`. Phase 1 gebaut: `/haeufige-fragen/`
+  (FAQPage-Schema, Daten `src/data/fragen.ts`), `/llms.txt`, `/offsite-hamburg/` (Anreise `src/data/anreise.ts`).
 - **Offen bis zum Livegang** (Details und Nummern: `OFFENE-ANGABEN.md`):
-  - 12 rechtliche Angaben (Impressum, Datenschutz, Bildrechte). Ein Fragebogen an Uli ist erstellt.
+  - Haftungstext im Impressum (Nr. 1c) — Uli meldet sich.
+  - Freigabe der Datenschutzerklärung durch Sergiy, dann `ENTWURF_HINWEIS_ANZEIGEN = false` (Nr. 2).
   - Anfrage-Server (`PUBLIC_ANFRAGE_URL` → finanzelot-lotse.de) erlaubt CORS bisher nur für
     mswohldorf.netlify.app, noch nicht für `https://www.mswohldorf.de`.
   - DNS-Umstellung bei IONOS. Auf der Domain läuft Zoho-Mail: nur A-Record und `www` ändern,
@@ -54,5 +59,6 @@ npm run pruefen                              # Playwright-Prüfungen gegen dist/
 
 ## Was woanders liegt
 
-- Anfrage-Server und Buchungs-Mailtexte: eigenes Repo („Lotse“), nicht hier.
-- CRM: Zoho CRM (EU).
+- Anfrage-Server („Merlin“, finanzelot-lotse.de, IONOS Cloud Berlin) und Buchungs-Mailtexte:
+  eigenes Repo („Lotse“), nicht hier. Betreiber: Sergiy (AV-Vertrag mit Finanzelot).
+- CRM: Zoho CRM (EU). Mail der Domain: Zoho Mail (EU).
