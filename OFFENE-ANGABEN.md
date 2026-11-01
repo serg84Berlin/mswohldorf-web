@@ -36,7 +36,7 @@ läuft Production auf Netlify mit `PUBLIC_VORSCHAU=1` (README, „Bis zum Livega
 
 | Nr. | Was | Wo |
 |---|---|---|
-| 1 ⛔ | **Impressum rechtlich prüfen.** Wörtlich übernommen, aber: (a) Die alte Seite nennt als „persönlich haftenden Gesellschafter" Ulrich Ritter. Bei einer GmbH & Co. KG ist das in der Regel die Komplementär-GmbH — dann gehören deren Firma, Sitz, Registergericht und HRB-Nummer sowie ihre Geschäftsführung ins Impressum. (b) Die USt-IdNr. `DE3223275031` hat 10 statt 9 Ziffern — bitte prüfen. (c) Im Haftungsteil wurden die Verweise auf das aufgehobene TMG entfernt; prüfen, ob der Text so bleiben soll. | `src/config.ts` (`BETREIBER`), `src/pages/impressum.astro` — je ein `pflicht`-Platzhalter für (a), (b), (c) |
+| 1 ⛔ | **Impressum rechtlich prüfen.** Wörtlich übernommen, aber: (a) Die alte Seite nennt als „persönlich haftenden Gesellschafter" Ulrich Ritter. Bei einer GmbH & Co. KG ist das in der Regel die Komplementär-GmbH — dann gehören deren Firma, Sitz, Registergericht und HRB-Nummer sowie ihre Geschäftsführung ins Impressum. (b) Die USt-IdNr. `DE3223275031` hat 10 statt 9 Ziffern — bitte prüfen. EU-Prüfung (VIES) am 01.11.2026: diese Nummer und alle 9-stelligen Varianten ungültig — richtige Nummer von Uli nötig (oder Zeile streichen, falls es keine gibt). (c) Im Haftungsteil wurden die Verweise auf das aufgehobene TMG entfernt; prüfen, ob der Text so bleiben soll. | `src/config.ts` (`BETREIBER`), `src/pages/impressum.astro` — je ein `pflicht`-Platzhalter für (a), (b), (c) |
 | 2 ⛔ | **Datenschutz-Entwurf rechtlich prüfen**, dann `ENTWURF_HINWEIS_ANZEIGEN = false` (sonst bricht der Produktions-Build ab; mit `false` entfällt auch „(Entwurf)" beim Stand). | `src/config.ts` |
 | 3 ⛔ | Datenschutz: Datenschutzbeauftragter benannt oder nicht? Die alte Erklärung nannte als verantwortliche Stelle Ulrich Ritter persönlich (Postfach 110689) mit `ritter@finanzelot.de`; der Entwurf nennt die Finanzelot GmbH & Co. KG mit `info@finanzelot.de` — welche Adresse soll für Datenschutzanfragen gelten? (Die Adressfrage hat keinen eigenen Platzhalter; sie gehört zur Prüfung in Nr. 2.) | `src/pages/datenschutz.astro` — `pflicht`-Platzhalter |
 | 4 ⛔ | Netlify: AV-Vertrag, Rechtsgrundlage USA (SCC, ggf. DPF), Speicherdauer der Server-Logs | dito — zwei `pflicht`-Platzhalter |
@@ -92,7 +92,7 @@ stehen: in der Vorschau als Kasten auf /geschichte/, in Produktion fällt sie we
 
 | Nr. | Was |
 |---|---|
-| 27 ⛔ | `PUBLIC_ANFRAGE_URL` in Netlify setzen (https). Der Server muss CORS für `https://www.mswohldorf.de` erlauben (Preflight `OPTIONS`, Header `Content-Type: application/json`). |
-| 28 ⛔ | DNS von mswohldorf.de auf Netlify umstellen (README „Livegang"). |
+| 27 ⛔ | `PUBLIC_ANFRAGE_URL` ist in Netlify gesetzt (`https://finanzelot-lotse.de/api/oeffentlich/anfrage`). **Offen:** Der Server erlaubt CORS bisher nur für `https://mswohldorf.netlify.app` — Test am 01.11.2026: Preflight von `https://www.mswohldorf.de` liefert 204 ohne `Access-Control-Allow-Origin`. Vor der DNS-Umstellung im Anfrage-Server (Repo „Lotse“) `https://www.mswohldorf.de` freigeben. |
+| 28 ⛔ | DNS von mswohldorf.de auf Netlify umstellen (README „Livegang"). Domain und DNS liegen bei **IONOS** (Nameserver `ui-dns`). Auf der Domain läuft **Zoho-Mail** (MX `mx*.zoho.eu`, SPF `include:one.zoho.eu include:_spf-eu.ionos.com`) — deshalb bei IONOS bleiben und nur den A-Record und `www` ändern, **nicht** die Nameserver zu Netlify umziehen. Klären: Ist die Domain Teil des gekündigten Vertrags (Webspace endet im Dezember 2026)? Dann vorher herauslösen, sonst sind Website und Mail weg. |
 | 29 | Altes Favicon behalten oder das neue? (alt: `public/alt/`) |
 | 30 | Optional: Anreise mit Bus/Bahn ergänzen |

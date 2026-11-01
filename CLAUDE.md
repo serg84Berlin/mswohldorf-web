@@ -1,0 +1,58 @@
+# CLAUDE.md — MS Wohldorf Website
+
+**Dieses Repo ist genau ein Projekt:** die Website der MS Wohldorf (www.mswohldorf.de).
+Nicht mit anderen Projekten oder Ventures vermischen. Was hier nicht steht, gehört nicht hierher.
+
+## Worum es geht
+
+- **Kunde:** Finanzelot GmbH & Co. KG, Hamburg. Ansprechpartner: Ulrich Ritter („Uli“).
+- **Gegenstand:** MS Wohldorf, ehemalige HADAG-Hafenfähre (1959, Umbau 2016), heute Eventschiff
+  für bis zu 35 Gäste am Liegeplatz auf der Süderelbe (Finkenriek, Hamburg-Wilhelmsburg).
+- **Auftrag:** neue Website, ersetzt die alte Seite. Der alte Webspace endet im **Dezember 2026**,
+  Livegang ist für **Anfang November 2026** geplant.
+
+## Technik in einem Satz
+
+Astro 7 + Tailwind 4, rein statisch, Netlify (Projekt `mswohldorf`, mswohldorf.netlify.app).
+Keine Cookies, keine Analyse, keine externen Anfragen beim Seitenaufruf. Einzelheiten: `README.md`.
+
+```bash
+npm ci
+npm run dev                                  # http://localhost:4321
+PUBLIC_VORSCHAU=1 npx astro build --outDir dist-vorschau   # Vorschau-Build, läuft immer durch
+npm run build                                # Produktion — scheitert, solange rechtliche Angaben offen sind (gewollt)
+npm run check                                # astro check
+npm run offen                                # alle offenen Angaben, Pflicht zuerst
+npm run pruefen                              # Playwright-Prüfungen gegen dist/
+```
+
+## Regeln für Änderungen
+
+1. **Nichts erfinden.** Fakten nur aus `quelle/alte-seite/` (Quelle der Wahrheit), den Presse-PDFs
+   oder von Uli. Fehlt etwas: `<Platzhalter>` (inhaltlich) oder `<Platzhalter pflicht>` (rechtlich),
+   nie einen plausiblen Wert einsetzen. Herkunft jeder Angabe: `INHALT.md`.
+2. **Inhalt steht nicht im Layout:** Angaben in `src/config.ts`, Texte in `src/data/*`.
+3. **Ist ein rechtlicher Punkt geklärt:** Text korrigieren und den `pflicht`-Platzhalter löschen,
+   nie in einen inhaltlichen umwandeln. Danach `OFFENE-ANGABEN.md` nachziehen.
+4. **Livegang-Sperre nicht umgehen** (`integrationen/livegang-sperre.mjs`): Sie verhindert, dass
+   ein Impressum oder Datenschutz mit Lücken live geht.
+5. **Keine externen Anfragen beim Laden:** Drittinhalte nur per Zwei-Klick (`ZweiKlick.astro`);
+   neue Ursprünge brauchen einen Eintrag in der CSP (`integrationen/sicherheits-header.mjs`).
+6. Code, Dateien und Texte auf Deutsch, Kunden in der Sie-Form.
+7. Vor jedem Push: `npm run check`, Vorschau-Build und – wenn Seiten betroffen sind – `npm run pruefen`.
+
+## Stand (01.11.2026)
+
+- Gemerged: PR #1 (neue Seite, Inhalte der alten Seite) und PR #2 (Platzhalter-Arten, Livegang-Sperre).
+- Netlify Production baut als Vorschau (`PUBLIC_VORSCHAU=1` für Production gesetzt): noindex + Band.
+- **Offen bis zum Livegang** (Details und Nummern: `OFFENE-ANGABEN.md`):
+  - 12 rechtliche Angaben (Impressum, Datenschutz, Bildrechte). Ein Fragebogen an Uli ist erstellt.
+  - Anfrage-Server (`PUBLIC_ANFRAGE_URL` → finanzelot-lotse.de) erlaubt CORS bisher nur für
+    mswohldorf.netlify.app, noch nicht für `https://www.mswohldorf.de`.
+  - DNS-Umstellung bei IONOS. Auf der Domain läuft Zoho-Mail: nur A-Record und `www` ändern,
+    MX und SPF bleiben.
+
+## Was woanders liegt
+
+- Anfrage-Server und Buchungs-Mailtexte: eigenes Repo („Lotse“), nicht hier.
+- CRM: Zoho CRM (EU).
