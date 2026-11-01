@@ -1,0 +1,395 @@
+---
+/**
+ * Offsite in Hamburg — für Teams aus Berlin, dem Umland und Norddeutschland.
+ * EINE starke Seite statt vieler fast gleicher Stadtseiten (Google wertet
+ * solche „Doorway Pages“ ab). Fakten nur aus src/config.ts, src/data/anreise.ts
+ * (Quellen dort) und src/data/fragen.ts.
+ */
+import Basis from '../layouts/Basis.astro';
+import SeitenKopf from '../components/SeitenKopf.astro';
+import FragenListe from '../components/FragenListe.astro';
+import GalerieRaster from '../components/GalerieRaster.astro';
+import Lightbox from '../components/Lightbox.astro';
+import Symbol from '../components/Symbol.astro';
+import Welle from '../components/Welle.astro';
+import { FAKTEN, LIEGEPLATZ, SEITE } from '../config';
+import { ANREISE, ROUTE_BERLIN } from '../data/anreise';
+import { FRAGEN } from '../data/fragen';
+import { FOTO_DROHNE_2024, fotosFuerAnlass } from '../data/bilder';
+
+const fragen = FRAGEN.filter((f) => f.offsite);
+const fotos = fotosFuerAnlass('workshop-seminar');
+
+const gruende = [
+  {
+    symbol: 'anker',
+    titel: 'Raus aus dem Gewohnten',
+    text: `Eine echte HADAG-Hafenfähre von ${FAKTEN.baujahr} statt Hotel-Tagungsraum — ein Ort, der Köpfe frei macht.`,
+  },
+  {
+    symbol: 'workshop',
+    titel: 'Raum für Arbeit und Austausch',
+    text: 'Ein großer Veranstaltungsbereich fürs Plenum, ein kleinerer, verglaster Besprechungsraum für die Arbeit in Gruppen.',
+  },
+  {
+    symbol: 'personen',
+    titel: `Bis zu ${FAKTEN.maxGaeste} Personen`,
+    text: 'Passend für Team, Abteilung, Führungskreis oder ausgewählte Kundinnen und Kunden.',
+  },
+  {
+    symbol: 'feier',
+    titel: 'Essen ohne Ortswechsel',
+    text: 'Eine Küche mit Geräten ist an Bord. Wie Sie verpflegt werden, stimmen wir mit Ihnen ab.',
+  },
+] as const;
+
+const tag = [
+  { zeit: 'Anreise', text: `Mit dem ICE nach Hamburg, vom Hauptbahnhof rund ${ANREISE.hbfKm} km mit Taxi oder Auto bis an Bord.` },
+  { zeit: 'Arbeiten', text: 'Workshop im verglasten Besprechungsraum, Plenum im großen Veranstaltungsbereich.' },
+  { zeit: 'Gemeinsam essen', text: 'Business-Essen an Bord — die Küche mit Geräten macht es möglich.' },
+  { zeit: 'Ausklang', text: 'Abend an Bord oder Rückreise am selben Tag.' },
+];
+
+const brotkrumen = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Start', item: `${SEITE.url}/` },
+    { '@type': 'ListItem', position: 2, name: 'Offsite in Hamburg', item: `${SEITE.url}/offsite-hamburg/` },
+  ],
+};
+---
+
+<Basis
+  titel="Offsite in Hamburg für Teams aus Berlin | MS Wohldorf"
+  beschreibung={`Offsite, Workshop oder Teamtag auf einer historischen Hafenfähre in Hamburg: knapp zwei Stunden mit dem ICE von Berlin, für bis zu ${FAKTEN.maxGaeste} Personen, am Naturschutzgebiet Heuckenlock.`}
+  bild={FOTO_DROHNE_2024.bild}
+  strukturiert={[brotkrumen]}
+  fussVon="var(--color-sand-hell)"
+>
+  <SeitenKopf
+    eyebrow="Offsite in Hamburg"
+    titel="Ihr Offsite an der Elbe — knapp zwei Stunden von Berlin."
+    lead={`Für Teams aus Berlin, Hannover, Bremen, Kiel oder Lübeck: eine historische Hafenfähre für bis zu ${FAKTEN.maxGaeste} Personen, ${LIEGEPLATZ.beschreibung}.`}
+    bild={FOTO_DROHNE_2024.bild}
+    bildAlt={FOTO_DROHNE_2024.alt}
+  >
+    <div class="mt-8 flex flex-wrap gap-3" data-reveal>
+      <a href="/anfrage/?anlass=workshop-seminar" class="knopf knopf-messing" data-magnet>Offsite anfragen <Symbol name="pfeil" /></a>
+      <a href="#route" class="knopf knopf-geist text-schaum"><Symbol name="karte" /> So kommen Sie hin</a>
+    </div>
+  </SeitenKopf>
+
+  <!-- Die Route: Berlin → Hamburg Hbf → an Bord -->
+  <section id="route" class="bg-schaum" aria-labelledby="route-titel">
+    <div class="seite-breite py-14 lg:py-20">
+      <div class="max-w-2xl" data-reveal>
+        <p class="eyebrow">Anreise</p>
+        <h2 id="route-titel" class="titel-mittel mt-4 text-tiefe">Morgens in Berlin, mittags an Bord.</h2>
+      </div>
+
+      <ol class="route mt-10" data-reveal aria-label="Anreise von Berlin">
+        {
+          ROUTE_BERLIN.map((s, i) => (
+            <li class:list={['route-halt', { 'route-ziel': i === ROUTE_BERLIN.length - 1 }]} style={`--i:${i}`}>
+              <span class="route-punkt" aria-hidden="true">
+                <Symbol name={i === ROUTE_BERLIN.length - 1 ? 'anker' : 'karte'} class="size-5" />
+              </span>
+              <span class="route-ort">{s.ort}</span>
+              {s.mittel && (
+                <span class="route-etappe">
+                  <span class="route-linie" aria-hidden="true" />
+                  <span class="route-text">
+                    <span class="font-semibold">{s.mittel}</span>
+                    <span class="sr-only">: </span>
+                    <span class="block">{s.dauer}</span>
+                  </span>
+                </span>
+              )}
+            </li>
+          ))
+        }
+      </ol>
+
+      <ul class="mt-12 grid gap-4 md:grid-cols-3" data-reveal-gruppe>
+        <li class="info" data-reveal>
+          <Symbol name="steuerrad" class="size-6 text-petrol" />
+          <h3 class="mt-3 font-semibold text-tiefe">Vom Flughafen Hamburg</h3>
+          <p class="mt-1 text-grau">Rund {ANREISE.flughafenKm} km bis zum Liegeplatz, mit Taxi oder Auto {ANREISE.flughafenMinuten}.</p>
+        </li>
+        <li class="info" data-reveal>
+          <Symbol name="navi" class="size-6 text-petrol" />
+          <h3 class="mt-3 font-semibold text-tiefe">Mit dem Auto</h3>
+          <p class="mt-1 text-grau">Navi: {LIEGEPLATZ.navi}. Parkplätze gibt es direkt vor der Tür.</p>
+        </li>
+        <li class="info" data-reveal>
+          <Symbol name="kalender" class="size-6 text-petrol" />
+          <h3 class="mt-3 font-semibold text-tiefe">Aus dem Norden und Westen</h3>
+          <p class="mt-1 text-grau">Hannover, Bremen, Kiel und Lübeck liegen noch näher an Hamburg als Berlin.</p>
+        </li>
+      </ul>
+      <p class="mt-6 text-sm text-grau" data-reveal>
+        Bahnzeiten können sich ändern — aktuelle Verbindungen finden Sie bei der Deutschen Bahn. Der Zugang zum Schiff ist nicht
+        barrierefrei.
+      </p>
+    </div>
+  </section>
+
+  <Welle von="var(--color-schaum)" nach="var(--color-tiefe)" />
+
+  <!-- Warum an Bord -->
+  <section class="bg-tiefe auf-dunkel" aria-labelledby="gruende-titel">
+    <div class="seite-breite py-14 lg:py-20">
+      <div class="max-w-2xl" data-reveal>
+        <p class="eyebrow">Warum an Bord</p>
+        <h2 id="gruende-titel" class="titel-mittel mt-4 text-schaum">Ein Ort, der anders denken lässt.</h2>
+      </div>
+      <ul class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" data-reveal-gruppe>
+        {
+          gruende.map((g) => (
+            <li class="grund karte-glas" data-reveal data-kippen>
+              <span class="grund-symbol">
+                <Symbol name={g.symbol} class="size-5" />
+              </span>
+              <h3 class="mt-4 text-lg font-semibold text-schaum">{g.titel}</h3>
+              <p class="mt-1.5 text-nebel">{g.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+
+      <h3 class="mt-16 font-display text-2xl text-schaum" data-reveal>Ein Tag an Bord — ein Beispiel</h3>
+      <ol class="tag mt-6 grid gap-4 md:grid-cols-4" data-reveal-gruppe>
+        {
+          tag.map((t, i) => (
+            <li class="tag-schritt" data-reveal>
+              <span class="tag-nr" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <span class="mt-2 block font-semibold text-messing-hell">{t.zeit}</span>
+              <span class="mt-1 block text-nebel">{t.text}</span>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <Welle von="var(--color-tiefe)" nach="var(--color-sand-hell)" />
+
+  <!-- Eindrücke + Fragen -->
+  <section class="bg-sand-hell" aria-labelledby="eindruecke-titel">
+    <div class="seite-breite py-14 lg:py-20">
+      <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between" data-reveal>
+        <h2 id="eindruecke-titel" class="titel-mittel text-tiefe">So sieht es an Bord aus.</h2>
+        <div class="flex flex-wrap gap-x-6 gap-y-2">
+          <a href="/#rundgang" class="textlink font-semibold">3D-Rundgang</a>
+          <a href="/galerie/" class="textlink font-semibold">Alle Fotos</a>
+        </div>
+      </div>
+      <GalerieRaster fotos={fotos} class="mt-10" sammlung="offsite" />
+
+      <div class="mt-16 grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14">
+        <div data-reveal="links">
+          <h2 class="titel-mittel text-tiefe">Fragen von Teams, die anreisen.</h2>
+          <a href="/haeufige-fragen/" class="textlink mt-5 inline-flex items-center gap-1.5 font-semibold">
+            Alle häufigen Fragen <Symbol name="pfeil" class="size-4" />
+          </a>
+        </div>
+        <FragenListe fragen={fragen} />
+      </div>
+
+      <div class="cta-band auf-dunkel mt-16" data-reveal="zoom" data-anfrage-verbergen>
+        <div>
+          <p class="eyebrow">Anfrage</p>
+          <h2 class="mt-3 font-display text-3xl leading-tight text-schaum">Ihr nächstes Offsite auf der MS Wohldorf?</h2>
+          <p class="mt-3 text-nebel">Wunschtermin und Gruppengröße genügen — wir melden uns persönlich bei Ihnen.</p>
+        </div>
+        <a href="/anfrage/?anlass=workshop-seminar" class="knopf knopf-messing shrink-0" data-magnet>Unverbindlich anfragen <Symbol name="pfeil" /></a>
+      </div>
+    </div>
+  </section>
+
+  <Lightbox />
+</Basis>
+
+<style>
+  .bg-schaum {
+    background: var(--color-schaum);
+  }
+  .bg-sand-hell {
+    background: var(--color-sand-hell);
+  }
+  .bg-tiefe {
+    background: var(--color-tiefe);
+  }
+
+  /* ---------- Route ---------- */
+  .route {
+    display: grid;
+    gap: 0;
+    padding: clamp(1.25rem, 3vw, 2.25rem);
+    border-radius: 1.6rem;
+    background:
+      radial-gradient(70% 140% at 100% 0%, rgb(43 122 138 / 0.45), transparent 60%),
+      var(--color-tiefe);
+    color: var(--color-schaum);
+    counter-reset: halt;
+  }
+  .route-halt {
+    position: relative;
+    display: grid;
+    grid-template-columns: 2.75rem 1fr;
+    column-gap: 1rem;
+    align-items: center;
+  }
+  .route-punkt {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.08);
+    border: 1px solid rgb(255 255 255 / 0.18);
+    color: var(--color-messing-hell);
+  }
+  .route-ziel .route-punkt {
+    background: var(--color-messing);
+    border-color: var(--color-messing-hell);
+    color: var(--color-tiefe);
+    box-shadow: 0 0 0 0 rgb(224 184 114 / 0.6);
+    animation: ziel-puls 2.6s ease-out infinite;
+  }
+  .route-ort {
+    white-space: nowrap;
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+    line-height: 1.2;
+  }
+  .route-etappe {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 2.75rem 1fr;
+    column-gap: 1rem;
+    align-items: center;
+    min-height: 5.5rem;
+  }
+  .route-linie {
+    justify-self: center;
+    width: 2px;
+    height: 100%;
+    background: repeating-linear-gradient(to bottom, var(--color-messing-hell) 0 7px, transparent 7px 13px);
+    transform-origin: top;
+    transition: transform 1.1s var(--ease-welle);
+    transition-delay: calc(var(--i) * 0.45s + 0.2s);
+  }
+  .route-text {
+    color: var(--color-nebel);
+    opacity: 1;
+    transition: opacity 0.8s var(--ease-welle);
+    transition-delay: calc(var(--i) * 0.45s + 0.5s);
+  }
+  :global(.js) .route:not(.sichtbar) .route-linie {
+    transform: scaleY(0);
+  }
+  :global(.js) .route:not(.sichtbar) .route-text {
+    opacity: 0;
+  }
+  @media (min-width: 900px) {
+    .route {
+      grid-template-columns: 1fr 1fr auto;
+      align-items: center;
+    }
+    .route-halt {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 1rem;
+    }
+    .route-halt:not(.route-ziel) {
+      flex: 1;
+    }
+    .route-etappe {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.6rem;
+      min-height: 0;
+      min-width: 12rem;
+      flex: 1;
+      padding: 0 0.5rem;
+    }
+    .route-linie {
+      width: 100%;
+      height: 2px;
+      background: repeating-linear-gradient(to right, var(--color-messing-hell) 0 7px, transparent 7px 13px);
+      transform-origin: left;
+    }
+    :global(.js) .route:not(.sichtbar) .route-linie {
+      transform: scaleX(0);
+    }
+    .route-text {
+      text-align: center;
+      font-size: 0.95rem;
+    }
+  }
+  @keyframes ziel-puls {
+    0% {
+      box-shadow: 0 0 0 0 rgb(224 184 114 / 0.55);
+    }
+    70%,
+    100% {
+      box-shadow: 0 0 0 14px rgb(224 184 114 / 0);
+    }
+  }
+
+  .info {
+    padding: 1.3rem 1.25rem;
+    border-radius: 1.1rem;
+    background: #fff;
+    border: 1px solid rgb(11 26 42 / 0.07);
+    box-shadow: 0 20px 40px -34px rgb(6 18 31 / 0.5);
+  }
+
+  /* ---------- Gründe + Tag ---------- */
+  .grund {
+    padding: 1.4rem 1.3rem;
+    border-radius: 1.1rem;
+  }
+  .grund-symbol {
+    display: inline-grid;
+    place-items: center;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 0.8rem;
+    background: var(--color-messing);
+    color: var(--color-tiefe);
+  }
+  .tag-schritt {
+    padding: 1.2rem 1.2rem 1.3rem;
+    border-top: 2px solid color-mix(in srgb, var(--color-messing) 70%, transparent);
+  }
+  .tag-nr {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    line-height: 1;
+    color: rgb(255 255 255 / 0.55);
+  }
+
+  .cta-band {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: clamp(1.5rem, 4vw, 2.75rem);
+    border-radius: 1.6rem;
+    color: var(--color-schaum);
+    background:
+      radial-gradient(80% 120% at 100% 0%, rgb(43 122 138 / 0.5), transparent 60%),
+      var(--color-tiefe);
+  }
+  @media (min-width: 768px) {
+    .cta-band {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+</style>

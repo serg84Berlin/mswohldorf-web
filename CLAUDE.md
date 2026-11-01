@@ -47,6 +47,8 @@ npm run pruefen                              # Playwright-Prüfungen gegen dist/
   PR #3 (diese Datei).
 - Netlify Production baut als Vorschau (`PUBLIC_VORSCHAU=1` für Production gesetzt): noindex + Band.
 - Rechtliches: 10 von 12 Pflicht-Punkten geklärt (Angaben von Sergiy, Impressum von finanzelot.de).
+- Reichweite und Leads: Plan und Entscheidungen in `REICHWEITE.md`. Phase 1 gebaut: `/haeufige-fragen/`
+  (FAQPage-Schema, Daten `src/data/fragen.ts`), `/llms.txt`, `/offsite-hamburg/` (Anreise `src/data/anreise.ts`).
 - **Offen bis zum Livegang** (Details und Nummern: `OFFENE-ANGABEN.md`):
   - Haftungstext im Impressum (Nr. 1c) — Uli meldet sich.
   - Freigabe der Datenschutzerklärung durch Sergiy, dann `ENTWURF_HINWEIS_ANZEIGEN = false` (Nr. 2).
