@@ -3,6 +3,7 @@ import Basis from '../layouts/Basis.astro';
 import SeitenKopf from '../components/SeitenKopf.astro';
 import AnfrageFormular from '../components/AnfrageFormular.astro';
 import Symbol from '../components/Symbol.astro';
+import ExposeKnopf from '../components/ExposeKnopf.astro';
 import { KONTAKT, FAKTEN } from '../config';
 
 const schritte = [
@@ -41,6 +42,11 @@ const schritte = [
               ))
             }
           </ol>
+        </div>
+        <div>
+          <h2 class="font-display text-xl text-tiefe">Erst einmal stöbern?</h2>
+          <p class="mt-2 text-grau">Räume, Anlässe, Anreise und eine Checkliste für Ihre Planung — im Exposé.</p>
+          <ExposeKnopf class="mt-4" />
         </div>
         <div class="kontakt-kasten">
           <h2 class="font-display text-xl text-tiefe">Lieber direkt?</h2>

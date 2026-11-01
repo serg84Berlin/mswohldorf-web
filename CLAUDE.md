@@ -44,11 +44,14 @@ npm run pruefen                              # Playwright-Prüfungen gegen dist/
 ## Stand (01.11.2026)
 
 - Gemerged: PR #1 (neue Seite, Inhalte der alten Seite), PR #2 (Platzhalter-Arten, Livegang-Sperre),
-  PR #3 (diese Datei).
+  PR #3 (diese Datei), PR #4 (Rechtliches 10/12, Reichweite Phase 1).
 - Netlify Production baut als Vorschau (`PUBLIC_VORSCHAU=1` für Production gesetzt): noindex + Band.
 - Rechtliches: 10 von 12 Pflicht-Punkten geklärt (Angaben von Sergiy, Impressum von finanzelot.de).
 - Reichweite und Leads: Plan und Entscheidungen in `REICHWEITE.md`. Phase 1 gebaut: `/haeufige-fragen/`
   (FAQPage-Schema, Daten `src/data/fragen.ts`), `/llms.txt`, `/offsite-hamburg/` (Anreise `src/data/anreise.ts`).
+  Phase 2 gebaut: Exposé-PDF (`npm run expose`, Vorlage `/expose/`), Lead-Block mit Schnellanfrage
+  (`LeadBlock.astro`, `AnfrageFormular schnell`), Erstantwort-Hinweis (Server meldet `erstantwort: true`),
+  Lead-Quelle hinter `PUBLIC_ANFRAGE_ERWEITERT=1`. Ändern sich Angaben im Exposé: `npm run expose` neu laufen lassen.
 - **Offen bis zum Livegang** (Details und Nummern: `OFFENE-ANGABEN.md`):
   - Haftungstext im Impressum (Nr. 1c) — Uli meldet sich.
   - Freigabe der Datenschutzerklärung durch Sergiy, dann `ENTWURF_HINWEIS_ANZEIGEN = false` (Nr. 2).

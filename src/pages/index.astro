@@ -14,6 +14,7 @@ import Anfahrt from '../components/Anfahrt.astro';
 import AnfrageFormular from '../components/AnfrageFormular.astro';
 import Welle from '../components/Welle.astro';
 import Symbol from '../components/Symbol.astro';
+import ExposeKnopf from '../components/ExposeKnopf.astro';
 import { FOTOS_START, FOTO_DROHNE_2024 } from '../data/bilder';
 import { FAKTEN, KONTAKT, MEDIEN, SEITE } from '../config';
 
@@ -173,6 +174,7 @@ const eckdaten = [
         <p class="eyebrow">Anfrage</p>
         <h2 id="anfrage-kurz-titel" class="titel-mittel mt-4 text-tiefe">Erzählen Sie uns von Ihrem Anlass.</h2>
         <p class="lead mt-6 text-grau">Anlass, Wunschtermin und Gästezahl genügen für den Anfang. Wir melden uns persönlich bei Ihnen.</p>
+        <ExposeKnopf class="mt-6" />
         <p class="mt-8 text-grau">Lieber direkt? Ihr Ansprechpartner ist {KONTAKT.person}.</p>
         <a class="mt-2 flex items-center gap-2 text-lg font-semibold text-petrol hover:underline" href={`tel:${KONTAKT.telefonLink}`}>
           <Symbol name="telefon" class="size-5" />{KONTAKT.telefon}

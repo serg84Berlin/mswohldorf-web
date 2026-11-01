@@ -8,6 +8,7 @@ import Basis from '../layouts/Basis.astro';
 import SeitenKopf from '../components/SeitenKopf.astro';
 import FragenListe from '../components/FragenListe.astro';
 import Symbol from '../components/Symbol.astro';
+import ExposeKnopf from '../components/ExposeKnopf.astro';
 import { FRAGEN } from '../data/fragen';
 import { SEITE } from '../config';
 
@@ -54,6 +55,7 @@ const brotkrumen = {
           <h2 class="mt-3 font-display text-2xl leading-tight text-schaum">Noch Fragen?</h2>
           <p class="mt-3 text-nebel">Anlass, Wunschtermin und Gästezahl genügen — wir melden uns persönlich.</p>
           <a href="/anfrage/" class="knopf knopf-messing mt-5 w-full" data-magnet>Unverbindlich anfragen <Symbol name="pfeil" /></a>
+          <ExposeKnopf variante="geist" class="mt-3 w-full text-schaum" />
         </div>
         <a href="/offsite-hamburg/" class="kasten-hell">
           <Symbol name="kalender" class="size-6 shrink-0 text-petrol" />

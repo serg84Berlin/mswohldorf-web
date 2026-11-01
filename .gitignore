@@ -10,3 +10,5 @@ npm-debug.log*
 /test-ergebnisse/
 dist-test/
 dist-vorschau/
+dist-expose/
+dist-erweitert/
