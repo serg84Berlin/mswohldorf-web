@@ -18,9 +18,11 @@ interface Props {
   poster?: ImageMetadata;
   posterAlt?: string;
   format?: string;
+  /** Weiterer Satz vor dem Klick, z. B. zur Übermittlung in die USA (Einwilligung nach Art. 49 Abs. 1 lit. a DSGVO). */
+  zusatz?: string;
   class?: string;
 }
-const { art, src, titel, anbieter, direkt, poster, posterAlt = '', format = '16 / 9', class: klasse = '' } = Astro.props;
+const { art, src, titel, anbieter, direkt, poster, posterAlt = '', format = '16 / 9', zusatz, class: klasse = '' } = Astro.props;
 const symbol = art === 'youtube' ? 'play' : art === 'matterport' ? 'wuerfel' : 'karte';
 const erlaubt =
   art === 'youtube'
@@ -39,6 +41,7 @@ const erlaubt =
       <p class="zk-titel">{titel}</p>
       <p class="zk-hinweis">
         Erst nach Ihrem Klick wird der Inhalt von {anbieter} geladen. Dabei werden Daten wie Ihre IP-Adresse an {anbieter} übertragen.{' '}
+        {zusatz && <>{zusatz}{' '}</>}
         <a href="/datenschutz/#einbettungen" class="underline underline-offset-2">Mehr in der Datenschutzerklärung</a>.
       </p>
       <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-3">

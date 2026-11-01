@@ -34,17 +34,23 @@ Jeder Punkt hier steht als `<Platzhalter pflicht>` im Quelltext (bzw. Nr. 2 als 
 `ENTWURF_HINWEIS_ANZEIGEN`). Solange einer übrig ist, scheitert der Produktions-Build. Bis dahin
 läuft Production auf Netlify mit `PUBLIC_VORSCHAU=1` (README, „Bis zum Livegang").
 
-| Nr. | Was | Wo |
-|---|---|---|
-| 1 ⛔ | **Impressum rechtlich prüfen.** Wörtlich übernommen, aber: (a) Die alte Seite nennt als „persönlich haftenden Gesellschafter" Ulrich Ritter. Bei einer GmbH & Co. KG ist das in der Regel die Komplementär-GmbH — dann gehören deren Firma, Sitz, Registergericht und HRB-Nummer sowie ihre Geschäftsführung ins Impressum. (b) Die USt-IdNr. `DE3223275031` hat 10 statt 9 Ziffern — bitte prüfen. EU-Prüfung (VIES) am 01.11.2026: diese Nummer und alle 9-stelligen Varianten ungültig — richtige Nummer von Uli nötig (oder Zeile streichen, falls es keine gibt). (c) Im Haftungsteil wurden die Verweise auf das aufgehobene TMG entfernt; prüfen, ob der Text so bleiben soll. | `src/config.ts` (`BETREIBER`), `src/pages/impressum.astro` — je ein `pflicht`-Platzhalter für (a), (b), (c) |
-| 2 ⛔ | **Datenschutz-Entwurf rechtlich prüfen**, dann `ENTWURF_HINWEIS_ANZEIGEN = false` (sonst bricht der Produktions-Build ab; mit `false` entfällt auch „(Entwurf)" beim Stand). | `src/config.ts` |
-| 3 ⛔ | Datenschutz: Datenschutzbeauftragter benannt oder nicht? Die alte Erklärung nannte als verantwortliche Stelle Ulrich Ritter persönlich (Postfach 110689) mit `ritter@finanzelot.de`; der Entwurf nennt die Finanzelot GmbH & Co. KG mit `info@finanzelot.de` — welche Adresse soll für Datenschutzanfragen gelten? (Die Adressfrage hat keinen eigenen Platzhalter; sie gehört zur Prüfung in Nr. 2.) | `src/pages/datenschutz.astro` — `pflicht`-Platzhalter |
-| 4 ⛔ | Netlify: AV-Vertrag, Rechtsgrundlage USA (SCC, ggf. DPF), Speicherdauer der Server-Logs | dito — zwei `pflicht`-Platzhalter |
-| 5 ⛔ | Hosting-Anbieter des eigenen Anfrage-Servers (Merlin, Deutschland) | dito — `pflicht` |
-| 6 ⛔ | Zoho CRM: Vertragspartner und Sitz (EU-Rechenzentrum), AV-Vertrag | dito — `pflicht` |
-| 7 ⛔ | Löschfrist für unbeantwortete/abgelehnte Anfragen | dito — `pflicht` |
-| 8 ⛔ | Matterport: Rechtsgrundlage der USA-Übermittlung | dito — `pflicht` |
-| 9 ⛔ | Bildrechte: NDR-Standbild („Die Pfefferkörner"), Presse-Ausschnitte und die zwei Video-Standbilder wie auf der alten Seite verwenden? | `src/data/bilder.ts`, `PresseFilm.astro`; `pflicht`-Platzhalter im Bildnachweis von `src/pages/impressum.astro` |
+Stand 01.11.2026: **noch 2 offen** (Nr. 1c, Nr. 2). Alles andere ist geklärt — Angaben von Sergiy
+(Betreiber von Website und Anfrage-Server, DSGVO-Berater) bzw. aus dem Impressum von finanzelot.de.
+
+| Nr. | Was | Stand | Wo |
+|---|---|---|---|
+| 1a | Vertretung (Komplementärin) | ✅ Finanzelot Verwaltungs GmbH, Amtsgericht Hamburg, HRB 154872, Geschäftsführer Ulrich Ritter (wie finanzelot.de/impressum) | `src/config.ts` (`BETREIBER.komplementaerin`) |
+| 1b | USt-IdNr. | ✅ `DE326098307` (wie finanzelot.de, VIES gültig am 01.11.2026). Die Nummer der alten Seite (`DE3223275031`) war ungültig. | `src/config.ts` |
+| 1c ⛔ | **Haftungstext** (Inhalte, Links): Verweise auf das aufgehobene TMG entfernt — soll der Text so bleiben? | offen — Uli meldet sich | `src/pages/impressum.astro` — `pflicht`-Platzhalter |
+| 2 ⛔ | **Datenschutz-Entwurf freigeben**, dann `ENTWURF_HINWEIS_ANZEIGEN = false` (sonst bricht der Produktions-Build ab; mit `false` entfällt auch „(Entwurf)" beim Stand). Vorher prüfen: Netlify-DPA abgeschlossen? Speicherdauer der Netlify-Protokolle (steht jetzt als Kriterium, nicht als Frist; genaue Frist: „Data Retention and Deletion Summary" im Netlify Trust Center, auf Anfrage)? Matterport-Absatz (Art. 49 DSGVO, siehe Nr. 8)? | offen — Freigabe durch Sergiy | `src/config.ts` |
+| 3 | Datenschutzbeauftragter; Kontakt für Datenschutzanfragen | ✅ nicht benannt, nicht verpflichtet (§ 38 BDSG); Kontakt bleibt `info@finanzelot.de` | `src/pages/datenschutz.astro` |
+| 4 | Netlify: Rechtsgrundlage USA, Speicherdauer | ✅ DPF-zertifiziert ([Netlify Privacy, Abschnitt 13](https://www.netlify.com/privacy/)) → Art. 45 DSGVO, ergänzend SCC; Speicherdauer als Kriterium (Netlify veröffentlicht keine Frist) | dito |
+| 5 | Hosting des Anfrage-Servers (Merlin) | ✅ IONOS SE, Montabaur; Rechenzentrum in Deutschland (IONOS Cloud Berlin) | dito |
+| 6 | Zoho CRM | ✅ Zoho EU, Zoho Corporation B.V., Beneluxlaan 4B, 3527 HT Utrecht (betreibt die EU-Rechenzentren); AV-Vertrag besteht | dito |
+| 7 | Löschfrist | ✅ Anfragen ohne Buchung: spätestens 30 Tage nach dem letzten Kontakt | dito |
+| 8 | Matterport: Rechtsgrundlage USA | ✅ kein DPF-Nachweis gefunden (Matterport gehört seit 2025 zur CoStar Group) → ausdrückliche Einwilligung per Klick (Art. 49 Abs. 1 lit. a DSGVO), Risiko-Hinweis in der Datenschutzerklärung **und** vor dem Klick (`ZweiKlick`, Prop `zusatz`). Ist CoStar/Matterport auf der [DPF-Liste](https://www.dataprivacyframework.gov/list), auf Art. 45 umstellen. | `src/pages/datenschutz.astro`, `src/pages/index.astro` |
+| 9 | Bildrechte (NDR-Standbild, Presse-Ausschnitte, Video-Standbilder) | ✅ bestätigt: schon auf der alten Seite mit Abstimmung der Rechteinhaber | `src/pages/impressum.astro` (Bildnachweis) |
+| 9a | AV-Verträge | ✅ Finanzelot ↔ Sergiy (Betrieb Website und Anfrage-Server) und Sergiy ↔ IONOS bestehen | — |
 
 ## B. Angaben für Anlässe (auch auf der alten Seite nicht vorhanden) — inhaltlich, kein Blocker
 
@@ -93,6 +99,6 @@ stehen: in der Vorschau als Kasten auf /geschichte/, in Produktion fällt sie we
 | Nr. | Was |
 |---|---|
 | 27 ⛔ | `PUBLIC_ANFRAGE_URL` ist in Netlify gesetzt (`https://finanzelot-lotse.de/api/oeffentlich/anfrage`). **Offen:** Der Server erlaubt CORS bisher nur für `https://mswohldorf.netlify.app` — Test am 01.11.2026: Preflight von `https://www.mswohldorf.de` liefert 204 ohne `Access-Control-Allow-Origin`. Vor der DNS-Umstellung im Anfrage-Server (Repo „Lotse“) `https://www.mswohldorf.de` freigeben. |
-| 28 ⛔ | DNS von mswohldorf.de auf Netlify umstellen (README „Livegang"). Domain und DNS liegen bei **IONOS** (Nameserver `ui-dns`). Auf der Domain läuft **Zoho-Mail** (MX `mx*.zoho.eu`, SPF `include:one.zoho.eu include:_spf-eu.ionos.com`) — deshalb bei IONOS bleiben und nur den A-Record und `www` ändern, **nicht** die Nameserver zu Netlify umziehen. Klären: Ist die Domain Teil des gekündigten Vertrags (Webspace endet im Dezember 2026)? Dann vorher herauslösen, sonst sind Website und Mail weg. |
+| 28 ⛔ | DNS von mswohldorf.de auf Netlify umstellen (README „Livegang"). Domain und DNS liegen bei **IONOS** (Nameserver `ui-dns`). Auf der Domain läuft **Zoho-Mail** (MX `mx*.zoho.eu`, SPF `include:one.zoho.eu include:_spf-eu.ionos.com`) — deshalb bei IONOS bleiben und nur den A-Record und `www` ändern, **nicht** die Nameserver zu Netlify umziehen. Klären: Ist die Domain Teil des gekündigten Vertrags (Webspace endet im Dezember 2026)? Dann vorher herauslösen, sonst sind Website und Mail weg. Befund 01.11.2026: Der alte Webspace liegt bei Webspace-Verkauf (IP 37.218.254.109, RIPE „WEBSPACEVERKAUF“), mswohldorf.de hat aber dieselben IONOS-Nameserver wie finanzelot-lotse.de (ns1033/1057/1076/1085) — spricht dafür, dass die Domain in Sergiys IONOS-Konto liegt. Im IONOS-Konto prüfen. |
 | 29 | Altes Favicon behalten oder das neue? (alt: `public/alt/`) |
 | 30 | Optional: Anreise mit Bus/Bahn ergänzen |

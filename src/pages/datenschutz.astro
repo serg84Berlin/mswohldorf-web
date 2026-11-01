@@ -4,15 +4,18 @@
  * Vor Veröffentlichung rechtlich prüfen; danach ENTWURF_HINWEIS_ANZEIGEN
  * in src/config.ts auf false setzen.
  *
- * Alle Platzhalter hier sind rechtlich (`pflicht`): Solange einer davon oder
+ * Platzhalter hier sind immer rechtlich (`pflicht`): Solange einer davon oder
  * der Entwurf-Hinweis übrig ist, bricht der Produktions-Build ab
  * (integrationen/livegang-sperre.mjs). Die Vorschau zeigt sie als Kasten.
+ * Stand 01.11.2026: alle Platzhalter geklärt (Angaben von Sergiy); es bleibt
+ * nur der Entwurf-Hinweis bis zur Freigabe.
  */
 import Basis from '../layouts/Basis.astro';
 import SeitenKopf from '../components/SeitenKopf.astro';
 import EntwurfHinweis from '../components/EntwurfHinweis.astro';
-import Platzhalter from '../components/Platzhalter.astro';
 import { BETREIBER, ENTWURF_HINWEIS_ANZEIGEN, KONTAKT } from '../config';
+
+const k = BETREIBER.komplementaerin;
 ---
 
 <Basis
@@ -28,12 +31,12 @@ import { BETREIBER, ENTWURF_HINWEIS_ANZEIGEN, KONTAKT } from '../config';
         <h2 id="verantwortlicher">1. Verantwortlicher</h2>
         <p>
           Verantwortlich für die Datenverarbeitung auf dieser Website ist:<br />
-          <strong>{BETREIBER.firma}</strong>, vertreten durch {BETREIBER.vertreter}<br />
+          <strong>{BETREIBER.firma}</strong>, vertreten durch die {k.firma}, diese vertreten durch den Geschäftsführer {k.geschaeftsfuehrer}<br />
           {BETREIBER.strasse}, {BETREIBER.plz} {BETREIBER.ort}<br />
           Telefon: <a href={`tel:${KONTAKT.telefonLink}`}>{KONTAKT.telefon}</a><br />
           E-Mail: <a href={`mailto:${KONTAKT.mail}`}>{KONTAKT.mail}</a>
         </p>
-        <p>Einen Datenschutzbeauftragten haben wir <Platzhalter inline pflicht>benannt / nicht benannt (nicht verpflichtet) — bitte festlegen</Platzhalter>.</p>
+        <p>Einen Datenschutzbeauftragten haben wir nicht benannt, weil wir dazu nicht verpflichtet sind (Art. 37 DSGVO, § 38 BDSG).</p>
 
         <h2 id="ueberblick">2. Das Wichtigste vorab</h2>
         <ul>
@@ -53,10 +56,14 @@ import { BETREIBER, ENTWURF_HINWEIS_ANZEIGEN, KONTAKT } from '../config';
         <p>
           Rechtsgrundlage ist unser berechtigtes Interesse an einem sicheren und funktionsfähigen Internetauftritt (Art. 6 Abs. 1 lit. f
           DSGVO). Mit Netlify haben wir einen Vertrag über die Auftragsverarbeitung (Art. 28 DSGVO) geschlossen. Da Netlify seinen Sitz in den
-          USA hat, können Daten in die USA übermittelt werden; die Übermittlung stützt sich auf die EU-Standardvertragsklauseln (Art. 46 Abs. 2
-          lit. c DSGVO) <Platzhalter inline pflicht>und ggf. die Zertifizierung nach dem EU-U.S. Data Privacy Framework (Art. 45 DSGVO) — bitte prüfen</Platzhalter>.
+          USA hat, können Daten in die USA übermittelt werden. Netlify ist nach dem EU-U.S. Data Privacy Framework zertifiziert; die
+          Übermittlung stützt sich deshalb auf den Angemessenheitsbeschluss der EU-Kommission (Art. 45 DSGVO) und ergänzend auf die
+          EU-Standardvertragsklauseln (Art. 46 Abs. 2 lit. c DSGVO).
         </p>
-        <p>Speicherdauer der Protokolle: <Platzhalter inline pflicht>laut Netlify-Vertrag/Tarif prüfen und eintragen</Platzhalter>.</p>
+        <p>
+          Speicherdauer der Protokolle: Netlify speichert sie nur so lange, wie es für die genannten Zwecke (Auslieferung, Sicherheit, Abwehr
+          von Angriffen) erforderlich ist, und löscht sie danach. Eine feste Frist veröffentlicht Netlify nicht.
+        </p>
 
         <h2 id="speicher">4. Cookies und Speicherung auf Ihrem Gerät</h2>
         <p>
@@ -74,10 +81,11 @@ import { BETREIBER, ENTWURF_HINWEIS_ANZEIGEN, KONTAKT } from '../config';
           zwischen dem Laden der Seite und dem Absenden. Wir nutzen dafür keinen Dienst eines Drittanbieters (kein „Captcha“).
         </p>
         <p>
-          Die Angaben werden verschlüsselt (HTTPS) an unseren eigenen Server übertragen, der in einem Rechenzentrum in Deutschland (EU) betrieben
-          wird <Platzhalter inline pflicht>Hosting-Anbieter des Servers nennen</Platzhalter>, und dort in unserem Kundenverwaltungssystem <strong>Zoho CRM</strong>
-          gespeichert. Zoho CRM betreiben wir im Rechenzentrum der EU <Platzhalter inline pflicht>Vertragspartner und Sitz (z. B. Zoho Corporation B.V., Niederlande) prüfen</Platzhalter>;
-          mit Zoho besteht ein Vertrag über die Auftragsverarbeitung (Art. 28 DSGVO).
+          Die Angaben werden verschlüsselt (HTTPS) an einen Server übertragen, der in unserem Auftrag in einem Rechenzentrum in Deutschland
+          betrieben wird (Anbieter: IONOS SE, Elgendorfer Str. 57, 56410 Montabaur). Von dort werden sie in unserem Kundenverwaltungssystem
+          <strong>Zoho CRM</strong> gespeichert. Zoho CRM nutzen wir in den Rechenzentren der EU (Anbieter: Zoho Corporation B.V., Beneluxlaan 4B,
+          3527 HT Utrecht, Niederlande). Mit unserem Dienstleister, mit IONOS und mit Zoho bestehen Verträge über die Auftragsverarbeitung
+          (Art. 28 DSGVO).
         </p>
         <p>
           Zweck ist die Bearbeitung Ihrer Anfrage und gegebenenfalls die Vorbereitung eines Vertrags. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b
@@ -87,7 +95,8 @@ import { BETREIBER, ENTWURF_HINWEIS_ANZEIGEN, KONTAKT } from '../config';
         </p>
         <p>
           Wir löschen Ihre Angaben, wenn Ihre Anfrage erledigt ist und keine gesetzlichen Aufbewahrungspflichten (z. B. nach Handels- und
-          Steuerrecht bei einer Buchung) entgegenstehen. <Platzhalter inline pflicht>konkrete Löschfrist für unbeantwortete/abgelehnte Anfragen festlegen</Platzhalter>
+          Steuerrecht bei einer Buchung) entgegenstehen. Anfragen, aus denen keine Buchung wird, löschen wir spätestens 30 Tage nach dem
+          letzten Kontakt.
         </p>
 
         <h2 id="email">6. Kontakt per E-Mail</h2>
@@ -114,9 +123,12 @@ import { BETREIBER, ENTWURF_HINWEIS_ANZEIGEN, KONTAKT } from '../config';
         </p>
         <h3>Matterport (3D-Rundgang)</h3>
         <p>
-          Anbieter: Matterport, Inc., USA. Nach dem Klick werden Daten an Matterport übertragen, auch in die USA
-          <Platzhalter inline pflicht>Rechtsgrundlage der Übermittlung (DPF-Zertifizierung) prüfen</Platzhalter>. Mehr:
-          <a href="https://matterport.com/de/legal/privacy-policy" target="_blank" rel="noopener">Datenschutzerklärung von Matterport</a>.
+          Anbieter: Matterport, Inc., USA (ein Unternehmen der CoStar Group). Nach dem Klick werden Daten an Matterport übertragen, auch in die
+          USA. Für Matterport liegt uns kein Nachweis einer Zertifizierung nach dem EU-U.S. Data Privacy Framework vor; die Übermittlung erfolgt
+          deshalb auf Grundlage Ihrer ausdrücklichen Einwilligung durch den Klick (Art. 49 Abs. 1 lit. a DSGVO). In den USA ist kein dem
+          EU-Recht gleichwertiges Datenschutzniveau garantiert; insbesondere können US-Behörden auf die Daten zugreifen, ohne dass Ihnen
+          wirksame Rechtsbehelfe zustehen. Mehr:
+          <a href="https://www.costar.com/about/privacy-notice" target="_blank" rel="noopener">Datenschutzhinweise der CoStar Group (Matterport)</a>.
         </p>
         <h3>OpenStreetMap (interaktive Karte)</h3>
         <p>
@@ -157,7 +169,7 @@ import { BETREIBER, ENTWURF_HINWEIS_ANZEIGEN, KONTAKT } from '../config';
           einschließlich Profiling findet nicht statt.
         </p>
 
-        <p class="text-sm opacity-75">Stand: Oktober 2026{ENTWURF_HINWEIS_ANZEIGEN && ' (Entwurf)'}</p>
+        <p class="text-sm opacity-75">Stand: November 2026{ENTWURF_HINWEIS_ANZEIGEN && ' (Entwurf)'}</p>
       </div>
     </div>
   </section>
