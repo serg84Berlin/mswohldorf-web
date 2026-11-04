@@ -258,11 +258,13 @@ Damit mswohldorf.netlify.app bis dahin die aktuelle Vorschau zeigt:
 
 ## Checkliste Livegang
 
+Klick für Klick, mit den konkreten DNS-Werten: [LIVEGANG.md](LIVEGANG.md).
+
 - [x] Inhalte der alten Seite übernommen (`quelle/alte-seite/`, INHALT.md).
-- [ ] **Impressum** rechtlich geprüft (OFFENE-ANGABEN.md Nr. 1: Komplementärin, USt-IdNr., Haftungstext) und Bildrechte bestätigt (Nr. 9); die `pflicht`-Platzhalter in `src/pages/impressum.astro` gelöscht.
-- [ ] **Datenschutz** rechtlich geprüft, `pflicht`-Platzhalter darin gefüllt und gelöscht, dann in `src/config.ts` `ENTWURF_HINWEIS_ANZEIGEN = false`.
-- [ ] `npm run offen` meldet **0 Pflicht**. Inhaltliche Punkte (Preise, Technik, Catering …) dürfen offen bleiben — die Seite zeigt dort „auf Anfrage" bzw. „… stimmen wir individuell mit Ihnen ab".
-- [ ] `npm run build` **ohne** `PUBLIC_VORSCHAU` läuft durch (keine „LIVEGANG GESPERRT"-Meldung).
+- [x] **Impressum** rechtlich geprüft (OFFENE-ANGABEN.md Nr. 1: Komplementärin, USt-IdNr., Haftungstext) und Bildrechte bestätigt (Nr. 9); die `pflicht`-Platzhalter in `src/pages/impressum.astro` gelöscht.
+- [x] **Datenschutz** rechtlich geprüft, `pflicht`-Platzhalter darin gefüllt und gelöscht, dann in `src/config.ts` `ENTWURF_HINWEIS_ANZEIGEN = false`.
+- [x] `npm run offen` meldet **0 Pflicht**. Inhaltliche Punkte (Preise, Technik, Catering …) dürfen offen bleiben — die Seite zeigt dort „auf Anfrage" bzw. „… stimmen wir individuell mit Ihnen ab".
+- [x] `npm run build` **ohne** `PUBLIC_VORSCHAU` läuft durch (keine „LIVEGANG GESPERRT"-Meldung).
 - [ ] Angaben aus der Presse 2019 bestätigt (OFFENE-ANGABEN.md, Abschnitt C).
 - [ ] **Formular** verbunden: `PUBLIC_ANFRAGE_URL` gesetzt, Server erlaubt CORS für `https://www.mswohldorf.de`, Testanfrage kommt in Zoho CRM an.
 - [ ] Hero-Foto entschieden; bei neuem Foto `scripts/schiff-freistellen.mjs` + `npm run poster`.

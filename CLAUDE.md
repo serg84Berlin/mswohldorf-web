@@ -44,10 +44,12 @@ npm run pruefen                              # Playwright-Prüfungen gegen dist/
 ## Stand (04.11.2026)
 
 - Gemerged: PR #1 (neue Seite, Inhalte der alten Seite), PR #2 (Platzhalter-Arten, Livegang-Sperre),
-  PR #3 (diese Datei), PR #4 (Rechtliches 10/12, Reichweite Phase 1), PR #5 (Reichweite Phase 2).
+  PR #3 (diese Datei), PR #4 (Rechtliches 10/12, Reichweite Phase 1), PR #5 (Reichweite Phase 2),
+  PR #6 (Rückmeldung Uli, Ratgeber, Englisch).
 - Netlify Production baut als Vorschau (`PUBLIC_VORSCHAU=1` für Production gesetzt): noindex + Band.
-- Rechtliches: 11 von 12 Pflicht-Punkten geklärt (Sergiy; Uli per Mail 04.11.2026: Impressum wie finanzelot.de,
-  kein Datenschutzbeauftragter; Preise, Catering, Technik usw. „alles auf Anfrage“).
+- Rechtliches: alle Pflicht-Punkte geklärt (Sergiy; Uli per Mail 04.11.2026: Impressum wie finanzelot.de,
+  kein Datenschutzbeauftragter; Preise, Catering, Technik usw. „alles auf Anfrage“). Datenschutzerklärung
+  von Sergiy freigegeben (04.11.2026) — `npm run build` läuft durch. **Livegang-Anleitung: `LIVEGANG.md`.**
 - Reichweite und Leads: Plan und Entscheidungen in `REICHWEITE.md`. Phase 1 gebaut: `/haeufige-fragen/`
   (FAQPage-Schema, Daten `src/data/fragen.ts`), `/llms.txt`, `/offsite-hamburg/` (Anreise `src/data/anreise.ts`).
   Phase 2 gebaut: Exposé-PDF (`npm run expose`, Vorlage `/expose/`), Lead-Block mit Schnellanfrage
@@ -56,8 +58,7 @@ npm run pruefen                              # Playwright-Prüfungen gegen dist/
   Phase 3 gebaut: Ratgeber (`/ratgeber/`, Artikel in `src/content/ratgeber/`, Quellen Pflicht) und Englisch
   (`/en/`, `/en/faq/`, Texte `src/data/englisch.ts`). **Ändert sich ein Fakt, auch `src/data/englisch.ts`,
   die Ratgeber-Artikel und das Exposé mitziehen.**
-- **Offen bis zum Livegang** (Details und Nummern: `OFFENE-ANGABEN.md`):
-  - Freigabe der Datenschutzerklärung durch Sergiy, dann `ENTWURF_HINWEIS_ANZEIGEN = false` (Nr. 2).
+- **Offen bis zum Livegang** (Schritt für Schritt: `LIVEGANG.md`):
   - Anfrage-Server (`PUBLIC_ANFRAGE_URL` → finanzelot-lotse.de) erlaubt CORS bisher nur für
     mswohldorf.netlify.app, noch nicht für `https://www.mswohldorf.de`.
   - DNS-Umstellung bei IONOS. Auf der Domain läuft Zoho-Mail: nur A-Record und `www` ändern,
