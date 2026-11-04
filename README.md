@@ -42,8 +42,10 @@ Environment variables*. Beide werden **beim Bauen** eingesetzt — nach einer Ä
 `/` (Hero, Kurzvorstellung, Zahlen, Anlässe, Geschichte, Galerie, 3D-Rundgang, Stimmen,
 Film & Presse, Anfahrt, Anfrage) · `/anlaesse/firmenevent/` · `/anlaesse/workshop-seminar/` ·
 `/anlaesse/film-und-foto/` · `/anlaesse/lesung-ausstellung/` · `/anlaesse/private-feier/` ·
-`/offsite-hamburg/` · `/haeufige-fragen/` · `/geschichte/` · `/galerie/` · `/anfrage/` · `/impressum/` ·
-`/datenschutz/` · `404` · `/llms.txt` (für KI-Assistenten, aus denselben Daten erzeugt).
+`/offsite-hamburg/` · `/haeufige-fragen/` · `/ratgeber/` + Artikel (`src/content/ratgeber/*.md`) ·
+`/geschichte/` · `/galerie/` · `/anfrage/` · `/impressum/` · `/datenschutz/` · `404` · Englisch: `/en/`, `/en/faq/`
+(Texte `src/data/englisch.ts`, `hreflang` zu Start und Häufigen Fragen) · `/expose/` (nur Druckvorlage fürs
+PDF) · `/llms.txt` (für KI-Assistenten, aus denselben Daten erzeugt).
 Plan für Reichweite und Leads: [REICHWEITE.md](REICHWEITE.md).
 
 Inhalte stehen getrennt vom Layout:
@@ -59,6 +61,8 @@ Inhalte stehen getrennt vom Layout:
 | `src/data/presse.json`, `public/pdf/` | Presse |
 | `src/data/stimmen.ts` | Kundenstimmen (wörtlich) |
 | `src/data/fragen.ts` | Häufige Fragen (Seite, FAQPage-Schema, llms.txt) — nur belegte Antworten |
+| `src/content/ratgeber/*.md` | Ratgeber-Artikel (Frontmatter: Titel, Beschreibung, Thema, Datum, Fotos, Anlass, **Quellen**, `entwurf`) — Schema in `src/content.config.ts` |
+| `src/data/englisch.ts`, `src/data/formular-texte.ts` | Englische Seiten (Übersetzungen derselben Fakten) und Formulartexte DE/EN |
 | `src/data/anreise.ts` | Anreise für Teams von außerhalb (Quellen im Kopf der Datei) |
 
 ## Platzhalter und Livegang-Sperre

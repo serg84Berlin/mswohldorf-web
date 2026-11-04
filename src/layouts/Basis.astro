@@ -23,9 +23,14 @@ interface Props {
   strukturiert?: Record<string, unknown>[];
   /** Farbe des letzten Abschnitts (für die Welle in den Footer). */
   fussVon?: string;
+  /** Sprache der Seite (Standard: deutsch). */
+  sprache?: 'de' | 'en';
+  /** Dieselbe Seite in der anderen Sprache (Pfade) → hreflang. */
+  alternativ?: { de: string; en: string };
 }
 
-const { titel, beschreibung, bild = ALTE_BILDER.social, ueberHero = false, ohneAnfrageKnopf = false, strukturiert = [], fussVon } = Astro.props;
+const { titel, beschreibung, bild = ALTE_BILDER.social, ueberHero = false, ohneAnfrageKnopf = false, strukturiert = [], fussVon, sprache = 'de', alternativ } = Astro.props;
+const en = sprache === 'en';
 
 const kanonisch = new URL(Astro.url.pathname, SEITE.url).href;
 const ogBild = await getImage({ src: bild, width: 1200, height: 630, fit: 'cover', format: 'jpg', quality: 82 });
@@ -64,7 +69,7 @@ const seitenTitel = titel.includes(SEITE.name) ? titel : `${titel} | ${SEITE.nam
 ---
 
 <!doctype html>
-<html lang="de">
+<html lang={sprache}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -81,7 +86,17 @@ const seitenTitel = titel.includes(SEITE.name) ? titel : `${titel} | ${SEITE.nam
     <link rel="sitemap" href="/sitemap-index.xml" />
 
     <meta property="og:type" content="website" />
-    <meta property="og:locale" content="de_DE" />
+    <meta property="og:locale" content={en ? 'en_GB' : 'de_DE'} />
+    {alternativ && <meta property="og:locale:alternate" content={en ? 'de_DE' : 'en_GB'} />}
+    {
+      alternativ && (
+        <>
+          <link rel="alternate" hreflang="de" href={new URL(alternativ.de, SEITE.url).href} />
+          <link rel="alternate" hreflang="en" href={new URL(alternativ.en, SEITE.url).href} />
+          <link rel="alternate" hreflang="x-default" href={new URL(alternativ.de, SEITE.url).href} />
+        </>
+      )
+    }
     <meta property="og:site_name" content={SEITE.name} />
     <meta property="og:title" content={seitenTitel} />
     <meta property="og:description" content={beschreibung} />
@@ -110,14 +125,14 @@ const seitenTitel = titel.includes(SEITE.name) ? titel : `${titel} | ${SEITE.nam
     <slot name="kopf" />
   </head>
   <body class="min-h-dvh antialiased">
-    <a class="sprunglink" href="#inhalt">Zum Inhalt springen</a>
-    {VORSCHAU && <div class="vorschau-band" role="note">Vorschau</div>}
-    <Kopf ueberHero={ueberHero} />
+    <a class="sprunglink" href="#inhalt">{en ? 'Skip to content' : 'Zum Inhalt springen'}</a>
+    {VORSCHAU && <div class="vorschau-band" role="note">{en ? 'Preview' : 'Vorschau'}</div>}
+    <Kopf ueberHero={ueberHero} sprache={sprache} />
     <main id="inhalt" tabindex="-1">
       <slot />
     </main>
-    <Fuss von={fussVon} />
-    {!ohneAnfrageKnopf && <AnfrageKnopf />}
+    <Fuss von={fussVon} sprache={sprache} />
+    {!ohneAnfrageKnopf && <AnfrageKnopf sprache={sprache} />}
 
     <!-- Wasser-Verzerrung für Bild-Hover (nur Zeiger-Geräte, nur bei erlaubter Bewegung) -->
     <svg class="absolute size-0 overflow-hidden" aria-hidden="true" focusable="false">

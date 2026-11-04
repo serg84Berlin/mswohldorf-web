@@ -1,0 +1,74 @@
+---
+/** Karte eines Ratgeber-Artikels (Übersicht, „Weiterlesen“). */
+import { Picture } from 'astro:assets';
+import type { Artikel } from '../lib/ratgeber';
+import { datumIso, datumLang } from '../lib/ratgeber';
+import { fotoPerSchluessel } from '../data/bilder';
+import Symbol from './Symbol.astro';
+
+interface Props {
+  artikel: Artikel;
+  ebene?: 'h2' | 'h3';
+}
+const { artikel: a, ebene = 'h2' } = Astro.props;
+const f = fotoPerSchluessel(a.data.titelfoto);
+const Ueberschrift = ebene;
+---
+
+<article class="karte" data-reveal>
+  <a href={`/ratgeber/${a.id}/`} class="karte-link">
+    <div class="karte-bild">
+      <Picture src={f.bild} alt="" formats={['avif', 'webp']} widths={[400, 640, 900]} sizes="(min-width: 1024px) 30rem, 100vw" loading="lazy" class="h-full w-full object-cover" />
+    </div>
+    <div class="karte-text">
+      <p class="eyebrow">{a.data.thema}{a.data.entwurf && ' · Entwurf'}</p>
+      <Ueberschrift class="mt-3 font-display text-2xl leading-snug text-tiefe">{a.data.titel}</Ueberschrift>
+      <p class="mt-2 text-grau">{a.data.beschreibung}</p>
+      <p class="mt-4 flex items-center justify-between text-sm text-grau">
+        <time datetime={datumIso(a.data.veroeffentlicht)}>{datumLang(a.data.veroeffentlicht)}</time>
+        <span class="inline-flex items-center gap-1.5 font-semibold text-petrol">Lesen <Symbol name="pfeil" class="size-4" /></span>
+      </p>
+    </div>
+  </a>
+</article>
+
+<style>
+  .karte {
+    border-radius: 1.3rem;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid rgb(11 26 42 / 0.08);
+    box-shadow: 0 24px 50px -40px rgb(6 18 31 / 0.6);
+    transition:
+      transform 0.45s var(--ease-welle),
+      box-shadow 0.45s var(--ease-welle);
+  }
+  .karte:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 34px 60px -40px rgb(6 18 31 / 0.7);
+  }
+  .karte-link {
+    display: grid;
+    height: 100%;
+    grid-template-rows: auto 1fr;
+  }
+  .karte-bild {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+  }
+  .karte-bild :global(img) {
+    transition: transform 1.2s var(--ease-welle);
+  }
+  .karte:hover .karte-bild :global(img) {
+    transform: scale(1.04);
+  }
+  .karte-text {
+    display: flex;
+    flex-direction: column;
+    padding: 1.3rem 1.35rem 1.4rem;
+  }
+  .karte-text > p:last-child {
+    margin-top: auto;
+    padding-top: 1rem;
+  }
+</style>

@@ -34,16 +34,17 @@ Jeder Punkt hier steht als `<Platzhalter pflicht>` im Quelltext (bzw. Nr. 2 als 
 `ENTWURF_HINWEIS_ANZEIGEN`). Solange einer übrig ist, scheitert der Produktions-Build. Bis dahin
 läuft Production auf Netlify mit `PUBLIC_VORSCHAU=1` (README, „Bis zum Livegang").
 
-Stand 01.11.2026: **noch 2 offen** (Nr. 1c, Nr. 2). Alles andere ist geklärt — Angaben von Sergiy
-(Betreiber von Website und Anfrage-Server, DSGVO-Berater) bzw. aus dem Impressum von finanzelot.de.
+Stand 04.11.2026: **noch 1 offen** (Nr. 2). Alles andere ist geklärt — Angaben von Sergiy
+(Betreiber von Website und Anfrage-Server, DSGVO-Berater), von Uli (Mail vom 04.11.2026) bzw. aus dem
+Impressum von finanzelot.de.
 
 | Nr. | Was | Stand | Wo |
 |---|---|---|---|
 | 1a | Vertretung (Komplementärin) | ✅ Finanzelot Verwaltungs GmbH, Amtsgericht Hamburg, HRB 154872, Geschäftsführer Ulrich Ritter (wie finanzelot.de/impressum) | `src/config.ts` (`BETREIBER.komplementaerin`) |
 | 1b | USt-IdNr. | ✅ `DE326098307` (wie finanzelot.de, VIES gültig am 01.11.2026). Die Nummer der alten Seite (`DE3223275031`) war ungültig. | `src/config.ts` |
-| 1c ⛔ | **Haftungstext** (Inhalte, Links): Verweise auf das aufgehobene TMG entfernt — soll der Text so bleiben? | offen — Uli meldet sich | `src/pages/impressum.astro` — `pflicht`-Platzhalter |
+| 1c | Haftungstext (Inhalte, Links) | ✅ entfällt — Uli: Impressum wie finanzelot.de, dort gibt es keinen Haftungs- und Urheberrechtstext (Mail vom 04.11.2026) | `src/pages/impressum.astro` |
 | 2 ⛔ | **Datenschutz-Entwurf freigeben**, dann `ENTWURF_HINWEIS_ANZEIGEN = false` (sonst bricht der Produktions-Build ab; mit `false` entfällt auch „(Entwurf)" beim Stand). Vorher prüfen: Netlify-DPA abgeschlossen? Speicherdauer der Netlify-Protokolle (steht jetzt als Kriterium, nicht als Frist; genaue Frist: „Data Retention and Deletion Summary" im Netlify Trust Center, auf Anfrage)? Matterport-Absatz (Art. 49 DSGVO, siehe Nr. 8)? | offen — Freigabe durch Sergiy | `src/config.ts` |
-| 3 | Datenschutzbeauftragter; Kontakt für Datenschutzanfragen | ✅ nicht benannt, nicht verpflichtet (§ 38 BDSG); Kontakt bleibt `info@finanzelot.de` | `src/pages/datenschutz.astro` |
+| 3 | Datenschutzbeauftragter; Kontakt für Datenschutzanfragen | ✅ nicht benannt, nicht verpflichtet (§ 38 BDSG; von Uli bestätigt am 04.11.2026); Verantwortlicher ist die KG, Kontakt `info@finanzelot.de` | `src/pages/datenschutz.astro` |
 | 4 | Netlify: Rechtsgrundlage USA, Speicherdauer | ✅ DPF-zertifiziert ([Netlify Privacy, Abschnitt 13](https://www.netlify.com/privacy/)) → Art. 45 DSGVO, ergänzend SCC; Speicherdauer als Kriterium (Netlify veröffentlicht keine Frist) | dito |
 | 5 | Hosting des Anfrage-Servers (Merlin) | ✅ IONOS SE, Montabaur; Rechenzentrum in Deutschland (IONOS Cloud Berlin) | dito |
 | 6 | Zoho CRM | ✅ Zoho EU, Zoho Corporation B.V., Beneluxlaan 4B, 3527 HT Utrecht (betreibt die EU-Rechenzentren); AV-Vertrag besteht | dito |
@@ -52,11 +53,12 @@ Stand 01.11.2026: **noch 2 offen** (Nr. 1c, Nr. 2). Alles andere ist geklärt �
 | 9 | Bildrechte (NDR-Standbild, Presse-Ausschnitte, Video-Standbilder) | ✅ bestätigt: schon auf der alten Seite mit Abstimmung der Rechteinhaber | `src/pages/impressum.astro` (Bildnachweis) |
 | 9a | AV-Verträge | ✅ Finanzelot ↔ Sergiy (Betrieb Website und Anfrage-Server) und Sergiy ↔ IONOS bestehen | — |
 
-## B. Angaben für Anlässe (auch auf der alten Seite nicht vorhanden) — inhaltlich, kein Blocker
+## B. Angaben für Anlässe — ✅ entschieden: „auf Anfrage“
 
-In Produktion zeigt jede Anlass-Seite statt der Liste einen Satz aus `offenKurz`. Ist ein Punkt
-geklärt: Angabe in `absaetze`/`wissen` aufnehmen, ihn aus `offen` streichen und `offenKurz`
-anpassen (sind alle geklärt, `offen: []` — dann entfällt der Satz).
+Uli (Mail vom 04.11.2026): „Zu Buchungen alles auf Anfrage. Es sei denn wir machen irgendwann eine
+extra Seite dafür auf.“ Die Punkte unten stehen deshalb in `src/data/anlaesse.ts` als `aufAnfrage`;
+jede Anlass-Seite zeigt EINEN Satz („… stimmen wir individuell mit Ihnen ab — sprechen Sie uns an.“),
+in Vorschau und Produktion gleich. Kommt später eine Buchungsseite, wandern die Angaben dorthin.
 
 | Nr. | Was | Wo |
 |---|---|---|

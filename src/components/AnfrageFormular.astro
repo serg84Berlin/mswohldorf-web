@@ -8,9 +8,12 @@
  * `schnell` (Schnellanfrage: Anlass, Datum, Gäste, Name, E-Mail — ohne
  * Nachrichtenfeld; die Nachricht setzt das Skript aus einer Vorlage zusammen,
  * der Server-Vertrag bleibt gleich).
+ * Sprache: `sprache="en"` für die englischen Seiten — Beschriftung und Meldungen
+ * englisch (src/data/formular-texte.ts), die Werte an den Server bleiben deutsch.
  */
 import { ANFRAGE_URL, ANFRAGE_ERWEITERT, ANLAESSE_AUSWAHL, KONTAKT, FAKTEN, EXPOSE } from '../config';
 import type { AnlassWert } from '../data/typen';
+import { FORMULAR_TEXTE, ANLASS_BESCHRIFTUNG_EN, type Sprache } from '../data/formular-texte';
 import Symbol from './Symbol.astro';
 
 interface Props {
@@ -20,12 +23,16 @@ interface Props {
   /** Schnellanfrage (siehe oben). */
   schnell?: boolean;
   vorauswahl?: AnlassWert;
+  sprache?: Sprache;
 }
-const { id = 'anfrage', kompakt: kompaktProp = false, schnell = false, vorauswahl } = Astro.props;
+const { id = 'anfrage', kompakt: kompaktProp = false, schnell = false, vorauswahl, sprache = 'de' } = Astro.props;
+const t = FORMULAR_TEXTE[sprache];
 const kompakt = kompaktProp || schnell;
-const knopfText = schnell ? 'Verfügbarkeit anfragen' : 'Anfrage senden';
+const knopfText = schnell ? t.sendenSchnell : t.senden;
 const f = (name: string) => `${id}-${name}`;
-const mailto = `mailto:${KONTAKT.mail}?subject=${encodeURIComponent('Anfrage MS Wohldorf')}`;
+const mailto = `mailto:${KONTAKT.mail}?subject=${encodeURIComponent(sprache === 'en' ? 'Enquiry MS Wohldorf' : 'Anfrage MS Wohldorf')}`;
+const beschriftung = (a: string) => (sprache === 'en' ? (ANLASS_BESCHRIFTUNG_EN[a] ?? a) : a);
+const rundgangLink = '/#rundgang';
 ---
 
 <form
@@ -35,6 +42,7 @@ const mailto = `mailto:${KONTAKT.mail}?subject=${encodeURIComponent('Anfrage MS 
   data-ziel={ANFRAGE_URL}
   data-mail={KONTAKT.mail}
   data-art={schnell ? 'schnell' : 'voll'}
+  data-sprache={sprache}
   data-erweitert={ANFRAGE_ERWEITERT ? '1' : undefined}
   action={mailto}
   method="post"
@@ -42,12 +50,11 @@ const mailto = `mailto:${KONTAKT.mail}?subject=${encodeURIComponent('Anfrage MS 
   novalidate
   aria-labelledby={`${f('titel')}`}
 >
-  <h2 id={f('titel')} class="sr-only">Anfrageformular</h2>
+  <h2 id={f('titel')} class="sr-only">{t.titel}</h2>
 
   <noscript>
     <p class="formular-hinweis">
-      JavaScript ist ausgeschaltet: „Anfrage senden“ öffnet Ihr E-Mail-Programm mit Ihren Angaben. Sie können uns auch direkt
-      schreiben: <a class="underline" href={`mailto:${KONTAKT.mail}`}>{KONTAKT.mail}</a>.
+      {t.ohneJs} <a class="underline" href={`mailto:${KONTAKT.mail}`}>{KONTAKT.mail}</a>.
     </p>
   </noscript>
 
@@ -56,7 +63,7 @@ const mailto = `mailto:${KONTAKT.mail}?subject=${encodeURIComponent('Anfrage MS 
       <p class="formular-hinweis vorschau" data-vorschau-hinweis>
         <Symbol name="hinweis" class="size-5 shrink-0" />
         <span>
-          <strong>Vorschau:</strong> Das Formular ist noch nicht verbunden. Bitte schreiben Sie an{' '}
+          <strong>{t.vorschauFett}</strong> {t.vorschau}{' '}
           <a class="underline" href={`mailto:${KONTAKT.mail}`}>{KONTAKT.mail}</a>
         </span>
       </p>
@@ -64,30 +71,30 @@ const mailto = `mailto:${KONTAKT.mail}?subject=${encodeURIComponent('Anfrage MS 
   }
 
   <div class="fehler-liste" role="alert" tabindex="-1" data-fehlerliste hidden>
-    <p class="font-semibold">Bitte prüfen Sie Ihre Angaben:</p>
+    <p class="font-semibold">{t.fehlerKopf}</p>
     <ul data-fehlerliste-punkte></ul>
   </div>
 
   <div class="felder">
     <div class:list={['feld', schnell ? 'feld-ganz' : 'feld-halb']}>
-      <label for={f('anlass')}>Anlass <span class="pflicht" aria-hidden="true">*</span></label>
+      <label for={f('anlass')}>{t.anlass} <span class="pflicht" aria-hidden="true">*</span></label>
       <div class="auswahl">
         <select id={f('anlass')} name="anlass" required aria-describedby={f('anlass-fehler')}>
-          <option value="" selected={!vorauswahl}>Bitte wählen</option>
-          {ANLAESSE_AUSWAHL.map((a) => <option value={a} selected={a === vorauswahl}>{a}</option>)}
+          <option value="" selected={!vorauswahl}>{t.bitteWaehlen}</option>
+          {ANLAESSE_AUSWAHL.map((a) => <option value={a} selected={a === vorauswahl}>{beschriftung(a)}</option>)}
         </select>
       </div>
       <p class="feld-fehler" id={f('anlass-fehler')} hidden></p>
     </div>
 
     <div class="feld feld-halb">
-      <label for={f('gaeste')}>Gäste <span class="feld-zusatz">(1–{FAKTEN.maxGaeste}, optional)</span></label>
+      <label for={f('gaeste')}>{t.gaeste} <span class="feld-zusatz">{t.gaesteZusatz(FAKTEN.maxGaeste)}</span></label>
       <input id={f('gaeste')} name="gaeste" type="number" inputmode="numeric" min="1" max={FAKTEN.maxGaeste} step="1" aria-describedby={f('gaeste-fehler')} />
       <p class="feld-fehler" id={f('gaeste-fehler')} hidden></p>
     </div>
 
     <div class="feld feld-halb">
-      <label for={f('datum')}>Wunschdatum <span class="feld-zusatz">(optional)</span></label>
+      <label for={f('datum')}>{t.datum} <span class="feld-zusatz">{t.optional}</span></label>
       <input id={f('datum')} name="datum" type="date" aria-describedby={f('datum-fehler')} />
       <p class="feld-fehler" id={f('datum-fehler')} hidden></p>
     </div>
@@ -96,7 +103,7 @@ const mailto = `mailto:${KONTAKT.mail}?subject=${encodeURIComponent('Anfrage MS 
       !kompakt && (
         <div class="feld feld-halb">
           <label for={f('ausweichdatum')}>
-            Ausweichdatum <span class="feld-zusatz">(optional)</span>
+            {t.ausweichdatum} <span class="feld-zusatz">{t.optional}</span>
           </label>
           <input id={f('ausweichdatum')} name="ausweichdatum" type="date" aria-describedby={f('ausweichdatum-fehler')} />
           <p class="feld-fehler" id={f('ausweichdatum-fehler')} hidden />
@@ -105,13 +112,13 @@ const mailto = `mailto:${KONTAKT.mail}?subject=${encodeURIComponent('Anfrage MS 
     }
 
     <div class="feld feld-halb">
-      <label for={f('name')}>Name <span class="pflicht" aria-hidden="true">*</span></label>
+      <label for={f('name')}>{t.name} <span class="pflicht" aria-hidden="true">*</span></label>
       <input id={f('name')} name="name" type="text" autocomplete="name" required maxlength="120" aria-describedby={f('name-fehler')} />
       <p class="feld-fehler" id={f('name-fehler')} hidden></p>
     </div>
 
     <div class="feld feld-halb">
-      <label for={f('email')}>E-Mail <span class="pflicht" aria-hidden="true">*</span></label>
+      <label for={f('email')}>{t.email} <span class="pflicht" aria-hidden="true">*</span></label>
       <input id={f('email')} name="email" type="email" autocomplete="email" required maxlength="200" aria-describedby={f('email-fehler')} />
       <p class="feld-fehler" id={f('email-fehler')} hidden></p>
     </div>
@@ -120,7 +127,7 @@ const mailto = `mailto:${KONTAKT.mail}?subject=${encodeURIComponent('Anfrage MS 
       !kompakt && (
         <div class="feld feld-halb">
           <label for={f('telefon')}>
-            Telefon <span class="feld-zusatz">(optional)</span>
+            {t.telefon} <span class="feld-zusatz">{t.optional}</span>
           </label>
           <input id={f('telefon')} name="telefon" type="tel" autocomplete="tel" maxlength="40" aria-describedby={f('telefon-fehler')} />
           <p class="feld-fehler" id={f('telefon-fehler')} hidden />
@@ -131,18 +138,18 @@ const mailto = `mailto:${KONTAKT.mail}?subject=${encodeURIComponent('Anfrage MS 
     {
       kompakt && !schnell && (
         <details class="feld feld-ganz mehr-angaben">
-          <summary>Weitere Angaben (optional): Ausweichdatum, Telefon</summary>
+          <summary>{t.mehrAngaben}</summary>
           <div class="felder mt-4">
             <div class="feld feld-halb">
               <label for={f('ausweichdatum')}>
-                Ausweichdatum <span class="feld-zusatz">(optional)</span>
+                {t.ausweichdatum} <span class="feld-zusatz">{t.optional}</span>
               </label>
               <input id={f('ausweichdatum')} name="ausweichdatum" type="date" aria-describedby={f('ausweichdatum-fehler')} />
               <p class="feld-fehler" id={f('ausweichdatum-fehler')} hidden />
             </div>
             <div class="feld feld-halb">
               <label for={f('telefon')}>
-                Telefon <span class="feld-zusatz">(optional)</span>
+                {t.telefon} <span class="feld-zusatz">{t.optional}</span>
               </label>
               <input id={f('telefon')} name="telefon" type="tel" autocomplete="tel" maxlength="40" aria-describedby={f('telefon-fehler')} />
               <p class="feld-fehler" id={f('telefon-fehler')} hidden />
@@ -155,10 +162,10 @@ const mailto = `mailto:${KONTAKT.mail}?subject=${encodeURIComponent('Anfrage MS 
     {
       schnell && (
         <details class="feld feld-ganz mehr-angaben">
-          <summary>Möchten Sie noch etwas ergänzen? (optional)</summary>
+          <summary>{t.ergaenzenFrage}</summary>
           <div class="feld mt-4">
-            <label for={f('zusatz')}>Ergänzung</label>
-            <textarea id={f('zusatz')} name="zusatz" rows="3" maxlength="2000"></textarea>
+            <label for={f('zusatz')}>{t.ergaenzung}</label>
+            <textarea id={f('zusatz')} name="zusatz" rows="3" maxlength="2000" />
           </div>
         </details>
       )
@@ -168,11 +175,11 @@ const mailto = `mailto:${KONTAKT.mail}?subject=${encodeURIComponent('Anfrage MS 
       !schnell && (
         <div class="feld feld-ganz">
           <label for={f('nachricht')}>
-            Ihre Nachricht <span class="pflicht" aria-hidden="true">*</span>
+            {t.nachricht} <span class="pflicht" aria-hidden="true">*</span>
           </label>
           <textarea id={f('nachricht')} name="nachricht" rows={kompakt ? 4 : 6} required maxlength="4000" aria-describedby={`${f('nachricht-hilfe')} ${f('nachricht-fehler')}`} />
           <p class="feld-hilfe" id={f('nachricht-hilfe')}>
-            Was planen Sie? Uhrzeit, Ablauf, Wünsche — alles hilft uns.
+            {t.nachrichtHilfe}
           </p>
           <p class="feld-fehler" id={f('nachricht-fehler')} hidden />
         </div>
@@ -183,15 +190,15 @@ const mailto = `mailto:${KONTAKT.mail}?subject=${encodeURIComponent('Anfrage MS 
       <div class="einwilligung">
         <input id={f('einwilligung')} name="einwilligung" type="checkbox" value="ja" required aria-describedby={f('einwilligung-fehler')} />
         <label for={f('einwilligung')}>
-          Ich bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage verarbeitet werden. Mehr dazu in der{' '}
-          <a href="/datenschutz/#anfrage" class="underline underline-offset-2">Datenschutzerklärung</a>. <span class="pflicht" aria-hidden="true">*</span>
+          {t.einwilligungVor}{' '}
+          <a href="/datenschutz/#anfrage" class="underline underline-offset-2">{t.einwilligungLink}</a>. <span class="pflicht" aria-hidden="true">*</span>
         </label>
       </div>
       <p class="feld-fehler" id={f('einwilligung-fehler')} hidden></p>
     </div>
 
     <div class="honig" aria-hidden="true">
-      <label for={f('website')}>Bitte leer lassen</label>
+      <label for={f('website')}>{t.honig}</label>
       <input id={f('website')} name="website" type="text" tabindex="-1" autocomplete="off" />
     </div>
     <input type="hidden" name="geladen" value="" data-geladen />
@@ -202,7 +209,7 @@ const mailto = `mailto:${KONTAKT.mail}?subject=${encodeURIComponent('Anfrage MS 
       <span data-senden-text>{knopfText}</span>
       <Symbol name="pfeil" />
     </button>
-    <p class="text-sm opacity-80"><span class="pflicht" aria-hidden="true">*</span> Pflichtfeld</p>
+    <p class="text-sm opacity-80"><span class="pflicht" aria-hidden="true">*</span> {t.pflichtfeld}</p>
   </div>
 
   <div class="formular-status" role="status" aria-live="polite" data-status></div>
@@ -210,23 +217,23 @@ const mailto = `mailto:${KONTAKT.mail}?subject=${encodeURIComponent('Anfrage MS 
 
 <div class="formular-erfolg" tabindex="-1" data-erfolg={id} hidden>
   <span class="erfolg-symbol" aria-hidden="true"><Symbol name="haken" class="size-8" /></span>
-  <p class="font-display text-2xl">Danke! Ihre Anfrage ist angekommen.</p>
+  <p class="font-display text-2xl">{t.danke}</p>
   {/* Meldet der Server `erstantwort: true`, ist die automatische Erstantwort unterwegs (Lotse/Zoho). */}
   <p class="mt-2" data-erstantwort-hinweis hidden>
-    In wenigen Minuten erhalten Sie eine E-Mail von uns — mit dem Exposé und den nächsten Schritten. Antworten Sie einfach darauf.
+    {t.erstantwort}
   </p>
-  <p class="mt-2">Wir melden uns persönlich bei Ihnen.</p>
+  <p class="mt-2">{t.persoenlich}</p>
   <div class="erfolg-weiter">
-    <p class="text-sm font-semibold tracking-[0.12em] uppercase opacity-75">Bis dahin</p>
+    <p class="text-sm font-semibold tracking-[0.12em] uppercase opacity-75">{t.bisDahin}</p>
     <ul class="mt-3 flex flex-wrap justify-center gap-3">
       <li>
-        <a class="knopf knopf-dunkel" href={EXPOSE.pfad} download><Symbol name="dokument" /> Exposé (PDF)</a>
+        <a class="knopf knopf-dunkel" href={EXPOSE.pfad} download><Symbol name="dokument" /> {t.exposePdf}</a>
       </li>
       <li>
-        <a class="knopf knopf-geist" href={`tel:${KONTAKT.telefonLink}`}><Symbol name="telefon" /> Direkt anrufen</a>
+        <a class="knopf knopf-geist" href={`tel:${KONTAKT.telefonLink}`}><Symbol name="telefon" /> {t.anrufen}</a>
       </li>
       <li>
-        <a class="knopf knopf-geist" href="/#rundgang"><Symbol name="wuerfel" /> 3D-Rundgang</a>
+        <a class="knopf knopf-geist" href={rundgangLink}><Symbol name="wuerfel" /> {t.rundgang}</a>
       </li>
     </ul>
   </div>

@@ -42,6 +42,7 @@ Zwei Tippfehler in der alten HTML löst das Skript auf: `wohldorf_innen_17jpg` �
 | Q7 | OpenStreetMap (ODbL) | statische Anfahrtskarte | `src/assets/karte/anfahrt.png` |
 | Q8 | neu gestaltet | Bildmarke, Favicon | `Logo.astro`, `public/favicon.svg` |
 | Q9 | Routenberechnung OSRM (router.project-osrm.org), 01.11.2026 | Hamburg Hbf → Liegeplatz 11 km, Flughafen → Liegeplatz 20 km (Fahrzeiten ohne Verkehr, auf der Seite als Spanne) | `src/data/anreise.ts` |
+| Q11 | Uli, Mail vom 04.11.2026 | Impressum wie finanzelot.de, USt-IdNr., kein Datenschutzbeauftragter, „alles auf Anfrage“, Liegeplatz-Name „Anleger Finkenriek“ | `src/config.ts`, `src/pages/impressum.astro`, `src/data/anlaesse.ts` |
 | Q10 | DB-Korridorsanierung Hamburg–Berlin 2026 (deutschebahn.com), giga.de | ICE Berlin Hbf → Hamburg Hbf „knapp zwei Stunden“ (rund 107 Min.; DB nennt keine feste Zeit) | `src/data/anreise.ts` |
 
 **3D-Hero:** Die Schiffsebene bleibt das freigestellte Standbild aus dem Video 2024. Geprüft
@@ -73,13 +74,31 @@ Kundenstimmen und das Impressum.
 | Datenschutz | neuer Entwurf; Verantwortlicher mit Anschrift aus dem Impressum | AS (Impressum) |
 | 3D-Rundgang | „entstand am früheren Liegeplatz im Sandtorhafen" (iframe-Titel der alten Seite: „Rundgang auf der MS Wohldorf im Hamburger Sandtorhafen") | AS |
 
-### Änderungen am Impressum gegenüber der alten Seite
+### Impressum seit 04.11.2026: wie finanzelot.de
+
+Uli (Mail vom 04.11.2026): „das Impressum kannst du von Finanzelot übernehmen“, USt-IdNr. DE326098307,
+kein Datenschutzbeauftragter. Übernommen von https://www.finanzelot.de/impressum: Anbieter, Vertretung
+(Finanzelot Verwaltungs GmbH, HRB 154872, Geschäftsführer Ulrich Ritter), Kontakt, Registereintrag,
+USt-IdNr., „Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV“. **Nicht** übernommen: die Angaben zur
+Finanz- und Versicherungsvermittlung (§§ 34d/f/i GewO usw.) — sie betreffen nicht das Angebot dieser
+Website. **Entfallen**: Postfach, Haftung für Inhalte/Links, Urheberrecht (finanzelot.de hat diese Texte nicht).
+Geblieben: Streitschlichtung und Bildnachweis. Liegeplatz-Name „Anleger Finkenriek“ ebenfalls aus Ulis Mail.
+
+### Frühere Änderungen am Impressum gegenüber der alten Seite (vor dem 04.11.2026)
 
 - „Angaben gemäß § 5 TMG" → „§ 5 DDG".
 - Haftung für Inhalte: Verweise „gemäß § 7 Abs. 1 TMG" und „Nach §§ 8 bis 10 TMG" entfernt (TMG aufgehoben); Inhalt sonst wörtlich.
 - Streitschlichtung: Satz und Link zur EU-OS-Plattform entfernt (Plattform am 20.07.2025 eingestellt); der Satz zur Verbraucherschlichtung bleibt wörtlich.
 - „Handelsregister: 124152" und „HRA 124152" (beides auf der alten Seite) → einmal „HRA 124152".
 - Bildnachweis: „Wohldorf: Andrea Klick" bleibt; ergänzt um Video-Standbilder, NDR-Standbild und OSM. Der zweite Eintrag der alten Seite (KI-generierte Hintergrundbilder) entfällt, weil die neue Seite diese Bilder nicht verwendet.
+
+## Ratgeber und Englisch (seit 04.11.2026)
+
+- **Ratgeber** (`src/content/ratgeber/*.md`): nur Angaben, die schon auf der Seite belegt sind (Quellen oben
+  und im Frontmatter jedes Artikels). Kundenstimmen nur wörtlich und als Zitat.
+- **Englisch** (`src/data/englisch.ts`): Übersetzungen derselben Fakten, nichts Neues. Exposé, Impressum,
+  Datenschutz und Anlass-Details bleiben deutsch und sind auf den englischen Seiten als „German“ markiert.
+- Englische Bild-Alternativtexte für zwei Innenfotos (`/en/`) beschreiben nur Sichtbares.
 
 ## Nicht übernommen (bewusst)
 

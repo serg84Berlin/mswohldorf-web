@@ -55,6 +55,12 @@ const SEITEN = [
   '/anlaesse/private-feier/',
   '/offsite-hamburg/',
   '/haeufige-fragen/',
+  '/ratgeber/',
+  '/ratgeber/offsite-hamburg-planen/',
+  '/ratgeber/lernort-an-bord/',
+  '/ratgeber/umbau-faehre-zum-veranstaltungsschiff/',
+  '/en/',
+  '/en/faq/',
   '/geschichte/',
   '/galerie/',
   '/anfrage/',
@@ -472,6 +478,42 @@ async function fuelle(seite, id) {
 }
 
 /* ------------------------------------------------------------------
+   6b2. Englisch: Formular (Beschriftung/Meldungen englisch, Vertrag deutsch), hreflang
+   ------------------------------------------------------------------ */
+{
+  const { ctx, extern, fehler } = await kontext(verbunden, { viewport: GROESSEN[390] }, { erlaubt: [ANFRAGE_TEST_URL] });
+  let gesendet = null;
+  await ctx.route(ANFRAGE_TEST_URL, (route) => {
+    if (route.request().method() === 'OPTIONS') return route.fulfill({ status: 204, headers: { 'access-control-allow-origin': '*', 'access-control-allow-headers': 'content-type', 'access-control-allow-methods': 'POST' } });
+    gesendet = JSON.parse(route.request().postData() ?? 'null');
+    return route.fulfill({ status: 202, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: '{"ok":true}' });
+  });
+  const seite = await ctx.newPage();
+  await seite.goto(verbunden.url + '/en/', { waitUntil: 'networkidle' });
+  const id = 'schnell-en';
+  pruefe('Englisch: <html lang="en">, Formular englisch beschriftet', (await seite.getAttribute('html', 'lang')) === 'en' && (await seite.textContent(`label[for="${id}-email"]`)).includes('Email') && (await seite.textContent(`#${id} [data-senden]`)).includes('Check availability'));
+  await seite.click(`#${id} [data-senden]`);
+  pruefe('Englisch: Fehlermeldungen englisch', (await seite.textContent(`#${id}-anlass-fehler`)) === 'Please choose an occasion.' && (await seite.textContent(`#${id}-email-fehler`)).startsWith('Please enter a valid email'));
+  await seite.selectOption(`#${id}-anlass`, 'Firmenevent');
+  await seite.fill(`#${id}-name`, 'Alex Example');
+  await seite.fill(`#${id}-email`, 'alex@example.org');
+  await seite.check(`#${id}-einwilligung`);
+  await seite.click(`#${id} [data-senden]`);
+  await seite.waitForTimeout(800);
+  const g = gesendet ?? {};
+  const schluessel = ['quelle', 'anlass', 'datum', 'ausweichdatum', 'gaeste', 'name', 'email', 'telefon', 'nachricht', 'einwilligung', 'website', 'dauerMs'];
+  pruefe('Englisch: gleicher Vertrag, Anlass-Wert deutsch, Hinweis „auf Englisch antworten“ für Uli', JSON.stringify(Object.keys(g).sort()) === JSON.stringify([...schluessel].sort()) && g.anlass === 'Firmenevent' && g.nachricht.includes('[Englische Seite'), JSON.stringify(g));
+  pruefe('Englisch: Erfolgsmeldung englisch', (await seite.textContent(`[data-erfolg="${id}"]`)).includes('Thank you! Your enquiry has arrived.'));
+  pruefe('Englisch: keine externen Anfragen außer dem Ziel, keine Skriptfehler', extern.length === 0 && fehler.length === 0, [...extern, ...fehler].join(' | '));
+  await ctx.close();
+  const hreflang = async (pfad, de, en) => {
+    const html = await readFile(join(PROJEKT, 'dist', pfad, 'index.html'), 'utf8');
+    return html.includes(`hreflang="de" href="https://www.mswohldorf.de${de}"`) && html.includes(`hreflang="en" href="https://www.mswohldorf.de${en}"`) && html.includes(`hreflang="x-default" href="https://www.mswohldorf.de${de}"`);
+  };
+  pruefe('hreflang: Start ↔ /en/ und Fragen ↔ /en/faq/ (beide Richtungen, x-default deutsch)', (await hreflang('', '/', '/en/')) && (await hreflang('en', '/', '/en/')) && (await hreflang('haeufige-fragen', '/haeufige-fragen/', '/en/faq/')) && (await hreflang('en/faq', '/haeufige-fragen/', '/en/faq/')));
+}
+
+/* ------------------------------------------------------------------
    6c. Lead-Quelle (nur mit PUBLIC_ANFRAGE_ERWEITERT=1 → dist-erweitert/)
    ------------------------------------------------------------------ */
 {
@@ -714,21 +756,20 @@ for (const [breite, viewport] of Object.entries(GROESSEN)) {
   pruefe(`Produktion: keine inhaltlichen Platzhalter-Kästen (${produktion.size} Seiten)`, inhaltKasten.length === 0, inhaltKasten.join(' '));
   pruefe('Produktion: „Angabe folgt“/„bitte von Uli ergänzen“ nur in rechtlichen Kästen, Seiten ohne rechtlichen Rest ganz ohne', fremderText.length === 0, fremderText.join(' '));
   pruefe('Produktion: jeder rechtliche Rest (Platzhalter, Entwurf-Hinweis) sperrt den Build', ohneSperre.length === 0, ohneSperre.join(' | '));
+  // „Auf Anfrage“ (Entscheidung Uli): je Anlass-Seite EIN Satz mit Anfrage-Link — in Produktion UND Vorschau, keine Kästen
   for (const pfad of SEITEN.filter((p) => p.startsWith('/anlaesse/'))) {
     const slug = pfad.split('/')[2];
-    const offen = zaehle(vorschauSeiten.get(pfad) ?? '', 'data-platzhalter="inhalt"');
-    const html = produktion.get(pfad) ?? '';
-    const saetze = [...html.matchAll(/<p\b[^>]*\sdata-platzhalter-ersatz\b[^>]*>([\s\S]*?)<\/p>/g)];
-    const satz = saetze.length === 1 ? klartext(saetze[0][1]) : '';
-    const ok =
-      offen === 0
-        ? saetze.length === 0
-        : saetze.length === 1 &&
-          /^[A-ZÄÖÜ].+ stimmen wir individuell mit Ihnen ab — sprechen Sie uns an\.$/.test(satz) &&
-          !/\s[.,;:]|\s{2}/.test(satz) &&
-          saetze[0][1].includes(`href="/anfrage/?anlass=${slug}"`) &&
-          !html.includes('Diese Details klären wir gern persönlich');
-    pruefe(`Produktion ${pfad}: ${offen} offene Punkte → ein Satz mit Anfrage-Link`, ok, satz || `${saetze.length} Sätze`);
+    for (const [art, html] of [['Produktion', produktion.get(pfad) ?? ''], ['Vorschau', vorschauSeiten.get(pfad) ?? '']]) {
+      const saetze = [...html.matchAll(/<p\b[^>]*\sdata-auf-anfrage\b[^>]*>([\s\S]*?)<\/p>/g)];
+      const satz = saetze.length === 1 ? klartext(saetze[0][1]) : '';
+      const ok =
+        saetze.length === 1 &&
+        /^[A-ZÄÖÜ].+ stimmen wir individuell mit Ihnen ab — sprechen Sie uns an\.$/.test(satz) &&
+        !/\s[.,;:]|\s{2}/.test(satz) &&
+        saetze[0][1].includes(`href="/anfrage/?anlass=${slug}"`) &&
+        zaehle(html, 'data-platzhalter="inhalt"') === 0;
+      pruefe(`${art} ${pfad}: „auf Anfrage“ als ein Satz mit Anfrage-Link, keine Kästen`, ok, satz || `${saetze.length} Sätze`);
+    }
   }
   {
     const { ctx: p } = await kontext(haupt, { viewport: GROESSEN[1440], reducedMotion: 'reduce' });

@@ -76,7 +76,7 @@ function initKopf() {
   const setze = (offen: boolean, fokusZurueck = true) => {
     menue.hidden = !offen;
     knopf.setAttribute('aria-expanded', String(offen));
-    knopf.querySelector('.menue-text')!.textContent = offen ? 'Schließen' : 'Menü';
+    knopf.querySelector('.menue-text')!.textContent = offen ? (knopf.dataset.textZu ?? 'Schließen') : (knopf.dataset.textAuf ?? 'Menü');
     kopf.classList.toggle('menue-offen', offen);
     document.documentElement.style.overflow = offen ? 'hidden' : '';
     draussen().forEach((el) => (el.inert = offen));

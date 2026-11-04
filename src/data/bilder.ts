@@ -146,3 +146,13 @@ export const GALERIE_ABSCHNITTE: { id: string; titel: string; text: string; foto
 ];
 
 export const ANZAHL_FOTOS = GALERIE_ABSCHNITTE.reduce((n, a) => n + a.fotos.length, 0);
+
+/**
+ * Foto per Schlüssel — für Inhalte in Markdown-Frontmatter (Ratgeber):
+ * Dateiname ohne Endung aus dem Katalog oder 'drohne-2024' / 'sandtorhafen-2017'.
+ */
+export function fotoPerSchluessel(schluessel: string): Foto {
+  if (schluessel === 'drohne-2024') return FOTO_DROHNE_2024;
+  if (schluessel === 'sandtorhafen-2017') return FOTO_SANDTORHAFEN_2017;
+  return foto(schluessel);
+}

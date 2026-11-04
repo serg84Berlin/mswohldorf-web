@@ -11,14 +11,17 @@ import Symbol from './Symbol.astro';
 interface Props {
   variante?: 'messing' | 'dunkel' | 'geist';
   text?: string;
+  sprache?: 'de' | 'en';
   class?: string;
 }
-const { variante = 'dunkel', text = 'Exposé herunterladen', class: klasse = '' } = Astro.props;
+const { variante = 'dunkel', sprache = 'de', class: klasse = '' } = Astro.props;
+const en = sprache === 'en';
+const text = Astro.props.text ?? (en ? 'Download exposé' : 'Exposé herunterladen');
 
 let groesse = '';
 try {
   const bytes = statSync(join(process.cwd(), EXPOSE.datei)).size;
-  groesse = `${(bytes / 1024 / 1024).toLocaleString('de-DE', { maximumFractionDigits: 1, minimumFractionDigits: 1 })} MB`;
+  groesse = `${(bytes / 1024 / 1024).toLocaleString(en ? 'en-GB' : 'de-DE', { maximumFractionDigits: 1, minimumFractionDigits: 1 })} MB`;
 } catch {
   /* PDF noch nicht erzeugt */
 }
@@ -27,5 +30,5 @@ try {
 <a href={EXPOSE.pfad} download class:list={['knopf', `knopf-${variante}`, klasse]} data-expose-knopf>
   <Symbol name="dokument" />
   <span>{text}</span>
-  <span class="text-[0.85em] font-medium">(PDF{groesse && `, ${groesse}`})</span>
+  <span class="text-[0.85em] font-medium">(PDF{en && ', German'}{groesse && `, ${groesse}`})</span>
 </a>

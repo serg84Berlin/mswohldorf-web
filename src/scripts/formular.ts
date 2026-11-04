@@ -68,6 +68,8 @@ export interface AnfrageDaten {
   herkunft?: Herkunft;
 }
 
+import { FORMULAR_TEXTE, type Sprache } from '../data/formular-texte';
+
 const MAX_GAESTE = 35;
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const DATUM = /^\d{4}-\d{2}-\d{2}$/;
@@ -93,6 +95,8 @@ document.querySelectorAll<HTMLFormElement>('form[data-anfrage]').forEach((form) 
   const erfolg = document.querySelector<HTMLElement>(`[data-erfolg="${form.id}"]`);
   const geladen = form.querySelector<HTMLInputElement>('[data-geladen]')!;
   const schnell = form.dataset.art === 'schnell';
+  const sprache: Sprache = form.dataset.sprache === 'en' ? 'en' : 'de';
+  const T = FORMULAR_TEXTE[sprache].f;
   const erweitert = form.dataset.erweitert === '1';
   const sendenStandard = sendenText.textContent ?? 'Anfrage senden';
   const feld = <T extends HTMLElement = HTMLInputElement>(name: string) => form.elements.namedItem(name) as T | null;
@@ -119,34 +123,34 @@ document.querySelectorAll<HTMLFormElement>('form[data-anfrage]').forEach((form) 
 
   /* ---------- Prüfen ---------- */
   const regeln: Record<string, () => string | null> = {
-    anlass: () => (feld<HTMLSelectElement>('anlass')?.value ? null : 'Bitte wählen Sie einen Anlass.'),
+    anlass: () => (feld<HTMLSelectElement>('anlass')?.value ? null : T.anlass),
     gaeste: () => {
       const v = feld('gaeste')?.value.trim() ?? '';
       if (!v) return null;
       const n = Number(v);
-      return Number.isInteger(n) && n >= 1 && n <= MAX_GAESTE ? null : `Bitte geben Sie eine Gästezahl zwischen 1 und ${MAX_GAESTE} an.`;
+      return Number.isInteger(n) && n >= 1 && n <= MAX_GAESTE ? null : T.gaeste(MAX_GAESTE);
     },
     datum: () => {
       const v = feld('datum')?.value ?? '';
       if (!v) return null;
-      if (!DATUM.test(v)) return 'Bitte geben Sie das Datum vollständig an.';
-      return v < min ? 'Bitte wählen Sie ein Datum ab heute.' : null;
+      if (!DATUM.test(v)) return T.datumVoll;
+      return v < min ? T.datumHeute : null;
     },
     ausweichdatum: () => {
       const v = feld('ausweichdatum')?.value ?? '';
       if (!v) return null;
-      if (!DATUM.test(v)) return 'Bitte geben Sie das Ausweichdatum vollständig an.';
-      return v < min ? 'Bitte wählen Sie ein Ausweichdatum ab heute.' : null;
+      if (!DATUM.test(v)) return T.ausweichVoll;
+      return v < min ? T.ausweichHeute : null;
     },
-    name: () => ((feld('name')?.value.trim().length ?? 0) >= 2 ? null : 'Bitte geben Sie Ihren Namen an.'),
-    email: () => (EMAIL.test(feld('email')?.value.trim() ?? '') ? null : 'Bitte geben Sie eine gültige E-Mail-Adresse an, z. B. name@beispiel.de.'),
+    name: () => ((feld('name')?.value.trim().length ?? 0) >= 2 ? null : T.name),
+    email: () => (EMAIL.test(feld('email')?.value.trim() ?? '') ? null : T.email),
     telefon: () => {
       const v = feld('telefon')?.value.trim() ?? '';
       if (!v) return null;
-      return /^[+()\d\s/.-]{6,}$/.test(v) && (v.match(/\d/g)?.length ?? 0) >= 6 ? null : 'Bitte prüfen Sie die Telefonnummer (nur Ziffern, Leerzeichen, + / - ( )).';
+      return /^[+()\d\s/.-]{6,}$/.test(v) && (v.match(/\d/g)?.length ?? 0) >= 6 ? null : T.telefon;
     },
-    nachricht: () => ((feld<HTMLTextAreaElement>('nachricht')?.value.trim().length ?? 0) >= 10 ? null : 'Bitte schreiben Sie uns kurz, was Sie planen (mindestens 10 Zeichen).'),
-    einwilligung: () => (feld('einwilligung')?.checked ? null : 'Bitte stimmen Sie der Verarbeitung Ihrer Angaben zu.'),
+    nachricht: () => ((feld<HTMLTextAreaElement>('nachricht')?.value.trim().length ?? 0) >= 10 ? null : T.nachricht),
+    einwilligung: () => (feld('einwilligung')?.checked ? null : T.einwilligung),
   };
 
   const zeigeFehler = (name: string, satz: string | null) => {
@@ -222,7 +226,7 @@ document.querySelectorAll<HTMLFormElement>('form[data-anfrage]').forEach((form) 
     // Schnellanfrage: Nachricht aus der Vorlage, plus optionale Ergänzung
     const zusatz = text('zusatz');
     const nachricht = schnell
-      ? `Schnellanfrage über die Website (${location.pathname}): Bitte senden Sie mir Verfügbarkeit und ein Angebot.${zusatz ? `\n\n${zusatz}` : ''}`
+      ? `Schnellanfrage über die Website (${location.pathname}): Bitte senden Sie mir Verfügbarkeit und ein Angebot.${sprache === 'en' ? ' [Englische Seite — bitte auf Englisch antworten.]' : ''}${zusatz ? `\n\n${zusatz}` : ''}`
       : text('nachricht');
     const d: AnfrageDaten = {
       quelle: 'mswohldorf',
@@ -265,12 +269,12 @@ document.querySelectorAll<HTMLFormElement>('form[data-anfrage]').forEach((form) 
   };
 
   const ersatz = (d: AnfrageDaten) =>
-    `<a href="${escape(mailLink(d))}">Anfrage per E-Mail senden</a> (öffnet Ihr Mailprogramm mit Ihren Angaben) oder direkt an <a href="mailto:${escape(mail)}">${escape(mail)}</a>.`;
+    `<a href="${escape(mailLink(d))}">${T.mailSenden}</a> ${T.mailOeffnet} <a href="mailto:${escape(mail)}">${escape(mail)}</a>.`;
 
   const beschaeftigt = (an: boolean) => {
     senden.disabled = an;
     senden.setAttribute('aria-busy', String(an));
-    sendenText.textContent = an ? 'Wird gesendet …' : sendenStandard;
+    sendenText.textContent = an ? T.wirdGesendet : sendenStandard;
   };
 
   /* ---------- Senden ---------- */
@@ -284,7 +288,7 @@ document.querySelectorAll<HTMLFormElement>('form[data-anfrage]').forEach((form) 
 
     const d = daten();
     if (!ziel) {
-      meldung(`<strong>Vorschau: Das Formular ist noch nicht verbunden.</strong> Bitte schreiben Sie an ${escape(mail)}: ${ersatz(d)}`);
+      meldung(`<strong>${T.vorschau}</strong> ${T.bitteSchreiben} ${escape(mail)}: ${ersatz(d)}`);
       return;
     }
 
@@ -319,25 +323,25 @@ document.querySelectorAll<HTMLFormElement>('form[data-anfrage]').forEach((form) 
       }
       if (antwort.status === 400) {
         if (inhalt.fehler === 'feld' && inhalt.feld && feld(inhalt.feld)) {
-          const satz = inhalt.satz || 'Bitte prüfen Sie dieses Feld.';
+          const satz = inhalt.satz || T.feld;
           zeigeFehler(inhalt.feld, satz);
           zeigeListe([[inhalt.feld, satz]]);
         } else {
-          meldung('Bitte prüfen Sie Ihre Angaben und senden Sie die Anfrage noch einmal.');
+          meldung(T.pruefen);
         }
         return;
       }
       if (antwort.status === 429) {
-        meldung(`Gerade kommen sehr viele Anfragen auf einmal. Bitte versuchen Sie es in ein paar Minuten noch einmal — oder ${ersatz(d)}`);
+        meldung(`${T.zuViele} ${ersatz(d)}`);
         return;
       }
       if (antwort.status === 503) {
-        meldung(`Das Formular ist im Moment abgeschaltet. Bitte schreiben Sie uns direkt: ${ersatz(d)}`);
+        meldung(`${T.aus} ${ersatz(d)}`);
         return;
       }
-      meldung(`Das hat leider nicht geklappt (Fehler ${antwort.status}). Bitte versuchen Sie es später noch einmal — oder ${ersatz(d)}`);
+      meldung(`${T.fehler(antwort.status)} ${ersatz(d)}`);
     } catch {
-      meldung(`Wir konnten den Server gerade nicht erreichen. Bitte prüfen Sie Ihre Internetverbindung und versuchen Sie es erneut — oder ${ersatz(d)}`);
+      meldung(`${T.netz} ${ersatz(d)}`);
     } finally {
       clearTimeout(uhr);
       beschaeftigt(false);

@@ -1,0 +1,255 @@
+---
+/**
+ * Ratgeber-Artikel. Inhalt: src/content/ratgeber/<slug>.md (nur belegte
+ * Angaben, Quellen im Frontmatter). Strukturierte Daten: BlogPosting + Brotkrumen.
+ */
+import type { GetStaticPaths } from 'astro';
+import { getImage } from 'astro:assets';
+import { render } from 'astro:content';
+import Basis from '../../layouts/Basis.astro';
+import SeitenKopf from '../../components/SeitenKopf.astro';
+import GalerieRaster from '../../components/GalerieRaster.astro';
+import Lightbox from '../../components/Lightbox.astro';
+import LeadBlock from '../../components/LeadBlock.astro';
+import RatgeberKarte from '../../components/RatgeberKarte.astro';
+import Symbol from '../../components/Symbol.astro';
+import Welle from '../../components/Welle.astro';
+import { ratgeberArtikel, datumIso, datumLang, type Artikel } from '../../lib/ratgeber';
+import { fotoPerSchluessel } from '../../data/bilder';
+import { BETREIBER, SEITE } from '../../config';
+
+export const getStaticPaths = (async () => {
+  const alle = await ratgeberArtikel();
+  return alle.map((a) => ({ params: { slug: a.id }, props: { artikel: a, weitere: alle.filter((b) => b.id !== a.id).slice(0, 2) } }));
+}) satisfies GetStaticPaths;
+
+interface Props {
+  artikel: Artikel;
+  weitere: Artikel[];
+}
+const { artikel: a, weitere } = Astro.props;
+const { Content, headings } = await render(a);
+const titelfoto = fotoPerSchluessel(a.data.titelfoto);
+const fotos = a.data.fotos.map(fotoPerSchluessel);
+const abschnitte = headings.filter((h) => h.depth === 2);
+const woerter = (a.body ?? '').split(/\s+/).filter(Boolean).length;
+const lesezeit = Math.max(1, Math.round(woerter / 200));
+const url = `${SEITE.url}/ratgeber/${a.id}/`;
+const bildUrl = new URL((await getImage({ src: titelfoto.bild, width: 1200, height: 675, fit: 'cover', format: 'jpg' })).src, SEITE.url).href;
+
+const beitrag = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  '@id': `${url}#artikel`,
+  headline: a.data.titel,
+  description: a.data.beschreibung,
+  url,
+  mainEntityOfPage: url,
+  image: bildUrl,
+  inLanguage: 'de-DE',
+  datePublished: datumIso(a.data.veroeffentlicht),
+  dateModified: datumIso(a.data.aktualisiert ?? a.data.veroeffentlicht),
+  wordCount: woerter,
+  articleSection: a.data.thema,
+  author: { '@type': 'Organization', name: SEITE.name, url: `${SEITE.url}/` },
+  publisher: { '@type': 'Organization', name: BETREIBER.firma },
+  about: { '@id': `${SEITE.url}/#schiff` },
+  isPartOf: { '@id': `${SEITE.url}/ratgeber/#blog` },
+  citation: a.data.quellen.filter((q) => q.url).map((q) => q.url),
+};
+const brotkrumen = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Start', item: `${SEITE.url}/` },
+    { '@type': 'ListItem', position: 2, name: 'Ratgeber', item: `${SEITE.url}/ratgeber/` },
+    { '@type': 'ListItem', position: 3, name: a.data.titel, item: url },
+  ],
+};
+---
+
+<Basis titel={a.data.titel} beschreibung={a.data.beschreibung} bild={titelfoto.bild} strukturiert={[beitrag, brotkrumen]} fussVon="var(--color-sand-hell)">
+  <SeitenKopf eyebrow={`Ratgeber · ${a.data.thema}`} titel={a.data.titel} lead={a.data.beschreibung} bild={titelfoto.bild} bildAlt={titelfoto.alt}>
+    <p class="mt-6 flex flex-wrap gap-x-4 gap-y-1 text-sm text-nebel" data-reveal>
+      <span>{SEITE.name}</span>
+      <span aria-hidden="true">·</span>
+      <time datetime={datumIso(a.data.veroeffentlicht)}>{datumLang(a.data.veroeffentlicht)}</time>
+      {
+        a.data.aktualisiert && (
+          <>
+            <span aria-hidden="true">·</span>
+            <span>
+              aktualisiert am <time datetime={datumIso(a.data.aktualisiert)}>{datumLang(a.data.aktualisiert)}</time>
+            </span>
+          </>
+        )
+      }
+      <span aria-hidden="true">·</span>
+      <span>{lesezeit} Min. Lesezeit</span>
+    </p>
+  </SeitenKopf>
+
+  <section class="bg-schaum" aria-label="Artikel">
+    <div class="seite-breite grid gap-12 py-12 lg:grid-cols-[minmax(0,1fr)_16rem] lg:gap-16 lg:py-16">
+      <div class="max-w-3xl">
+        {
+          a.data.entwurf && (
+            <p class="entwurf-hinweis" role="note" data-ratgeber-entwurf>
+              <Symbol name="hinweis" class="size-5 shrink-0" />
+              <span>
+                <strong>Entwurf</strong> — nur in der Vorschau sichtbar. Zum Veröffentlichen im Frontmatter <code>entwurf: false</code> setzen.
+              </span>
+            </p>
+          )
+        }
+        <div class="fliesstext artikel">
+          <Content />
+        </div>
+
+        <aside class="quellen mt-12" aria-labelledby="quellen-titel">
+          <h2 id="quellen-titel" class="font-display text-xl text-tiefe">Quellen</h2>
+          <ul class="mt-3 grid gap-2 text-sm text-grau">
+            {
+              a.data.quellen.map((q) => (
+                <li>
+                  {q.url ? (
+                    <a class="textlink" href={q.url} target={q.url.startsWith(SEITE.url) ? undefined : '_blank'} rel="noopener">
+                      {q.titel}
+                    </a>
+                  ) : (
+                    q.titel
+                  )}
+                </li>
+              ))
+            }
+          </ul>
+        </aside>
+      </div>
+
+      {
+        abschnitte.length > 1 && (
+          <nav class="inhalt hidden lg:block" aria-label="Inhalt des Artikels">
+            <p class="eyebrow">Inhalt</p>
+            <ol class="mt-3 grid gap-2 text-sm">
+              {abschnitte.map((h) => (
+                <li>
+                  <a class="hover:text-petrol" href={`#${h.slug}`}>
+                    {h.text}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+        )
+      }
+    </div>
+  </section>
+
+  <Welle von="var(--color-schaum)" nach="var(--color-sand-hell)" />
+
+  <section class="bg-sand-hell" aria-labelledby="bilder-titel">
+    <div class="seite-breite py-14 lg:py-20">
+      {
+        fotos.length > 0 && (
+          <>
+            <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between" data-reveal>
+              <h2 id="bilder-titel" class="titel-mittel text-tiefe">Bilder zum Artikel</h2>
+              <a href="/galerie/" class="textlink font-semibold">Alle Fotos ansehen</a>
+            </div>
+            <GalerieRaster fotos={fotos} class="mt-10" sammlung={`ratgeber-${a.id}`} />
+          </>
+        )
+      }
+
+      <div class="mt-16">
+        <LeadBlock id={`schnell-ratgeber-${a.id}`} titel="Alle Infos zur MS Wohldorf — im Exposé." vorauswahl={a.data.anlass} />
+      </div>
+
+      {
+        weitere.length > 0 && (
+          <div class="mt-16">
+            <h2 class="titel-mittel text-tiefe" data-reveal>
+              Weiterlesen
+            </h2>
+            <div class="mt-8 grid gap-6 md:grid-cols-2" data-reveal-gruppe>
+              {weitere.map((w) => (
+                <RatgeberKarte artikel={w} ebene="h3" />
+              ))}
+            </div>
+          </div>
+        )
+      }
+    </div>
+  </section>
+
+  <Lightbox />
+</Basis>
+
+<style>
+  .bg-schaum {
+    background: var(--color-schaum);
+  }
+  .bg-sand-hell {
+    background: var(--color-sand-hell);
+  }
+  .artikel {
+    font-size: 1.075rem;
+    line-height: 1.75;
+    color: var(--color-tinte);
+  }
+  .artikel > :global(p:first-child) {
+    font-size: 1.2rem;
+    line-height: 1.65;
+    color: var(--color-tiefe);
+  }
+  .artikel :global(h2) {
+    scroll-margin-top: 6rem;
+  }
+  .artikel :global(ol) {
+    list-style: decimal;
+    padding-left: 1.4rem;
+  }
+  .artikel :global(li + li) {
+    margin-top: 0.45em;
+  }
+  .artikel :global(li::marker) {
+    color: var(--color-messing-dunkel);
+    font-weight: 650;
+  }
+  .artikel :global(blockquote) {
+    margin: 1.6em 0;
+    padding: 1.1rem 1.3rem;
+    border-left: 4px solid var(--color-messing);
+    border-radius: 0 1rem 1rem 0;
+    background: #fff;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    line-height: 1.5;
+    color: var(--color-tiefe);
+  }
+  .inhalt {
+    position: sticky;
+    top: 6.5rem;
+    align-self: start;
+    padding: 1.2rem 1.25rem;
+    border-radius: 1.1rem;
+    background: var(--color-sand-hell);
+    border: 1px solid rgb(11 26 42 / 0.07);
+    color: var(--color-grau);
+  }
+  .quellen {
+    padding-top: 1.5rem;
+    border-top: 1px solid rgb(11 26 42 / 0.12);
+  }
+  .entwurf-hinweis {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    padding: 0.9rem 1.1rem;
+    border-radius: 0.9rem;
+    border: 2px dashed #b4541a;
+    background: #fff4e8;
+    color: #6b2c05;
+  }
+</style>
