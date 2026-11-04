@@ -5,6 +5,8 @@
  *   PUBLIC_VORSCHAU=1 PUBLIC_ANFRAGE_URL=https://anfrage.example.test/v1/anfrage \
  *     npx astro build --outDir dist-test                → dist-test/ (Formular verbunden)
  *   PUBLIC_VORSCHAU=1 npx astro build --outDir dist-vorschau
+ *   PUBLIC_VORSCHAU=1 PUBLIC_ANFRAGE_URL=https://anfrage.example.test/v1/anfrage PUBLIC_ANFRAGE_ERWEITERT=1 \
+ *     npx astro build --outDir dist-erweitert           → dist-erweitert/ (Lead-Quelle an)
  *   npm run pruefen
  *
  * `npm run build` endet mit „LIVEGANG GESPERRT“, solange rechtliche Angaben
@@ -14,6 +16,7 @@
  * Prüft: Konsolenfehler, keine externen Anfragen beim Laden (Abfangen aller
  * Requests), Lightbox per Tastatur, reduzierte Bewegung, Formular (Vorschau,
  * Prüfung, 202/400/429/503/Netzfehler mit gemockter Antwort, JSON-Vertrag),
+ * Schnellanfrage + Erstantwort-Hinweis, Lead-Quelle (erweitert), Exposé-PDF,
  * Barrierefreiheit (axe-core, WCAG 2.2 AA), Seitengewicht von „/",
  * Platzhalter (Vorschau: Kästen; Produktion: neutraler Text) und die
  * Livegang-Sperre (eigenes kleines Prüfprojekt tests/livegang-sperre/).
@@ -399,6 +402,7 @@ async function fuelle(seite, id) {
         typeof g.dauerMs === 'number' &&
         g.dauerMs > 0;
       pruefe('Formular verbunden: JSON entspricht dem Vertrag', vertrag && kopf?.startsWith('application/json'), JSON.stringify(g));
+      pruefe('Erfolg ohne „erstantwort“: kein Hinweis auf automatische E-Mail, aber Exposé/Anruf/Rundgang angeboten', !(await seite.isVisible('[data-erfolg="anfrage-seite"] [data-erstantwort-hinweis]')) && (await seite.isVisible('[data-erfolg="anfrage-seite"] a[href="/pdf/ms-wohldorf-expose.pdf"]')) && (await seite.isVisible('[data-erfolg="anfrage-seite"] a[href^="tel:"]')));
       bericht.beispielAnfrage = g;
       await seite.screenshot({ path: join(BILDER, 'formular-erfolg-1440.png') });
     }
@@ -427,6 +431,100 @@ async function fuelle(seite, id) {
   const g = gesendet ?? {};
   pruefe('Kompaktformular (Start): leere Felder werden null', g.datum === null && g.ausweichdatum === null && g.gaeste === null && g.telefon === null && g.anlass === 'Sonstiges', JSON.stringify(g));
   await ctx.close();
+}
+
+/* ------------------------------------------------------------------
+   6b. Schnellanfrage + automatische Erstantwort (gleicher Vertrag)
+   ------------------------------------------------------------------ */
+{
+  const { ctx, extern, fehler } = await kontext(verbunden, { viewport: GROESSEN[390] }, { erlaubt: [ANFRAGE_TEST_URL] });
+  let gesendet = null;
+  await ctx.route(ANFRAGE_TEST_URL, (route) => {
+    if (route.request().method() === 'OPTIONS') return route.fulfill({ status: 204, headers: { 'access-control-allow-origin': '*', 'access-control-allow-headers': 'content-type', 'access-control-allow-methods': 'POST' } });
+    gesendet = JSON.parse(route.request().postData() ?? 'null');
+    return route.fulfill({ status: 202, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: '{"ok":true,"erstantwort":true}' });
+  });
+  const seite = await ctx.newPage();
+  await seite.goto(verbunden.url + '/offsite-hamburg/', { waitUntil: 'networkidle' });
+  const id = 'schnell-offsite';
+  pruefe('Schnellanfrage (Offsite): Anlass vorausgewählt, kein Nachrichten-Pflichtfeld', (await seite.inputValue(`#${id}-anlass`)) === 'Workshop/Seminar' && (await seite.locator(`#${id} [name="nachricht"]`).count()) === 0);
+  await seite.click(`#${id} [data-senden]`);
+  const fehlerZahl = await seite.locator(`#${id} [aria-invalid="true"]`).count();
+  pruefe('Schnellanfrage: Prüfung greift (Name, E-Mail, Einwilligung)', fehlerZahl === 3, String(fehlerZahl));
+  await seite.fill(`#${id}-gaeste`, '18');
+  await seite.fill(`#${id}-datum`, '2027-03-04');
+  await seite.fill(`#${id}-name`, 'Team Lead Berlin');
+  await seite.fill(`#${id}-email`, 'team@example.org');
+  await seite.check(`#${id}-einwilligung`);
+  await seite.click(`#${id} [data-senden]`);
+  await seite.waitForTimeout(800);
+  const g = gesendet ?? {};
+  const schluessel = ['quelle', 'anlass', 'datum', 'ausweichdatum', 'gaeste', 'name', 'email', 'telefon', 'nachricht', 'einwilligung', 'website', 'dauerMs'];
+  pruefe(
+    'Schnellanfrage: gleicher JSON-Vertrag, Nachricht aus der Vorlage',
+    JSON.stringify(Object.keys(g).sort()) === JSON.stringify([...schluessel].sort()) && g.anlass === 'Workshop/Seminar' && g.gaeste === 18 && g.datum === '2027-03-04' && g.telefon === null && g.ausweichdatum === null && typeof g.nachricht === 'string' && g.nachricht.startsWith('Schnellanfrage über die Website (/offsite-hamburg/)'),
+    JSON.stringify(g),
+  );
+  pruefe('Erfolg mit „erstantwort: true“: E-Mail wird angekündigt', await seite.isVisible(`[data-erfolg="${id}"] [data-erstantwort-hinweis]`));
+  pruefe('Schnellanfrage: keine externen Anfragen außer dem Anfrage-Ziel, keine Skriptfehler', extern.length === 0 && fehler.length === 0, [...extern, ...fehler].join(' | '));
+  await seite.screenshot({ path: join(BILDER, 'schnellanfrage-erfolg-390.png') });
+  await ctx.close();
+}
+
+/* ------------------------------------------------------------------
+   6c. Lead-Quelle (nur mit PUBLIC_ANFRAGE_ERWEITERT=1 → dist-erweitert/)
+   ------------------------------------------------------------------ */
+{
+  const erweitert = await starteServer({ ordner: join(PROJEKT, 'dist-erweitert'), port: 4403 });
+  const { ctx } = await kontext(erweitert, { viewport: GROESSEN[1440] }, { erlaubt: [ANFRAGE_TEST_URL] });
+  let gesendet = null;
+  await ctx.route(ANFRAGE_TEST_URL, (route) => {
+    if (route.request().method() === 'OPTIONS') return route.fulfill({ status: 204, headers: { 'access-control-allow-origin': '*', 'access-control-allow-headers': 'content-type', 'access-control-allow-methods': 'POST' } });
+    gesendet = JSON.parse(route.request().postData() ?? 'null');
+    return route.fulfill({ status: 202, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: '{"ok":true}' });
+  });
+  const seite = await ctx.newPage();
+  await seite.goto(erweitert.url + '/', { waitUntil: 'networkidle' });
+  await seite.goto(erweitert.url + '/offsite-hamburg/?utm_source=linkedin&utm_campaign=offsite-berlin', { waitUntil: 'networkidle', referer: erweitert.url + '/' });
+  const id = 'schnell-offsite';
+  await seite.fill(`#${id}-name`, 'Team Lead Berlin');
+  await seite.fill(`#${id}-email`, 'team@example.org');
+  await seite.check(`#${id}-einwilligung`);
+  await seite.click(`#${id} [data-senden]`);
+  await seite.waitForTimeout(800);
+  const g = gesendet ?? {};
+  const h = g.herkunft ?? {};
+  pruefe(
+    'Lead-Quelle (erweitert): art + herkunft mit Seite, vorheriger Seite und utm',
+    g.art === 'schnell' && h.seite === '/offsite-hamburg/' && h.zuvor === '/' && h.extern === null && h.utm?.source === 'linkedin' && h.utm?.campaign === 'offsite-berlin',
+    JSON.stringify({ art: g.art, herkunft: h }),
+  );
+  const speicher = await seite.evaluate(() => ({ lokal: localStorage.length, sitzung: sessionStorage.length, kekse: document.cookie }));
+  pruefe('Lead-Quelle: nichts auf dem Gerät gespeichert', speicher.lokal === 0 && speicher.sitzung === 0 && speicher.kekse === '', JSON.stringify(speicher));
+  await seite.goto(erweitert.url + '/datenschutz/', { waitUntil: 'networkidle' });
+  pruefe('Lead-Quelle: Absatz in der Datenschutzerklärung (nur erweitert)', (await seite.textContent('main')).includes('wie Sie auf uns aufmerksam geworden sind'));
+  await ctx.close();
+  await erweitert.schliesse();
+  const normal = await readFile(join(PROJEKT, 'dist/datenschutz/index.html'), 'utf8');
+  pruefe('Ohne Schalter: kein Lead-Quellen-Absatz in der Datenschutzerklärung', !normal.includes('wie Sie auf uns aufmerksam geworden sind'));
+}
+
+/* ------------------------------------------------------------------
+   6d. Exposé (Lead-Magnet)
+   ------------------------------------------------------------------ */
+{
+  const pdf = await readFile(join(PROJEKT, 'dist/pdf/ms-wohldorf-expose.pdf'));
+  const seiten = (pdf.toString('latin1').match(/\/Type\s*\/Page[^s]/g) ?? []).length;
+  pruefe('Exposé: PDF in dist/, 4 Seiten, unter 3 MB', pdf.subarray(0, 5).toString() === '%PDF-' && seiten === 4 && pdf.length < 3 * 1024 * 1024, `${seiten} Seiten, ${(pdf.length / 1024 / 1024).toFixed(1)} MB`);
+  const druck = await readFile(join(PROJEKT, 'dist/expose/index.html'), 'utf8');
+  const karte = await readFile(join(PROJEKT, 'dist/sitemap-0.xml'), 'utf8');
+  pruefe('Exposé-Druckseite: noindex, nicht in der Sitemap, keine Skripte', druck.includes('noindex') && !karte.includes('/expose/') && !druck.includes('<script'));
+  const mitKnopf = [];
+  for (const pfad of ['/', '/anfrage/', '/haeufige-fragen/', '/offsite-hamburg/', '/anlaesse/firmenevent/']) {
+    const html = await readFile(join(PROJEKT, 'dist', pfad, 'index.html'), 'utf8');
+    if (html.includes('href="/pdf/ms-wohldorf-expose.pdf"') && html.includes('data-expose-knopf')) mitKnopf.push(pfad);
+  }
+  pruefe('Exposé-Download auf Start, Anfrage, Fragen, Offsite und Anlass-Seiten', mitKnopf.length === 5, mitKnopf.join(', '));
 }
 
 /* ------------------------------------------------------------------
@@ -532,7 +630,8 @@ for (const [breite, viewport] of Object.entries(GROESSEN)) {
   const sammle = async (o) => {
     for (const e of await readdir(o, { withFileTypes: true })) {
       if (e.isDirectory()) await sammle(join(o, e.name));
-      else if (e.name.endsWith('.html')) vorschau.push(await readFile(join(o, e.name), 'utf8'));
+      // Die Exposé-Druckseite ist nur Vorlage fürs PDF (immer noindex, ohne Band)
+      else if (e.name.endsWith('.html') && !join(o, e.name).includes(`${'/'}expose${'/'}`)) vorschau.push(await readFile(join(o, e.name), 'utf8'));
     }
   };
   await sammle(join(PROJEKT, 'dist-vorschau'));

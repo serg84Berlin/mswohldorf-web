@@ -1,0 +1,31 @@
+---
+/**
+ * Download-Knopf fürs Exposé (PDF, ohne E-Mail-Pflicht). Die Dateigröße wird
+ * beim Bauen gelesen; fehlt das PDF noch (`npm run expose`), steht keine Größe da.
+ */
+import { statSync } from 'node:fs';
+import { join } from 'node:path';
+import { EXPOSE } from '../config';
+import Symbol from './Symbol.astro';
+
+interface Props {
+  variante?: 'messing' | 'dunkel' | 'geist';
+  text?: string;
+  class?: string;
+}
+const { variante = 'dunkel', text = 'Exposé herunterladen', class: klasse = '' } = Astro.props;
+
+let groesse = '';
+try {
+  const bytes = statSync(join(process.cwd(), EXPOSE.datei)).size;
+  groesse = `${(bytes / 1024 / 1024).toLocaleString('de-DE', { maximumFractionDigits: 1, minimumFractionDigits: 1 })} MB`;
+} catch {
+  /* PDF noch nicht erzeugt */
+}
+---
+
+<a href={EXPOSE.pfad} download class:list={['knopf', `knopf-${variante}`, klasse]} data-expose-knopf>
+  <Symbol name="dokument" />
+  <span>{text}</span>
+  <span class="text-[0.85em] font-medium">(PDF{groesse && `, ${groesse}`})</span>
+</a>

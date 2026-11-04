@@ -13,7 +13,7 @@
 import Basis from '../layouts/Basis.astro';
 import SeitenKopf from '../components/SeitenKopf.astro';
 import EntwurfHinweis from '../components/EntwurfHinweis.astro';
-import { BETREIBER, ENTWURF_HINWEIS_ANZEIGEN, KONTAKT } from '../config';
+import { ANFRAGE_ERWEITERT, BETREIBER, ENTWURF_HINWEIS_ANZEIGEN, KONTAKT } from '../config';
 
 const k = BETREIBER.komplementaerin;
 ---
@@ -93,6 +93,18 @@ const k = BETREIBER.komplementaerin;
           lit. a DSGVO), die Sie jederzeit mit Wirkung für die Zukunft widerrufen können. Die Spam-Prüfung beruht auf unserem berechtigten
           Interesse an einem missbrauchsfreien Formular (Art. 6 Abs. 1 lit. f DSGVO).
         </p>
+        {
+          ANFRAGE_ERWEITERT && (
+            <p>
+              Mit Ihrer Anfrage übermitteln wir außerdem, wie Sie auf uns aufmerksam geworden sind: die Seite, auf der Sie das Formular
+              abschicken, die zuvor besuchte Seite unserer Website, die Domain einer verweisenden Website (z. B. einer Suchmaschine) und
+              gegebenenfalls Kampagnen-Kennzeichen in der Adresse (utm-Parameter). Dafür wird nichts auf Ihrem Gerät gespeichert; die Angaben
+              stammen aus der aktuellen Seitenadresse und der Herkunftsangabe Ihres Browsers. Zweck ist, unser Angebot dort bekannt zu machen,
+              wo es gesucht wird. Rechtsgrundlage ist unser berechtigtes Interesse (Art. 6 Abs. 1 lit. f DSGVO); gespeichert und gelöscht
+              werden die Angaben zusammen mit Ihrer Anfrage.
+            </p>
+          )
+        }
         <p>
           Wir löschen Ihre Angaben, wenn Ihre Anfrage erledigt ist und keine gesetzlichen Aufbewahrungspflichten (z. B. nach Handels- und
           Steuerrecht bei einer Buchung) entgegenstehen. Anfragen, aus denen keine Buchung wird, löschen wir spätestens 30 Tage nach dem

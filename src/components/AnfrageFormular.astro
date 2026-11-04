@@ -3,8 +3,13 @@
  * Anfrageformular. Sendet JSON an PUBLIC_ANFRAGE_URL (Vertrag: README →
  * „Anfrage-Schnittstelle“). Ohne URL: Vorschau-Hinweis + Mail-Link.
  * Ohne JavaScript: Der Browser öffnet das Mailprogramm (mailto-Formular).
+ *
+ * Varianten: voll (Anfrage-Seite), `kompakt` (Startseite, Weiteres zugeklappt),
+ * `schnell` (Schnellanfrage: Anlass, Datum, Gäste, Name, E-Mail — ohne
+ * Nachrichtenfeld; die Nachricht setzt das Skript aus einer Vorlage zusammen,
+ * der Server-Vertrag bleibt gleich).
  */
-import { ANFRAGE_URL, ANLAESSE_AUSWAHL, KONTAKT, FAKTEN } from '../config';
+import { ANFRAGE_URL, ANFRAGE_ERWEITERT, ANLAESSE_AUSWAHL, KONTAKT, FAKTEN, EXPOSE } from '../config';
 import type { AnlassWert } from '../data/typen';
 import Symbol from './Symbol.astro';
 
@@ -12,19 +17,25 @@ interface Props {
   /** Eindeutiges Kürzel, falls mehrere Formulare auf einer Seite stehen. */
   id?: string;
   kompakt?: boolean;
+  /** Schnellanfrage (siehe oben). */
+  schnell?: boolean;
   vorauswahl?: AnlassWert;
 }
-const { id = 'anfrage', kompakt = false, vorauswahl } = Astro.props;
+const { id = 'anfrage', kompakt: kompaktProp = false, schnell = false, vorauswahl } = Astro.props;
+const kompakt = kompaktProp || schnell;
+const knopfText = schnell ? 'Verfügbarkeit anfragen' : 'Anfrage senden';
 const f = (name: string) => `${id}-${name}`;
 const mailto = `mailto:${KONTAKT.mail}?subject=${encodeURIComponent('Anfrage MS Wohldorf')}`;
 ---
 
 <form
-  class:list={['anfrage-formular', { kompakt }]}
+  class:list={['anfrage-formular', { kompakt, schnell }]}
   id={id}
   data-anfrage
   data-ziel={ANFRAGE_URL}
   data-mail={KONTAKT.mail}
+  data-art={schnell ? 'schnell' : 'voll'}
+  data-erweitert={ANFRAGE_ERWEITERT ? '1' : undefined}
   action={mailto}
   method="post"
   enctype="text/plain"
@@ -58,7 +69,7 @@ const mailto = `mailto:${KONTAKT.mail}?subject=${encodeURIComponent('Anfrage MS 
   </div>
 
   <div class="felder">
-    <div class="feld feld-halb">
+    <div class:list={['feld', schnell ? 'feld-ganz' : 'feld-halb']}>
       <label for={f('anlass')}>Anlass <span class="pflicht" aria-hidden="true">*</span></label>
       <div class="auswahl">
         <select id={f('anlass')} name="anlass" required aria-describedby={f('anlass-fehler')}>
@@ -118,7 +129,7 @@ const mailto = `mailto:${KONTAKT.mail}?subject=${encodeURIComponent('Anfrage MS 
     }
 
     {
-      kompakt && (
+      kompakt && !schnell && (
         <details class="feld feld-ganz mehr-angaben">
           <summary>Weitere Angaben (optional): Ausweichdatum, Telefon</summary>
           <div class="felder mt-4">
@@ -141,12 +152,32 @@ const mailto = `mailto:${KONTAKT.mail}?subject=${encodeURIComponent('Anfrage MS 
       )
     }
 
-    <div class="feld feld-ganz">
-      <label for={f('nachricht')}>Ihre Nachricht <span class="pflicht" aria-hidden="true">*</span></label>
-      <textarea id={f('nachricht')} name="nachricht" rows={kompakt ? 4 : 6} required maxlength="4000" aria-describedby={`${f('nachricht-hilfe')} ${f('nachricht-fehler')}`}></textarea>
-      <p class="feld-hilfe" id={f('nachricht-hilfe')}>Was planen Sie? Uhrzeit, Ablauf, Wünsche — alles hilft uns.</p>
-      <p class="feld-fehler" id={f('nachricht-fehler')} hidden></p>
-    </div>
+    {
+      schnell && (
+        <details class="feld feld-ganz mehr-angaben">
+          <summary>Möchten Sie noch etwas ergänzen? (optional)</summary>
+          <div class="feld mt-4">
+            <label for={f('zusatz')}>Ergänzung</label>
+            <textarea id={f('zusatz')} name="zusatz" rows="3" maxlength="2000"></textarea>
+          </div>
+        </details>
+      )
+    }
+
+    {
+      !schnell && (
+        <div class="feld feld-ganz">
+          <label for={f('nachricht')}>
+            Ihre Nachricht <span class="pflicht" aria-hidden="true">*</span>
+          </label>
+          <textarea id={f('nachricht')} name="nachricht" rows={kompakt ? 4 : 6} required maxlength="4000" aria-describedby={`${f('nachricht-hilfe')} ${f('nachricht-fehler')}`} />
+          <p class="feld-hilfe" id={f('nachricht-hilfe')}>
+            Was planen Sie? Uhrzeit, Ablauf, Wünsche — alles hilft uns.
+          </p>
+          <p class="feld-fehler" id={f('nachricht-fehler')} hidden />
+        </div>
+      )
+    }
 
     <div class="feld feld-ganz">
       <div class="einwilligung">
@@ -168,7 +199,7 @@ const mailto = `mailto:${KONTAKT.mail}?subject=${encodeURIComponent('Anfrage MS 
 
   <div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
     <button type="submit" class="knopf knopf-messing" data-senden data-magnet>
-      <span data-senden-text>Anfrage senden</span>
+      <span data-senden-text>{knopfText}</span>
       <Symbol name="pfeil" />
     </button>
     <p class="text-sm opacity-80"><span class="pflicht" aria-hidden="true">*</span> Pflichtfeld</p>
@@ -180,7 +211,25 @@ const mailto = `mailto:${KONTAKT.mail}?subject=${encodeURIComponent('Anfrage MS 
 <div class="formular-erfolg" tabindex="-1" data-erfolg={id} hidden>
   <span class="erfolg-symbol" aria-hidden="true"><Symbol name="haken" class="size-8" /></span>
   <p class="font-display text-2xl">Danke! Ihre Anfrage ist angekommen.</p>
+  {/* Meldet der Server `erstantwort: true`, ist die automatische Erstantwort unterwegs (Lotse/Zoho). */}
+  <p class="mt-2" data-erstantwort-hinweis hidden>
+    In wenigen Minuten erhalten Sie eine E-Mail von uns — mit dem Exposé und den nächsten Schritten. Antworten Sie einfach darauf.
+  </p>
   <p class="mt-2">Wir melden uns persönlich bei Ihnen.</p>
+  <div class="erfolg-weiter">
+    <p class="text-sm font-semibold tracking-[0.12em] uppercase opacity-75">Bis dahin</p>
+    <ul class="mt-3 flex flex-wrap justify-center gap-3">
+      <li>
+        <a class="knopf knopf-dunkel" href={EXPOSE.pfad} download><Symbol name="dokument" /> Exposé (PDF)</a>
+      </li>
+      <li>
+        <a class="knopf knopf-geist" href={`tel:${KONTAKT.telefonLink}`}><Symbol name="telefon" /> Direkt anrufen</a>
+      </li>
+      <li>
+        <a class="knopf knopf-geist" href="/#rundgang"><Symbol name="wuerfel" /> 3D-Rundgang</a>
+      </li>
+    </ul>
+  </div>
 </div>
 
 <script>
@@ -363,6 +412,11 @@ const mailto = `mailto:${KONTAKT.mail}?subject=${encodeURIComponent('Anfrage MS 
     background: rgb(15 76 92 / 0.08);
     border: 1px solid rgb(15 76 92 / 0.3);
     text-align: center;
+  }
+  .erfolg-weiter {
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgb(15 76 92 / 0.2);
   }
   .erfolg-symbol {
     display: inline-grid;

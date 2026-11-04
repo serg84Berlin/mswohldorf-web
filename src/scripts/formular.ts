@@ -7,7 +7,48 @@
  *     telefon, nachricht, einwilligung: true, website, dauerMs }
  *   202 {ok:true} · 400 {fehler:"feld",feld,satz} · 429 {fehler:"zu_viele"}
  *   503 {fehler:"aus"} · Netzwerkfehler
+ *
+ * Erweiterungen (abwärtskompatibel):
+ *   - Antwort 202 {ok:true, erstantwort:true}: Der Server hat eine automatische
+ *     Erstantwort verschickt → die Erfolgsmeldung kündigt die E-Mail an.
+ *   - Nur mit PUBLIC_ANFRAGE_ERWEITERT=1 (form[data-erweitert]): zusätzlich
+ *     `art` ("voll" | "schnell") und `herkunft` (Lead-Quelle, siehe unten).
+ *   - Schnellanfrage (form[data-art="schnell"]) hat kein Nachrichtenfeld: Die
+ *     Nachricht entsteht aus einer Vorlage (+ optionaler Ergänzung) — gleicher Vertrag.
  */
+
+/** Lead-Quelle — nur, was die Seite ohnehin kennt; nichts wird auf dem Gerät gespeichert. */
+export interface Herkunft {
+  /** Seite, auf der das Formular abgeschickt wurde. */
+  seite: string;
+  /** Vorherige Seite auf www.mswohldorf.de (Pfad), sonst null. */
+  zuvor: string | null;
+  /** Fremde Herkunftsdomain (z. B. www.google.com), sonst null. */
+  extern: string | null;
+  /** utm_*-Parameter der aktuellen Adresse, sonst null. */
+  utm: Partial<Record<'source' | 'medium' | 'campaign' | 'term' | 'content', string>> | null;
+}
+
+export function herkunftErmitteln(adresse: string = location.href, verweis: string = document.referrer): Herkunft {
+  const url = new URL(adresse);
+  let zuvor: string | null = null;
+  let extern: string | null = null;
+  try {
+    if (verweis) {
+      const r = new URL(verweis);
+      if (r.origin === url.origin) zuvor = r.pathname;
+      else extern = r.hostname;
+    }
+  } catch {
+    /* ungültiger Verweis */
+  }
+  const utm: NonNullable<Herkunft['utm']> = {};
+  for (const k of ['source', 'medium', 'campaign', 'term', 'content'] as const) {
+    const v = url.searchParams.get(`utm_${k}`);
+    if (v) utm[k] = v.slice(0, 100);
+  }
+  return { seite: url.pathname, zuvor, extern, utm: Object.keys(utm).length ? utm : null };
+}
 
 export interface AnfrageDaten {
   quelle: 'mswohldorf';
@@ -22,6 +63,9 @@ export interface AnfrageDaten {
   einwilligung: true;
   website: string;
   dauerMs: number;
+  /** Nur mit PUBLIC_ANFRAGE_ERWEITERT=1. */
+  art?: 'voll' | 'schnell';
+  herkunft?: Herkunft;
 }
 
 const MAX_GAESTE = 35;
@@ -48,6 +92,9 @@ document.querySelectorAll<HTMLFormElement>('form[data-anfrage]').forEach((form) 
   const sendenText = form.querySelector<HTMLElement>('[data-senden-text]')!;
   const erfolg = document.querySelector<HTMLElement>(`[data-erfolg="${form.id}"]`);
   const geladen = form.querySelector<HTMLInputElement>('[data-geladen]')!;
+  const schnell = form.dataset.art === 'schnell';
+  const erweitert = form.dataset.erweitert === '1';
+  const sendenStandard = sendenText.textContent ?? 'Anfrage senden';
   const feld = <T extends HTMLElement = HTMLInputElement>(name: string) => form.elements.namedItem(name) as T | null;
 
   geladen.value = String(Date.now());
@@ -172,7 +219,12 @@ document.querySelectorAll<HTMLFormElement>('form[data-anfrage]').forEach((form) 
     const text = (n: string) => (feld<HTMLInputElement>(n)?.value ?? '').trim();
     const oderNull = (n: string) => text(n) || null;
     const start = Number(geladen.value);
-    return {
+    // Schnellanfrage: Nachricht aus der Vorlage, plus optionale Ergänzung
+    const zusatz = text('zusatz');
+    const nachricht = schnell
+      ? `Schnellanfrage über die Website (${location.pathname}): Bitte senden Sie mir Verfügbarkeit und ein Angebot.${zusatz ? `\n\n${zusatz}` : ''}`
+      : text('nachricht');
+    const d: AnfrageDaten = {
       quelle: 'mswohldorf',
       anlass: text('anlass'),
       datum: oderNull('datum'),
@@ -181,11 +233,16 @@ document.querySelectorAll<HTMLFormElement>('form[data-anfrage]').forEach((form) 
       name: text('name'),
       email: text('email'),
       telefon: oderNull('telefon'),
-      nachricht: text('nachricht'),
+      nachricht,
       einwilligung: true,
       website: feld<HTMLInputElement>('website')?.value ?? '',
       dauerMs: start ? Math.max(0, Date.now() - start) : 0,
     };
+    if (erweitert) {
+      d.art = schnell ? 'schnell' : 'voll';
+      d.herkunft = herkunftErmitteln();
+    }
+    return d;
   };
 
   const mailLink = (d: AnfrageDaten) => {
@@ -213,7 +270,7 @@ document.querySelectorAll<HTMLFormElement>('form[data-anfrage]').forEach((form) 
   const beschaeftigt = (an: boolean) => {
     senden.disabled = an;
     senden.setAttribute('aria-busy', String(an));
-    sendenText.textContent = an ? 'Wird gesendet …' : 'Anfrage senden';
+    sendenText.textContent = an ? 'Wird gesendet …' : sendenStandard;
   };
 
   /* ---------- Senden ---------- */
@@ -243,7 +300,7 @@ document.querySelectorAll<HTMLFormElement>('form[data-anfrage]').forEach((form) 
         credentials: 'omit',
         signal: abbruch.signal,
       });
-      let inhalt: { ok?: boolean; fehler?: string; feld?: string; satz?: string } = {};
+      let inhalt: { ok?: boolean; erstantwort?: boolean; fehler?: string; feld?: string; satz?: string } = {};
       try {
         inhalt = await antwort.json();
       } catch {
@@ -253,6 +310,8 @@ document.querySelectorAll<HTMLFormElement>('form[data-anfrage]').forEach((form) 
       if (antwort.status === 202 || (antwort.ok && inhalt.ok)) {
         form.hidden = true;
         if (erfolg) {
+          const hinweis = erfolg.querySelector<HTMLElement>('[data-erstantwort-hinweis]');
+          if (hinweis) hinweis.hidden = inhalt.erstantwort !== true;
           erfolg.hidden = false;
           erfolg.focus();
         }

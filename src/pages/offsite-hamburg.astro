@@ -10,6 +10,7 @@ import SeitenKopf from '../components/SeitenKopf.astro';
 import FragenListe from '../components/FragenListe.astro';
 import GalerieRaster from '../components/GalerieRaster.astro';
 import Lightbox from '../components/Lightbox.astro';
+import LeadBlock from '../components/LeadBlock.astro';
 import Symbol from '../components/Symbol.astro';
 import Welle from '../components/Welle.astro';
 import { FAKTEN, LIEGEPLATZ, SEITE } from '../config';
@@ -197,13 +198,8 @@ const brotkrumen = {
         <FragenListe fragen={fragen} />
       </div>
 
-      <div class="cta-band auf-dunkel mt-16" data-reveal="zoom" data-anfrage-verbergen>
-        <div>
-          <p class="eyebrow">Anfrage</p>
-          <h2 class="mt-3 font-display text-3xl leading-tight text-schaum">Ihr nächstes Offsite auf der MS Wohldorf?</h2>
-          <p class="mt-3 text-nebel">Wunschtermin und Gruppengröße genügen — wir melden uns persönlich bei Ihnen.</p>
-        </div>
-        <a href="/anfrage/?anlass=workshop-seminar" class="knopf knopf-messing shrink-0" data-magnet>Unverbindlich anfragen <Symbol name="pfeil" /></a>
+      <div class="mt-16">
+        <LeadBlock id="schnell-offsite" titel="Das Exposé für Ihr Offsite." vorauswahl="Workshop/Seminar" />
       </div>
     </div>
   </section>
@@ -374,22 +370,4 @@ const brotkrumen = {
     color: rgb(255 255 255 / 0.55);
   }
 
-  .cta-band {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    padding: clamp(1.5rem, 4vw, 2.75rem);
-    border-radius: 1.6rem;
-    color: var(--color-schaum);
-    background:
-      radial-gradient(80% 120% at 100% 0%, rgb(43 122 138 / 0.5), transparent 60%),
-      var(--color-tiefe);
-  }
-  @media (min-width: 768px) {
-    .cta-band {
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-    }
-  }
 </style>

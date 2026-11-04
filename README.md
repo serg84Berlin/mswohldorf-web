@@ -34,6 +34,7 @@ Environment variables*. Beide werden **beim Bauen** eingesetzt — nach einer Ä
 | Variable | Bedeutung |
 |---|---|
 | `PUBLIC_ANFRAGE_URL` | Ziel des Anfrageformulars (`POST`, JSON, https). **Leer** = das Formular zeigt „Vorschau: Das Formular ist noch nicht verbunden …" mit Mail-Link und sendet nichts. Der Ursprung landet automatisch in der CSP (`connect-src`). Ungültige oder `http://`-Adressen brechen den Build ab. |
+| `PUBLIC_ANFRAGE_ERWEITERT` | `1` = Anfrage mit `art` und `herkunft` (Lead-Quelle), dazu der Absatz in der Datenschutzerklärung. **Erst setzen, wenn der Lotse-Server die Felder annimmt** (siehe „Anfrage-Schnittstelle“). |
 | `PUBLIC_VORSCHAU` | `1` = Vorschau-Build: jede Seite bekommt `<meta name="robots" content="noindex,nofollow">` und ein „Vorschau"-Band, **alle Platzhalter erscheinen als gestrichelter Kasten**, die Livegang-Sperre ist aus. Auf Netlify für Deploy-Previews und Branch-Deploys automatisch gesetzt (`netlify.toml`); für *Production* bis zum Livegang von Hand (siehe [Bis zum Livegang](#bis-zum-livegang-production-als-vorschau)). **Leer** = Produktions-Build: inhaltliche Platzhalter als neutraler Text, offene rechtliche Angaben **brechen den Build ab**. |
 
 ## Seiten
@@ -106,6 +107,7 @@ keine Sperre); alle Kästen lokal: `PUBLIC_VORSCHAU=1 npm run dev`.
 | Befehl | Zweck |
 |---|---|
 | `npm run alte-seite` | Liest `quelle/alte-seite/` (offline) und erzeugt Foto-Katalog, Presse-Liste, `public/pdf/`, `public/alt/` und `quelle/alte-seite/texte.md`. Erkennt alle Galerien (auch `galerie//03_innen`, `thumb_`/`thumb-`). Mit `--quelle=https://…` würde es die Live-Seite spiegeln (Hosting gekündigt); `--trocken` zeigt nur an. |
+| `npm run expose` | Erzeugt das Exposé-PDF `public/pdf/ms-wohldorf-expose.pdf` (4 × A4) aus der Druckseite `/expose/` (baut dafür selbst als Vorschau nach `dist-expose/`). Neu erzeugen, wenn sich Angaben im Exposé ändern; danach normal bauen. Braucht Playwright + Chromium. |
 | `npm run poster` | Rendert das Hero-Poster (quer/hoch) aus der 3D-Szene. Ablauf: `npm run build && npm run poster && npm run build`. Braucht Playwright + Chromium. |
 | `npm run pruefen` | Alle Prüfungen (siehe unten). |
 | `npm run offen` | Listet alle offenen Angaben im Quelltext — zuerst **Pflicht** (rechtliche Platzhalter und `ENTWURF_HINWEIS_ANZEIGEN = true`; sperren den Produktions-Build), dann **inhaltlich** (Platzhalter ohne `pflicht`, `offen`-Listen). |
@@ -118,6 +120,7 @@ keine Sperre); alle Kästen lokal: `PUBLIC_VORSCHAU=1 npm run dev`.
 npm run build      # Produktion → dist/ (endet mit „LIVEGANG GESPERRT", solange rechtliche Angaben offen sind — erwartet)
 PUBLIC_VORSCHAU=1 PUBLIC_ANFRAGE_URL=https://anfrage.example.test/v1/anfrage npx astro build --outDir dist-test
 PUBLIC_VORSCHAU=1 npx astro build --outDir dist-vorschau
+PUBLIC_VORSCHAU=1 PUBLIC_ANFRAGE_URL=https://anfrage.example.test/v1/anfrage PUBLIC_ANFRAGE_ERWEITERT=1 npx astro build --outDir dist-erweitert
 npm run pruefen    # Playwright (global installiert, require('playwright')) + Chromium
 ```
 
@@ -165,6 +168,14 @@ Content-Type: application/json
 Private Feier, Sonstiges. Der Server muss **CORS** für `https://www.mswohldorf.de` erlauben
 (Preflight `OPTIONS`, Header `Content-Type`). Ohne JavaScript öffnet das Formular das
 Mailprogramm (`mailto:`-Formular) — und ein Hinweis nennt die Mailadresse.
+
+### Erweiterungen für Lead-Magnet und Erstantwort (abwärtskompatibel)
+
+| Was | Seite (dieses Repo) | Server (Lotse/Merlin, Zoho) |
+|---|---|---|
+| **Schnellanfrage** (Anlass-Seiten, `/offsite-hamburg/`) | gleicher Vertrag; `nachricht` = „Schnellanfrage über die Website (/pfad/): Bitte senden Sie mir Verfügbarkeit und ein Angebot." + optionale Ergänzung | nichts nötig — erkennbar am Anfang von `nachricht` (bzw. an `art`, siehe unten) |
+| **Automatische Erstantwort** | Antwortet der Server `202 {"ok":true,"erstantwort":true}`, kündigt die Erfolgsmeldung die E-Mail an („In wenigen Minuten erhalten Sie eine E-Mail …“). Ohne das Feld bleibt die Meldung wie bisher. Nach dem Absenden bietet die Seite sofort Exposé, Anruf und 3D-Rundgang an. | Erstantwort verschicken und `erstantwort: true` zurückgeben. Exposé-Link für die Mail: `https://www.mswohldorf.de/pdf/ms-wohldorf-expose.pdf` |
+| **Lead-Quelle** | nur mit `PUBLIC_ANFRAGE_ERWEITERT=1`: zusätzlich `"art": "voll" \| "schnell"` und `"herkunft": {"seite": "/offsite-hamburg/", "zuvor": "/" \| null, "extern": "www.google.com" \| null, "utm": {"source": "…", "medium": "…", "campaign": "…", "term": "…", "content": "…"} \| null}` — nichts wird auf dem Gerät gespeichert; dann erscheint auch der Absatz in der Datenschutzerklärung | Felder annehmen (nicht als unbekannt ablehnen) und nach Zoho übernehmen; **erst danach** die Variable in Netlify setzen |
 
 ## Gestaltung
 

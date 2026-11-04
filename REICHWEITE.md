@@ -28,10 +28,39 @@ anderen Großstädten. Gegenstück zu [OFFENE-ANGABEN.md](OFFENE-ANGABEN.md) (wa
 | Phase | Inhalt | Stand |
 |---|---|---|
 | 1 Fundament | Häufige Fragen mit FAQPage-Schema (`/haeufige-fragen/`), `/llms.txt` für KI-Assistenten, Offsite-Seite mit animierter Anreise-Route (`/offsite-hamburg/`), Verlinkung in Kopf, Fuß und Startseite | ✅ gebaut |
-| 2 Konversion | **Exposé**: druckbare Seite `/expose/` → PDF per Skript (wie `npm run poster`), Download-Knöpfe auf Start, Anlässen, Offsite · **Schnellanfrage**: Datum, Gäste, E-Mail über den bestehenden Anfrage-Vertrag · **Lead-Quelle**: Suchmaschine/Kampagne/Einstiegsseite als eigenes Feld — braucht Lotse-Server und einen Satz im Datenschutz | offen |
+| 2 Konversion | **Exposé** (4 × A4, `npm run expose`) mit Download-Knöpfen auf Start, Anfrage, Fragen, Offsite, Anlass-Seiten und im Fuß · **Schnellanfrage** im Lead-Block (Exposé + Formular) auf allen Anlass-Seiten und `/offsite-hamburg/` — gleicher Server-Vertrag · **Erstantwort vorbereitet**: Erfolgsmeldung kündigt die E-Mail an, sobald der Server `erstantwort: true` meldet; danach sofort Exposé, Anruf, 3D-Rundgang · **Lead-Quelle** hinter `PUBLIC_ANFRAGE_ERWEITERT=1` (Feld `herkunft`, nichts auf dem Gerät gespeichert, Absatz im Datenschutz) | ✅ gebaut — Erstantwort und Lead-Quelle warten auf Lotse/Zoho |
 | 3 Inhalte | **Ratgeber** als Astro-Content-Collection mit Article-Schema, 4–6 Grundartikel (unten) · **Englisch** `/en/` für Start, Offsite, FAQ, Anfrage mit `hreflang` — Berliner Start-ups und internationale Teams | offen |
 | 4 Bewegtbild | 3–5 KI-Loops aus Originalfotos (Wasser, Licht, langsame Kamerafahrt), siehe unten | offen — Kosten und Bildrechte klären |
 | 5 Sichtbarkeit außerhalb der Seite | Google-Unternehmensprofil, Bing Places, Apple Business Connect; Location-Portale; Motivdatenbank der Filmförderung Hamburg Schleswig-Holstein; Wikidata-Eintrag; Google Search Console + Bing Webmaster Tools nach dem Livegang | offen — Sergiy/Uli |
+
+## Automatische Erstantwort — Vorschlag für Lotse/Zoho
+
+Ziel: Die Anfrage wird sofort zum Gespräch. Die E-Mail bestätigt, liefert das Exposé und stellt drei
+Fragen, auf die man einfach antwortet. Umsetzung im Lotse-Server bzw. Zoho-Workflow; danach antwortet der
+Server `202 {"ok":true,"erstantwort":true}` (README, „Anfrage-Schnittstelle“).
+
+> **Betreff:** Ihre Anfrage für die MS Wohldorf — {Anlass}{, am Datum}
+>
+> Guten Tag {Name},
+>
+> vielen Dank für Ihre Anfrage für {Anlass}{ am Datum}{ mit X Gästen}. Wir prüfen die Verfügbarkeit
+> und melden uns persönlich bei Ihnen.
+>
+> Damit unser Angebot gleich passt, antworten Sie gern direkt auf diese E-Mail:
+> 1. Von wann bis wann möchten Sie an Bord sein?
+> 2. Wünschen Sie Verpflegung oder Getränke?
+> 3. Brauchen Sie Technik, z. B. Bildschirm oder Musik?
+>
+> Alles Wichtige zum Schiff finden Sie im Exposé: https://www.mswohldorf.de/pdf/ms-wohldorf-expose.pdf
+> Vorab an Bord: https://www.mswohldorf.de/#rundgang · Anreise: https://www.mswohldorf.de/#anfahrt
+>
+> Lieber sprechen? Rufen Sie an unter +49 40 277347 — oder nennen Sie uns zwei Zeitfenster für einen Rückruf.
+>
+> Viele Grüße
+> Ulrich Ritter · MS Wohldorf · Finanzelot GmbH & Co. KG
+
+Offen (Uli): Soll die Mail eine Antwortzeit zusagen („innerhalb von 24 Stunden“)? Nur, wenn sie gehalten wird.
+Schnellanfragen erkennt der Server am Anfang der Nachricht („Schnellanfrage über die Website …“) oder an `art`.
 
 ## Ratgeber — erste Themen
 

@@ -22,6 +22,20 @@ export const VORSCHAU = import.meta.env.PUBLIC_VORSCHAU === '1';
 /** Ziel des Anfrageformulars. Kein Standardwert im Code. */
 export const ANFRAGE_URL = (import.meta.env.PUBLIC_ANFRAGE_URL ?? '').trim();
 
+/**
+ * `PUBLIC_ANFRAGE_ERWEITERT=1`: Die Anfrage enthält zusätzlich `art` (voll/schnell)
+ * und `herkunft` (Seite, vorherige Seite, fremde Herkunftsdomain, utm-Parameter) —
+ * für die Lead-Quelle in Zoho. Erst einschalten, wenn der Lotse-Server die Felder
+ * annimmt; dann erscheint auch der passende Absatz in der Datenschutzerklärung.
+ */
+export const ANFRAGE_ERWEITERT = import.meta.env.PUBLIC_ANFRAGE_ERWEITERT === '1';
+
+/** Exposé als PDF (erzeugt mit `npm run expose` aus /expose/, liegt in public/pdf/). */
+export const EXPOSE = {
+  pfad: '/pdf/ms-wohldorf-expose.pdf',
+  datei: 'public/pdf/ms-wohldorf-expose.pdf',
+} as const;
+
 export const SEITE = {
   name: 'MS Wohldorf',
   url: 'https://www.mswohldorf.de',

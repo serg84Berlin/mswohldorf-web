@@ -14,7 +14,8 @@ export default defineConfig({
   devToolbar: { enabled: false },
   integrations: [
     sitemap({
-      filter: (seite) => !seite.includes('/404'),
+      // 404 und die Druckseite des Exposés (nur Vorlage fürs PDF) nicht in die Sitemap
+      filter: (seite) => !seite.includes('/404') && !seite.includes('/expose/'),
       i18n: undefined,
     }),
     sicherheitsHeader(),

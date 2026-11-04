@@ -1,5 +1,5 @@
 {
-  "zeit": "2026-11-01T20:44:52.513Z",
+  "zeit": "2026-11-01T22:26:29.425Z",
   "pruefungen": [
     {
       "name": "/ @390: Status 200",
@@ -714,7 +714,12 @@
     {
       "name": "Formular verbunden: JSON entspricht dem Vertrag",
       "ok": true,
-      "info": "{\"quelle\":\"mswohldorf\",\"anlass\":\"Firmenevent\",\"datum\":\"2027-06-12\",\"ausweichdatum\":\"2027-06-19\",\"gaeste\":24,\"name\":\"Erika Mustermann\",\"email\":\"erika@example.org\",\"telefon\":\"+49 40 123456\",\"nachricht\":\"Sommerfest für unser Team, gern ab 18 Uhr.\",\"einwilligung\":true,\"website\":\"\",\"dauerMs\":1927}"
+      "info": "{\"quelle\":\"mswohldorf\",\"anlass\":\"Firmenevent\",\"datum\":\"2027-06-12\",\"ausweichdatum\":\"2027-06-19\",\"gaeste\":24,\"name\":\"Erika Mustermann\",\"email\":\"erika@example.org\",\"telefon\":\"+49 40 123456\",\"nachricht\":\"Sommerfest für unser Team, gern ab 18 Uhr.\",\"einwilligung\":true,\"website\":\"\",\"dauerMs\":1935}"
+    },
+    {
+      "name": "Erfolg ohne „erstantwort“: kein Hinweis auf automatische E-Mail, aber Exposé/Anruf/Rundgang angeboten",
+      "ok": true,
+      "info": ""
     },
     {
       "name": "Formular verbunden (202): sonst keine externen Anfragen",
@@ -814,7 +819,67 @@
     {
       "name": "Kompaktformular (Start): leere Felder werden null",
       "ok": true,
-      "info": "{\"quelle\":\"mswohldorf\",\"anlass\":\"Sonstiges\",\"datum\":null,\"ausweichdatum\":null,\"gaeste\":null,\"name\":\"Max Muster\",\"email\":\"max@example.org\",\"telefon\":null,\"nachricht\":\"Kurze Frage zur Verfügbarkeit im Mai.\",\"einwilligung\":true,\"website\":\"\",\"dauerMs\":2816}"
+      "info": "{\"quelle\":\"mswohldorf\",\"anlass\":\"Sonstiges\",\"datum\":null,\"ausweichdatum\":null,\"gaeste\":null,\"name\":\"Max Muster\",\"email\":\"max@example.org\",\"telefon\":null,\"nachricht\":\"Kurze Frage zur Verfügbarkeit im Mai.\",\"einwilligung\":true,\"website\":\"\",\"dauerMs\":2880}"
+    },
+    {
+      "name": "Schnellanfrage (Offsite): Anlass vorausgewählt, kein Nachrichten-Pflichtfeld",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Schnellanfrage: Prüfung greift (Name, E-Mail, Einwilligung)",
+      "ok": true,
+      "info": "3"
+    },
+    {
+      "name": "Schnellanfrage: gleicher JSON-Vertrag, Nachricht aus der Vorlage",
+      "ok": true,
+      "info": "{\"quelle\":\"mswohldorf\",\"anlass\":\"Workshop/Seminar\",\"datum\":\"2027-03-04\",\"ausweichdatum\":null,\"gaeste\":18,\"name\":\"Team Lead Berlin\",\"email\":\"team@example.org\",\"telefon\":null,\"nachricht\":\"Schnellanfrage über die Website (/offsite-hamburg/): Bitte senden Sie mir Verfügbarkeit und ein Angebot.\",\"einwilligung\":true,\"website\":\"\",\"dauerMs\":2117}"
+    },
+    {
+      "name": "Erfolg mit „erstantwort: true“: E-Mail wird angekündigt",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Schnellanfrage: keine externen Anfragen außer dem Anfrage-Ziel, keine Skriptfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Lead-Quelle (erweitert): art + herkunft mit Seite, vorheriger Seite und utm",
+      "ok": true,
+      "info": "{\"art\":\"schnell\",\"herkunft\":{\"seite\":\"/offsite-hamburg/\",\"zuvor\":\"/\",\"extern\":null,\"utm\":{\"source\":\"linkedin\",\"campaign\":\"offsite-berlin\"}}}"
+    },
+    {
+      "name": "Lead-Quelle: nichts auf dem Gerät gespeichert",
+      "ok": true,
+      "info": "{\"lokal\":0,\"sitzung\":0,\"kekse\":\"\"}"
+    },
+    {
+      "name": "Lead-Quelle: Absatz in der Datenschutzerklärung (nur erweitert)",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Ohne Schalter: kein Lead-Quellen-Absatz in der Datenschutzerklärung",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Exposé: PDF in dist/, 4 Seiten, unter 3 MB",
+      "ok": true,
+      "info": "4 Seiten, 1.3 MB"
+    },
+    {
+      "name": "Exposé-Druckseite: noindex, nicht in der Sitemap, keine Skripte",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Exposé-Download auf Start, Anfrage, Fragen, Offsite und Anlass-Seiten",
+      "ok": true,
+      "info": "/, /anfrage/, /haeufige-fragen/, /offsite-hamburg/, /anlaesse/firmenevent/"
     },
     {
       "name": "axe / @390: keine WCAG-2.2-AA-Verstöße",
@@ -1032,7 +1097,7 @@
       "info": "{\"kaesten\":1,\"pflicht\":1,\"sichtbar\":true,\"gestrichelt\":true,\"text\":true,\"ersatz\":0,\"sperre\":0}"
     },
     {
-      "name": "Produktion: keine inhaltlichen Platzhalter-Kästen (14 Seiten)",
+      "name": "Produktion: keine inhaltlichen Platzhalter-Kästen (15 Seiten)",
       "ok": true,
       "info": ""
     },
@@ -1100,33 +1165,34 @@
   "gewicht": {
     "390": {
       "lcp": {
-        "ms": 112,
+        "ms": 128,
         "element": "SPAN.wort",
         "url": ""
       },
-      "ladezeitMsLokal": 113,
-      "beimLadenKB": 160,
+      "ladezeitMsLokal": 130,
+      "beimLadenKB": 161,
       "nachTypKB": {
-        "stylesheet": 15,
         "font": 83,
+        "stylesheet": 16,
         "image": 33,
         "document": 21,
-        "script": 8
+        "script": 9
       },
       "beimLaden": [
-        "stylesheet 9 kB /_astro/Basis.Dh-UKcX0.css",
         "font 36 kB /_astro/fraunces-latin-wght-normal.ukD16Tqj.woff2",
+        "stylesheet 7 kB /_astro/bilder.DKu5IPek.css",
         "stylesheet 2 kB /_astro/index.td-SGHPV.css",
         "stylesheet 1 kB /_astro/Lightbox.tSWfEd92.css",
+        "stylesheet 2 kB /_astro/Basis.D6rWlFaZ.css",
         "stylesheet 2 kB /_astro/PresseFilm.Pvwx6IJs.css",
-        "stylesheet 1 kB /_astro/AnfrageFormular.Bq6uzhcP.css",
+        "stylesheet 1 kB /_astro/AnfrageFormular.B2XFSRyg.css",
         "image 18 kB /_astro/poster-hoch.FK7CNsWj_cV6re.avif",
         "font 47 kB /_astro/inter-latin-wght-normal.Dx4kXJAl.woff2",
         "document 21 kB /",
-        "script 1 kB /_astro/Zeitleiste.astro_astro_type_script_index_0_lang.CuK3wq_s.js",
         "script 2 kB /_astro/Hero.astro_astro_type_script_index_0_lang.B5jupHYU.js",
+        "script 1 kB /_astro/Zeitleiste.astro_astro_type_script_index_0_lang.CuK3wq_s.js",
         "script 1 kB /_astro/Lightbox.astro_astro_type_script_index_0_lang.CHIQJIXZ.js",
-        "script 3 kB /_astro/AnfrageFormular.astro_astro_type_script_index_0_lang.DMeIQh3h.js",
+        "script 3 kB /_astro/AnfrageFormular.astro_astro_type_script_index_0_lang.Idw45l7Y.js",
         "script 2 kB /_astro/Basis.astro_astro_type_script_index_0_lang.BqySre5_.js",
         "script 0 kB /_astro/bewegung.Ci3i6uZa.js",
         "image 15 kB /_astro/ms-wohldorf-2024.DNJParMR_l2WSa.avif"
@@ -1139,38 +1205,39 @@
     },
     "1440": {
       "lcp": {
-        "ms": 136,
+        "ms": 124,
         "element": "SPAN.wort",
         "url": ""
       },
-      "ladezeitMsLokal": 142,
-      "beimLadenKB": 288,
+      "ladezeitMsLokal": 124,
+      "beimLadenKB": 289,
       "nachTypKB": {
+        "stylesheet": 16,
         "font": 83,
-        "stylesheet": 15,
-        "image": 161,
         "document": 21,
-        "script": 8
+        "image": 161,
+        "script": 9
       },
       "beimLaden": [
+        "stylesheet 7 kB /_astro/bilder.DKu5IPek.css",
         "font 36 kB /_astro/fraunces-latin-wght-normal.ukD16Tqj.woff2",
-        "stylesheet 9 kB /_astro/Basis.Dh-UKcX0.css",
         "stylesheet 2 kB /_astro/index.td-SGHPV.css",
         "stylesheet 1 kB /_astro/Lightbox.tSWfEd92.css",
+        "stylesheet 2 kB /_astro/Basis.D6rWlFaZ.css",
         "stylesheet 2 kB /_astro/PresseFilm.Pvwx6IJs.css",
-        "stylesheet 1 kB /_astro/AnfrageFormular.Bq6uzhcP.css",
-        "image 45 kB /_astro/poster-quer.D0oYptdo_2hupnp.avif",
+        "stylesheet 1 kB /_astro/AnfrageFormular.B2XFSRyg.css",
         "font 47 kB /_astro/inter-latin-wght-normal.Dx4kXJAl.woff2",
         "document 21 kB /",
+        "image 45 kB /_astro/poster-quer.D0oYptdo_2hupnp.avif",
         "script 1 kB /_astro/Zeitleiste.astro_astro_type_script_index_0_lang.CuK3wq_s.js",
         "script 2 kB /_astro/Hero.astro_astro_type_script_index_0_lang.B5jupHYU.js",
+        "script 3 kB /_astro/AnfrageFormular.astro_astro_type_script_index_0_lang.Idw45l7Y.js",
         "script 1 kB /_astro/Lightbox.astro_astro_type_script_index_0_lang.CHIQJIXZ.js",
         "script 2 kB /_astro/Basis.astro_astro_type_script_index_0_lang.BqySre5_.js",
-        "script 3 kB /_astro/AnfrageFormular.astro_astro_type_script_index_0_lang.DMeIQh3h.js",
         "script 0 kB /_astro/bewegung.Ci3i6uZa.js",
+        "image 16 kB /_astro/wohldorf_umbau_02.BNiLy2o-_VJHC1.avif",
         "image 33 kB /_astro/ms-wohldorf-2024.DNJParMR_aAIpt.avif",
         "image 26 kB /_astro/wohldorf_ueberfahrt-hamburg_10.D2-zLw___Z1zPcLo.avif",
-        "image 16 kB /_astro/wohldorf_umbau_02.BNiLy2o-_VJHC1.avif",
         "image 17 kB /_astro/ndr-pfefferkoerner-wohldorf.D3RUWIWy_Z1IjjCJ.avif",
         "image 23 kB /_astro/ms-wohldorf-2024.DNJParMR_Z1vq09s.avif"
       ],
@@ -1223,7 +1290,7 @@
     "nachricht": "Sommerfest für unser Team, gern ab 18 Uhr.",
     "einwilligung": true,
     "website": "",
-    "dauerMs": 1927
+    "dauerMs": 1935
   },
   "livegang": {
     "gesperrt": true,
@@ -1239,7 +1306,7 @@
     ]
   },
   "ergebnis": {
-    "gesamt": 219,
+    "gesamt": 232,
     "fehlgeschlagen": 0
   }
 }
