@@ -19,7 +19,7 @@ export const GET: APIRoute = () => {
     '',
     `- Schiff: ehemalige ${FAKTEN.herkunft}, Baujahr ${FAKTEN.baujahr}, Umbau ${FAKTEN.umbau} zum Büro- und Veranstaltungsschiff`,
     `- Kapazität: bis zu ${FAKTEN.maxGaeste} Personen`,
-    `- Liegeplatz: ${LIEGEPLATZ.beschreibung}; Navi-Adresse ${LIEGEPLATZ.navi}; Koordinaten ${LIEGEPLATZ.breite.toFixed(5)}, ${LIEGEPLATZ.laenge.toFixed(5)}`,
+    `- Liegeplatz: ${LIEGEPLATZ.name}, ${LIEGEPLATZ.beschreibung}; Navi-Adresse ${LIEGEPLATZ.navi}; Koordinaten ${LIEGEPLATZ.breite.toFixed(5)}, ${LIEGEPLATZ.laenge.toFixed(5)}`,
     '- Veranstaltungen finden am Liegeplatz statt (das Schiff fährt nicht mehr aus eigener Kraft)',
     '- Küche mit Geräten an Bord; Parkplätze vor der Tür; Zugang nicht barrierefrei',
     `- Kontakt: ${KONTAKT.person}, ${KONTAKT.mail}, ${KONTAKT.telefon}`,

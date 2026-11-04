@@ -30,7 +30,7 @@ export const FRAGEN: Frage[] = [
   {
     id: 'liegeplatz',
     frage: 'Wo liegt die MS Wohldorf?',
-    antwort: `Die MS Wohldorf liegt ${LIEGEPLATZ.beschreibung}. Für das Navi: ${LIEGEPLATZ.navi}. Eine kleine Privatstraße führt zum Liegeplatz, Parkplätze gibt es direkt vor der Tür.`,
+    antwort: `Am ${LIEGEPLATZ.name}: Die MS Wohldorf liegt ${LIEGEPLATZ.beschreibung}. Für das Navi: ${LIEGEPLATZ.navi}. Eine kleine Privatstraße führt zum Liegeplatz, Parkplätze gibt es direkt vor der Tür.`,
     link: { href: '/#anfahrt', text: 'Anfahrt und Karte' },
   },
   {

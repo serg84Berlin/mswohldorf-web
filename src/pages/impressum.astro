@@ -1,20 +1,18 @@
 ---
 /**
- * Impressum — übernommen von der bisherigen Website (quelle/alte-seite/texte.md).
- * Geändert: „§ 5 TMG“ → „§ 5 DDG“; Verweise auf das aufgehobene TMG im
- * Haftungsteil entfernt; Link auf die eingestellte EU-OS-Plattform entfernt;
- * Bildnachweis an die neue Seite angepasst; Vertretung (Komplementärin) und
- * USt-IdNr. wie im Impressum von finanzelot.de (01.11.2026). Alles andere wörtlich.
- * Vor dem Livegang rechtlich prüfen (OFFENE-ANGABEN.md, Abschnitt A).
+ * Impressum — wie das Impressum von finanzelot.de (Entscheidung Uli, Mail vom
+ * 04.11.2026: „das Impressum kannst du von Finanzelot übernehmen“): Anbieter,
+ * Vertretung, Kontakt, Registereintrag, USt-IdNr., Verantwortlich nach § 18 Abs. 2 MStV.
+ * Bewusst NICHT übernommen: die Angaben zur Finanz- und Versicherungsvermittlung
+ * (§§ 34d/f/i GewO, Aufsicht, Schlichtung, Berufshaftpflicht) — sie betreffen nicht das
+ * Angebot dieser Website. Ergänzt: Streitschlichtung und Bildnachweis der alten Seite.
+ * Die Haftungs- und Urheberrechtstexte der alten Seite entfallen (finanzelot.de hat keine).
  *
- * Die offenen Prüfpunkte stehen als rechtliche Platzhalter (`pflicht`) an Ort
- * und Stelle: In der Vorschau als Kasten, im Produktions-Build bricht der Build
- * ab, solange einer übrig ist (integrationen/livegang-sperre.mjs). Ist ein
- * Punkt geklärt: Angabe korrigieren und den Platzhalter löschen.
+ * Rechtliche Lücken stünden hier als `<Platzhalter pflicht>` (Livegang-Sperre,
+ * integrationen/livegang-sperre.mjs). Stand 04.11.2026: keine.
  */
 import Basis from '../layouts/Basis.astro';
 import SeitenKopf from '../components/SeitenKopf.astro';
-import Platzhalter from '../components/Platzhalter.astro';
 import { BETREIBER, KONTAKT } from '../config';
 
 const k = BETREIBER.komplementaerin;
@@ -25,89 +23,43 @@ const k = BETREIBER.komplementaerin;
   <section class="bg-schaum">
     <div class="seite-breite fliesstext max-w-3xl py-12 lg:py-16">
       <h2>Angaben gemäß § 5 DDG</h2>
+
+      <h3>Anbieter</h3>
       <p>
         {BETREIBER.firma}<br />
-        {BETREIBER.strasse}<br />
-        {BETREIBER.plz} {BETREIBER.ort}
+        {BETREIBER.strasse}, {BETREIBER.plz} {BETREIBER.ort}
       </p>
+
+      <h3>Vertreten durch</h3>
       <p>
-        Handelsregister: {BETREIBER.register}<br />
-        Registergericht: {BETREIBER.registergericht}
-      </p>
-      <p>
-        Vertreten durch die persönlich haftende Gesellschafterin:<br />
-        {k.firma}, {BETREIBER.ort}<br />
-        {k.registergericht}, {k.register}<br />
-        vertreten durch den Geschäftsführer {k.geschaeftsfuehrer}
+        Die persönlich haftende Gesellschafterin {k.firma}, {k.registergericht}, {k.register}, vertreten durch den Geschäftsführer
+        {k.geschaeftsfuehrer}.
       </p>
 
       <h3>Kontakt</h3>
       <p>
         Telefon: <a href={`tel:${KONTAKT.telefonLink}`}>{KONTAKT.telefon}</a><br />
         Telefax: {KONTAKT.fax}<br />
-        Mail: <a href={`mailto:${KONTAKT.mail}`}>{KONTAKT.mail}</a>
+        E-Mail: <a href={`mailto:${KONTAKT.mail}`}>{KONTAKT.mail}</a>
       </p>
 
-      <h3>Postadresse</h3>
-      <p>
-        {BETREIBER.postfach.split(', ')[0]}<br />
-        {BETREIBER.postfach.split(', ')[1]}
-      </p>
+      <h3>Registereintrag</h3>
+      <p>Handelsregister: {BETREIBER.registergericht}, {BETREIBER.register}</p>
 
-      <h3>Umsatzsteuer-ID</h3>
-      <p>
-        Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br />
-        {BETREIBER.ustId}
-      </p>
+      <h3>Umsatzsteuer-Identifikationsnummer</h3>
+      <p>USt-IdNr. nach § 27a UStG: {BETREIBER.ustId}</p>
+
+      <h3>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h3>
+      <p>{k.geschaeftsfuehrer}, Anschrift wie oben.</p>
+
+      <h3>Streitschlichtung</h3>
+      <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
 
       <h3>Bildnachweis</h3>
       <p>
         Fotos der Wohldorf: Andrea Klick. Standbilder aus den Videos „MS Wohldorf 2024“ (YouTube-Kanal Finanzelot) und „Einfahrt in den
         Sandtorhafen, Mai 2017" (YouTube-Kanal ulrichritter). Standbild „Die Pfefferkörner“: NDR. Kartenausschnitt: © OpenStreetMap-Mitwirkende,
         <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">ODbL</a>.
-      </p>
-
-      <h3>Streitschlichtung</h3>
-      <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
-
-      <h3>Haftung für Inhalte</h3>
-      <Platzhalter pflicht>
-        Haftungstext prüfen (OFFENE-ANGABEN.md Nr. 1c): Die Verweise auf das aufgehobene TMG wurden entfernt — soll der Text so bleiben?
-      </Platzhalter>
-      <p>
-        Als Diensteanbieter sind wir für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Wir sind als
-        Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu
-        forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
-      </p>
-      <p>
-        Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt.
-        Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei
-        Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.
-      </p>
-
-      <h3>Haftung für Links</h3>
-      <p>
-        Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese
-        fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber
-        der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft.
-        Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar.
-      </p>
-      <p>
-        Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht
-        zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.
-      </p>
-
-      <h3>Urheberrecht</h3>
-      <p>
-        Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die
-        Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der
-        schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht
-        kommerziellen Gebrauch gestattet.
-      </p>
-      <p>
-        Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere
-        werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten
-        wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.
       </p>
     </div>
   </section>

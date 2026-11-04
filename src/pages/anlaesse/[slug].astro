@@ -6,12 +6,11 @@ import AnlassKarten from '../../components/AnlassKarten.astro';
 import GalerieRaster from '../../components/GalerieRaster.astro';
 import Lightbox from '../../components/Lightbox.astro';
 import LeadBlock from '../../components/LeadBlock.astro';
-import Platzhalter from '../../components/Platzhalter.astro';
 import Symbol from '../../components/Symbol.astro';
 import Welle from '../../components/Welle.astro';
 import { ANLAESSE, type Anlass } from '../../data/anlaesse';
 import { fotosFuerAnlass } from '../../data/bilder';
-import { SEITE, VORSCHAU } from '../../config';
+import { SEITE } from '../../config';
 
 export const getStaticPaths = (() => ANLAESSE.map((a) => ({ params: { slug: a.slug }, props: { anlass: a } }))) satisfies GetStaticPaths;
 
@@ -78,23 +77,13 @@ const brotkrumen = {
             ))
           }
         </ul>
-        {/* Offene Punkte: Vorschau → je ein Platzhalter-Kasten; Produktion → EIN Satz (src/data/anlaesse.ts, offenKurz). */}
+        {/* Auf Anfrage (Entscheidung Uli): EIN Satz, in Vorschau und Produktion gleich (src/data/anlaesse.ts, aufAnfrageKurz). */}
         {
-          a.offen.length > 0 &&
-            (VORSCHAU ? (
-              <>
-                <p class="mt-6 text-grau">Diese Details klären wir gern persönlich mit Ihnen:</p>
-                <ul class="mt-3 grid gap-3 md:grid-cols-2">
-                  {a.offen.map((o) => (
-                    <li>
-                      <Platzhalter class="text-tinte">{o}</Platzhalter>
-                    </li>
-                  ))}
-                </ul>
-              </>
-            ) : (
-              <p class="mt-6 text-grau" data-platzhalter-ersatz>{a.offenKurz} stimmen wir individuell mit Ihnen ab — <a class="textlink" href={`/anfrage/?anlass=${a.slug}`}>sprechen Sie uns an</a>.</p>
-            ))
+          a.aufAnfrage.length > 0 && (
+            <p class="mt-6 text-grau" data-auf-anfrage>
+              {a.aufAnfrageKurz} stimmen wir individuell mit Ihnen ab — <a class="textlink" href={`/anfrage/?anlass=${a.slug}`}>sprechen Sie uns an</a>.
+            </p>
+          )
         }
       </div>
       {

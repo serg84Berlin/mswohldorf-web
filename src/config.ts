@@ -55,7 +55,6 @@ export const BETREIBER = {
   strasse: 'Moorfleeter Deich 344',
   plz: '22113',
   ort: 'Hamburg',
-  postfach: 'Postfach 110689, 20406 Hamburg',
   registergericht: 'Amtsgericht Hamburg',
   register: 'HRA 124152',
   /** Persönlich haftende Gesellschafterin (Komplementärin). */
@@ -85,6 +84,8 @@ export const KONTAKT = {
  * Beschreibung Heuckenlock/Finkenriek: Navi-Hinweis im Lotsen-Repo.
  */
 export const LIEGEPLATZ = {
+  /** So nennt Uli den Liegeplatz (Mail vom 04.11.2026). */
+  name: 'Anleger Finkenriek',
   beschreibung: 'auf der Süderelbe in Finkenriek (Hamburg-Wilhelmsburg), am Naturschutzgebiet Heuckenlock',
   strasse: 'Finkenrieker Hauptdeich 14',
   plz: '21109',

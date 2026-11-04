@@ -73,7 +73,17 @@ Kundenstimmen und das Impressum.
 | Datenschutz | neuer Entwurf; Verantwortlicher mit Anschrift aus dem Impressum | AS (Impressum) |
 | 3D-Rundgang | „entstand am früheren Liegeplatz im Sandtorhafen" (iframe-Titel der alten Seite: „Rundgang auf der MS Wohldorf im Hamburger Sandtorhafen") | AS |
 
-### Änderungen am Impressum gegenüber der alten Seite
+### Impressum seit 04.11.2026: wie finanzelot.de
+
+Uli (Mail vom 04.11.2026): „das Impressum kannst du von Finanzelot übernehmen“, USt-IdNr. DE326098307,
+kein Datenschutzbeauftragter. Übernommen von https://www.finanzelot.de/impressum: Anbieter, Vertretung
+(Finanzelot Verwaltungs GmbH, HRB 154872, Geschäftsführer Ulrich Ritter), Kontakt, Registereintrag,
+USt-IdNr., „Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV“. **Nicht** übernommen: die Angaben zur
+Finanz- und Versicherungsvermittlung (§§ 34d/f/i GewO usw.) — sie betreffen nicht das Angebot dieser
+Website. **Entfallen**: Postfach, Haftung für Inhalte/Links, Urheberrecht (finanzelot.de hat diese Texte nicht).
+Geblieben: Streitschlichtung und Bildnachweis. Liegeplatz-Name „Anleger Finkenriek“ ebenfalls aus Ulis Mail.
+
+### Frühere Änderungen am Impressum gegenüber der alten Seite (vor dem 04.11.2026)
 
 - „Angaben gemäß § 5 TMG" → „§ 5 DDG".
 - Haftung für Inhalte: Verweise „gemäß § 7 Abs. 1 TMG" und „Nach §§ 8 bis 10 TMG" entfernt (TMG aufgehoben); Inhalt sonst wörtlich.

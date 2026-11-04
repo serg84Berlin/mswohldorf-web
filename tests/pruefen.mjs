@@ -714,21 +714,20 @@ for (const [breite, viewport] of Object.entries(GROESSEN)) {
   pruefe(`Produktion: keine inhaltlichen Platzhalter-Kästen (${produktion.size} Seiten)`, inhaltKasten.length === 0, inhaltKasten.join(' '));
   pruefe('Produktion: „Angabe folgt“/„bitte von Uli ergänzen“ nur in rechtlichen Kästen, Seiten ohne rechtlichen Rest ganz ohne', fremderText.length === 0, fremderText.join(' '));
   pruefe('Produktion: jeder rechtliche Rest (Platzhalter, Entwurf-Hinweis) sperrt den Build', ohneSperre.length === 0, ohneSperre.join(' | '));
+  // „Auf Anfrage“ (Entscheidung Uli): je Anlass-Seite EIN Satz mit Anfrage-Link — in Produktion UND Vorschau, keine Kästen
   for (const pfad of SEITEN.filter((p) => p.startsWith('/anlaesse/'))) {
     const slug = pfad.split('/')[2];
-    const offen = zaehle(vorschauSeiten.get(pfad) ?? '', 'data-platzhalter="inhalt"');
-    const html = produktion.get(pfad) ?? '';
-    const saetze = [...html.matchAll(/<p\b[^>]*\sdata-platzhalter-ersatz\b[^>]*>([\s\S]*?)<\/p>/g)];
-    const satz = saetze.length === 1 ? klartext(saetze[0][1]) : '';
-    const ok =
-      offen === 0
-        ? saetze.length === 0
-        : saetze.length === 1 &&
-          /^[A-ZÄÖÜ].+ stimmen wir individuell mit Ihnen ab — sprechen Sie uns an\.$/.test(satz) &&
-          !/\s[.,;:]|\s{2}/.test(satz) &&
-          saetze[0][1].includes(`href="/anfrage/?anlass=${slug}"`) &&
-          !html.includes('Diese Details klären wir gern persönlich');
-    pruefe(`Produktion ${pfad}: ${offen} offene Punkte → ein Satz mit Anfrage-Link`, ok, satz || `${saetze.length} Sätze`);
+    for (const [art, html] of [['Produktion', produktion.get(pfad) ?? ''], ['Vorschau', vorschauSeiten.get(pfad) ?? '']]) {
+      const saetze = [...html.matchAll(/<p\b[^>]*\sdata-auf-anfrage\b[^>]*>([\s\S]*?)<\/p>/g)];
+      const satz = saetze.length === 1 ? klartext(saetze[0][1]) : '';
+      const ok =
+        saetze.length === 1 &&
+        /^[A-ZÄÖÜ].+ stimmen wir individuell mit Ihnen ab — sprechen Sie uns an\.$/.test(satz) &&
+        !/\s[.,;:]|\s{2}/.test(satz) &&
+        saetze[0][1].includes(`href="/anfrage/?anlass=${slug}"`) &&
+        zaehle(html, 'data-platzhalter="inhalt"') === 0;
+      pruefe(`${art} ${pfad}: „auf Anfrage“ als ein Satz mit Anfrage-Link, keine Kästen`, ok, satz || `${saetze.length} Sätze`);
+    }
   }
   {
     const { ctx: p } = await kontext(haupt, { viewport: GROESSEN[1440], reducedMotion: 'reduce' });
