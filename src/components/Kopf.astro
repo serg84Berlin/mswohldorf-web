@@ -44,6 +44,7 @@ const anlassAktiv = pfad.startsWith('/anlaesse/');
           </ul>
         </li>
         <li><a class="navlink" href="/offsite-hamburg/" aria-current={aktiv('/offsite-hamburg/')}>Offsite</a></li>
+        <li><a class="navlink" href="/ratgeber/" aria-current={pfad.startsWith('/ratgeber/') ? 'page' : undefined}>Ratgeber</a></li>
         <li><a class="navlink" href="/geschichte/" aria-current={aktiv('/geschichte/')}>Geschichte</a></li>
         <li><a class="navlink" href="/galerie/" aria-current={aktiv('/galerie/')}>Galerie</a></li>
         <li><a class="navlink" href="/#anfahrt">Anfahrt</a></li>
@@ -76,8 +77,9 @@ const anlassAktiv = pfad.startsWith('/anlaesse/');
         <li class="mobil-eintrag" style="--i:5"><a href="/offsite-hamburg/" class="mobil-link mobil-gross" aria-current={aktiv('/offsite-hamburg/')}>Offsite in Hamburg</a></li>
         <li class="mobil-eintrag" style="--i:6"><a href="/geschichte/" class="mobil-link mobil-gross" aria-current={aktiv('/geschichte/')}>Geschichte</a></li>
         <li class="mobil-eintrag" style="--i:7"><a href="/galerie/" class="mobil-link mobil-gross" aria-current={aktiv('/galerie/')}>Galerie</a></li>
-        <li class="mobil-eintrag" style="--i:8"><a href="/haeufige-fragen/" class="mobil-link mobil-gross" aria-current={aktiv('/haeufige-fragen/')}>Häufige Fragen</a></li>
-        <li class="mobil-eintrag" style="--i:9"><a href="/#anfahrt" class="mobil-link mobil-gross" data-menue-schliessen>Anfahrt</a></li>
+        <li class="mobil-eintrag" style="--i:8"><a href="/ratgeber/" class="mobil-link mobil-gross" aria-current={pfad.startsWith('/ratgeber/') ? 'page' : undefined}>Ratgeber</a></li>
+        <li class="mobil-eintrag" style="--i:9"><a href="/haeufige-fragen/" class="mobil-link mobil-gross" aria-current={aktiv('/haeufige-fragen/')}>Häufige Fragen</a></li>
+        <li class="mobil-eintrag" style="--i:10"><a href="/#anfahrt" class="mobil-link mobil-gross" data-menue-schliessen>Anfahrt</a></li>
       </ul>
       <a href="/anfrage/" class="knopf knopf-messing mt-8 w-full">Jetzt anfragen <Symbol name="pfeil" /></a>
     </nav>

@@ -7,8 +7,10 @@ import type { APIRoute } from 'astro';
 import { FAKTEN, KONTAKT, LIEGEPLATZ, SEITE, BETREIBER } from '../config';
 import { ANLAESSE } from '../data/anlaesse';
 import { FRAGEN } from '../data/fragen';
+import { ratgeberArtikel } from '../lib/ratgeber';
 
-export const GET: APIRoute = () => {
+export const GET: APIRoute = async () => {
+  const artikel = await ratgeberArtikel();
   const url = (pfad: string) => new URL(pfad, SEITE.url).href;
   const zeilen = [
     `# ${SEITE.name}`,
@@ -34,6 +36,10 @@ export const GET: APIRoute = () => {
     '',
     ...FRAGEN.map((f) => `- **${f.frage}** ${f.antwort}`),
     '',
+    '## Ratgeber',
+    '',
+    ...artikel.map((a) => `- [${a.data.titel}](${url(`/ratgeber/${a.id}/`)}): ${a.data.beschreibung}`),
+    '',
     '## Seiten',
     '',
     `- [Startseite](${url('/')}): Überblick, 3D-Rundgang, Anfahrt`,
@@ -42,6 +48,7 @@ export const GET: APIRoute = () => {
     `- [Geschichte](${url('/geschichte/')}): von der HADAG-Hafenfähre zum Eventschiff`,
     `- [Galerie](${url('/galerie/')}): Fotos innen, außen, Umbau, Überfahrt`,
     `- [Anfrage](${url('/anfrage/')}): unverbindliche Anfrage`,
+    `- [Exposé (PDF)](${url('/pdf/ms-wohldorf-expose.pdf')}): Räume, Anlässe, Anreise, Planungs-Checkliste`,
     '',
   ];
   return new Response(zeilen.join('\n'), { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
