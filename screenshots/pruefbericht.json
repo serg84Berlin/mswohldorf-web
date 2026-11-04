@@ -1,5 +1,5 @@
 {
-  "zeit": "2026-11-01T22:26:29.425Z",
+  "zeit": "2026-11-04T12:33:47.562Z",
   "pruefungen": [
     {
       "name": "/ @390: Status 200",
@@ -158,6 +158,126 @@
     },
     {
       "name": "/haeufige-fragen/ @390: kein waagerechtes Scrollen",
+      "ok": true,
+      "info": "0px"
+    },
+    {
+      "name": "/ratgeber/ @390: Status 200",
+      "ok": true,
+      "info": "200"
+    },
+    {
+      "name": "/ratgeber/ @390: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/ratgeber/ @390: keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/ratgeber/ @390: kein waagerechtes Scrollen",
+      "ok": true,
+      "info": "0px"
+    },
+    {
+      "name": "/ratgeber/offsite-hamburg-planen/ @390: Status 200",
+      "ok": true,
+      "info": "200"
+    },
+    {
+      "name": "/ratgeber/offsite-hamburg-planen/ @390: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/ratgeber/offsite-hamburg-planen/ @390: keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/ratgeber/offsite-hamburg-planen/ @390: kein waagerechtes Scrollen",
+      "ok": true,
+      "info": "0px"
+    },
+    {
+      "name": "/ratgeber/lernort-an-bord/ @390: Status 200",
+      "ok": true,
+      "info": "200"
+    },
+    {
+      "name": "/ratgeber/lernort-an-bord/ @390: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/ratgeber/lernort-an-bord/ @390: keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/ratgeber/lernort-an-bord/ @390: kein waagerechtes Scrollen",
+      "ok": true,
+      "info": "0px"
+    },
+    {
+      "name": "/ratgeber/umbau-faehre-zum-veranstaltungsschiff/ @390: Status 200",
+      "ok": true,
+      "info": "200"
+    },
+    {
+      "name": "/ratgeber/umbau-faehre-zum-veranstaltungsschiff/ @390: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/ratgeber/umbau-faehre-zum-veranstaltungsschiff/ @390: keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/ratgeber/umbau-faehre-zum-veranstaltungsschiff/ @390: kein waagerechtes Scrollen",
+      "ok": true,
+      "info": "0px"
+    },
+    {
+      "name": "/en/ @390: Status 200",
+      "ok": true,
+      "info": "200"
+    },
+    {
+      "name": "/en/ @390: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/en/ @390: keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/en/ @390: kein waagerechtes Scrollen",
+      "ok": true,
+      "info": "0px"
+    },
+    {
+      "name": "/en/faq/ @390: Status 200",
+      "ok": true,
+      "info": "200"
+    },
+    {
+      "name": "/en/faq/ @390: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/en/faq/ @390: keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/en/faq/ @390: kein waagerechtes Scrollen",
       "ok": true,
       "info": "0px"
     },
@@ -442,6 +562,126 @@
       "info": "0px"
     },
     {
+      "name": "/ratgeber/ @1440: Status 200",
+      "ok": true,
+      "info": "200"
+    },
+    {
+      "name": "/ratgeber/ @1440: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/ratgeber/ @1440: keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/ratgeber/ @1440: kein waagerechtes Scrollen",
+      "ok": true,
+      "info": "0px"
+    },
+    {
+      "name": "/ratgeber/offsite-hamburg-planen/ @1440: Status 200",
+      "ok": true,
+      "info": "200"
+    },
+    {
+      "name": "/ratgeber/offsite-hamburg-planen/ @1440: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/ratgeber/offsite-hamburg-planen/ @1440: keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/ratgeber/offsite-hamburg-planen/ @1440: kein waagerechtes Scrollen",
+      "ok": true,
+      "info": "0px"
+    },
+    {
+      "name": "/ratgeber/lernort-an-bord/ @1440: Status 200",
+      "ok": true,
+      "info": "200"
+    },
+    {
+      "name": "/ratgeber/lernort-an-bord/ @1440: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/ratgeber/lernort-an-bord/ @1440: keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/ratgeber/lernort-an-bord/ @1440: kein waagerechtes Scrollen",
+      "ok": true,
+      "info": "0px"
+    },
+    {
+      "name": "/ratgeber/umbau-faehre-zum-veranstaltungsschiff/ @1440: Status 200",
+      "ok": true,
+      "info": "200"
+    },
+    {
+      "name": "/ratgeber/umbau-faehre-zum-veranstaltungsschiff/ @1440: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/ratgeber/umbau-faehre-zum-veranstaltungsschiff/ @1440: keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/ratgeber/umbau-faehre-zum-veranstaltungsschiff/ @1440: kein waagerechtes Scrollen",
+      "ok": true,
+      "info": "0px"
+    },
+    {
+      "name": "/en/ @1440: Status 200",
+      "ok": true,
+      "info": "200"
+    },
+    {
+      "name": "/en/ @1440: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/en/ @1440: keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/en/ @1440: kein waagerechtes Scrollen",
+      "ok": true,
+      "info": "0px"
+    },
+    {
+      "name": "/en/faq/ @1440: Status 200",
+      "ok": true,
+      "info": "200"
+    },
+    {
+      "name": "/en/faq/ @1440: keine Konsolenfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/en/faq/ @1440: keine externen Anfragen",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/en/faq/ @1440: kein waagerechtes Scrollen",
+      "ok": true,
+      "info": "0px"
+    },
+    {
       "name": "/geschichte/ @1440: Status 200",
       "ok": true,
       "info": "200"
@@ -714,7 +954,7 @@
     {
       "name": "Formular verbunden: JSON entspricht dem Vertrag",
       "ok": true,
-      "info": "{\"quelle\":\"mswohldorf\",\"anlass\":\"Firmenevent\",\"datum\":\"2027-06-12\",\"ausweichdatum\":\"2027-06-19\",\"gaeste\":24,\"name\":\"Erika Mustermann\",\"email\":\"erika@example.org\",\"telefon\":\"+49 40 123456\",\"nachricht\":\"Sommerfest für unser Team, gern ab 18 Uhr.\",\"einwilligung\":true,\"website\":\"\",\"dauerMs\":1935}"
+      "info": "{\"quelle\":\"mswohldorf\",\"anlass\":\"Firmenevent\",\"datum\":\"2027-06-12\",\"ausweichdatum\":\"2027-06-19\",\"gaeste\":24,\"name\":\"Erika Mustermann\",\"email\":\"erika@example.org\",\"telefon\":\"+49 40 123456\",\"nachricht\":\"Sommerfest für unser Team, gern ab 18 Uhr.\",\"einwilligung\":true,\"website\":\"\",\"dauerMs\":1954}"
     },
     {
       "name": "Erfolg ohne „erstantwort“: kein Hinweis auf automatische E-Mail, aber Exposé/Anruf/Rundgang angeboten",
@@ -819,7 +1059,7 @@
     {
       "name": "Kompaktformular (Start): leere Felder werden null",
       "ok": true,
-      "info": "{\"quelle\":\"mswohldorf\",\"anlass\":\"Sonstiges\",\"datum\":null,\"ausweichdatum\":null,\"gaeste\":null,\"name\":\"Max Muster\",\"email\":\"max@example.org\",\"telefon\":null,\"nachricht\":\"Kurze Frage zur Verfügbarkeit im Mai.\",\"einwilligung\":true,\"website\":\"\",\"dauerMs\":2880}"
+      "info": "{\"quelle\":\"mswohldorf\",\"anlass\":\"Sonstiges\",\"datum\":null,\"ausweichdatum\":null,\"gaeste\":null,\"name\":\"Max Muster\",\"email\":\"max@example.org\",\"telefon\":null,\"nachricht\":\"Kurze Frage zur Verfügbarkeit im Mai.\",\"einwilligung\":true,\"website\":\"\",\"dauerMs\":3173}"
     },
     {
       "name": "Schnellanfrage (Offsite): Anlass vorausgewählt, kein Nachrichten-Pflichtfeld",
@@ -834,7 +1074,7 @@
     {
       "name": "Schnellanfrage: gleicher JSON-Vertrag, Nachricht aus der Vorlage",
       "ok": true,
-      "info": "{\"quelle\":\"mswohldorf\",\"anlass\":\"Workshop/Seminar\",\"datum\":\"2027-03-04\",\"ausweichdatum\":null,\"gaeste\":18,\"name\":\"Team Lead Berlin\",\"email\":\"team@example.org\",\"telefon\":null,\"nachricht\":\"Schnellanfrage über die Website (/offsite-hamburg/): Bitte senden Sie mir Verfügbarkeit und ein Angebot.\",\"einwilligung\":true,\"website\":\"\",\"dauerMs\":2117}"
+      "info": "{\"quelle\":\"mswohldorf\",\"anlass\":\"Workshop/Seminar\",\"datum\":\"2027-03-04\",\"ausweichdatum\":null,\"gaeste\":18,\"name\":\"Team Lead Berlin\",\"email\":\"team@example.org\",\"telefon\":null,\"nachricht\":\"Schnellanfrage über die Website (/offsite-hamburg/): Bitte senden Sie mir Verfügbarkeit und ein Angebot.\",\"einwilligung\":true,\"website\":\"\",\"dauerMs\":2137}"
     },
     {
       "name": "Erfolg mit „erstantwort: true“: E-Mail wird angekündigt",
@@ -843,6 +1083,36 @@
     },
     {
       "name": "Schnellanfrage: keine externen Anfragen außer dem Anfrage-Ziel, keine Skriptfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Englisch: <html lang=\"en\">, Formular englisch beschriftet",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Englisch: Fehlermeldungen englisch",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Englisch: gleicher Vertrag, Anlass-Wert deutsch, Hinweis „auf Englisch antworten“ für Uli",
+      "ok": true,
+      "info": "{\"quelle\":\"mswohldorf\",\"anlass\":\"Firmenevent\",\"datum\":null,\"ausweichdatum\":null,\"gaeste\":null,\"name\":\"Alex Example\",\"email\":\"alex@example.org\",\"telefon\":null,\"nachricht\":\"Schnellanfrage über die Website (/en/): Bitte senden Sie mir Verfügbarkeit und ein Angebot. [Englische Seite — bitte auf Englisch antworten.]\",\"einwilligung\":true,\"website\":\"\",\"dauerMs\":2679}"
+    },
+    {
+      "name": "Englisch: Erfolgsmeldung englisch",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "Englisch: keine externen Anfragen außer dem Ziel, keine Skriptfehler",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "hreflang: Start ↔ /en/ und Fragen ↔ /en/faq/ (beide Richtungen, x-default deutsch)",
       "ok": true,
       "info": ""
     },
@@ -922,6 +1192,36 @@
       "info": ""
     },
     {
+      "name": "axe /ratgeber/ @390: keine WCAG-2.2-AA-Verstöße",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "axe /ratgeber/offsite-hamburg-planen/ @390: keine WCAG-2.2-AA-Verstöße",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "axe /ratgeber/lernort-an-bord/ @390: keine WCAG-2.2-AA-Verstöße",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "axe /ratgeber/umbau-faehre-zum-veranstaltungsschiff/ @390: keine WCAG-2.2-AA-Verstöße",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "axe /en/ @390: keine WCAG-2.2-AA-Verstöße",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "axe /en/faq/ @390: keine WCAG-2.2-AA-Verstöße",
+      "ok": true,
+      "info": ""
+    },
+    {
       "name": "axe /geschichte/ @390: keine WCAG-2.2-AA-Verstöße",
       "ok": true,
       "info": ""
@@ -992,6 +1292,36 @@
       "info": ""
     },
     {
+      "name": "axe /ratgeber/ @1440: keine WCAG-2.2-AA-Verstöße",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "axe /ratgeber/offsite-hamburg-planen/ @1440: keine WCAG-2.2-AA-Verstöße",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "axe /ratgeber/lernort-an-bord/ @1440: keine WCAG-2.2-AA-Verstöße",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "axe /ratgeber/umbau-faehre-zum-veranstaltungsschiff/ @1440: keine WCAG-2.2-AA-Verstöße",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "axe /en/ @1440: keine WCAG-2.2-AA-Verstöße",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "axe /en/faq/ @1440: keine WCAG-2.2-AA-Verstöße",
+      "ok": true,
+      "info": ""
+    },
+    {
       "name": "axe /geschichte/ @1440: keine WCAG-2.2-AA-Verstöße",
       "ok": true,
       "info": ""
@@ -1037,9 +1367,9 @@
       "info": ""
     },
     {
-      "name": "Sitemap enthält alle 13 Seiten, ohne 404",
+      "name": "Sitemap enthält alle 19 Seiten, ohne 404",
       "ok": true,
-      "info": "13 Einträge, fehlen: –"
+      "info": "19 Einträge, fehlen: –"
     },
     {
       "name": "FAQPage-Schema: jede sichtbare Frage auch im Schema",
@@ -1059,7 +1389,7 @@
     {
       "name": "Vorschau-Build: jede Seite noindex,nofollow + Band",
       "ok": true,
-      "info": "14 Seiten"
+      "info": "20 Seiten"
     },
     {
       "name": "CSP (verbunden): connect-src enthält das Anfrage-Ziel",
@@ -1067,37 +1397,7 @@
       "info": ""
     },
     {
-      "name": "Vorschau /anlaesse/firmenevent/: 4 Platzhalter als gestrichelte Kästen (0 rechtlich), kein Ersatztext, keine Sperre",
-      "ok": true,
-      "info": "{\"kaesten\":4,\"pflicht\":0,\"sichtbar\":true,\"gestrichelt\":true,\"text\":true,\"ersatz\":0,\"sperre\":0}"
-    },
-    {
-      "name": "Vorschau /anlaesse/workshop-seminar/: 4 Platzhalter als gestrichelte Kästen (0 rechtlich), kein Ersatztext, keine Sperre",
-      "ok": true,
-      "info": "{\"kaesten\":4,\"pflicht\":0,\"sichtbar\":true,\"gestrichelt\":true,\"text\":true,\"ersatz\":0,\"sperre\":0}"
-    },
-    {
-      "name": "Vorschau /anlaesse/film-und-foto/: 3 Platzhalter als gestrichelte Kästen (0 rechtlich), kein Ersatztext, keine Sperre",
-      "ok": true,
-      "info": "{\"kaesten\":3,\"pflicht\":0,\"sichtbar\":true,\"gestrichelt\":true,\"text\":true,\"ersatz\":0,\"sperre\":0}"
-    },
-    {
-      "name": "Vorschau /anlaesse/lesung-ausstellung/: 4 Platzhalter als gestrichelte Kästen (0 rechtlich), kein Ersatztext, keine Sperre",
-      "ok": true,
-      "info": "{\"kaesten\":4,\"pflicht\":0,\"sichtbar\":true,\"gestrichelt\":true,\"text\":true,\"ersatz\":0,\"sperre\":0}"
-    },
-    {
-      "name": "Vorschau /anlaesse/private-feier/: 4 Platzhalter als gestrichelte Kästen (0 rechtlich), kein Ersatztext, keine Sperre",
-      "ok": true,
-      "info": "{\"kaesten\":4,\"pflicht\":0,\"sichtbar\":true,\"gestrichelt\":true,\"text\":true,\"ersatz\":0,\"sperre\":0}"
-    },
-    {
-      "name": "Vorschau /impressum/: 1 Platzhalter als gestrichelte Kästen (1 rechtlich), kein Ersatztext, keine Sperre",
-      "ok": true,
-      "info": "{\"kaesten\":1,\"pflicht\":1,\"sichtbar\":true,\"gestrichelt\":true,\"text\":true,\"ersatz\":0,\"sperre\":0}"
-    },
-    {
-      "name": "Produktion: keine inhaltlichen Platzhalter-Kästen (15 Seiten)",
+      "name": "Produktion: keine inhaltlichen Platzhalter-Kästen (21 Seiten)",
       "ok": true,
       "info": ""
     },
@@ -1112,27 +1412,52 @@
       "info": ""
     },
     {
-      "name": "Produktion /anlaesse/firmenevent/: 4 offene Punkte → ein Satz mit Anfrage-Link",
+      "name": "Produktion /anlaesse/firmenevent/: „auf Anfrage“ als ein Satz mit Anfrage-Link, keine Kästen",
       "ok": true,
       "info": "Preise und Pakete, Catering, Technik und Uhrzeiten stimmen wir individuell mit Ihnen ab — sprechen Sie uns an."
     },
     {
-      "name": "Produktion /anlaesse/workshop-seminar/: 4 offene Punkte → ein Satz mit Anfrage-Link",
+      "name": "Vorschau /anlaesse/firmenevent/: „auf Anfrage“ als ein Satz mit Anfrage-Link, keine Kästen",
+      "ok": true,
+      "info": "Preise und Pakete, Catering, Technik und Uhrzeiten stimmen wir individuell mit Ihnen ab — sprechen Sie uns an."
+    },
+    {
+      "name": "Produktion /anlaesse/workshop-seminar/: „auf Anfrage“ als ein Satz mit Anfrage-Link, keine Kästen",
       "ok": true,
       "info": "Bestuhlung, Präsentationstechnik, Verpflegung und Tagespauschalen stimmen wir individuell mit Ihnen ab — sprechen Sie uns an."
     },
     {
-      "name": "Produktion /anlaesse/film-und-foto/: 3 offene Punkte → ein Satz mit Anfrage-Link",
+      "name": "Vorschau /anlaesse/workshop-seminar/: „auf Anfrage“ als ein Satz mit Anfrage-Link, keine Kästen",
+      "ok": true,
+      "info": "Bestuhlung, Präsentationstechnik, Verpflegung und Tagespauschalen stimmen wir individuell mit Ihnen ab — sprechen Sie uns an."
+    },
+    {
+      "name": "Produktion /anlaesse/film-und-foto/: „auf Anfrage“ als ein Satz mit Anfrage-Link, keine Kästen",
       "ok": true,
       "info": "Konditionen für Drehtage, Strom für Licht und Technik sowie die Drehgenehmigung am Liegeplatz stimmen wir individuell mit Ihnen ab — sprechen Sie uns an."
     },
     {
-      "name": "Produktion /anlaesse/lesung-ausstellung/: 4 offene Punkte → ein Satz mit Anfrage-Link",
+      "name": "Vorschau /anlaesse/film-und-foto/: „auf Anfrage“ als ein Satz mit Anfrage-Link, keine Kästen",
+      "ok": true,
+      "info": "Konditionen für Drehtage, Strom für Licht und Technik sowie die Drehgenehmigung am Liegeplatz stimmen wir individuell mit Ihnen ab — sprechen Sie uns an."
+    },
+    {
+      "name": "Produktion /anlaesse/lesung-ausstellung/: „auf Anfrage“ als ein Satz mit Anfrage-Link, keine Kästen",
       "ok": true,
       "info": "Hängemöglichkeiten, Licht und Ton sowie die Konditionen stimmen wir individuell mit Ihnen ab — sprechen Sie uns an."
     },
     {
-      "name": "Produktion /anlaesse/private-feier/: 4 offene Punkte → ein Satz mit Anfrage-Link",
+      "name": "Vorschau /anlaesse/lesung-ausstellung/: „auf Anfrage“ als ein Satz mit Anfrage-Link, keine Kästen",
+      "ok": true,
+      "info": "Hängemöglichkeiten, Licht und Ton sowie die Konditionen stimmen wir individuell mit Ihnen ab — sprechen Sie uns an."
+    },
+    {
+      "name": "Produktion /anlaesse/private-feier/: „auf Anfrage“ als ein Satz mit Anfrage-Link, keine Kästen",
+      "ok": true,
+      "info": "Preise, Catering und Getränke, Musik und Dekoration stimmen wir individuell mit Ihnen ab — sprechen Sie uns an."
+    },
+    {
+      "name": "Vorschau /anlaesse/private-feier/: „auf Anfrage“ als ein Satz mit Anfrage-Link, keine Kästen",
       "ok": true,
       "info": "Preise, Catering und Getränke, Musik und Dekoration stimmen wir individuell mit Ihnen ab — sprechen Sie uns an."
     },
@@ -1165,35 +1490,35 @@
   "gewicht": {
     "390": {
       "lcp": {
-        "ms": 128,
+        "ms": 160,
         "element": "SPAN.wort",
         "url": ""
       },
-      "ladezeitMsLokal": 130,
-      "beimLadenKB": 161,
+      "ladezeitMsLokal": 154,
+      "beimLadenKB": 163,
       "nachTypKB": {
-        "font": 83,
         "stylesheet": 16,
-        "image": 33,
         "document": 21,
-        "script": 9
+        "font": 83,
+        "image": 33,
+        "script": 10
       },
       "beimLaden": [
-        "font 36 kB /_astro/fraunces-latin-wght-normal.ukD16Tqj.woff2",
-        "stylesheet 7 kB /_astro/bilder.DKu5IPek.css",
+        "stylesheet 7 kB /_astro/bilder.BAZraQhb.css",
         "stylesheet 2 kB /_astro/index.td-SGHPV.css",
         "stylesheet 1 kB /_astro/Lightbox.tSWfEd92.css",
+        "document 21 kB /",
         "stylesheet 2 kB /_astro/Basis.D6rWlFaZ.css",
-        "stylesheet 2 kB /_astro/PresseFilm.Pvwx6IJs.css",
+        "stylesheet 2 kB /_astro/PresseFilm.z996GO0W.css",
+        "font 36 kB /_astro/fraunces-latin-wght-normal.ukD16Tqj.woff2",
         "stylesheet 1 kB /_astro/AnfrageFormular.B2XFSRyg.css",
         "image 18 kB /_astro/poster-hoch.FK7CNsWj_cV6re.avif",
         "font 47 kB /_astro/inter-latin-wght-normal.Dx4kXJAl.woff2",
-        "document 21 kB /",
-        "script 2 kB /_astro/Hero.astro_astro_type_script_index_0_lang.B5jupHYU.js",
         "script 1 kB /_astro/Zeitleiste.astro_astro_type_script_index_0_lang.CuK3wq_s.js",
+        "script 5 kB /_astro/AnfrageFormular.astro_astro_type_script_index_0_lang.HkGiiQnI.js",
+        "script 2 kB /_astro/Hero.astro_astro_type_script_index_0_lang.B5jupHYU.js",
         "script 1 kB /_astro/Lightbox.astro_astro_type_script_index_0_lang.CHIQJIXZ.js",
-        "script 3 kB /_astro/AnfrageFormular.astro_astro_type_script_index_0_lang.Idw45l7Y.js",
-        "script 2 kB /_astro/Basis.astro_astro_type_script_index_0_lang.BqySre5_.js",
+        "script 2 kB /_astro/Basis.astro_astro_type_script_index_0_lang.TKKq9Om4.js",
         "script 0 kB /_astro/bewegung.Ci3i6uZa.js",
         "image 15 kB /_astro/ms-wohldorf-2024.DNJParMR_l2WSa.avif"
       ],
@@ -1205,38 +1530,38 @@
     },
     "1440": {
       "lcp": {
-        "ms": 124,
+        "ms": 152,
         "element": "SPAN.wort",
         "url": ""
       },
-      "ladezeitMsLokal": 124,
-      "beimLadenKB": 289,
+      "ladezeitMsLokal": 164,
+      "beimLadenKB": 291,
       "nachTypKB": {
         "stylesheet": 16,
         "font": 83,
-        "document": 21,
         "image": 161,
-        "script": 9
+        "document": 21,
+        "script": 10
       },
       "beimLaden": [
-        "stylesheet 7 kB /_astro/bilder.DKu5IPek.css",
+        "stylesheet 7 kB /_astro/bilder.BAZraQhb.css",
         "font 36 kB /_astro/fraunces-latin-wght-normal.ukD16Tqj.woff2",
         "stylesheet 2 kB /_astro/index.td-SGHPV.css",
         "stylesheet 1 kB /_astro/Lightbox.tSWfEd92.css",
         "stylesheet 2 kB /_astro/Basis.D6rWlFaZ.css",
-        "stylesheet 2 kB /_astro/PresseFilm.Pvwx6IJs.css",
+        "stylesheet 2 kB /_astro/PresseFilm.z996GO0W.css",
         "stylesheet 1 kB /_astro/AnfrageFormular.B2XFSRyg.css",
         "font 47 kB /_astro/inter-latin-wght-normal.Dx4kXJAl.woff2",
-        "document 21 kB /",
         "image 45 kB /_astro/poster-quer.D0oYptdo_2hupnp.avif",
+        "document 21 kB /",
         "script 1 kB /_astro/Zeitleiste.astro_astro_type_script_index_0_lang.CuK3wq_s.js",
         "script 2 kB /_astro/Hero.astro_astro_type_script_index_0_lang.B5jupHYU.js",
-        "script 3 kB /_astro/AnfrageFormular.astro_astro_type_script_index_0_lang.Idw45l7Y.js",
+        "script 2 kB /_astro/Basis.astro_astro_type_script_index_0_lang.TKKq9Om4.js",
         "script 1 kB /_astro/Lightbox.astro_astro_type_script_index_0_lang.CHIQJIXZ.js",
-        "script 2 kB /_astro/Basis.astro_astro_type_script_index_0_lang.BqySre5_.js",
+        "script 5 kB /_astro/AnfrageFormular.astro_astro_type_script_index_0_lang.HkGiiQnI.js",
         "script 0 kB /_astro/bewegung.Ci3i6uZa.js",
-        "image 16 kB /_astro/wohldorf_umbau_02.BNiLy2o-_VJHC1.avif",
         "image 33 kB /_astro/ms-wohldorf-2024.DNJParMR_aAIpt.avif",
+        "image 16 kB /_astro/wohldorf_umbau_02.BNiLy2o-_VJHC1.avif",
         "image 26 kB /_astro/wohldorf_ueberfahrt-hamburg_10.D2-zLw___Z1zPcLo.avif",
         "image 17 kB /_astro/ndr-pfefferkoerner-wohldorf.D3RUWIWy_Z1IjjCJ.avif",
         "image 23 kB /_astro/ms-wohldorf-2024.DNJParMR_Z1vq09s.avif"
@@ -1257,6 +1582,12 @@
     "/anlaesse/private-feier/@390": [],
     "/offsite-hamburg/@390": [],
     "/haeufige-fragen/@390": [],
+    "/ratgeber/@390": [],
+    "/ratgeber/offsite-hamburg-planen/@390": [],
+    "/ratgeber/lernort-an-bord/@390": [],
+    "/ratgeber/umbau-faehre-zum-veranstaltungsschiff/@390": [],
+    "/en/@390": [],
+    "/en/faq/@390": [],
     "/geschichte/@390": [],
     "/galerie/@390": [],
     "/anfrage/@390": [],
@@ -1271,6 +1602,12 @@
     "/anlaesse/private-feier/@1440": [],
     "/offsite-hamburg/@1440": [],
     "/haeufige-fragen/@1440": [],
+    "/ratgeber/@1440": [],
+    "/ratgeber/offsite-hamburg-planen/@1440": [],
+    "/ratgeber/lernort-an-bord/@1440": [],
+    "/ratgeber/umbau-faehre-zum-veranstaltungsschiff/@1440": [],
+    "/en/@1440": [],
+    "/en/faq/@1440": [],
     "/geschichte/@1440": [],
     "/galerie/@1440": [],
     "/anfrage/@1440": [],
@@ -1290,7 +1627,7 @@
     "nachricht": "Sommerfest für unser Team, gern ab 18 Uhr.",
     "einwilligung": true,
     "website": "",
-    "dauerMs": 1935
+    "dauerMs": 1954
   },
   "livegang": {
     "gesperrt": true,
@@ -1298,15 +1635,11 @@
       {
         "seite": "/datenschutz/",
         "grund": "Entwurf-Hinweis ist an — nach der rechtlichen Prüfung in src/config.ts ENTWURF_HINWEIS_ANZEIGEN = false setzen"
-      },
-      {
-        "seite": "/impressum/",
-        "grund": "Haftungstext prüfen (OFFENE-ANGABEN.md Nr. 1c): Die Verweise auf das aufgehobene TMG wurden entfernt — soll der Text so bleiben?"
       }
     ]
   },
   "ergebnis": {
-    "gesamt": 232,
+    "gesamt": 297,
     "fehlgeschlagen": 0
   }
 }

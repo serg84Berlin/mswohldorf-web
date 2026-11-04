@@ -15,9 +15,13 @@ interface Props {
   id: string;
   titel: string;
   vorauswahl?: AnlassWert;
+  sprache?: 'de' | 'en';
 }
-const { id, titel, vorauswahl } = Astro.props;
-const inhalt = ['Räume und Ausstattung an Bord', 'Alle Anlässe auf einen Blick', 'Anreise aus Berlin und Hamburg', 'Checkliste für Ihre Planung'];
+const { id, titel, vorauswahl, sprache = 'de' } = Astro.props;
+const en = sprache === 'en';
+const inhalt = en
+  ? ['Rooms and facilities on board', 'All occasions at a glance', 'Getting there from Berlin and Hamburg', 'Checklist for your planning']
+  : ['Räume und Ausstattung an Bord', 'Alle Anlässe auf einen Blick', 'Anreise aus Berlin und Hamburg', 'Checkliste für Ihre Planung'];
 ---
 
 <section class="lead-block" aria-labelledby={`${id}-titel`} data-anfrage-verbergen>
@@ -26,7 +30,7 @@ const inhalt = ['Räume und Ausstattung an Bord', 'Alle Anlässe auf einen Blick
       <Picture src={FOTO_DROHNE_2024.bild} alt="" formats={['avif', 'webp']} widths={[320, 480]} sizes="12rem" loading="lazy" class="h-full w-full object-cover" />
       <span class="lead-cover-titel">MS Wohldorf<br /><span>Exposé</span></span>
     </div>
-    <p class="eyebrow mt-6">Exposé · kostenlos</p>
+    <p class="eyebrow mt-6">{en ? 'Exposé · free · in German' : 'Exposé · kostenlos'}</p>
     <h2 id={`${id}-titel`} class="mt-3 font-display text-3xl leading-tight text-schaum">{titel}</h2>
     <ul class="mt-5 grid gap-2 text-nebel">
       {
@@ -38,16 +42,18 @@ const inhalt = ['Räume und Ausstattung an Bord', 'Alle Anlässe auf einen Blick
         ))
       }
     </ul>
-    <ExposeKnopf variante="messing" class="mt-7" />
-    <p class="mt-3 text-sm text-nebel">Ohne Anmeldung, ohne E-Mail.</p>
+    <ExposeKnopf variante="messing" class="mt-7" sprache={sprache} />
+    <p class="mt-3 text-sm text-nebel">{en ? 'No sign-up, no email.' : 'Ohne Anmeldung, ohne E-Mail.'}</p>
   </div>
 
   <div class="lead-formular" data-reveal="rechts">
-    <p class="eyebrow eyebrow-hell">Schnellanfrage</p>
-    <h3 class="mt-3 font-display text-2xl leading-tight text-tiefe">Ist Ihr Termin noch frei?</h3>
-    <p class="mt-2 text-grau">Für bis zu {FAKTEN.maxGaeste} Gäste. Wir melden uns persönlich mit Verfügbarkeit und Angebot.</p>
+    <p class="eyebrow eyebrow-hell">{en ? 'Quick enquiry' : 'Schnellanfrage'}</p>
+    <h3 class="mt-3 font-display text-2xl leading-tight text-tiefe">{en ? 'Is your date still free?' : 'Ist Ihr Termin noch frei?'}</h3>
+    <p class="mt-2 text-grau">
+      {en ? `For up to ${FAKTEN.maxGaeste} guests. We will get back to you personally with availability and an offer.` : `Für bis zu ${FAKTEN.maxGaeste} Gäste. Wir melden uns persönlich mit Verfügbarkeit und Angebot.`}
+    </p>
     <div class="mt-6">
-      <AnfrageFormular id={id} schnell vorauswahl={vorauswahl} />
+      <AnfrageFormular id={id} schnell vorauswahl={vorauswahl} sprache={sprache} />
     </div>
   </div>
 </section>

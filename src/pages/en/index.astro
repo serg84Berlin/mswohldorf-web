@@ -1,0 +1,268 @@
+---
+/**
+ * English landing page — for international teams (e.g. Berlin start-ups) and
+ * guests from abroad. Same sourced facts as the German pages (src/data/englisch.ts).
+ * The exposé, legal pages and occasion details stay German (marked as such).
+ */
+import { Picture } from 'astro:assets';
+import Basis from '../../layouts/Basis.astro';
+import SeitenKopf from '../../components/SeitenKopf.astro';
+import FragenListe from '../../components/FragenListe.astro';
+import LeadBlock from '../../components/LeadBlock.astro';
+import ExposeKnopf from '../../components/ExposeKnopf.astro';
+import Symbol from '../../components/Symbol.astro';
+import Welle from '../../components/Welle.astro';
+import { FAKTEN, KONTAKT, LIEGEPLATZ } from '../../config';
+import { ANREISE } from '../../data/anreise';
+import { ANLAESSE_EN, BESCHREIBUNG_LIEGEPLATZ_EN, FRAGEN_EN, ROUTE_EN, SEITE_EN } from '../../data/englisch';
+import { FOTO_DROHNE_2024, foto } from '../../data/bilder';
+
+const bilder = [
+  { bild: foto('wohldorf_innen_31').bild, alt: 'Round wooden table with blue velvet armchairs in front of the large windows on board.' },
+  { bild: foto('wohldorf_innen_18').bild, alt: 'Desk with a cast-iron industrial base and a screen by the windows, wooden floor and teak doors.' },
+];
+const drohneAlt = 'The MS Wohldorf from above at her berth on the Süderelbe: white superstructure, green roof, Hamburg flag on the mast, pontoon and gangway alongside.';
+const fakten = [
+  { symbol: 'personen', text: `Up to ${FAKTEN.maxGaeste} guests` },
+  { symbol: 'anker', text: `HADAG harbour ferry from ${FAKTEN.baujahr}, converted ${FAKTEN.umbau}` },
+  { symbol: 'feier', text: 'Kitchen with appliances on board' },
+  { symbol: 'karte', text: `${LIEGEPLATZ.name}, parking right outside` },
+] as const;
+const symbole = ['firma', 'workshop', 'kamera', 'buch', 'feier'] as const;
+---
+
+<Basis titel={SEITE_EN.titel} beschreibung={SEITE_EN.beschreibung} sprache="en" alternativ={{ de: '/', en: '/en/' }} bild={FOTO_DROHNE_2024.bild} fussVon="var(--color-sand-hell)">
+  <SeitenKopf eyebrow="Event ship · Hamburg" titel="A 1959 harbour ferry for your team." lead={`Offsites, workshops, team events and celebrations for up to ${FAKTEN.maxGaeste} people — ${BESCHREIBUNG_LIEGEPLATZ_EN}.`} bild={FOTO_DROHNE_2024.bild} bildAlt={drohneAlt}>
+    <div class="mt-8 flex flex-wrap gap-3" data-reveal>
+      <a href="#enquiry" class="knopf knopf-messing" data-magnet>Check availability <Symbol name="pfeil" /></a>
+      <ExposeKnopf variante="geist" sprache="en" class="text-schaum" />
+    </div>
+  </SeitenKopf>
+
+  <!-- The ship -->
+  <section id="venue" class="bg-schaum" aria-labelledby="venue-title">
+    <div class="seite-breite grid gap-12 py-14 lg:grid-cols-[1fr_1.05fr] lg:items-center lg:gap-16 lg:py-20">
+      <div data-reveal="links">
+        <p class="eyebrow">The ship</p>
+        <h2 id="venue-title" class="titel-mittel mt-4 text-tiefe">A venue with history, for up to {FAKTEN.maxGaeste} people.</h2>
+        <div class="lead mt-6 grid gap-4 text-grau">
+          <p>
+            The MS Wohldorf is a former HADAG harbour ferry: in service from {FAKTEN.baujahr}, built for up to {FAKTEN.fahrgaesteFrueher} passengers, and
+            converted into an office and event ship in {FAKTEN.umbau}. Today she lies at the {LIEGEPLATZ.name} pier on the Süderelbe — on a small private
+            road, with parking right outside.
+          </p>
+          <p>
+            The main deck has a large event area and a smaller, glazed meeting room; the upper deck has the office with galley. The ship no longer runs under
+            her own power — events take place at the berth.
+          </p>
+        </div>
+        <ul class="mt-8 grid gap-3 sm:grid-cols-2" data-reveal-gruppe>
+          {
+            fakten.map((f) => (
+              <li class="eckdatum" data-reveal>
+                <Symbol name={f.symbol} class="size-5 shrink-0 text-petrol" />
+                <span>{f.text}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div class="grid grid-cols-2 gap-3" data-reveal="zoom">
+        {
+          bilder.map((b) => (
+            <div class="bild">
+              <Picture src={b.bild} alt={b.alt} formats={['avif', 'webp']} widths={[360, 560, 800]} sizes="(min-width: 1024px) 18rem, 50vw" loading="lazy" class="h-full w-full object-cover" />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <Welle von="var(--color-schaum)" nach="var(--color-tiefe)" />
+
+  <!-- Occasions -->
+  <section class="bg-tiefe auf-dunkel" aria-labelledby="occasions-title">
+    <div class="seite-breite py-14 lg:py-20">
+      <div class="max-w-2xl" data-reveal>
+        <p class="eyebrow">Occasions</p>
+        <h2 id="occasions-title" class="titel-mittel mt-4 text-schaum">Five ways on board — and room for your own idea.</h2>
+      </div>
+      <ul class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5" data-reveal-gruppe>
+        {
+          ANLAESSE_EN.map((a, i) => (
+            <li class="anlass karte-glas" data-reveal>
+              <span class="anlass-symbol">
+                <Symbol name={symbole[i]} class="size-5" />
+              </span>
+              <h3 class="mt-4 text-lg font-semibold text-schaum">{a.titel}</h3>
+              <p class="mt-1.5 text-nebel">{a.text}</p>
+              <a class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-messing-hell hover:underline" href={`/anlaesse/${a.slug}/`} lang="de" hreflang="de">
+                Details (in German) <Symbol name="pfeil" class="size-4" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <Welle von="var(--color-tiefe)" nach="var(--color-schaum)" />
+
+  <!-- Offsite from Berlin -->
+  <section id="offsite" class="bg-schaum" aria-labelledby="offsite-title">
+    <div class="seite-breite py-14 lg:py-20">
+      <div class="max-w-2xl" data-reveal>
+        <p class="eyebrow">Offsite from Berlin</p>
+        <h2 id="offsite-title" class="titel-mittel mt-4 text-tiefe">Morning in Berlin, midday on board.</h2>
+      </div>
+      <ol class="route mt-10" data-reveal aria-label="Getting there from Berlin">
+        {
+          ROUTE_EN.map((s, i) => (
+            <li class="route-halt">
+              <span class="route-ort">
+                <span class="route-nr" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                {s.ort}
+              </span>
+              {s.mittel && (
+                <span class="route-etappe">
+                  <span class="font-semibold text-schaum">{s.mittel}</span> · {s.dauer}
+                </span>
+              )}
+            </li>
+          ))
+        }
+      </ol>
+      <ul class="mt-8 grid gap-4 md:grid-cols-3" data-reveal-gruppe>
+        <li class="info" data-reveal>
+          <h3 class="font-semibold text-tiefe">From Hamburg Airport</h3>
+          <p class="mt-1 text-grau">About {ANREISE.flughafenKm} km to the berth, roughly half an hour by taxi or car.</p>
+        </li>
+        <li class="info" data-reveal>
+          <h3 class="font-semibold text-tiefe">By car</h3>
+          <p class="mt-1 text-grau">Satnav: {LIEGEPLATZ.navi}. Parking right outside.</p>
+        </li>
+        <li class="info" data-reveal>
+          <h3 class="font-semibold text-tiefe">Good to know</h3>
+          <p class="mt-1 text-grau">Train times can change — check current connections with Deutsche Bahn. Access to the ship is not barrier-free.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <Welle von="var(--color-schaum)" nach="var(--color-sand-hell)" />
+
+  <!-- FAQ + enquiry -->
+  <section class="bg-sand-hell" aria-labelledby="faq-title">
+    <div class="seite-breite py-14 lg:py-20">
+      <div class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14">
+        <div data-reveal="links">
+          <p class="eyebrow">FAQ</p>
+          <h2 id="faq-title" class="titel-mittel mt-4 text-tiefe">Questions teams ask before they come.</h2>
+          <a href="/en/faq/" class="textlink mt-5 inline-flex items-center gap-1.5 font-semibold">All questions <Symbol name="pfeil" class="size-4" /></a>
+          <p class="mt-8 text-grau">Prefer to talk? Your contact is {KONTAKT.person}.</p>
+          <a class="mt-2 flex items-center gap-2 text-lg font-semibold text-petrol hover:underline" href={`tel:${KONTAKT.telefonLink}`}>
+            <Symbol name="telefon" class="size-5" />{KONTAKT.telefon}
+          </a>
+          <a class="mt-1 flex items-center gap-2 text-lg font-semibold text-petrol hover:underline" href={`mailto:${KONTAKT.mail}`}>
+            <Symbol name="mail" class="size-5" />{KONTAKT.mail}
+          </a>
+        </div>
+        <FragenListe fragen={FRAGEN_EN.filter((f) => f.start)} />
+      </div>
+
+      <div id="enquiry" class="mt-16 scroll-mt-24">
+        <LeadBlock id="schnell-en" titel="Everything about the MS Wohldorf — in the exposé." sprache="en" />
+      </div>
+    </div>
+  </section>
+</Basis>
+
+<style>
+  .bg-schaum {
+    background: var(--color-schaum);
+  }
+  .bg-sand-hell {
+    background: var(--color-sand-hell);
+  }
+  .bg-tiefe {
+    background: var(--color-tiefe);
+  }
+  .eckdatum {
+    display: flex;
+    gap: 0.7rem;
+    align-items: center;
+    padding: 0.85rem 1rem;
+    border-radius: 0.9rem;
+    background: #fff;
+    border: 1px solid rgb(11 26 42 / 0.08);
+    color: var(--color-tiefe);
+    font-weight: 560;
+  }
+  .bild {
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border-radius: 1.2rem;
+    box-shadow: 0 30px 60px -40px rgb(6 18 31 / 0.7);
+  }
+  .bild:nth-child(2) {
+    margin-top: 2.5rem;
+  }
+  .anlass {
+    display: flex;
+    flex-direction: column;
+    padding: 1.4rem 1.3rem;
+    border-radius: 1.1rem;
+  }
+  .anlass > a {
+    margin-top: auto;
+    padding-top: 1rem;
+  }
+  .anlass-symbol {
+    display: inline-grid;
+    place-items: center;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 0.8rem;
+    background: var(--color-messing);
+    color: var(--color-tiefe);
+  }
+  .route {
+    display: grid;
+    gap: 1.25rem;
+    padding: clamp(1.25rem, 3vw, 2.25rem);
+    border-radius: 1.6rem;
+    background:
+      radial-gradient(70% 140% at 100% 0%, rgb(43 122 138 / 0.45), transparent 60%),
+      var(--color-tiefe);
+    color: var(--color-nebel);
+  }
+  @media (min-width: 900px) {
+    .route {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .route-halt {
+    display: grid;
+    gap: 0.4rem;
+    padding-top: 0.9rem;
+    border-top: 2px dashed color-mix(in srgb, var(--color-messing-hell) 70%, transparent);
+  }
+  .route-ort {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+    color: var(--color-schaum);
+  }
+  .route-nr {
+    margin-right: 0.5rem;
+    font-size: 0.9em;
+    color: var(--color-messing-hell);
+  }
+  .info {
+    padding: 1.3rem 1.25rem;
+    border-radius: 1.1rem;
+    background: #fff;
+    border: 1px solid rgb(11 26 42 / 0.07);
+    box-shadow: 0 20px 40px -34px rgb(6 18 31 / 0.5);
+  }
+</style>

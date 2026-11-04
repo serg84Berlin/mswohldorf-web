@@ -59,6 +59,8 @@ const SEITEN = [
   '/ratgeber/offsite-hamburg-planen/',
   '/ratgeber/lernort-an-bord/',
   '/ratgeber/umbau-faehre-zum-veranstaltungsschiff/',
+  '/en/',
+  '/en/faq/',
   '/geschichte/',
   '/galerie/',
   '/anfrage/',
@@ -473,6 +475,42 @@ async function fuelle(seite, id) {
   pruefe('Schnellanfrage: keine externen Anfragen außer dem Anfrage-Ziel, keine Skriptfehler', extern.length === 0 && fehler.length === 0, [...extern, ...fehler].join(' | '));
   await seite.screenshot({ path: join(BILDER, 'schnellanfrage-erfolg-390.png') });
   await ctx.close();
+}
+
+/* ------------------------------------------------------------------
+   6b2. Englisch: Formular (Beschriftung/Meldungen englisch, Vertrag deutsch), hreflang
+   ------------------------------------------------------------------ */
+{
+  const { ctx, extern, fehler } = await kontext(verbunden, { viewport: GROESSEN[390] }, { erlaubt: [ANFRAGE_TEST_URL] });
+  let gesendet = null;
+  await ctx.route(ANFRAGE_TEST_URL, (route) => {
+    if (route.request().method() === 'OPTIONS') return route.fulfill({ status: 204, headers: { 'access-control-allow-origin': '*', 'access-control-allow-headers': 'content-type', 'access-control-allow-methods': 'POST' } });
+    gesendet = JSON.parse(route.request().postData() ?? 'null');
+    return route.fulfill({ status: 202, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: '{"ok":true}' });
+  });
+  const seite = await ctx.newPage();
+  await seite.goto(verbunden.url + '/en/', { waitUntil: 'networkidle' });
+  const id = 'schnell-en';
+  pruefe('Englisch: <html lang="en">, Formular englisch beschriftet', (await seite.getAttribute('html', 'lang')) === 'en' && (await seite.textContent(`label[for="${id}-email"]`)).includes('Email') && (await seite.textContent(`#${id} [data-senden]`)).includes('Check availability'));
+  await seite.click(`#${id} [data-senden]`);
+  pruefe('Englisch: Fehlermeldungen englisch', (await seite.textContent(`#${id}-anlass-fehler`)) === 'Please choose an occasion.' && (await seite.textContent(`#${id}-email-fehler`)).startsWith('Please enter a valid email'));
+  await seite.selectOption(`#${id}-anlass`, 'Firmenevent');
+  await seite.fill(`#${id}-name`, 'Alex Example');
+  await seite.fill(`#${id}-email`, 'alex@example.org');
+  await seite.check(`#${id}-einwilligung`);
+  await seite.click(`#${id} [data-senden]`);
+  await seite.waitForTimeout(800);
+  const g = gesendet ?? {};
+  const schluessel = ['quelle', 'anlass', 'datum', 'ausweichdatum', 'gaeste', 'name', 'email', 'telefon', 'nachricht', 'einwilligung', 'website', 'dauerMs'];
+  pruefe('Englisch: gleicher Vertrag, Anlass-Wert deutsch, Hinweis „auf Englisch antworten“ für Uli', JSON.stringify(Object.keys(g).sort()) === JSON.stringify([...schluessel].sort()) && g.anlass === 'Firmenevent' && g.nachricht.includes('[Englische Seite'), JSON.stringify(g));
+  pruefe('Englisch: Erfolgsmeldung englisch', (await seite.textContent(`[data-erfolg="${id}"]`)).includes('Thank you! Your enquiry has arrived.'));
+  pruefe('Englisch: keine externen Anfragen außer dem Ziel, keine Skriptfehler', extern.length === 0 && fehler.length === 0, [...extern, ...fehler].join(' | '));
+  await ctx.close();
+  const hreflang = async (pfad, de, en) => {
+    const html = await readFile(join(PROJEKT, 'dist', pfad, 'index.html'), 'utf8');
+    return html.includes(`hreflang="de" href="https://www.mswohldorf.de${de}"`) && html.includes(`hreflang="en" href="https://www.mswohldorf.de${en}"`) && html.includes(`hreflang="x-default" href="https://www.mswohldorf.de${de}"`);
+  };
+  pruefe('hreflang: Start ↔ /en/ und Fragen ↔ /en/faq/ (beide Richtungen, x-default deutsch)', (await hreflang('', '/', '/en/')) && (await hreflang('en', '/', '/en/')) && (await hreflang('haeufige-fragen', '/haeufige-fragen/', '/en/faq/')) && (await hreflang('en/faq', '/haeufige-fragen/', '/en/faq/')));
 }
 
 /* ------------------------------------------------------------------

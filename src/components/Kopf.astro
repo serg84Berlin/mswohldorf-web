@@ -5,8 +5,16 @@ import Symbol from './Symbol.astro';
 
 interface Props {
   ueberHero?: boolean;
+  sprache?: 'de' | 'en';
 }
-const { ueberHero = false } = Astro.props;
+const { ueberHero = false, sprache = 'de' } = Astro.props;
+const en = sprache === 'en';
+/** Englische Navigation: die englischen Seiten und der Weg zurück ins Deutsche. */
+const NAV_EN = [
+  { href: '/en/#venue', text: 'The ship' },
+  { href: '/en/#offsite', text: 'Offsite from Berlin' },
+  { href: '/en/faq/', text: 'FAQ' },
+];
 const pfad = Astro.url.pathname;
 const aktiv = (p: string) => (pfad === p ? 'page' : undefined);
 const anlassAktiv = pfad.startsWith('/anlaesse/');
@@ -14,16 +22,41 @@ const anlassAktiv = pfad.startsWith('/anlaesse/');
 
 <header class:list={['kopf auf-dunkel', { 'kopf-ueber-hero': ueberHero }]} data-kopf>
   <div class="seite-breite flex h-16 items-center justify-between gap-4 lg:h-[4.75rem]">
-    <a href="/" class="marke group">
+    <a href={en ? '/en/' : '/'} class="marke group">
       <Logo class="size-9 transition-transform duration-500 group-hover:rotate-[-8deg] lg:size-10" />
       <span class="flex flex-col leading-none">
         <span class="font-display text-[1.28rem] font-semibold tracking-tight lg:text-[1.4rem]">MS Wohldorf</span>
-        <span class="mt-1 text-[0.66rem] font-semibold tracking-[0.2em] text-messing-hell uppercase">Eventschiff · Hamburg</span>
+        <span class="mt-1 text-[0.66rem] font-semibold tracking-[0.2em] whitespace-nowrap text-messing-hell uppercase">{en ? 'Event ship · Hamburg' : 'Eventschiff · Hamburg'}</span>
       </span>
-      <span class="sr-only">, zur Startseite</span>
+      <span class="sr-only">{en ? ', to the home page' : ', zur Startseite'}</span>
     </a>
 
-    <nav aria-label="Hauptnavigation" class="hidden lg:block">
+    {
+      en && (
+        <nav aria-label="Main navigation" class="hidden lg:block">
+          <ul class="flex items-center gap-1 text-[0.95rem] font-medium">
+            {NAV_EN.map((n) => (
+              <li>
+                <a class="navlink" href={n.href} aria-current={aktiv(n.href)}>
+                  {n.text}
+                </a>
+              </li>
+            ))}
+            <li>
+              <a class="navlink" href="/" lang="de" hreflang="de">
+                Deutsch
+              </a>
+            </li>
+            <li class="ml-3">
+              <a class="knopf knopf-messing !min-h-11 !px-5" href="/en/#enquiry" data-magnet>
+                Enquiry
+              </a>
+            </li>
+          </ul>
+        </nav>
+      )
+    }
+    <nav aria-label="Hauptnavigation" class:list={['hidden', { 'lg:block': !en }]}>
       <ul class="flex items-center gap-1 text-[0.95rem] font-medium">
         <li class="aufklapp" data-aufklapp>
           <button type="button" class="navlink" aria-expanded="false" aria-controls="menue-anlaesse" data-aufklapp-knopf aria-current={anlassAktiv ? 'true' : undefined}>
@@ -48,18 +81,42 @@ const anlassAktiv = pfad.startsWith('/anlaesse/');
         <li><a class="navlink" href="/geschichte/" aria-current={aktiv('/geschichte/')}>Geschichte</a></li>
         <li><a class="navlink" href="/galerie/" aria-current={aktiv('/galerie/')}>Galerie</a></li>
         <li><a class="navlink" href="/#anfahrt">Anfahrt</a></li>
+        <li><a class="navlink" href="/en/" lang="en" hreflang="en" title="English">EN</a></li>
         <li class="ml-3"><a class="knopf knopf-messing !min-h-11 !px-5" href="/anfrage/" aria-current={aktiv('/anfrage/')} data-magnet>Anfrage</a></li>
       </ul>
     </nav>
 
-    <a href="#fuss-navigation" class="menue-knopf lg:hidden" aria-expanded="false" aria-controls="mobil-menue" data-menue-knopf role="button">
-      <span class="menue-text">Menü</span>
+    <a href="#fuss-navigation" class="menue-knopf lg:hidden" aria-expanded="false" aria-controls="mobil-menue" data-menue-knopf role="button" data-text-auf={en ? 'Menu' : 'Menü'} data-text-zu={en ? 'Close' : 'Schließen'}>
+      <span class="menue-text">{en ? 'Menu' : 'Menü'}</span>
       <span class="menue-striche" aria-hidden="true"><span></span><span></span><span></span></span>
     </a>
   </div>
 
   <div id="mobil-menue" class="mobil-menue lg:hidden" data-mobil-menue hidden>
-    <nav aria-label="Hauptnavigation (mobil)" class="seite-breite pt-6 pb-10">
+    {
+      en && (
+        <nav aria-label="Main navigation (mobile)" class="seite-breite pt-6 pb-10">
+          <ul class="grid gap-1">
+            {NAV_EN.map((n, i) => (
+              <li class="mobil-eintrag" style={`--i:${i}`}>
+                <a href={n.href} class="mobil-link mobil-gross" data-menue-schliessen>
+                  {n.text}
+                </a>
+              </li>
+            ))}
+            <li class="mobil-eintrag" style="--i:3">
+              <a href="/" class="mobil-link mobil-gross" lang="de" hreflang="de">
+                Deutsche Website
+              </a>
+            </li>
+          </ul>
+          <a href="/en/#enquiry" class="knopf knopf-messing mt-8 w-full" data-menue-schliessen>
+            Send an enquiry <Symbol name="pfeil" />
+          </a>
+        </nav>
+      )
+    }
+    <nav aria-label="Hauptnavigation (mobil)" class="seite-breite pt-6 pb-10" hidden={en}>
       <p class="eyebrow mb-3">Anlässe</p>
       <ul class="grid gap-1">
         {
@@ -80,6 +137,7 @@ const anlassAktiv = pfad.startsWith('/anlaesse/');
         <li class="mobil-eintrag" style="--i:8"><a href="/ratgeber/" class="mobil-link mobil-gross" aria-current={pfad.startsWith('/ratgeber/') ? 'page' : undefined}>Ratgeber</a></li>
         <li class="mobil-eintrag" style="--i:9"><a href="/haeufige-fragen/" class="mobil-link mobil-gross" aria-current={aktiv('/haeufige-fragen/')}>Häufige Fragen</a></li>
         <li class="mobil-eintrag" style="--i:10"><a href="/#anfahrt" class="mobil-link mobil-gross" data-menue-schliessen>Anfahrt</a></li>
+        <li class="mobil-eintrag" style="--i:11"><a href="/en/" class="mobil-link mobil-gross" lang="en" hreflang="en">English</a></li>
       </ul>
       <a href="/anfrage/" class="knopf knopf-messing mt-8 w-full">Jetzt anfragen <Symbol name="pfeil" /></a>
     </nav>

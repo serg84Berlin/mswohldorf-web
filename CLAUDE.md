@@ -53,6 +53,9 @@ npm run pruefen                              # Playwright-Prüfungen gegen dist/
   Phase 2 gebaut: Exposé-PDF (`npm run expose`, Vorlage `/expose/`), Lead-Block mit Schnellanfrage
   (`LeadBlock.astro`, `AnfrageFormular schnell`), Erstantwort-Hinweis (Server meldet `erstantwort: true`),
   Lead-Quelle hinter `PUBLIC_ANFRAGE_ERWEITERT=1`. Ändern sich Angaben im Exposé: `npm run expose` neu laufen lassen.
+  Phase 3 gebaut: Ratgeber (`/ratgeber/`, Artikel in `src/content/ratgeber/`, Quellen Pflicht) und Englisch
+  (`/en/`, `/en/faq/`, Texte `src/data/englisch.ts`). **Ändert sich ein Fakt, auch `src/data/englisch.ts`,
+  die Ratgeber-Artikel und das Exposé mitziehen.**
 - **Offen bis zum Livegang** (Details und Nummern: `OFFENE-ANGABEN.md`):
   - Freigabe der Datenschutzerklärung durch Sergiy, dann `ENTWURF_HINWEIS_ANZEIGEN = false` (Nr. 2).
   - Anfrage-Server (`PUBLIC_ANFRAGE_URL` → finanzelot-lotse.de) erlaubt CORS bisher nur für

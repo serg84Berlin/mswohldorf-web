@@ -49,6 +49,7 @@ export const GET: APIRoute = async () => {
     `- [Galerie](${url('/galerie/')}): Fotos innen, außen, Umbau, Überfahrt`,
     `- [Anfrage](${url('/anfrage/')}): unverbindliche Anfrage`,
     `- [Exposé (PDF)](${url('/pdf/ms-wohldorf-expose.pdf')}): Räume, Anlässe, Anreise, Planungs-Checkliste`,
+    `- [English](${url('/en/')}): English overview, offsite from Berlin, enquiry form; [FAQ in English](${url('/en/faq/')})`,
     '',
   ];
   return new Response(zeilen.join('\n'), { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });

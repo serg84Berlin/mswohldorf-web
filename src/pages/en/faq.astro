@@ -1,0 +1,58 @@
+---
+/** English FAQ — same sourced answers as /haeufige-fragen/ (src/data/englisch.ts), with FAQPage schema. */
+import Basis from '../../layouts/Basis.astro';
+import SeitenKopf from '../../components/SeitenKopf.astro';
+import FragenListe from '../../components/FragenListe.astro';
+import ExposeKnopf from '../../components/ExposeKnopf.astro';
+import Symbol from '../../components/Symbol.astro';
+import { FRAGEN_EN } from '../../data/englisch';
+import { SEITE } from '../../config';
+
+const faq = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${SEITE.url}/en/faq/#faq`,
+  about: { '@id': `${SEITE.url}/#schiff` },
+  inLanguage: 'en-GB',
+  mainEntity: FRAGEN_EN.map((f) => ({ '@type': 'Question', name: f.frage, acceptedAnswer: { '@type': 'Answer', text: f.antwort } })),
+};
+---
+
+<Basis
+  titel="FAQ — MS Wohldorf, event ship in Hamburg"
+  beschreibung="Answers to the most common questions about the MS Wohldorf: guests, berth, getting there from Berlin, rooms, kitchen, accessibility, viewing and enquiries."
+  sprache="en"
+  alternativ={{ de: '/haeufige-fragen/', en: '/en/faq/' }}
+  strukturiert={[faq]}
+  fussVon="var(--color-schaum)"
+>
+  <SeitenKopf eyebrow="FAQ" titel="Good to know before you enquire." lead="The key answers about the MS Wohldorf at a glance. Your question isn’t here? Just ask us." />
+
+  <section class="bg-schaum" aria-label="Questions and answers">
+    <div class="seite-breite grid gap-12 py-12 lg:grid-cols-[1.4fr_0.6fr] lg:gap-14 lg:py-16">
+      <FragenListe fragen={FRAGEN_EN} ersteOffen />
+      <aside class="grid content-start gap-6" data-reveal="rechts">
+        <div class="kasten auf-dunkel">
+          <p class="eyebrow">Personal</p>
+          <h2 class="mt-3 font-display text-2xl leading-tight text-schaum">Any other questions?</h2>
+          <p class="mt-3 text-nebel">Occasion, preferred date and number of guests are enough — we will get back to you personally.</p>
+          <a href="/en/#enquiry" class="knopf knopf-messing mt-5 w-full" data-magnet>Send an enquiry <Symbol name="pfeil" /></a>
+          <ExposeKnopf variante="geist" sprache="en" class="mt-3 w-full text-schaum" />
+        </div>
+      </aside>
+    </div>
+  </section>
+</Basis>
+
+<style>
+  .bg-schaum {
+    background: var(--color-schaum);
+  }
+  .kasten {
+    padding: 1.6rem;
+    border-radius: 1.4rem;
+    background:
+      radial-gradient(80% 120% at 100% 0%, rgb(43 122 138 / 0.5), transparent 60%),
+      var(--color-tiefe);
+  }
+</style>

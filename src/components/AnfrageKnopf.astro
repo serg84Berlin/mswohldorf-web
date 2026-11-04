@@ -1,10 +1,15 @@
 ---
 import Symbol from './Symbol.astro';
+
+interface Props {
+  sprache?: 'de' | 'en';
+}
+const en = Astro.props.sprache === 'en';
 ---
 
-<a href="/anfrage/" class="anfrage-schwebend knopf knopf-messing" data-anfrage-schwebend data-magnet>
+<a href={en ? '/en/#enquiry' : '/anfrage/'} class="anfrage-schwebend knopf knopf-messing" data-anfrage-schwebend data-magnet>
   <Symbol name="mail" class="size-5" />
-  <span>Anfrage</span>
+  <span>{en ? 'Enquiry' : 'Anfrage'}</span>
 </a>
 
 <style>
