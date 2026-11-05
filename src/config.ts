@@ -155,6 +155,14 @@ export const MEDIEN = {
   lebenslauf: 'https://www.elbdampfer-hamburg.de/lebenslauf-hadag-hafenfaehre-wohldorf-23917/',
 } as const;
 
+/**
+ * Öffentliche Profile der MS Wohldorf (Google Maps, Apple Karten, Bing, OpenStreetMap,
+ * Location-Portale). Erscheinen im Schema der Website als `sameAs` — damit Suchmaschinen
+ * und KI-Assistenten die Einträge demselben Schiff zuordnen. Nur echte, öffentliche Links
+ * eintragen, sobald ein Profil steht (Anleitung: PROFILE.md, Abschnitt 10).
+ */
+export const PROFIL_LINKS: readonly string[] = [];
+
 /** Auswahl im Anfrageformular — Werte gehen 1:1 an den Server. */
 export const ANLAESSE_AUSWAHL = [
   'Firmenevent',

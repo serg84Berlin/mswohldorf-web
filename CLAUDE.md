@@ -24,6 +24,7 @@ npm run build                                # Produktion — scheitert, solange
 npm run check                                # astro check
 npm run offen                                # alle offenen Angaben, Pflicht zuerst
 npm run pruefen                              # Playwright-Prüfungen gegen dist/
+npm run profilbilder                         # Bilder für Google/Apple/Portale → dist-profilbilder/
 ```
 
 ## Regeln für Änderungen
@@ -70,7 +71,10 @@ npm run pruefen                              # Playwright-Prüfungen gegen dist/
 - **Offen** (`LIVEGANG.md` Schritt 9, `REICHWEITE.md` Phase 4–5):
   - Domain-Vertrag bei IONOS prüfen (läuft unabhängig vom Webspace, der im Dezember endet).
   - Lead-Quelle (`PUBLIC_ANFRAGE_ERWEITERT`) erst, wenn Merlin `art` und `herkunft` annimmt.
-  - Google-Unternehmensprofil, Bing Places, Apple Business Connect, Location-Portale (Phase 5).
+  - Google-Unternehmensprofil, Bing Places, Apple Business Connect, OpenStreetMap, MOIN, HCB Venuefinder
+    (Phase 5): Textpaket, Klickpfade und Fragen an Uli in `PROFILE.md`; Bilder `npm run profilbilder`.
+    Steht ein Profil, seinen Link in `PROFIL_LINKS` (`src/config.ts`) eintragen → Schema `sameAs`.
+    Uli hat einen Giggster-Eintrag (30 Pers., 157,94 m²) — weicht von der Website ab, klären.
   - KI-Loops aus Originalfotos (Phase 4): Kosten und Bildrechte (Andrea Klick) klären.
   - Nach einigen Wochen: `https://mswohldorf.netlify.app` aus `ANFRAGE_HERKUNFT` nehmen; HSTS-`preload` erwägen.
 

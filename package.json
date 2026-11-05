@@ -15,7 +15,8 @@
     "poster": "node scripts/poster-aufnehmen.mjs",
     "alte-seite": "node scripts/alte-seite-holen.mjs",
     "offen": "node scripts/offene-angaben.mjs",
-    "expose": "node scripts/expose-erzeugen.mjs"
+    "expose": "node scripts/expose-erzeugen.mjs",
+    "profilbilder": "node scripts/profilbilder-erzeugen.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "3.7.4",
