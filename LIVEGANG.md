@@ -24,13 +24,38 @@ request** → **Confirm merge**. Netlify baut danach automatisch (noch als Vorsc
 
 ## 3. Anfrage-Server für die echte Domain freigeben (Lotse/Merlin)
 
-Im Lotse-Server die erlaubten Herkünfte (CORS) um `https://www.mswohldorf.de` ergänzen
-(`https://mswohldorf.netlify.app` darf bleiben). Danach prüfen — die Antwort muss
-`access-control-allow-origin: https://www.mswohldorf.de` enthalten:
+Kein Code — ein Schalter in der Server-Konfiguration auf Merlin (Repo `finanzelot-lotse`,
+`docs/ANFRAGE-OEFFENTLICH.md` §3 und §5 Schritt 5). Kann schon **vor** der DNS-Umstellung passieren.
+
+Per SSH auf den Merlin-Server (IONOS), dann:
+
+```bash
+cd /opt/finanzelot-lotse/deploy
+nano .env.production
+```
+
+Die Zeile `ANFRAGE_HERKUNFT=…` so ändern (Komma-Liste, ohne Leerzeichen, ohne Pfad; die Netlify-Adresse
+noch eine Weile stehen lassen) — speichern mit Strg+O, Enter, Strg+X:
+
+```
+ANFRAGE_HERKUNFT=https://www.mswohldorf.de,https://mswohldorf.de,https://mswohldorf.netlify.app
+```
+
+Backend neu starten und prüfen (erwartet: „ANFRAGE_HERKUNFT: 3 gueltige(r) Ursprung“):
+
+```bash
+docker compose --env-file .env.production up -d --force-recreate backend
+./pruefe-golive.sh
+```
+
+Von überall prüfen — die Antwort muss `access-control-allow-origin: https://www.mswohldorf.de` enthalten:
 
 ```bash
 curl -s -o /dev/null -D - -X OPTIONS -H 'Origin: https://www.mswohldorf.de' -H 'Access-Control-Request-Method: POST' -H 'Access-Control-Request-Headers: content-type' https://finanzelot-lotse.de/api/oeffentlich/anfrage | grep -i access-control-allow-origin
 ```
+
+Hinweis: Merlin lehnt unbekannte Felder ab (`400`, „Dieses Feld kennt das Formular nicht.“). Deshalb bleibt
+`PUBLIC_ANFRAGE_ERWEITERT` (Lead-Quelle) in Netlify **aus**, bis Merlin `art` und `herkunft` kennt.
 
 ## 4. Domain in Netlify anlegen (vor der DNS-Umstellung)
 
