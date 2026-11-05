@@ -41,12 +41,16 @@ npm run pruefen                              # Playwright-Prüfungen gegen dist/
 6. Code, Dateien und Texte auf Deutsch, Kunden in der Sie-Form.
 7. Vor jedem Push: `npm run check`, Vorschau-Build und – wenn Seiten betroffen sind – `npm run pruefen`.
 
-## Stand (04.11.2026)
+## Stand (05.11.2026)
 
+- **Live seit 05.11.2026** auf https://www.mswohldorf.de: DNS bei IONOS umgestellt (A `@` → `75.2.60.5`,
+  CNAME `www` → `mswohldorf.netlify.app`; MX/SPF für Zoho unverändert), `www` ist Primary Domain,
+  Let's-Encrypt-Zertifikat für `mswohldorf.de` und `www`, `PUBLIC_VORSCHAU` für Production gelöscht.
+  Deploy-Previews und Branch-Deploys bleiben Vorschau (`netlify.toml`).
 - Gemerged: PR #1 (neue Seite, Inhalte der alten Seite), PR #2 (Platzhalter-Arten, Livegang-Sperre),
   PR #3 (diese Datei), PR #4 (Rechtliches 10/12, Reichweite Phase 1), PR #5 (Reichweite Phase 2),
-  PR #6 (Rückmeldung Uli, Ratgeber, Englisch).
-- Netlify Production baut als Vorschau (`PUBLIC_VORSCHAU=1` für Production gesetzt): noindex + Band.
+  PR #6 (Rückmeldung Uli, Ratgeber, Englisch), PR #7 (Datenschutz freigegeben, `LIVEGANG.md`),
+  PR #8 (CORS-Schritt für Merlin).
 - Rechtliches: alle Pflicht-Punkte geklärt (Sergiy; Uli per Mail 04.11.2026: Impressum wie finanzelot.de,
   kein Datenschutzbeauftragter; Preise, Catering, Technik usw. „alles auf Anfrage“). Datenschutzerklärung
   von Sergiy freigegeben (04.11.2026) — `npm run build` läuft durch. **Livegang-Anleitung: `LIVEGANG.md`.**
@@ -58,11 +62,17 @@ npm run pruefen                              # Playwright-Prüfungen gegen dist/
   Phase 3 gebaut: Ratgeber (`/ratgeber/`, Artikel in `src/content/ratgeber/`, Quellen Pflicht) und Englisch
   (`/en/`, `/en/faq/`, Texte `src/data/englisch.ts`). **Ändert sich ein Fakt, auch `src/data/englisch.ts`,
   die Ratgeber-Artikel und das Exposé mitziehen.**
-- **Offen bis zum Livegang** (Schritt für Schritt: `LIVEGANG.md`):
-  - Anfrage-Server (`PUBLIC_ANFRAGE_URL` → finanzelot-lotse.de) erlaubt CORS bisher nur für
-    mswohldorf.netlify.app, noch nicht für `https://www.mswohldorf.de`.
-  - DNS-Umstellung bei IONOS. Auf der Domain läuft Zoho-Mail: nur A-Record und `www` ändern,
-    MX und SPF bleiben.
+- Anfrage-Server erlaubt CORS für `https://www.mswohldorf.de`, `https://mswohldorf.de` und
+  `https://mswohldorf.netlify.app` (`ANFRAGE_HERKUNFT` auf Merlin, geprüft 05.11.2026).
+- Nach dem Livegang erledigt (Sergiy, 05.11.2026): Testanfrage über die echte Domain bis Zoho,
+  Test-Mail an @mswohldorf.de, Google Search Console (Domain-Property, Sitemap, Indexierung beantragt),
+  Bing Webmaster Tools (Import aus der Search Console).
+- **Offen** (`LIVEGANG.md` Schritt 9, `REICHWEITE.md` Phase 4–5):
+  - Domain-Vertrag bei IONOS prüfen (läuft unabhängig vom Webspace, der im Dezember endet).
+  - Lead-Quelle (`PUBLIC_ANFRAGE_ERWEITERT`) erst, wenn Merlin `art` und `herkunft` annimmt.
+  - Google-Unternehmensprofil, Bing Places, Apple Business Connect, Location-Portale (Phase 5).
+  - KI-Loops aus Originalfotos (Phase 4): Kosten und Bildrechte (Andrea Klick) klären.
+  - Nach einigen Wochen: `https://mswohldorf.netlify.app` aus `ANFRAGE_HERKUNFT` nehmen; HSTS-`preload` erwägen.
 
 ## Was woanders liegt
 

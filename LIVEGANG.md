@@ -8,6 +8,14 @@ keine CAA-Einträge.
 
 **Reihenfolge einhalten.** Mail-Einträge (MX, SPF/TXT, DKIM) nie anfassen.
 
+> **Stand 05.11.2026, 19:05 Uhr: live.** Schritte 1–6 erledigt. Von außen geprüft:
+> `http://` und `https://mswohldorf.de` → `https://www.mswohldorf.de` (301), Zertifikat Let's Encrypt
+> (05.11.2026) für beide Namen, HSTS aktiv, kein noindex, kein Vorschau-Band, Sitemap mit `www`-Adressen,
+> alte Adressen leiten um, CORS für `https://www.mswohldorf.de` ok, MX/SPF für Zoho unverändert.
+> Einzelne DNS-Caches lieferten kurz noch die alte IP (TTL 1 Stunde) — erledigt sich von selbst.
+> Schritt 7 (Testanfrage, Test-Mail) und Schritt 8 (Search Console, Sitemap, Bing) am 05.11.2026 von
+> Sergiy erledigt. Offen: Schritt 9.
+
 ## 1. Pull Request mergen (GitHub)
 
 Den offenen PR „Livegang: Datenschutzerklärung freigegeben …“ öffnen → **Ready for review** → **Merge pull
