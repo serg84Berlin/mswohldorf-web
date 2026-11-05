@@ -6,10 +6,11 @@
  */
 
 /** Datenschutz-Seite: Hinweis „Entwurf — vor Veröffentlichung rechtlich prüfen“.
- *  Nach der rechtlichen Prüfung auf `false` setzen. Steht er auf `true`, bricht
- *  ein Produktions-Build ab (integrationen/livegang-sperre.mjs) — kein Livegang
- *  mit einer Entwurfs-Datenschutzerklärung aus Versehen. */
-export const ENTWURF_HINWEIS_ANZEIGEN = true;
+ *  Steht er auf `true`, bricht ein Produktions-Build ab (integrationen/livegang-sperre.mjs) —
+ *  kein Livegang mit einer Entwurfs-Datenschutzerklärung aus Versehen.
+ *  `false` seit 04.11.2026: von Sergiy (DSGVO-Berater, Betreiber) freigegeben. Bei
+ *  größeren Änderungen an der Datenschutzerklärung wieder auf `true` bis zur Freigabe. */
+export const ENTWURF_HINWEIS_ANZEIGEN = false;
 
 /**
  * Vorschau-Build (`PUBLIC_VORSCHAU=1`): noindex,nofollow + „Vorschau“-Band,

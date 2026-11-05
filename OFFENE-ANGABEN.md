@@ -34,7 +34,7 @@ Jeder Punkt hier steht als `<Platzhalter pflicht>` im Quelltext (bzw. Nr. 2 als 
 `ENTWURF_HINWEIS_ANZEIGEN`). Solange einer übrig ist, scheitert der Produktions-Build. Bis dahin
 läuft Production auf Netlify mit `PUBLIC_VORSCHAU=1` (README, „Bis zum Livegang").
 
-Stand 04.11.2026: **noch 1 offen** (Nr. 2). Alles andere ist geklärt — Angaben von Sergiy
+Stand 04.11.2026: **alles geklärt** — der Produktions-Build läuft durch. Alles ist geklärt — Angaben von Sergiy
 (Betreiber von Website und Anfrage-Server, DSGVO-Berater), von Uli (Mail vom 04.11.2026) bzw. aus dem
 Impressum von finanzelot.de.
 
@@ -43,7 +43,7 @@ Impressum von finanzelot.de.
 | 1a | Vertretung (Komplementärin) | ✅ Finanzelot Verwaltungs GmbH, Amtsgericht Hamburg, HRB 154872, Geschäftsführer Ulrich Ritter (wie finanzelot.de/impressum) | `src/config.ts` (`BETREIBER.komplementaerin`) |
 | 1b | USt-IdNr. | ✅ `DE326098307` (wie finanzelot.de, VIES gültig am 01.11.2026). Die Nummer der alten Seite (`DE3223275031`) war ungültig. | `src/config.ts` |
 | 1c | Haftungstext (Inhalte, Links) | ✅ entfällt — Uli: Impressum wie finanzelot.de, dort gibt es keinen Haftungs- und Urheberrechtstext (Mail vom 04.11.2026) | `src/pages/impressum.astro` |
-| 2 ⛔ | **Datenschutz-Entwurf freigeben**, dann `ENTWURF_HINWEIS_ANZEIGEN = false` (sonst bricht der Produktions-Build ab; mit `false` entfällt auch „(Entwurf)" beim Stand). Vorher prüfen: Netlify-DPA abgeschlossen? Speicherdauer der Netlify-Protokolle (steht jetzt als Kriterium, nicht als Frist; genaue Frist: „Data Retention and Deletion Summary" im Netlify Trust Center, auf Anfrage)? Matterport-Absatz (Art. 49 DSGVO, siehe Nr. 8)? | offen — Freigabe durch Sergiy | `src/config.ts` |
+| 2 | Datenschutz-Entwurf freigeben, dann `ENTWURF_HINWEIS_ANZEIGEN = false` | ✅ von Sergiy freigegeben am 04.11.2026; Schalter steht auf `false` | `src/config.ts` |
 | 3 | Datenschutzbeauftragter; Kontakt für Datenschutzanfragen | ✅ nicht benannt, nicht verpflichtet (§ 38 BDSG; von Uli bestätigt am 04.11.2026); Verantwortlicher ist die KG, Kontakt `info@finanzelot.de` | `src/pages/datenschutz.astro` |
 | 4 | Netlify: Rechtsgrundlage USA, Speicherdauer | ✅ DPF-zertifiziert ([Netlify Privacy, Abschnitt 13](https://www.netlify.com/privacy/)) → Art. 45 DSGVO, ergänzend SCC; Speicherdauer als Kriterium (Netlify veröffentlicht keine Frist) | dito |
 | 5 | Hosting des Anfrage-Servers (Merlin) | ✅ IONOS SE, Montabaur; Rechenzentrum in Deutschland (IONOS Cloud Berlin) | dito |
