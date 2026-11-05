@@ -64,11 +64,15 @@ npm run pruefen                              # Playwright-Prüfungen gegen dist/
   die Ratgeber-Artikel und das Exposé mitziehen.**
 - Anfrage-Server erlaubt CORS für `https://www.mswohldorf.de`, `https://mswohldorf.de` und
   `https://mswohldorf.netlify.app` (`ANFRAGE_HERKUNFT` auf Merlin, geprüft 05.11.2026).
-- **Offen nach dem Livegang** (`LIVEGANG.md` Schritt 7–9):
-  - Testanfrage über die echte Domain bis Zoho und Test-Mail an @mswohldorf.de (Sergiy).
-  - Google Search Console + Bing Webmaster Tools, Sitemap einreichen.
+- Nach dem Livegang erledigt (Sergiy, 05.11.2026): Testanfrage über die echte Domain bis Zoho,
+  Test-Mail an @mswohldorf.de, Google Search Console (Domain-Property, Sitemap, Indexierung beantragt),
+  Bing Webmaster Tools (Import aus der Search Console).
+- **Offen** (`LIVEGANG.md` Schritt 9, `REICHWEITE.md` Phase 4–5):
   - Domain-Vertrag bei IONOS prüfen (läuft unabhängig vom Webspace, der im Dezember endet).
   - Lead-Quelle (`PUBLIC_ANFRAGE_ERWEITERT`) erst, wenn Merlin `art` und `herkunft` annimmt.
+  - Google-Unternehmensprofil, Bing Places, Apple Business Connect, Location-Portale (Phase 5).
+  - KI-Loops aus Originalfotos (Phase 4): Kosten und Bildrechte (Andrea Klick) klären.
+  - Nach einigen Wochen: `https://mswohldorf.netlify.app` aus `ANFRAGE_HERKUNFT` nehmen; HSTS-`preload` erwägen.
 
 ## Was woanders liegt
 

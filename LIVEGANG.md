@@ -13,7 +13,8 @@ keine CAA-Einträge.
 > (05.11.2026) für beide Namen, HSTS aktiv, kein noindex, kein Vorschau-Band, Sitemap mit `www`-Adressen,
 > alte Adressen leiten um, CORS für `https://www.mswohldorf.de` ok, MX/SPF für Zoho unverändert.
 > Einzelne DNS-Caches lieferten kurz noch die alte IP (TTL 1 Stunde) — erledigt sich von selbst.
-> Offen: Testanfrage und Test-Mail (Schritt 7), Suchmaschinen (Schritt 8), Schritt 9.
+> Schritt 7 (Testanfrage, Test-Mail) und Schritt 8 (Search Console, Sitemap, Bing) am 05.11.2026 von
+> Sergiy erledigt. Offen: Schritt 9.
 
 ## 1. Pull Request mergen (GitHub)
 
