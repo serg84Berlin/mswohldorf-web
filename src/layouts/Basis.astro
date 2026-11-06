@@ -7,7 +7,7 @@ import interUrl from '@fontsource-variable/inter/files/inter-latin-wght-normal.w
 import Kopf from '../components/Kopf.astro';
 import Fuss from '../components/Fuss.astro';
 import AnfrageKnopf from '../components/AnfrageKnopf.astro';
-import { SEITE, VORSCHAU, KONTAKT, LIEGEPLATZ, FAKTEN, BETREIBER, KARTEN_LINKS } from '../config';
+import { SEITE, VORSCHAU, KONTAKT, LIEGEPLATZ, FAKTEN, BETREIBER, KARTEN_LINKS, PROFIL_LINKS } from '../config';
 import { ALTE_BILDER } from '../data/bilder';
 
 interface Props {
@@ -63,6 +63,7 @@ const ort: Record<string, unknown> = {
     address: { '@type': 'PostalAddress', streetAddress: BETREIBER.strasse, postalCode: BETREIBER.plz, addressLocality: BETREIBER.ort, addressCountry: 'DE' },
   },
   amenityFeature: [{ '@type': 'LocationFeatureSpecification', name: 'Küche mit Geräten', value: true }],
+  ...(PROFIL_LINKS.length ? { sameAs: [...PROFIL_LINKS] } : {}),
 };
 const jsonLd = JSON.stringify([ort, ...strukturiert]).replace(/</g, '\\u003c');
 const seitenTitel = titel.includes(SEITE.name) ? titel : `${titel} | ${SEITE.name}`;

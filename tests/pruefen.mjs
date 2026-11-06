@@ -654,6 +654,11 @@ for (const [breite, viewport] of Object.entries(GROESSEN)) {
   const ld = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => JSON.parse(m[1]));
   const ort = ld.flat().find((x) => Array.isArray(x['@type']) && x['@type'].includes('EventVenue'));
   pruefe('JSON-LD: EventVenue/LocalBusiness mit Geo und 35 Gästen', ort?.maximumAttendeeCapacity === 35 && ort?.geo?.latitude > 53 && ort['@type'].includes('LocalBusiness'));
+  pruefe(
+    'JSON-LD: sameAs fehlt oder enthält nur https-Links (PROFIL_LINKS)',
+    ort?.sameAs === undefined || (Array.isArray(ort.sameAs) && ort.sameAs.length > 0 && ort.sameAs.every((u) => /^https:\/\/[^\s]+$/.test(u))),
+    ort?.sameAs ? `${ort.sameAs.length} Profile` : 'noch keine Profile eingetragen',
+  );
   pruefe('Kanonische URL auf www.mswohldorf.de', html.includes('<link rel="canonical" href="https://www.mswohldorf.de/">'));
   pruefe('Produktiv-Build ohne noindex (dist/ aus „npm run build“, nicht mit PUBLIC_VORSCHAU=1)', !html.includes('noindex'));
   const sitemap = await readFile(join(PROJEKT, 'dist/sitemap-0.xml'), 'utf8');
