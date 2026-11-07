@@ -42,7 +42,7 @@ npm run profilbilder                         # Bilder für Google/Apple/Portale 
 6. Code, Dateien und Texte auf Deutsch, Kunden in der Sie-Form.
 7. Vor jedem Push: `npm run check`, Vorschau-Build und – wenn Seiten betroffen sind – `npm run pruefen`.
 
-## Stand (05.11.2026)
+## Stand (07.11.2026)
 
 - **Live seit 05.11.2026** auf https://www.mswohldorf.de: DNS bei IONOS umgestellt (A `@` → `75.2.60.5`,
   CNAME `www` → `mswohldorf.netlify.app`; MX/SPF für Zoho unverändert), `www` ist Primary Domain,
@@ -51,7 +51,7 @@ npm run profilbilder                         # Bilder für Google/Apple/Portale 
 - Gemerged: PR #1 (neue Seite, Inhalte der alten Seite), PR #2 (Platzhalter-Arten, Livegang-Sperre),
   PR #3 (diese Datei), PR #4 (Rechtliches 10/12, Reichweite Phase 1), PR #5 (Reichweite Phase 2),
   PR #6 (Rückmeldung Uli, Ratgeber, Englisch), PR #7 (Datenschutz freigegeben, `LIVEGANG.md`),
-  PR #8 (CORS-Schritt für Merlin).
+  PR #8 (CORS-Schritt für Merlin), PR #9 (Live-Stand), PR #10 (Phase 5: `PROFILE.md`, Profilbilder, `PROFIL_LINKS`).
 - Rechtliches: alle Pflicht-Punkte geklärt (Sergiy; Uli per Mail 04.11.2026: Impressum wie finanzelot.de,
   kein Datenschutzbeauftragter; Preise, Catering, Technik usw. „alles auf Anfrage“). Datenschutzerklärung
   von Sergiy freigegeben (04.11.2026) — `npm run build` läuft durch. **Livegang-Anleitung: `LIVEGANG.md`.**
@@ -63,6 +63,8 @@ npm run profilbilder                         # Bilder für Google/Apple/Portale 
   Phase 3 gebaut: Ratgeber (`/ratgeber/`, Artikel in `src/content/ratgeber/`, Quellen Pflicht) und Englisch
   (`/en/`, `/en/faq/`, Texte `src/data/englisch.ts`). **Ändert sich ein Fakt, auch `src/data/englisch.ts`,
   die Ratgeber-Artikel und das Exposé mitziehen.**
+- Ausstattung (Uli, 07.11.2026): WLAN, PA-Anlage, eigener DJ erlaubt, 20 Parkplätze — zentral in `AUSSTATTUNG`
+  (`src/config.ts`), auf Häufige Fragen, Anlass-Seiten, Englisch, Exposé, llms.txt und im Schema.
 - Anfrage-Server erlaubt CORS für `https://www.mswohldorf.de`, `https://mswohldorf.de` und
   `https://mswohldorf.netlify.app` (`ANFRAGE_HERKUNFT` auf Merlin, geprüft 05.11.2026).
 - Nach dem Livegang erledigt (Sergiy, 05.11.2026): Testanfrage über die echte Domain bis Zoho,
@@ -74,7 +76,9 @@ npm run profilbilder                         # Bilder für Google/Apple/Portale 
   - Google-Unternehmensprofil, Bing Places, Apple Business Connect, OpenStreetMap, MOIN, HCB Venuefinder
     (Phase 5): Textpaket, Klickpfade und Fragen an Uli in `PROFILE.md`; Bilder `npm run profilbilder`.
     Steht ein Profil, seinen Link in `PROFIL_LINKS` (`src/config.ts`) eintragen → Schema `sameAs`.
-    Uli hat einen Giggster-Eintrag (30 Pers., 157,94 m²) — weicht von der Website ab, klären.
+    Uli (07.11.2026): kein Maps-Eintrag, Profil gehört Finanzelot (Sergiy Manager), Navi-Adresse vorerst,
+    Video-Bestätigung macht Uli, Fotos dürfen in Profile/Portale, MOIN + HCB ok. Noch offen: 30 oder 35 Personen,
+    157,94 oder 165 m² (Giggster vs. Website — Website bleibt bis zur Klärung bei 35 / 165 m²).
   - KI-Loops aus Originalfotos (Phase 4): Kosten und Bildrechte (Andrea Klick) klären.
   - Nach einigen Wochen: `https://mswohldorf.netlify.app` aus `ANFRAGE_HERKUNFT` nehmen; HSTS-`preload` erwägen.
 

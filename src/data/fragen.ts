@@ -7,7 +7,7 @@
  * src/data/anlaesse.ts (Quellen dort und in INHALT.md). Was nicht belegt ist
  * (Preise, Catering, Technik), wird nicht beantwortet, sondern an die Anfrage verwiesen.
  */
-import { FAKTEN, LIEGEPLATZ, KONTAKT } from '../config';
+import { FAKTEN, LIEGEPLATZ, KONTAKT, AUSSTATTUNG } from '../config';
 import { ANREISE } from './anreise';
 
 export interface Frage {
@@ -30,7 +30,7 @@ export const FRAGEN: Frage[] = [
   {
     id: 'liegeplatz',
     frage: 'Wo liegt die MS Wohldorf?',
-    antwort: `Am ${LIEGEPLATZ.name}: Die MS Wohldorf liegt ${LIEGEPLATZ.beschreibung}. Für das Navi: ${LIEGEPLATZ.navi}. Eine kleine Privatstraße führt zum Liegeplatz, Parkplätze gibt es direkt vor der Tür.`,
+    antwort: `Am ${LIEGEPLATZ.name}: Die MS Wohldorf liegt ${LIEGEPLATZ.beschreibung}. Für das Navi: ${LIEGEPLATZ.navi}. Eine kleine Privatstraße führt zum Liegeplatz, ${AUSSTATTUNG.parkplaetze} Parkplätze gibt es direkt vor der Tür.`,
     link: { href: '/#anfahrt', text: 'Anfahrt und Karte' },
   },
   {
@@ -59,6 +59,18 @@ export const FRAGEN: Frage[] = [
     antwort:
       'Ja, eine Küche mit Geräten ist an Bord — gut für Business-Essen und Feiern. Wie Verpflegung und Getränke für Ihren Anlass aussehen, stimmen wir persönlich mit Ihnen ab.',
     offsite: true,
+  },
+  {
+    id: 'ausstattung',
+    frage: 'Gibt es WLAN und eine Musikanlage an Bord?',
+    antwort:
+      'Ja. WLAN und eine PA-Anlage für Musik und Durchsagen sind an Bord. Eigene Musik ist willkommen, auch mit eigenem DJ. Weitere Technik, etwa für Präsentationen, stimmen wir persönlich mit Ihnen ab.',
+    offsite: true,
+  },
+  {
+    id: 'parken',
+    frage: 'Gibt es Parkplätze?',
+    antwort: `Ja, ${AUSSTATTUNG.parkplaetze} Parkplätze direkt vor der Tür. Eine kleine Privatstraße führt bis zum Liegeplatz.`,
   },
   {
     id: 'raeume',

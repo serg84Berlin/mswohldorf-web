@@ -7,7 +7,7 @@ import interUrl from '@fontsource-variable/inter/files/inter-latin-wght-normal.w
 import Kopf from '../components/Kopf.astro';
 import Fuss from '../components/Fuss.astro';
 import AnfrageKnopf from '../components/AnfrageKnopf.astro';
-import { SEITE, VORSCHAU, KONTAKT, LIEGEPLATZ, FAKTEN, BETREIBER, KARTEN_LINKS, PROFIL_LINKS } from '../config';
+import { SEITE, VORSCHAU, KONTAKT, LIEGEPLATZ, FAKTEN, BETREIBER, KARTEN_LINKS, PROFIL_LINKS, AUSSTATTUNG } from '../config';
 import { ALTE_BILDER } from '../data/bilder';
 
 interface Props {
@@ -62,7 +62,14 @@ const ort: Record<string, unknown> = {
     name: BETREIBER.firma,
     address: { '@type': 'PostalAddress', streetAddress: BETREIBER.strasse, postalCode: BETREIBER.plz, addressLocality: BETREIBER.ort, addressCountry: 'DE' },
   },
-  amenityFeature: [{ '@type': 'LocationFeatureSpecification', name: 'Küche mit Geräten', value: true }],
+  amenityFeature: [
+    { '@type': 'LocationFeatureSpecification', name: 'Küche mit Geräten', value: true },
+    { '@type': 'LocationFeatureSpecification', name: 'WLAN', value: AUSSTATTUNG.wlan },
+    { '@type': 'LocationFeatureSpecification', name: 'PA-Anlage', value: AUSSTATTUNG.paAnlage },
+    { '@type': 'LocationFeatureSpecification', name: 'Eigener DJ erlaubt', value: AUSSTATTUNG.eigenerDj },
+    { '@type': 'LocationFeatureSpecification', name: 'Parkplätze', value: AUSSTATTUNG.parkplaetze },
+    { '@type': 'LocationFeatureSpecification', name: 'Barrierefreier Zugang', value: LIEGEPLATZ.barrierefrei },
+  ],
   ...(PROFIL_LINKS.length ? { sameAs: [...PROFIL_LINKS] } : {}),
 };
 const jsonLd = JSON.stringify([ort, ...strukturiert]).replace(/</g, '\\u003c');

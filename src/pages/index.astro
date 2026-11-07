@@ -16,13 +16,13 @@ import Welle from '../components/Welle.astro';
 import Symbol from '../components/Symbol.astro';
 import ExposeKnopf from '../components/ExposeKnopf.astro';
 import { FOTOS_START, FOTO_DROHNE_2024 } from '../data/bilder';
-import { FAKTEN, KONTAKT, MEDIEN, SEITE } from '../config';
+import { FAKTEN, KONTAKT, MEDIEN, SEITE, AUSSTATTUNG } from '../config';
 
 const eckdaten = [
   { symbol: 'personen', text: `Bis zu ${FAKTEN.maxGaeste} Gäste` },
   { symbol: 'anker', text: `HADAG-Fähre von ${FAKTEN.baujahr}, Umbau ${FAKTEN.umbau}` },
   { symbol: 'feier', text: 'Küche mit Geräten an Bord' },
-  { symbol: 'karte', text: 'Süderelbe, Parkplätze vor der Tür' },
+  { symbol: 'karte', text: `Süderelbe, ${AUSSTATTUNG.parkplaetze} Parkplätze vor der Tür` },
 ] as const;
 ---
 
@@ -45,7 +45,7 @@ const eckdaten = [
           <p>
             Die MS Wohldorf ist eine ehemalige HADAG-Hafenfähre: {FAKTEN.baujahr} in Dienst gestellt, viele Jahre im Einsatz auf der Elbe
             und {FAKTEN.umbau} zum Büro- und Veranstaltungsschiff umgebaut. Heute liegt sie auf der Süderelbe — an einer kleinen
-            Privatstraße, mit Parkplätzen vor der Tür.
+            Privatstraße, mit {AUSSTATTUNG.parkplaetze} Parkplätzen vor der Tür.
           </p>
           <p>
             TV-Produktion, Fotoshooting, Lesung, Ausstellung, Präsentation, Brainstorming-Tag oder Business-Essen — oder was Ihnen
