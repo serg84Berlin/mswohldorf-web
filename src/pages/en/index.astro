@@ -12,7 +12,7 @@ import LeadBlock from '../../components/LeadBlock.astro';
 import ExposeKnopf from '../../components/ExposeKnopf.astro';
 import Symbol from '../../components/Symbol.astro';
 import Welle from '../../components/Welle.astro';
-import { FAKTEN, KONTAKT, LIEGEPLATZ } from '../../config';
+import { FAKTEN, KONTAKT, LIEGEPLATZ, AUSSTATTUNG } from '../../config';
 import { ANREISE } from '../../data/anreise';
 import { ANLAESSE_EN, BESCHREIBUNG_LIEGEPLATZ_EN, FRAGEN_EN, ROUTE_EN, SEITE_EN } from '../../data/englisch';
 import { FOTO_DROHNE_2024, foto } from '../../data/bilder';
@@ -26,7 +26,7 @@ const fakten = [
   { symbol: 'personen', text: `Up to ${FAKTEN.maxGaeste} guests` },
   { symbol: 'anker', text: `HADAG harbour ferry from ${FAKTEN.baujahr}, converted ${FAKTEN.umbau}` },
   { symbol: 'feier', text: 'Kitchen with appliances on board' },
-  { symbol: 'karte', text: `${LIEGEPLATZ.name}, parking right outside` },
+  { symbol: 'karte', text: `${LIEGEPLATZ.name}, ${AUSSTATTUNG.parkplaetze} parking spaces` },
 ] as const;
 const symbole = ['firma', 'workshop', 'kamera', 'buch', 'feier'] as const;
 ---
@@ -49,7 +49,7 @@ const symbole = ['firma', 'workshop', 'kamera', 'buch', 'feier'] as const;
           <p>
             The MS Wohldorf is a former HADAG harbour ferry: in service from {FAKTEN.baujahr}, built for up to {FAKTEN.fahrgaesteFrueher} passengers, and
             converted into an office and event ship in {FAKTEN.umbau}. Today she lies at the {LIEGEPLATZ.name} pier on the Süderelbe — on a small private
-            road, with parking right outside.
+            road, with {AUSSTATTUNG.parkplaetze} parking spaces right outside.
           </p>
           <p>
             The main deck has a large event area and a smaller, glazed meeting room; the upper deck has the office with galley. The ship no longer runs under
@@ -140,7 +140,7 @@ const symbole = ['firma', 'workshop', 'kamera', 'buch', 'feier'] as const;
         </li>
         <li class="info" data-reveal>
           <h3 class="font-semibold text-tiefe">By car</h3>
-          <p class="mt-1 text-grau">Satnav: {LIEGEPLATZ.navi}. Parking right outside.</p>
+          <p class="mt-1 text-grau">Satnav: {LIEGEPLATZ.navi}. {AUSSTATTUNG.parkplaetze} parking spaces right outside.</p>
         </li>
         <li class="info" data-reveal>
           <h3 class="font-semibold text-tiefe">Good to know</h3>

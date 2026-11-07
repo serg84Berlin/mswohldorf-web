@@ -94,7 +94,7 @@ export const LIEGEPLATZ = {
   breite: 53.474464814706096,
   laenge: 10.013551864414687,
   navi: 'Finkenrieker Hauptdeich 14, 21109 Hamburg',
-  hinweis: 'Eine kleine Privatstraße führt zum Liegeplatz, Parkplätze gibt es direkt vor der Tür. Die Koordinaten führen Sie genau hin.',
+  hinweis: 'Eine kleine Privatstraße führt zum Liegeplatz, 20 Parkplätze gibt es direkt vor der Tür. Die Koordinaten führen Sie genau hin.',
   barrierefrei: false,
 } as const;
 
@@ -108,6 +108,18 @@ export const KARTEN_LINKS = {
     const bbox = [LIEGEPLATZ.laenge - d * 1.6, LIEGEPLATZ.breite - d * 0.6, LIEGEPLATZ.laenge + d * 1.6, LIEGEPLATZ.breite + d * 0.6].join('%2C');
     return `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${LIEGEPLATZ.breite}%2C${LIEGEPLATZ.laenge}`;
   })(),
+} as const;
+
+/**
+ * Ausstattung laut Uli (Antwort an Sergiy vom 07.11.2026, Abgleich mit seinem
+ * Giggster-Eintrag): WLAN, PA-Anlage (Beschallung), eigene Musik auch mit eigenem DJ,
+ * 20 Parkplätze. Weitere Technik (Bildschirm, Beamer, Licht) bleibt „auf Anfrage“.
+ */
+export const AUSSTATTUNG = {
+  wlan: true,
+  paAnlage: true,
+  eigenerDj: true,
+  parkplaetze: 20,
 } as const;
 
 /**
