@@ -7,6 +7,9 @@
  *         Pfefferkörner, Kundenstimmen (Bildungswoche).
  *   P19 = Presse-PDFs der alten Website (2019): Raumaufteilung, Heizung,
  *         Raumhöhe, nicht mehr aus eigener Kraft fahrtüchtig, kleinere Feiern.
+ *   U   = Uli, Antwort vom 07.11.2026 (`AUSSTATTUNG` in config.ts): WLAN, PA-Anlage,
+ *         eigene Musik auch mit eigenem DJ, 20 Parkplätze. Der Satz der Presse 2019
+ *         „keine Techno- und Disco-Partys“ entfällt seitdem (DJ ausdrücklich erlaubt).
  * Preise, Catering, Technik, Uhrzeiten usw. gibt es auf Anfrage — Entscheidung von
  * Uli (Mail vom 04.11.2026: „Zu Buchungen alles auf Anfrage. Es sei denn wir machen
  * irgendwann eine extra Seite dafür auf.“). Die Themen stehen in `aufAnfrage`; die
@@ -14,6 +17,7 @@
  * Ihnen ab — sprechen Sie uns an.“), in Vorschau und Produktion gleich.
  */
 import type { AnlassWert } from './typen';
+import { AUSSTATTUNG } from '../config';
 
 export interface Anlass {
   slug: string;
@@ -45,7 +49,7 @@ const vorteil = {
   gaeste: { titel: 'Bis zu 35 Gäste', text: 'Überschaubar und persönlich — groß genug für Team, Publikum oder Familie.' },
   geschichte: { titel: 'Hafenfähre von 1959', text: 'Eine echte HADAG-Fähre, 2016 zum Büro- und Veranstaltungsschiff umgebaut.' },
   kueche: { titel: 'Küche mit Geräten', text: 'Eine Kombüse mit Geräten ist an Bord — gut für Business-Essen und Feiern.' },
-  parken: { titel: 'Parkplätze vor der Tür', text: 'Eine kleine Privatstraße führt bis zum Liegeplatz auf der Süderelbe.' },
+  parken: { titel: `${AUSSTATTUNG.parkplaetze} Parkplätze vor der Tür`, text: 'Eine kleine Privatstraße führt bis zum Liegeplatz auf der Süderelbe.' },
   interieur: { titel: 'Vintage-Interieur', text: 'Teakholztüren, Eichendielen, Samtsessel und Industrielampen.' },
 };
 
@@ -55,7 +59,9 @@ const wissen = {
   heizung: 'Das Schiff hat eine Zentralheizung mit gusseisernen Heizkörpern.',
   liegeschiff: 'Die Wohldorf fährt nicht mehr aus eigener Kraft — Ihre Veranstaltung findet am Liegeplatz auf der Süderelbe statt.',
   barriere: 'Der Zugang ist nicht barrierefrei.',
-  parken: 'Parkplätze gibt es vor der Tür, an einer kleinen Privatstraße.',
+  parken: `${AUSSTATTUNG.parkplaetze} Parkplätze gibt es vor der Tür, an einer kleinen Privatstraße.`,
+  technik: 'WLAN und eine PA-Anlage für Musik und Durchsagen sind an Bord.',
+  musik: 'Eigene Musik ist willkommen, auch mit eigenem DJ; die PA-Anlage ist an Bord.',
 };
 
 export const ANLAESSE: Anlass[] = [
@@ -75,11 +81,11 @@ export const ANLAESSE: Anlass[] = [
       'Mit Platz für bis zu 35 Personen eignet sich das Schiff für Teams, Abteilungen und ausgewählte Kundenkreise. Eine Küche mit Geräten ist an Bord — ideal auch für ein Business-Essen. Erzählen Sie uns, was Sie vorhaben; wir melden uns persönlich bei Ihnen.',
     ],
     vorteile: [vorteil.gaeste, vorteil.kueche, vorteil.geschichte, vorteil.parken],
-    wissen: [wissen.raeume, wissen.liegeschiff, wissen.heizung, wissen.barriere],
+    wissen: [wissen.raeume, wissen.technik, wissen.liegeschiff, wissen.heizung, wissen.barriere, wissen.parken],
     aufAnfrage: [
       'Preise und Pakete für Firmenveranstaltungen',
       'Catering: feste Partner oder freie Wahl? (Eine Küche mit Geräten ist an Bord.)',
-      'Technik: Musik/Beschallung, Präsentationstechnik, WLAN',
+      'Technik über WLAN und PA-Anlage hinaus, z. B. Präsentationstechnik',
       'Mögliche Uhrzeiten, Lautstärke und Saison',
     ],
     aufAnfrageKurz: 'Preise und Pakete, Catering, Technik und Uhrzeiten',
@@ -106,10 +112,10 @@ export const ANLAESSE: Anlass[] = [
       vorteil.gaeste,
       vorteil.kueche,
     ],
-    wissen: [wissen.raeume, wissen.kueche, wissen.liegeschiff, wissen.barriere],
+    wissen: [wissen.raeume, wissen.technik, wissen.kueche, wissen.liegeschiff, wissen.barriere, wissen.parken],
     aufAnfrage: [
       'Bestuhlung und Raumaufteilung (z. B. Reihe, U-Form, Gruppentische)',
-      'Präsentationstechnik: Bildschirm oder Beamer, WLAN',
+      'Präsentationstechnik: Bildschirm oder Beamer',
       'Tagespauschalen und Preise',
       'Verpflegung während des Workshops',
     ],
@@ -144,6 +150,8 @@ export const ANLAESSE: Anlass[] = [
     ],
     wissen: [
       'Die Raumhöhe an Bord liegt bei etwa 1,90 Metern.',
+      wissen.technik,
+      wissen.heizung,
       wissen.liegeschiff,
       wissen.barriere,
       wissen.parken,
@@ -177,10 +185,10 @@ export const ANLAESSE: Anlass[] = [
       vorteil.interieur,
       vorteil.geschichte,
     ],
-    wissen: [wissen.raeume, wissen.heizung, wissen.liegeschiff, wissen.barriere],
+    wissen: [wissen.raeume, wissen.technik, wissen.heizung, wissen.liegeschiff, wissen.barriere, wissen.parken],
     aufAnfrage: [
       'Hängemöglichkeiten und Wandflächen für Ausstellungen',
-      'Licht und Tontechnik für Lesungen',
+      'Licht und Tontechnik über die PA-Anlage hinaus',
       'Konditionen für Kulturveranstaltungen',
       'Öffentliche Veranstaltungen mit Ticketverkauf möglich?',
     ],
@@ -203,7 +211,7 @@ export const ANLAESSE: Anlass[] = [
       'Erzählen Sie uns, was Sie planen: Anlass, Wunschtermin und Gästezahl genügen für den Anfang. Wir melden uns persönlich bei Ihnen.',
     ],
     vorteile: [vorteil.gaeste, vorteil.kueche, vorteil.geschichte, vorteil.parken],
-    wissen: ['Die Wohldorf ist für kleinere Feiern gemacht — Techno- und Disco-Partys passen nicht an Bord.', wissen.kueche, wissen.liegeschiff, wissen.barriere],
+    wissen: ['Die Wohldorf ist für Feiern im kleineren Kreis gemacht.', wissen.musik, wissen.kueche, wissen.liegeschiff, wissen.barriere, wissen.parken],
     aufAnfrage: ['Preise für private Feiern', 'Catering und Getränke', 'Musik, Lautstärke und späteste Uhrzeit', 'Dekoration: Was ist möglich?'],
     aufAnfrageKurz: 'Preise, Catering und Getränke, Musik und Dekoration',
     symbol: 'feier',

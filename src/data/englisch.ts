@@ -3,7 +3,7 @@
  * wie auf den deutschen Seiten (src/data/fragen.ts, anreise.ts, anlaesse.ts).
  * Nichts Neues behaupten: Ändert sich ein Fakt, hier mitziehen. Britisches Englisch.
  */
-import { FAKTEN, KONTAKT, LIEGEPLATZ } from '../config';
+import { FAKTEN, KONTAKT, LIEGEPLATZ, AUSSTATTUNG } from '../config';
 import { ANREISE } from './anreise';
 import type { AnlassWert } from './typen';
 
@@ -46,7 +46,13 @@ export const FRAGEN_EN: FrageEn[] = [
   {
     id: 'berth',
     frage: 'Where is the MS Wohldorf?',
-    antwort: `At the ${LIEGEPLATZ.name} pier: the MS Wohldorf lies ${BESCHREIBUNG_LIEGEPLATZ_EN}. Satnav address: ${LIEGEPLATZ.navi}. A small private road leads to the berth, and there is parking right outside.`,
+    antwort: `At the ${LIEGEPLATZ.name} pier: the MS Wohldorf lies ${BESCHREIBUNG_LIEGEPLATZ_EN}. Satnav address: ${LIEGEPLATZ.navi}. A small private road leads to the berth, and there are ${AUSSTATTUNG.parkplaetze} parking spaces right outside.`,
+  },
+  {
+    id: 'equipment',
+    frage: 'Is there Wi-Fi and a sound system on board?',
+    antwort:
+      'Yes. Wi-Fi and a PA system for music and announcements are on board. You are welcome to bring your own music, including your own DJ. Anything beyond that, such as presentation equipment, we arrange with you personally.',
   },
   {
     id: 'sailing',

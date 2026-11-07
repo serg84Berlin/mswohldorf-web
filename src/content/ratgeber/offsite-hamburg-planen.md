@@ -3,6 +3,7 @@ titel: 'Offsite in Hamburg planen: Checkliste für Teams aus Berlin'
 beschreibung: 'Von Berlin aus ist ein Offsite in Hamburg ein Tagesausflug: knapp zwei Stunden mit dem ICE, dann rund 11 km bis an Bord. Die Checkliste für Ihre Planung.'
 thema: Planung
 veroeffentlicht: 2026-11-04
+aktualisiert: 2026-11-07
 titelfoto: wohldorf_innen_18
 fotos: [wohldorf_innen_31, wohldorf_innen_15, wohldorf_innen_10, drohne-2024]
 anlass: Workshop/Seminar
@@ -12,6 +13,7 @@ quellen:
   - titel: 'Routenberechnung OSRM: Hamburg Hbf → Liegeplatz 11 km, Flughafen → Liegeplatz 20 km (abgerufen am 01.11.2026)'
   - titel: 'Presse 2019: „Alles unter einem Dach“ (boote) und „Büro ahoi!“ (Umbauen + Modernisieren) — Raumaufteilung und Heizung'
     url: 'https://www.mswohldorf.de/pdf/boote_magazin_mai2019.pdf'
+  - titel: 'Angaben des Betreibers (November 2026): WLAN und PA-Anlage an Bord, 20 Parkplätze'
 ---
 
 Von Berlin aus ist ein Offsite in Hamburg ein Tagesausflug. Die schnellsten ICE brauchen knapp zwei Stunden
@@ -25,7 +27,7 @@ den Tag so zu planen, dass Ihr Team ankommt, arbeitet — und am Abend wieder zu
 - **Vom Hauptbahnhof an Bord:** rund 11 Kilometer mit Taxi oder Auto, je nach Verkehr 15 bis 25 Minuten.
 - **Vom Flughafen Hamburg:** rund 20 Kilometer, etwa eine halbe Stunde.
 - **Mit dem Auto:** Navi-Adresse Finkenrieker Hauptdeich 14, 21109 Hamburg. Eine kleine Privatstraße führt zum
-  Liegeplatz, Parkplätze gibt es direkt vor der Tür.
+  Liegeplatz, 20 Parkplätze gibt es direkt vor der Tür.
 
 Wichtig für die Planung: Der Zugang zum Schiff ist **nicht barrierefrei**.
 
@@ -49,7 +51,7 @@ eigener Kraft. Ihr Offsite findet also am Liegeplatz statt.
 4. **Zeitrahmen:** Ankunft, Ende, Rückreise — mit Blick auf die Zugverbindungen.
 5. **Ablauf:** Wie viel Plenum, wie viel Gruppenarbeit?
 6. **Verpflegung und Getränke:** Was brauchen Sie über den Tag?
-7. **Technik:** zum Beispiel Bildschirm oder Musik.
+7. **Technik:** WLAN und eine PA-Anlage sind an Bord — brauchen Sie mehr, etwa einen Bildschirm?
 8. **Anreise der Gruppe:** gemeinsam mit der Bahn, Taxis ab Hauptbahnhof, Fahrgemeinschaften?
 
 Preise, Verpflegung und Technik stimmen wir individuell mit Ihnen ab. Schreiben Sie uns Anlass, Wunschtermin und

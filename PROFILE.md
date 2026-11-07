@@ -1,6 +1,6 @@
 # Profile und Portale — Textpaket (Reichweite Phase 5)
 
-Stand: 05.11.2026 · Plan: [REICHWEITE.md](REICHWEITE.md) Phase 5 · Bilder: `npm run profilbilder` → `dist-profilbilder/`
+Stand: 07.11.2026 (Antworten von Uli eingearbeitet) · Plan: [REICHWEITE.md](REICHWEITE.md) Phase 5 · Bilder: `npm run profilbilder` → `dist-profilbilder/`
 
 Ziel: Die MS Wohldorf erscheint in Google Maps, Bing, Apple Karten und bei den Hamburger Location-Suchen,
 und zwar überall mit **denselben** Angaben. Für Suchmaschinen und KI-Assistenten ist die Gleichheit von Name,
@@ -11,7 +11,7 @@ Ort, Telefon und Website ein Vertrauenssignal. Alle Texte hier stammen nur aus b
 
 | # | Was | Wer | Dauer |
 |---|---|---|---|
-| 1 | Fragen an Uli klären (Abschnitt 11) — vor allem: Gibt es schon einen Google-Eintrag? | Sergiy → Uli | 1 Mail |
+| 1 | ✅ Fragen an Uli geklärt (07.11.2026, Abschnitt 11) | — | — |
 | 2 | Google-Unternehmensprofil anlegen oder übernehmen, bestätigen | Uli (Inhaber), Sergiy (Manager) | 30 Min. + Bestätigung |
 | 3 | Bing Places: Import aus Google | Sergiy | 5 Min. + 7–12 Tage |
 | 4 | Apple Business Connect | Uli bzw. Sergiy | 20 Min. + Bestätigung |
@@ -26,7 +26,7 @@ Ort, Telefon und Website ein Vertrauenssignal. Alle Texte hier stammen nur aus b
 |---|---|---|
 | Name | **MS Wohldorf** — ohne Zusatz wie „Eventschiff Hamburg“ (Google verbietet Zusätze im Namen) | `SEITE.name` |
 | Ort | **Anleger Finkenriek**, auf der Süderelbe in Finkenriek (Hamburg-Wilhelmsburg) | `LIEGEPLATZ` |
-| Adresse | Finkenrieker Hauptdeich 14, 21109 Hamburg — **Uli fragen**: Das ist die „dichteste Adresse für ein Navi“ der alten Seite, keine Adresse des Liegeplatzes | `LIEGEPLATZ.navi` |
+| Adresse | Finkenrieker Hauptdeich 14, 21109 Hamburg — vorerst so (Uli, 07.11.2026), bei Bedarf später anpassen. Die Stecknadel entscheidet, wo die Karte das Schiff zeigt | `LIEGEPLATZ.navi` |
 | Kartenpunkt | 53.474465, 10.013552 — die Stecknadel **genau auf das Schiff** setzen | `LIEGEPLATZ` |
 | Telefon | +49 40 277347 | `KONTAKT` |
 | E-Mail | info@finanzelot.de | `KONTAKT` |
@@ -42,9 +42,9 @@ Die Klickzahlen zeigen Google und Bing ohnehin in ihren Statistiken.
 
 ## 2. Texte
 
-**Lang (721 Zeichen, Google erlaubt 750; die ersten 250 Zeichen sind ohne „Mehr“ sichtbar):**
+**Lang (692 Zeichen, Google erlaubt 750; die ersten 250 Zeichen sind ohne „Mehr“ sichtbar):**
 
-> Die MS Wohldorf ist eine ehemalige HADAG-Hafenfähre von 1959, 2016 zum Büro- und Veranstaltungsschiff umgebaut. Heute ist sie Veranstaltungsort für bis zu 35 Gäste am Anleger Finkenriek auf der Süderelbe in Hamburg-Wilhelmsburg. Gebucht wird sie für Firmenevents, Workshops und Seminare, Film- und Fotoproduktionen, Lesungen, Ausstellungen und private Feiern im kleineren Kreis. An Bord: ein großer Veranstaltungsbereich und ein verglaster Besprechungsraum auf dem Hauptdeck, das Büro mit Kombüse auf dem Oberdeck, eine Küche mit Geräten und eine Zentralheizung. Das Schiff fährt nicht mehr aus eigener Kraft – Veranstaltungen finden am Liegeplatz statt. Parkplätze gibt es vor der Tür, der Zugang ist nicht barrierefrei.
+> Die MS Wohldorf ist eine ehemalige HADAG-Hafenfähre von 1959, 2016 zum Büro- und Veranstaltungsschiff umgebaut. Heute ist sie Veranstaltungsort für bis zu 35 Gäste am Anleger Finkenriek auf der Süderelbe in Hamburg-Wilhelmsburg. Gebucht wird sie für Firmenevents, Workshops und Seminare, Film- und Fotoproduktionen, Lesungen, Ausstellungen und private Feiern. An Bord: großer Veranstaltungsbereich und verglaster Besprechungsraum auf dem Hauptdeck, Büro mit Kombüse auf dem Oberdeck, Küche mit Geräten, WLAN, PA-Anlage und Zentralheizung. Das Schiff fährt nicht mehr aus eigener Kraft – Veranstaltungen finden am Liegeplatz statt. 20 Parkplätze vor der Tür; der Zugang ist nicht barrierefrei.
 
 **Mittel (315 Zeichen — Portale, Apple):**
 
@@ -74,16 +74,19 @@ Die Klickzahlen zeigen Google und Bing ohnehin in ihren Statistiken.
 
 ## 3. Google-Unternehmensprofil
 
-**Vorher:** Auf https://www.google.com/maps nach „MS Wohldorf“ suchen. Gibt es einen Eintrag, auch einen alten
-am Sandtorhafen, wird er **übernommen** und umgezogen, nicht neu angelegt (Google: ein Profil pro Unternehmen;
-Doppelte werden zusammengelegt oder gesperrt). Im Eintrag: **Inhaberschaft beanspruchen** bzw.
-**Dieses Unternehmen verwalten**.
+**Stand:** Es gibt keinen Eintrag in Google Maps (Uli, 07.11.2026) — das Profil wird neu angelegt.
 
-**Wem es gehört:** Inhaber wird das Google-Konto von Finanzelot (Uli), Sergiy wird **Manager**
-(Profil → **Menü ⋮** → **Unternehmensprofil-Einstellungen** → **Personen und Zugriff** → **Hinzufügen**).
-So bleibt das Profil beim Kunden, auch wenn sich die Zusammenarbeit ändert.
+**Wem es gehört:** Inhaber wird das Google-Konto von Finanzelot (Uli), Sergiy wird **Manager** (Uli, 07.11.2026).
+So bleibt das Profil beim Kunden, auch wenn sich die Zusammenarbeit ändert. Ablauf:
 
-**Neu anlegen** (nur wenn es keinen Eintrag gibt):
+1. Sergiy legt das Profil an (Schritte unten).
+2. Sofort danach: Profil → **Menü ⋮** → **Unternehmensprofil-Einstellungen** → **Personen und Zugriff** →
+   **Hinzufügen** → Google-Konto von Finanzelot → Rolle **Inhaber**. Uli nimmt die Einladung an.
+3. Uli bestätigt das Profil (siehe **Bestätigung**).
+4. Danach unter **Personen und Zugriff** die **Hauptinhaberschaft** auf das Finanzelot-Konto übertragen;
+   Sergiy bleibt **Manager**.
+
+**Neu anlegen:**
 
 1. https://business.google.com/create → Name `MS Wohldorf`.
 2. **Kategorie:** „Veranstalt…“ tippen und die Kategorie für Veranstaltungsorte wählen (englisch „Event venue“).
@@ -101,12 +104,12 @@ So bleibt das Profil beim Kunden, auch wenn sich die Zusammenarbeit ändert.
 | Weitere Kategorien | sparsam, nur wenn die Auswahlliste sie genau so anbietet: eine für Tagungs-/Seminarräume, eine für Party-/Festräume. Lieber eine zu wenig als eine unpassende. |
 | Öffnungszeiten | **keine** eintragen (die Option ohne Öffnungszeiten wählen) |
 | Dienstleistungen | die fünf Leistungen aus Abschnitt 2 |
-| Merkmale | Rollstuhlgerechter Eingang: **Nein**. Weitere (WLAN, Parkplätze kostenlos?) erst nach Antwort von Uli |
+| Merkmale | Rollstuhlgerechter Eingang: **Nein** · WLAN: **Ja** · Parkplätze vor Ort: **Ja** (20). Ob kostenlos, ist nicht geklärt — dieses Merkmal leer lassen |
 | Fotos | Logo `02-logo-720.png`, Titelbild `01-titelbild-16x9.jpg`, dazu `03`–`12`. `13` nur mit Hinweis auf 2017 |
 | Updates | „Erster Beitrag“ aus Abschnitt 2 |
 
-**Bestätigung:** Google schlägt die Methode selbst vor (Telefon/SMS, E-Mail, Live-Video, Postkarte). Beim
-**Video** muss jemand während eines Termins am Liegeplatz sein und zeigen: die Umgebung (Straßenschild, Zufahrt),
+**Bestätigung:** Google schlägt die Methode selbst vor (Telefon/SMS, E-Mail, Live-Video, Postkarte). Eine
+Video-Bestätigung macht **Uli** (07.11.2026). Beim **Video** muss jemand während eines Termins am Liegeplatz sein und zeigen: die Umgebung (Straßenschild, Zufahrt),
 den Namen am Schiff (Schriftzug „Wohldorf“ am Bug — siehe `04-aussen-schriftzug-bug.jpg`), die Räume an Bord
 und dass man berechtigt ist (z. B. die Tür mit dem Schlüssel öffnen). Weil das Profil keine Öffnungszeiten hat,
 für den Videotermin eine Zeit wählen, in der jemand an Bord ist.
@@ -200,10 +203,11 @@ Er weicht von der Website ab:
 
 | Giggster | Website (Quelle) | Was tun |
 |---|---|---|
-| bis zu 30 Personen; an einer Stelle 5 | bis zu 35 Gäste (alte Website) | **Uli fragen**, dann überall gleich |
-| 157,94 m² | 165 m² Nutzfläche (boote, Mai 2019) | **Uli fragen** |
-| WLAN, 20 Parkplätze, Make-up-Bereich, Konferenzraum, PA-System, Monitor, HiFi | nicht auf der Website | wenn Uli bestätigt: auch auf die Website (z. B. Häufige Fragen) |
-| eigener DJ erlaubt | „keine Techno- und Disco-Partys“ (Presse 2019) | **Uli fragen**, was heute gilt |
+| bis zu 30 Personen; an einer Stelle 5 | bis zu 35 Gäste (alte Website) | **noch offen** — Website bleibt bei 35; Uli sagt, welche Zahl gilt, dann überall gleich |
+| 157,94 m² | 165 m² Nutzfläche (boote, Mai 2019) | **noch offen** — wie oben |
+| WLAN, 20 Parkplätze, PA-System | ✅ seit 07.11.2026 auch auf der Website (Uli bestätigt) | — |
+| eigener DJ erlaubt | ✅ Website angepasst (Uli, 07.11.2026); der Satz „keine Techno- und Disco-Partys“ entfällt | — |
+| Make-up-Bereich, Konferenzraum, Monitor, HiFi | nicht auf der Website (nicht bestätigt) | nur bei Bedarf mit Uli klären |
 | Kategorien „Industriegebäude“, „Konzertort“ | — | auf „Veranstaltungsraum“ beschränken |
 
 Beschreibung bei Giggster: Text „Englisch“ aus Abschnitt 2, Link zur Website ergänzen, falls erlaubt.
@@ -220,31 +224,18 @@ Schiff; Dienstbeginn 1959; Länge 30 m; maximale Kapazität 35; Betreiber Finanz
 Deutschland; Koordinaten; offizielle Website) und Belegen (Lebenslauf auf elbdampfer-hamburg.de, boote 05/2019).
 Wikidata erwartet neutrale, belegte Angaben; Werbung wird gelöscht. Erst angehen, wenn 2–9 erledigt sind.
 
-## 11. Fragen an Uli (Mail-Entwurf)
+## 11. Fragen an Uli — beantwortet am 07.11.2026
 
-> **Betreff:** MS Wohldorf — Einträge bei Google, Apple und Co.
->
-> Hallo Uli,
->
-> die Website ist live. Als Nächstes tragen wir die Wohldorf bei Google Maps, Bing und Apple Karten ein. Dafür
-> brauche ich kurz deine Antworten:
->
-> 1. Gibt es bei Google Maps schon einen Eintrag „MS Wohldorf“ (evtl. noch am Sandtorhafen)? Wenn ja: Wer hat
->    Zugriff darauf?
-> 2. Das Profil sollte dem Google-Konto von Finanzelot gehören, ich verwalte es als Manager. Einverstanden?
->    Welches Google-Konto nehmen wir?
-> 3. Adresse für die Karten: Passt „Finkenrieker Hauptdeich 14, 21109 Hamburg“ für den Liegeplatz, oder gibt es
->    eine eigene Adresse? (In OpenStreetMap heißt die Stelle „Hafen Holstenkaten, Finkenrieker Deichweg“.)
-> 4. Google bestätigt neue Einträge oft per Live-Video vor Ort. Wer könnte das am Schiff machen?
-> 5. Dürfen wir die Fotos von Andrea Klick auch bei Google, Apple und in Location-Portalen verwenden?
-> 6. Dein Giggster-Eintrag nennt 30 Personen und 157,94 m², die Website 35 Gäste und 165 m². Was stimmt?
->    Und gilt: WLAN, 20 Parkplätze, PA-Anlage, eigener DJ erlaubt? Dann nehme ich das auch auf die Website.
-> 7. Telefonnummer im Profil: +49 40 277347 — richtig?
-> 8. Einverstanden, dass wir die Wohldorf der Film Commission Hamburg und dem Hamburg Convention Bureau
->    (kostenloser Eintrag) melden?
->
-> Viele Grüße
-> Sergiy
+| # | Frage | Antwort |
+|---|---|---|
+| 1 | Gibt es schon einen Google-Maps-Eintrag? | Nein — neu anlegen |
+| 2 | Profil gehört Finanzelot, Sergiy verwaltet als Manager? | Ja |
+| 3 | Adresse Finkenrieker Hauptdeich 14, 21109 Hamburg? | Ja, vorerst; bei Bedarf später anpassen |
+| 4 | Wer macht die Video-Bestätigung vor Ort? | Uli |
+| 5 | Fotos von Andrea Klick in Profilen und Portalen? | Ja |
+| 6 | WLAN, 20 Parkplätze, PA-Anlage, eigener DJ? | Ja — auf die Website, „professionell und qualitativ“. **Offen:** 30 oder 35 Personen, 157,94 oder 165 m² |
+| 7 | Telefon +49 40 277347? | Ja |
+| 8 | Meldung an Film Commission Hamburg und HCB? | Ja |
 
 ## Quellen
 

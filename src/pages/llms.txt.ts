@@ -4,7 +4,7 @@
  * Erzeugt aus denselben belegten Daten wie die Seite — nie von Hand pflegen.
  */
 import type { APIRoute } from 'astro';
-import { FAKTEN, KONTAKT, LIEGEPLATZ, SEITE, BETREIBER } from '../config';
+import { FAKTEN, KONTAKT, LIEGEPLATZ, SEITE, BETREIBER, AUSSTATTUNG } from '../config';
 import { ANLAESSE } from '../data/anlaesse';
 import { FRAGEN } from '../data/fragen';
 import { ratgeberArtikel } from '../lib/ratgeber';
@@ -23,7 +23,7 @@ export const GET: APIRoute = async () => {
     `- Kapazität: bis zu ${FAKTEN.maxGaeste} Personen`,
     `- Liegeplatz: ${LIEGEPLATZ.name}, ${LIEGEPLATZ.beschreibung}; Navi-Adresse ${LIEGEPLATZ.navi}; Koordinaten ${LIEGEPLATZ.breite.toFixed(5)}, ${LIEGEPLATZ.laenge.toFixed(5)}`,
     '- Veranstaltungen finden am Liegeplatz statt (das Schiff fährt nicht mehr aus eigener Kraft)',
-    '- Küche mit Geräten an Bord; Parkplätze vor der Tür; Zugang nicht barrierefrei',
+    `- Küche mit Geräten, WLAN und PA-Anlage an Bord; eigene Musik auch mit eigenem DJ; ${AUSSTATTUNG.parkplaetze} Parkplätze vor der Tür; Zugang nicht barrierefrei`,
     `- Kontakt: ${KONTAKT.person}, ${KONTAKT.mail}, ${KONTAKT.telefon}`,
     `- Betreiber: ${BETREIBER.firma}, ${BETREIBER.ort}`,
     '- Preise: auf Anfrage, je nach Anlass, Dauer und Gästezahl',
