@@ -1,20 +1,30 @@
 /**
- * 3D-Hero: Wasser in Echtzeit (Gerstner-Wellen im eigenen Shader), Himmel mit
- * tiefer Sonne, Hafensilhouette im Dunst — und die echte MS Wohldorf als
- * freigestellte Bildebene (2.5D), die sanft auf den Wellen schaukelt.
+ * 3D-Hero: die echte MS Wohldorf (freigestelltes Drohnenbild 2024) auf ruhigem
+ * Elbwasser im Abendlicht — aus derselben Perspektive wie das Foto.
+ *
+ * Warum so: Das Foto ist von schräg oben aufgenommen. Die Kamera der Szene
+ * schaut deshalb ebenfalls wie eine Drohne von oben (DROHNE.neigung), sonst
+ * wirkt das Schiff gekippt bzw. „sinkend“. Die Wasserlinie wird aus der Maske
+ * des Freistellers gemessen (nicht geschätzt); darunter zeichnet der Shader die
+ * Spiegelung des Rumpfs, darüber bleibt das Foto unverändert. Das Wasser hat
+ * pro Pixel berechnete Wellen-Normalen (kein Raster sichtbar), Glitzern der
+ * tiefen Sonne und Dunst zum oberen Bildrand.
+ *
+ * Bewegung: Die Kamera schwebt ruhig wie eine Drohne, das Schiff liegt fest am
+ * Liegeplatz (kaum merkliches Heben und Rollen um die Wasserlinie). Beim Scrollen
+ * steigt die Kamera auf und kippt nach unten.
  *
  * Wird erst nach dem ersten Zeichnen und nur auf fähigen Geräten geladen
  * (siehe start.ts). Alle Farben sind Anzeige-Farben (sRGB), ohne Tonemapping.
  */
 import {
-  BackSide,
-  CanvasTexture,
+  Color,
   Mesh,
   PerspectiveCamera,
   PlaneGeometry,
   Scene,
   ShaderMaterial,
-  SphereGeometry,
+  SRGBColorSpace,
   Texture,
   Vector2,
   Vector3,
@@ -39,16 +49,31 @@ interface Optionen {
   beiFehler?: () => void;
 }
 
-const SONNE = new Vector3(0.32, 0.075, -1).normalize();
+const GRAD = Math.PI / 180;
 
-// Gerstner-Wellen: Richtung (x, z), Steilheit, Wellenlänge (m)
+/** Länge der Wohldorf (Presse 2019: 30 m) — Maßstab für Wasser und Wellen. */
+const SCHIFF_LAENGE = 30;
+
+/** Kamera wie die Drohne, die das Foto aufgenommen hat. */
+const DROHNE = { neigung: 25 * GRAD, fov: 38 };
+
+/** Tiefe Sonne vorn rechts — ihr Glitzern liegt oben rechts hinter dem Schiff. */
+const SONNE = new Vector3(0.34, 0.2, -1).normalize();
+
+// Wellen für ruhiges Flusswasser: Richtung (x, z), Höhe-Faktor, Wellenlänge (m)
 const WELLEN = [
-  [1.0, 0.35, 0.16, 11.0],
-  [0.7, -0.6, 0.14, 6.3],
-  [-0.25, 1.0, 0.12, 3.9],
-  [0.9, 0.95, 0.09, 2.3],
-  [-0.8, 0.4, 0.07, 1.45],
+  [1.0, 0.35, 0.032, 9.0],
+  [0.45, -0.9, 0.034, 5.9],
+  [-0.4, 1.0, 0.036, 3.7],
+  [0.95, 0.6, 0.034, 2.3],
+  [-0.85, 0.45, 0.032, 1.45],
+  [0.15, -1.0, 0.03, 0.95],
+  [-0.65, -0.75, 0.026, 0.62],
+  [0.9, -0.3, 0.022, 0.41],
 ];
+
+/** Stützstellen der Wasserlinie im Foto (u = 0…1, je Spalte die Unterkante der Maske). */
+const LINIE_N = 33;
 
 const gemeinsamGlsl = /* glsl */ `
   uniform vec3 uSonne;
@@ -59,60 +84,34 @@ const gemeinsamGlsl = /* glsl */ `
   uniform vec3 uSonnenFarbe;
   vec3 himmel(vec3 r) {
     float h = clamp(r.y, 0.0, 1.0);
-    vec3 c = mix(uHorizont, uDunst, smoothstep(0.0, 0.07, h));
-    c = mix(c, uHoehe, smoothstep(0.05, 0.28, h));
-    c = mix(c, uZenit, smoothstep(0.25, 0.85, h));
+    vec3 c = mix(uHorizont, uDunst, smoothstep(0.0, 0.08, h));
+    c = mix(c, uHoehe, smoothstep(0.06, 0.3, h));
+    c = mix(c, uZenit, smoothstep(0.28, 0.9, h));
     float s = max(dot(normalize(r), uSonne), 0.0);
-    c += uSonnenFarbe * (pow(s, 900.0) * 3.0 + pow(s, 40.0) * 0.32 + pow(s, 6.0) * 0.1);
+    c += uSonnenFarbe * (pow(s, 1400.0) * 2.4 + pow(s, 60.0) * 0.38 + pow(s, 7.0) * 0.12);
     return c;
   }
 `;
 
 const wasserVertex = /* glsl */ `
-  uniform float uZeit;
-  uniform vec4 uWellen[5];
   varying vec3 vWelt;
-  varying vec3 vNormale;
-  varying float vHub;
-
-  vec3 gerstner(vec4 w, vec3 p, inout vec3 t, inout vec3 b) {
-    float steil = w.z;
-    float k = 6.2831853 / w.w;
-    float c = sqrt(9.8 / k);
-    vec2 d = normalize(w.xy);
-    float f = k * (dot(d, p.xz) - c * uZeit);
-    float a = steil / k;
-    float s = sin(f), co = cos(f);
-    t += vec3(-d.x * d.x * steil * s, d.x * steil * co, -d.x * d.y * steil * s);
-    b += vec3(-d.x * d.y * steil * s, d.y * steil * co, -d.y * d.y * steil * s);
-    return vec3(d.x * a * co, a * s, d.y * a * co);
-  }
-
   void main() {
-    vec3 p = (modelMatrix * vec4(position, 1.0)).xyz;
-    vec3 t = vec3(1.0, 0.0, 0.0);
-    vec3 b = vec3(0.0, 0.0, 1.0);
-    vec3 v = p;
-    for (int i = 0; i < 5; i++) v += gerstner(uWellen[i], p, t, b);
-    vNormale = normalize(cross(b, t));
-    vWelt = v;
-    vHub = v.y;
-    gl_Position = projectionMatrix * viewMatrix * vec4(v, 1.0);
+    vec4 w = modelMatrix * vec4(position, 1.0);
+    vWelt = w.xyz;
+    gl_Position = projectionMatrix * viewMatrix * w;
   }
 `;
 
 const wasserFragment = /* glsl */ `
   uniform float uZeit;
+  uniform vec4 uWellen[${WELLEN.length}];
   uniform vec3 uTief;
   uniform vec3 uKamm;
   uniform vec3 uNebel;
   uniform float uNebelDichte;
-  uniform vec2 uSchiffA;
-  uniform vec2 uSchiffB;
-  uniform float uSchiffBreite;
+  uniform vec2 uRumpf[6];
+  uniform float uRumpfBreite;
   varying vec3 vWelt;
-  varying vec3 vNormale;
-  varying float vHub;
   ${gemeinsamGlsl}
 
   float abstandStrecke(vec2 p, vec2 a, vec2 b) {
@@ -123,74 +122,52 @@ const wasserFragment = /* glsl */ `
 
   void main() {
     vec2 q = vWelt.xz;
-    float t = uZeit;
     float abstand = length(cameraPosition - vWelt);
-    // feine Kräuselung, nur in der Nähe
-    vec2 kr = vec2(
-      sin(q.x * 3.1 + t * 1.7) * 0.5 + sin(q.x * 7.3 - q.y * 2.1 + t * 2.9) * 0.3 + sin((q.x + q.y) * 13.0 + t * 4.1) * 0.15,
-      sin(q.y * 2.7 - t * 1.3) * 0.5 + sin(q.y * 6.1 + q.x * 1.7 - t * 2.3) * 0.3 + sin((q.y - q.x) * 11.0 - t * 3.7) * 0.15
-    );
-    vec3 n = normalize(vNormale + vec3(kr.x, 0.0, kr.y) * 0.11 * (1.0 - smoothstep(8.0, 80.0, abstand)));
+    // Normalen aller Wellen pro Pixel (analytisch) — feine Wellen blenden mit dem Abstand aus.
+    vec3 n = vec3(0.0, 1.0, 0.0);
+    float hub = 0.0;
+    for (int i = 0; i < ${WELLEN.length}; i++) {
+      vec4 w = uWellen[i];
+      float k = 6.2831853 / w.w;
+      float c = sqrt(9.8 / k);
+      vec2 d = normalize(w.xy);
+      float f = k * (dot(d, q) - c * uZeit);
+      float a = w.z;
+      float aus = 1.0 - smoothstep(w.w * 18.0, w.w * 70.0, abstand);
+      n.xz -= d * a * cos(f) * aus * 1.6;
+      hub += a * sin(f) * aus;
+    }
+    // unregelmäßige Kräuselung (zwei gedrehte, langsam laufende Felder) gegen ein zu gleichmäßiges Riffelmuster
+    float nah = 1.0 - smoothstep(30.0, 160.0, abstand);
+    vec2 k1 = mat2(0.8, -0.6, 0.6, 0.8) * q * 1.7;
+    vec2 k2 = mat2(0.28, 0.96, -0.96, 0.28) * q * 2.9;
+    n.xz += vec2(sin(k1.x + uZeit * 1.1) * cos(k1.y * 0.7 - uZeit * 0.8), cos(k2.y - uZeit * 1.4) * sin(k2.x * 0.6 + uZeit * 0.9)) * 0.045 * nah;
+    n = normalize(n);
 
     vec3 v = normalize(cameraPosition - vWelt);
     float fresnel = 0.02 + 0.98 * pow(1.0 - max(dot(n, v), 0.0), 5.0);
     vec3 r = reflect(-v, n);
     r.y = abs(r.y);
     vec3 spiegel = himmel(r);
-    vec3 koerper = mix(uTief, uKamm, clamp(vHub * 1.1 + 0.25, 0.0, 1.0) * 0.55);
-    vec3 farbe = mix(koerper, spiegel, clamp(fresnel * 1.15, 0.0, 1.0));
+    vec3 koerper = mix(uTief, uKamm, clamp(hub * 3.0 + 0.35, 0.0, 1.0) * 0.35);
+    vec3 farbe = mix(koerper, spiegel, clamp(fresnel * 1.25, 0.0, 1.0));
 
-    // Glitzern der tiefen Sonne (Messing)
-    float glanz = pow(max(dot(r, uSonne), 0.0), 260.0);
-    float breit = pow(max(dot(r, uSonne), 0.0), 18.0);
-    farbe += uSonnenFarbe * (glanz * 2.6 + breit * 0.12);
+    // Glitzern der tiefen Sonne
+    float sd = max(dot(r, uSonne), 0.0);
+    farbe += uSonnenFarbe * (pow(sd, 700.0) * 4.0 + pow(sd, 90.0) * 0.5 + pow(sd, 14.0) * 0.06);
 
-    // Schatten und dunkle Kante am Rumpf
-    float d = abstandStrecke(q, uSchiffA, uSchiffB);
-    float schatten = 1.0 - smoothstep(uSchiffBreite * 0.35, uSchiffBreite * 1.4, d);
-    farbe *= 1.0 - 0.42 * schatten;
+    // Kontaktschatten am Rumpf (Wasserlinie auf dem Wasser)
+    float d = 1e5;
+    for (int i = 0; i < 5; i++) d = min(d, abstandStrecke(q, uRumpf[i], uRumpf[i + 1]));
+    farbe *= 1.0 - 0.38 * (1.0 - smoothstep(0.0, uRumpfBreite, d));
+    // feine Ringwellen, die vom Rumpf weglaufen (das Schiff bewegt sich kaum merklich)
+    float ring = sin(d * 4.2 - uZeit * 2.0) * (1.0 - smoothstep(0.3, 7.0, d)) * smoothstep(0.0, 0.6, d);
+    farbe += vec3(0.55, 0.5, 0.42) * ring * 0.035;
 
-    // Dunst zum Horizont
-    float nebel = 1.0 - exp(-pow(abstand * uNebelDichte, 1.5));
+    // Dunst zum oberen Bildrand
+    float nebel = 1.0 - exp(-pow(abstand * uNebelDichte, 1.6));
     farbe = mix(farbe, uNebel, clamp(nebel, 0.0, 1.0));
     gl_FragColor = vec4(farbe, 1.0);
-  }
-`;
-
-const himmelVertex = /* glsl */ `
-  varying vec3 vRichtung;
-  void main() {
-    vec4 w = modelMatrix * vec4(position, 1.0);
-    vRichtung = w.xyz - cameraPosition;
-    gl_Position = projectionMatrix * viewMatrix * w;
-  }
-`;
-
-const himmelFragment = /* glsl */ `
-  uniform float uZeit;
-  varying vec3 vRichtung;
-  ${gemeinsamGlsl}
-  void main() {
-    vec3 r = normalize(vRichtung);
-    vec3 c = himmel(r);
-    // zarte Wolkenbänder
-    float band = sin(r.x * 7.0 + uZeit * 0.01) * sin(r.y * 40.0 + r.x * 3.0) * 0.5 + 0.5;
-    c = mix(c, c * 1.06 + vec3(0.02, 0.015, 0.0), band * smoothstep(0.02, 0.12, r.y) * (1.0 - smoothstep(0.12, 0.4, r.y)) * 0.6);
-    gl_FragColor = vec4(c, 1.0);
-  }
-`;
-
-const silhouetteFragment = /* glsl */ `
-  uniform sampler2D uBild;
-  uniform vec3 uNebel;
-  uniform vec3 uFarbe;
-  varying vec2 vUv;
-  void main() {
-    vec4 s = texture2D(uBild, vUv);
-    if (s.a < 0.02) discard;
-    vec3 c = mix(uFarbe, uNebel, 0.62);
-    c = mix(c, vec3(1.0, 0.84, 0.6), s.r * 0.75);
-    gl_FragColor = vec4(c, s.a * 0.82);
   }
 `;
 
@@ -202,130 +179,101 @@ const ebeneVertex = /* glsl */ `
   }
 `;
 
-// Wasserlinie des freigestellten Fotos (u → v), aus der Maske abgeleitet.
+// Die Bildebene reicht unter dem Foto um UNTEN (Anteil der Fotohöhe) weiter —
+// dort liegt die Spiegelung. vUv.y = 0 ist die Unterkante dieser Erweiterung.
+const UNTEN = 0.32;
+
 const schiffFragment = /* glsl */ `
   uniform sampler2D uBild;
   uniform float uZeit;
+  uniform float uLinie[${LINIE_N}];
   uniform vec3 uNebel;
+  uniform vec3 uTief;
   uniform vec3 uSonnenFarbe;
   varying vec2 vUv;
-  float wasserlinie(float u) {
-    float v = 0.47;
-    v = mix(v, 0.335, smoothstep(0.04, 0.166, u));
-    v = mix(v, 0.224, smoothstep(0.166, 0.376, u));
-    v = mix(v, 0.155, smoothstep(0.376, 0.532, u));
-    v = mix(v, 0.089, smoothstep(0.532, 0.69, u));
-    v = mix(v, 0.035, smoothstep(0.69, 0.847, u));
-    v = mix(v, 0.011, smoothstep(0.847, 0.921, u));
-    return v;
+
+  float linie(float u) {
+    float x = clamp(u, 0.0, 1.0) * ${(LINIE_N - 1).toFixed(1)};
+    int i = int(floor(x));
+    int j = min(i + 1, ${LINIE_N - 1});
+    return mix(uLinie[i], uLinie[j], fract(x));
   }
+
+  vec3 abendlicht(vec3 c, vec2 uv) {
+    // Tageslicht-Foto → Abendlicht: wärmer, etwas gedämpft, Sonnenseite oben rechts heller.
+    c = c * vec3(1.0, 0.9, 0.78) * 0.8;
+    c += uSonnenFarbe * 0.16 * smoothstep(0.3, 1.1, uv.x * 0.6 + uv.y * 0.7);
+    return mix(c, uNebel, 0.06);
+  }
+
   void main() {
-    vec4 s = texture2D(uBild, vUv);
-    float linie = wasserlinie(vUv.x) + 0.028 + sin(vUv.x * 38.0 - uZeit * 1.9) * 0.004 + sin(vUv.x * 91.0 + uZeit * 2.7) * 0.0025;
-    float tauch = smoothstep(linie - 0.012, linie + 0.01, vUv.y);
-    vec3 c = s.rgb;
-    // Abendlicht: wärmer, etwas gedämpft, Dunst
-    c = c * vec3(1.0, 0.92, 0.8) * 0.84;
-    c += uSonnenFarbe * 0.1 * smoothstep(0.35, 1.2, vUv.x * 0.7 + vUv.y * 0.6);
-    c = mix(c, uNebel, 0.08);
-    // dunkle Spiegelung knapp über der Wasserlinie
-    c *= mix(0.7, 1.0, smoothstep(linie, linie + 0.05, vUv.y));
-    float a = s.a * tauch;
+    // Koordinaten im Foto (0…1); darunter (y < 0) liegt die Spiegelung.
+    vec2 uv = vec2(vUv.x, (vUv.y * (1.0 + ${UNTEN.toFixed(2)})) - ${UNTEN.toFixed(2)});
+    float wl = linie(uv.x);
+    // Die Wasserlinie atmet minimal mit den kleinen Wellen.
+    float welle = sin(uv.x * 46.0 - uZeit * 1.7) * 0.0018 + sin(uv.x * 113.0 + uZeit * 2.3) * 0.0011;
+    float l = wl + welle;
+
+    if (uv.y >= l) {
+      vec4 s = texture2D(uBild, uv);
+      float a = s.a * smoothstep(l, l + 0.006, uv.y);
+      if (a < 0.01) discard;
+      vec3 c = abendlicht(s.rgb, uv);
+      // dunkler Saum direkt über dem Wasser (Rumpfschatten)
+      c *= mix(0.78, 1.0, smoothstep(l, l + 0.035, uv.y));
+      gl_FragColor = vec4(c, a);
+      return;
+    }
+
+    // Spiegelung: senkrecht an der Wasserlinie gespiegelt, von kleinen Wellen verzerrt.
+    float tiefe = l - uv.y;
+    vec2 verzerrt = vec2(
+      uv.x + sin(uv.y * 160.0 + uZeit * 2.1) * 0.0035 * (0.4 + tiefe * 6.0),
+      l + tiefe * 1.05 + sin(uv.x * 90.0 - uZeit * 1.6) * 0.004 * tiefe * 8.0
+    );
+    vec4 s = texture2D(uBild, verzerrt);
+    float aus = 1.0 - smoothstep(0.0, 0.14, tiefe);
+    float a = s.a * aus * 0.55;
     if (a < 0.01) discard;
+    vec3 c = mix(uTief, abendlicht(s.rgb, verzerrt) * 0.62, 0.7);
+    // feiner heller Kontakt-Saum genau an der Wasserlinie
+    c += vec3(0.5, 0.45, 0.38) * (1.0 - smoothstep(0.0, 0.006, tiefe)) * 0.35;
     gl_FragColor = vec4(c, a);
   }
 `;
 
-function zufall(saat: number) {
-  return () => {
-    saat |= 0;
-    saat = (saat + 0x6d2b79f5) | 0;
-    let t = Math.imul(saat ^ (saat >>> 15), 1 | saat);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
-
-/** Hafensilhouette: Speicher, Kräne, ein paar Lichter — gezeichnet, nicht geladen. */
-function zeichneSilhouette(): HTMLCanvasElement {
-  const B = 4096,
-    H = 256;
+/** Unterkante der Maske je Spalte = Wasserlinie im Foto (v von unten, 0…1). */
+function messeWasserlinie(bild: HTMLImageElement): Float32Array {
+  const b = bild.naturalWidth,
+    h = bild.naturalHeight;
   const c = document.createElement('canvas');
-  c.width = B;
-  c.height = H;
-  const g = c.getContext('2d')!;
-  const z = zufall(1959);
-  const boden = H - 18;
-  g.fillStyle = '#000';
-  g.fillRect(0, boden, B, 18);
-  // Speicher und Hallen
-  for (let x = 0; x < B; ) {
-    const w = 40 + z() * 150;
-    const h = 8 + z() * 34;
-    g.fillRect(x, boden - h, w, h + 1);
-    if (z() > 0.55) {
-      // Sägezahndach
-      const zaehne = Math.max(2, Math.round(w / 18));
-      g.beginPath();
-      for (let i = 0; i < zaehne; i++) {
-        const x0 = x + (i * w) / zaehne;
-        g.moveTo(x0, boden - h);
-        g.lineTo(x0 + w / zaehne, boden - h - 7);
-        g.lineTo(x0 + w / zaehne, boden - h);
-      }
-      g.fill();
-    }
-    x += w + (z() > 0.7 ? z() * 120 : 0);
-  }
-  // Containerbrücken (Kräne)
-  g.strokeStyle = '#000';
-  g.lineCap = 'square';
-  const kraene = [2350, 2520, 2690, 2860, 3120, 3290, 900, 1060];
-  for (const kx of kraene) {
-    const hoehe = 52 + z() * 26;
-    const fuss = 30;
-    g.lineWidth = 4;
-    g.beginPath();
-    g.moveTo(kx, boden);
-    g.lineTo(kx + 6, boden - hoehe);
-    g.moveTo(kx + fuss, boden);
-    g.lineTo(kx + fuss - 6, boden - hoehe);
-    g.stroke();
-    g.lineWidth = 5;
-    g.beginPath();
-    g.moveTo(kx - 60, boden - hoehe + 6);
-    g.lineTo(kx + fuss + 40, boden - hoehe + 6);
-    g.stroke();
-    g.lineWidth = 2.5;
-    g.beginPath();
-    g.moveTo(kx + fuss / 2, boden - hoehe - 26);
-    g.lineTo(kx - 58, boden - hoehe + 6);
-    g.moveTo(kx + fuss / 2, boden - hoehe - 26);
-    g.lineTo(kx + fuss + 38, boden - hoehe + 6);
-    g.moveTo(kx + fuss / 2, boden - hoehe - 26);
-    g.lineTo(kx + fuss / 2, boden - hoehe + 6);
-    g.stroke();
-  }
-  // Lichter (roter Kanal = Licht, Alpha = Silhouette)
-  const daten = g.getImageData(0, 0, B, H);
-  for (let i = 0; i < 260; i++) {
-    const x = Math.floor(z() * B);
-    const y = Math.floor(boden - 2 - z() * 40);
-    const idx = (y * B + x) * 4;
-    if (daten.data[idx + 3] > 0) {
-      for (const [dx, dy] of [
-        [0, 0],
-        [1, 0],
-        [0, 1],
-        [1, 1],
-      ]) {
-        const j = ((y + dy) * B + x + dx) * 4;
-        daten.data[j] = 255;
+  c.width = b;
+  c.height = h;
+  const g = c.getContext('2d', { willReadFrequently: true })!;
+  g.drawImage(bild, 0, 0);
+  const d = g.getImageData(0, 0, b, h).data;
+  const roh: (number | null)[] = [];
+  for (let i = 0; i < LINIE_N; i++) {
+    const x = Math.min(b - 1, Math.round((i / (LINIE_N - 1)) * (b - 1)));
+    let v: number | null = null;
+    for (let y = h - 1; y >= 0; y--) {
+      if (d[(y * b + x) * 4 + 3] > 128) {
+        v = 1 - y / (h - 1);
+        break;
       }
     }
+    roh.push(v);
   }
-  g.putImageData(daten, 0, 0);
-  return c;
+  // Ränder ohne Rumpf: vom Nachbarn übernehmen; dann leicht glätten und 2 px nach innen.
+  for (let i = 0; i < LINIE_N; i++) if (roh[i] === null) roh[i] = roh[i + 1] ?? roh[i - 1] ?? 0;
+  const linie = new Float32Array(LINIE_N);
+  for (let i = 0; i < LINIE_N; i++) {
+    const a = roh[Math.max(0, i - 1)]!,
+      m = roh[i]!,
+      e = roh[Math.min(LINIE_N - 1, i + 1)]!;
+    linie[i] = (a + 2 * m + e) / 4 + 2 / h;
+  }
+  return linie;
 }
 
 export async function erstelleSzene(leinwand: HTMLCanvasElement, opt: Optionen): Promise<SzenenSteuerung> {
@@ -337,94 +285,78 @@ export async function erstelleSzene(leinwand: HTMLCanvasElement, opt: Optionen):
     preserveDrawingBuffer: opt.standbild !== undefined,
   });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
-  renderer.setClearColor(0x0a1d30, 1);
 
   const szene = new Scene();
-  const kamera = new PerspectiveCamera(42, 1, 0.5, 900);
+  const kamera = new PerspectiveCamera(DROHNE.fov, 1, 1, 8000);
 
   const farben = {
     uSonne: { value: SONNE },
-    uHorizont: { value: new Vector3(0.86, 0.66, 0.43) },
-    uDunst: { value: new Vector3(0.5, 0.47, 0.44) },
-    uHoehe: { value: new Vector3(0.15, 0.27, 0.34) },
-    uZenit: { value: new Vector3(0.035, 0.1, 0.17) },
-    uSonnenFarbe: { value: new Vector3(1.0, 0.82, 0.55) },
+    uHorizont: { value: new Vector3(0.93, 0.7, 0.45) },
+    uDunst: { value: new Vector3(0.56, 0.5, 0.45) },
+    uHoehe: { value: new Vector3(0.18, 0.29, 0.36) },
+    uZenit: { value: new Vector3(0.04, 0.11, 0.18) },
+    uSonnenFarbe: { value: new Vector3(1.0, 0.8, 0.52) },
   };
-  const nebel = new Vector3(0.36, 0.38, 0.39);
+  const nebel = new Vector3(0.42, 0.4, 0.38);
+  // Jenseits des Wassers (sehr hohe Formate): dieselbe Dunstfarbe, keine Kante.
+  renderer.setClearColor(new Color().setRGB(nebel.x, nebel.y, nebel.z, SRGBColorSpace), 1);
+  const tief = new Vector3(0.025, 0.085, 0.12);
 
-  // Himmel
-  const himmel = new Mesh(
-    new SphereGeometry(600, 32, 16),
-    new ShaderMaterial({
-      vertexShader: himmelVertex,
-      fragmentShader: himmelFragment,
-      uniforms: { ...farben, uZeit: { value: 0 } },
-      side: BackSide,
-      depthWrite: false,
-    }),
-  );
-  himmel.renderOrder = -2;
-  szene.add(himmel);
-
-  // Wasser
-  const schmal = window.innerWidth < 700;
-  const teile = schmal ? 140 : 220;
-  const wasserGeo = new PlaneGeometry(460, 460, teile, teile);
+  // Wasser: flache Ebene, Wellen stecken in den Normalen (pro Pixel).
+  const wasserGeo = new PlaneGeometry(9000, 9000, 1, 1);
   wasserGeo.rotateX(-Math.PI / 2);
-  wasserGeo.translate(0, 0, -150);
   const wasserUniforms = {
     ...farben,
     uZeit: { value: 0 },
     uWellen: { value: new Float32Array(WELLEN.flat()) },
-    uTief: { value: new Vector3(0.03, 0.11, 0.18) },
-    uKamm: { value: new Vector3(0.1, 0.33, 0.4) },
+    uTief: { value: tief },
+    uKamm: { value: new Vector3(0.09, 0.27, 0.32) },
     uNebel: { value: nebel },
-    uNebelDichte: { value: 0.0095 },
-    uSchiffA: { value: new Vector2() },
-    uSchiffB: { value: new Vector2() },
-    uSchiffBreite: { value: 1.5 },
+    uNebelDichte: { value: 0.0042 },
+    uRumpf: { value: Array.from({ length: 6 }, () => new Vector2()) },
+    uRumpfBreite: { value: 2.2 },
   };
-  const wasser = new Mesh(
-    wasserGeo,
-    new ShaderMaterial({ vertexShader: wasserVertex, fragmentShader: wasserFragment, uniforms: wasserUniforms }),
-  );
+  const wasser = new Mesh(wasserGeo, new ShaderMaterial({ vertexShader: wasserVertex, fragmentShader: wasserFragment, uniforms: wasserUniforms }));
   szene.add(wasser);
-
-  // Hafensilhouette im Dunst
-  const silTex = new CanvasTexture(zeichneSilhouette());
-  silTex.anisotropy = 4;
-  const silhouette = new Mesh(
-    new PlaneGeometry(1300, 81.25),
-    new ShaderMaterial({
-      vertexShader: ebeneVertex,
-      fragmentShader: silhouetteFragment,
-      uniforms: { uBild: { value: silTex }, uNebel: { value: new Vector3(0.62, 0.56, 0.5) }, uFarbe: { value: new Vector3(0.12, 0.2, 0.25) } },
-      transparent: true,
-      depthWrite: false,
-    }),
-  );
-  silhouette.position.set(60, 33, -370);
-  silhouette.renderOrder = -1;
-  szene.add(silhouette);
 
   // Das Schiff (freigestelltes Foto)
   const bild = new Image();
   bild.decoding = 'async';
   bild.src = opt.schiffUrl;
   await bild.decode();
+  const linie = messeWasserlinie(bild);
   const schiffTex = new Texture(bild);
   schiffTex.needsUpdate = true;
   schiffTex.anisotropy = 4;
   const seiten = bild.naturalWidth / bild.naturalHeight;
-  const schiffHoehe = 8.6;
+  const linieBei = (u: number) => {
+    const x = Math.max(0, Math.min(1, u)) * (LINIE_N - 1);
+    const i = Math.floor(x);
+    const j = Math.min(i + 1, LINIE_N - 1);
+    return linie[i] + (linie[j] - linie[i]) * (x - i);
+  };
+
+  // Fotohöhe in Metern, so dass die Wasserlinie (Heck bis Bug) 30 m lang ist —
+  // bei der Drohnenneigung wird die Tiefe auf dem Wasser um 1/sin(neigung) gestreckt.
+  const u0 = 0.04,
+    u1 = 0.93;
+  const du = (u1 - u0) * seiten,
+    dv = linieBei(u0) - linieBei(u1);
+  const fotoHoehe = SCHIFF_LAENGE / Math.hypot(du, dv / Math.sin(DROHNE.neigung));
+
   const schiffUniforms = {
     uBild: { value: schiffTex },
     uZeit: { value: 0 },
+    uLinie: { value: Array.from(linie) },
     uNebel: { value: nebel },
+    uTief: { value: tief },
     uSonnenFarbe: farben.uSonnenFarbe,
   };
+  const schiffGeo = new PlaneGeometry(fotoHoehe * seiten, fotoHoehe * (1 + UNTEN));
+  // Ursprung der Ebene = Punkt der Wasserlinie in der Bildmitte (u = 0.5).
+  schiffGeo.translate(0, fotoHoehe * ((1 + UNTEN) / 2 - UNTEN - linieBei(0.5)), 0);
   const schiff = new Mesh(
-    new PlaneGeometry(schiffHoehe * seiten, schiffHoehe),
+    schiffGeo,
     new ShaderMaterial({
       vertexShader: ebeneVertex,
       fragmentShader: schiffFragment,
@@ -437,55 +369,58 @@ export async function erstelleSzene(leinwand: HTMLCanvasElement, opt: Optionen):
   schiff.renderOrder = 5;
   szene.add(schiff);
 
-  // Aufbau je nach Seitenverhältnis: Das Schiff wird über eine Zielposition
-  // auf dem Bildschirm (NDC) und einen Abstand zur Kamera platziert — so
-  // steht es auf jedem Format neben bzw. unter dem Text.
-  const basis = { kx: 0, ky: 7.2, kz: 24, zy: 1.2, sx: 0, sy: 0, sz: 0, massstab: 1 };
-  const ziel = new Vector3();
+  // Aufbau je nach Format: Kamera als Drohne über dem Liegeplatz, das Schiff an
+  // einer Zielstelle des Bildschirms (neben bzw. unter dem Text).
+  const rig = { abstand: 80, neigung: DROHNE.neigung, ndcX: 0.45, ndcY: -0.2, anteil: 0.5 };
   function anordnen(b: number, h: number) {
     renderer.setSize(b, h, false);
     const a = b / h;
     kamera.aspect = a;
-    let ndcX: number, ndcY: number, abstand: number;
     if (a < 0.95) {
       // Hochformat: Text oben, Schiff unten
-      Object.assign(basis, { kx: 0, ky: 8.4, kz: 26, zy: 0.6 });
-      kamera.fov = 50;
-      ndcX = 0.06;
-      ndcY = -0.6;
-      abstand = 19;
-      basis.massstab = Math.max(0.5, Math.min(0.85, a * 1.3));
+      kamera.fov = DROHNE.fov + 8;
+      Object.assign(rig, { ndcX: 0.02, ndcY: -0.84, anteil: Math.min(0.36, (0.62 * a) / seiten) });
     } else {
       // Querformat: Text links, Schiff rechts
       const breit = Math.min(1, (a - 0.95) / 0.8);
-      Object.assign(basis, { kx: 0, ky: 7.2, kz: 24, zy: 1.2 });
-      kamera.fov = 42;
-      ndcX = 0.5 - 0.06 * breit;
-      ndcY = -0.3 + 0.14 * breit;
-      abstand = 21;
-      basis.massstab = 0.72 + 0.28 * breit;
+      kamera.fov = DROHNE.fov;
+      Object.assign(rig, { ndcX: 0.42 + 0.06 * breit, ndcY: -0.4 + 0.04 * breit, anteil: 0.62 - 0.05 * breit });
     }
     kamera.updateProjectionMatrix();
-    kamera.position.set(basis.kx, basis.ky, basis.kz);
-    kamera.lookAt(basis.kx * 0.5, basis.zy, 0);
+    // Abstand so, dass das Foto `anteil` der Bildhöhe einnimmt — gemessen am Liegeplatz,
+    // nicht an der Bildmitte (zum unteren Rand hin ist das Wasser näher an der Kamera).
+    stelleKamera(1, rig.neigung, 0);
+    const naehe = aufsWasser(rig.ndcX, rig.ndcY, ziel).distanceTo(kamera.position);
+    rig.abstand = fotoHoehe / (rig.anteil * 2 * Math.tan((kamera.fov / 2) * GRAD)) / naehe;
+  }
+
+  /** Drohne auf einer Kugel um den Ursprung: Abstand, Neigung nach unten, Drehung um die Hochachse. */
+  function stelleKamera(abstand: number, neigung: number, dreh: number) {
+    blick.set(Math.sin(dreh) * Math.cos(neigung), -Math.sin(neigung), -Math.cos(dreh) * Math.cos(neigung));
+    kamera.position.copy(blick).multiplyScalar(-abstand);
+    kamera.lookAt(0, 0, 0);
     kamera.updateMatrixWorld();
-    ziel.set(ndcX, ndcY, 0.5).unproject(kamera).sub(kamera.position).normalize().multiplyScalar(abstand).add(kamera.position);
-    basis.sx = ziel.x;
-    basis.sy = ziel.y;
-    basis.sz = ziel.z;
-    schiff.scale.setScalar(basis.massstab);
   }
 
   const zustand = { scroll: 0, zx: 0, zy: 0, glattX: 0, glattY: 0 };
+  const blick = new Vector3();
+  const ziel = new Vector3();
   const strahl = new Vector3();
   const punkt = new Vector3();
-  function aufWasser(u: number, v: number, ziel: Vector2) {
-    // Punkt der Bildebene (u, v) → Strahl von der Kamera → Schnitt mit y = 0
-    punkt.set((u - 0.5) * schiffHoehe * seiten, (v - 0.5) * schiffHoehe, 0);
-    schiff.localToWorld(punkt); // berücksichtigt auch den Maßstab
+
+  /** Strahl durch einen Bildschirmpunkt (NDC) → Schnitt mit dem Wasser (y = 0). */
+  function aufsWasser(x: number, y: number, aus: Vector3) {
+    strahl.set(x, y, 0.5).unproject(kamera).sub(kamera.position).normalize();
+    const t = strahl.y < -1e-4 ? -kamera.position.y / strahl.y : 1e4;
+    return aus.copy(kamera.position).addScaledVector(strahl, t);
+  }
+  /** Punkt des Fotos (u, v) auf der Bildebene → Strahl → Schnitt mit dem Wasser. */
+  function fotoAufsWasser(u: number, v: number, aus: Vector2) {
+    punkt.set((u - 0.5) * fotoHoehe * seiten, (v - linieBei(0.5)) * fotoHoehe, 0);
+    schiff.localToWorld(punkt);
     strahl.copy(punkt).sub(kamera.position).normalize();
-    const t = strahl.y < -0.001 ? -kamera.position.y / strahl.y : 200;
-    ziel.set(kamera.position.x + strahl.x * t, kamera.position.z + strahl.z * t);
+    const t = strahl.y < -1e-4 ? -kamera.position.y / strahl.y : 1e4;
+    aus.set(kamera.position.x + strahl.x * t, kamera.position.z + strahl.z * t);
   }
 
   let zeit = 0;
@@ -499,27 +434,39 @@ export async function erstelleSzene(leinwand: HTMLCanvasElement, opt: Optionen):
     letzte = jetzt;
     zeit = opt.standbild ?? zeit + dt;
 
-    zustand.glattX += (zustand.zx - zustand.glattX) * 0.05;
-    zustand.glattY += (zustand.zy - zustand.glattY) * 0.05;
+    zustand.glattX += (zustand.zx - zustand.glattX) * 0.04;
+    zustand.glattY += (zustand.zy - zustand.glattY) * 0.04;
     const p = zustand.scroll;
 
-    kamera.position.set(basis.kx + zustand.glattX * 1.1, basis.ky - 3.6 * p - zustand.glattY * 0.5, basis.kz - 9 * p);
-    kamera.lookAt(basis.kx * 0.5 + zustand.glattX * 0.35, basis.zy - 0.9 * p, 0);
+    // Drohne: ruhiges Schweben, Zeiger dreht leicht um den Liegeplatz,
+    // Scrollen lässt sie steigen und steiler nach unten blicken.
+    const neigung = rig.neigung + p * 16 * GRAD - zustand.glattY * 1.2 * GRAD + Math.sin(zeit * 0.21) * 0.25 * GRAD;
+    const dreh = zustand.glattX * 2.5 * GRAD + Math.sin(zeit * 0.13 + 1) * 0.6 * GRAD;
+    const abstand = rig.abstand * (1 - 0.18 * p) * (1 + Math.sin(zeit * 0.17) * 0.006);
+    stelleKamera(abstand, neigung, dreh);
 
-    // Schiff schaukelt: Hub, Rollen, leichtes Nicken
-    const hub = 0.09 * Math.sin(zeit * 0.85) + 0.04 * Math.sin(zeit * 1.63 + 1.3);
-    schiff.position.set(basis.sx, basis.sy + hub, basis.sz);
+    // Liegeplatz = Schnitt des Zielpunkts mit dem Wasser; die Szene ist um (0,0,0) gebaut,
+    // daher wird das Schiff dorthin gesetzt, wo der Bildschirmpunkt das Wasser trifft.
+    aufsWasser(rig.ndcX, rig.ndcY - 0.18 * p, ziel);
+
+    // Schiff liegt fest: kaum merkliches Heben und Rollen um die Wasserlinie.
+    const hub = 0.025 * Math.sin(zeit * 0.9) + 0.012 * Math.sin(zeit * 1.7 + 1.3);
+    schiff.position.copy(ziel);
+    schiff.position.y += hub;
     schiff.quaternion.copy(kamera.quaternion);
-    schiff.rotateZ(0.014 * Math.sin(zeit * 0.72 + 0.4) + 0.006 * Math.sin(zeit * 1.37));
+    schiff.rotateZ(0.0035 * Math.sin(zeit * 0.7 + 0.4) + 0.0015 * Math.sin(zeit * 1.31));
     schiff.updateMatrixWorld();
-    aufWasser(0.06, 0.45, wasserUniforms.uSchiffA.value);
-    aufWasser(0.9, 0.04, wasserUniforms.uSchiffB.value);
-    wasserUniforms.uSchiffBreite.value = 1.5 * basis.massstab;
 
-    himmel.position.copy(kamera.position);
-    wasserUniforms.uZeit.value = zeit * 0.8;
+    // Wasserlinie auf dem Wasser (für den Kontaktschatten)
+    const rumpf = wasserUniforms.uRumpf.value;
+    for (let i = 0; i < 6; i++) {
+      const u = u0 + ((u1 - u0) * i) / 5;
+      fotoAufsWasser(u, linieBei(u), rumpf[i]);
+    }
+
+
+    wasserUniforms.uZeit.value = zeit * 0.9;
     schiffUniforms.uZeit.value = zeit;
-    (himmel.material as ShaderMaterial).uniforms.uZeit.value = zeit;
 
     renderer.render(szene, kamera);
     if (!ersterRahmen) {
@@ -571,7 +518,6 @@ export async function erstelleSzene(leinwand: HTMLCanvasElement, opt: Optionen):
         const mat = m.material as ShaderMaterial | undefined;
         mat?.dispose();
       });
-      silTex.dispose();
       schiffTex.dispose();
       renderer.dispose();
     },
