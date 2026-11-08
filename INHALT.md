@@ -51,7 +51,9 @@ wurden alle Außenfotos der alten Seite: Auf `wohldorf-schiffs-location-118` ver
 Ponton den Rumpf, auf `wohldorf_ueberfahrt-hamburg_14` der Schlepper „Crusher" die halbe
 Bordwand, die Umbau-Fotos zeigen das Schiff an Land und klein im Bild. Nur das
 Drohnenbild zeigt die Wohldorf vollständig, mit Wasser ringsum — die Voraussetzung für
-eine saubere Freistellung. Szene und Poster sind deshalb unverändert.
+eine saubere Freistellung. Seit 08.11.2026 schaut die Kamera der Szene deshalb wie die Drohne
+von schräg oben (vorher fast auf Wasserhöhe — dadurch wirkte das Schiff „sinkend“); die
+gezeichnete Hafensilhouette mit Kränen entfällt, Poster neu aufgenommen.
 
 ## Texte: was woher kommt
 

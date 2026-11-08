@@ -202,11 +202,16 @@ Mailprogramm (`mailto:`-Formular) — und ein Hinweis nennt die Mailadresse.
 
 ### 3D-Hero
 
-`src/scripts/hero/szene.ts` (three.js 0.187.0): Wasser mit Gerstner-Wellen im eigenen Shader
-(Fresnel, Himmelsspiegelung, Messing-Glitzern der tiefen Sonne, Dunst), Himmelskuppel,
-gezeichnete Hafensilhouette, die echte Wohldorf als freigestellte Bildebene (2.5D) mit
-Schaukeln, Wasserlinie und Schatten. Maus-/Neigungs-Parallaxe; beim Scrollen gleitet die
-Kamera hinab und nach vorn.
+`src/scripts/hero/szene.ts` (three.js 0.187.0): die echte Wohldorf (freigestelltes Drohnenbild 2024)
+auf ruhigem Elbwasser im Abendlicht — **aus derselben Perspektive wie das Foto** (Kamera als Drohne,
+Neigung `DROHNE.neigung`), sonst wirkt das Schiff gekippt oder „sinkend“. Die Wasserlinie wird beim
+Laden aus der Maske des Freistellers gemessen; darunter zeichnet der Shader die Spiegelung des Rumpfs,
+darüber bleibt das Foto unverändert. Maßstab: Wasserlinie = 30 m (Presse 2019). Wasser mit pro Pixel
+berechneten Wellen-Normalen (Fresnel, Himmelsspiegelung, Glitzern der tiefen Sonne, Dunst),
+Kontaktschatten und feinen Ringwellen am Rumpf. Bewegung: Drohne schwebt ruhig, Maus-/Neigungs-
+Parallaxe dreht leicht um den Liegeplatz, beim Scrollen senkt sich die Kamera steiler auf das Schiff;
+das Schiff selbst liegt fest (kaum merkliches Heben und Rollen um die Wasserlinie).
+Ändert sich die Szene: `npm run build && npm run poster && npm run build` (Poster neu aufnehmen).
 
 - **Laden**: erst nach `load`, im Leerlauf (`requestIdleCallback`), per `import()`.
 - **Nur auf fähigen Geräten**: WebGL2 vorhanden, Bewegung erlaubt, kein Datensparmodus,
