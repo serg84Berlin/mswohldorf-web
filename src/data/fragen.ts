@@ -43,7 +43,7 @@ export const FRAGEN: Frage[] = [
     id: 'anlaesse',
     frage: 'Für welche Anlässe kann man die MS Wohldorf mieten?',
     antwort:
-      'Für Firmenevents, Workshops und Seminare, Film- und Fotoproduktionen, Lesungen und Ausstellungen sowie private Feiern. Genutzt wurde das Schiff auch für TV-Produktionen, Präsentationen, Brainstorming-Tage, Business-Essen und als Basislager.',
+      'Für Firmenevents, Workshops und Seminare, Film- und Fotoproduktionen, Lesungen und Ausstellungen sowie private Feiern. Genutzt wurde das Schiff auch für eine TV-Produktion („Die Pfefferkörner“, NDR), für Präsentationen, Brainstorming-Tage, Business-Essen und als Basislager.',
     link: { href: '/#anlaesse', text: 'Alle Anlässe' },
   },
   {

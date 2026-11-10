@@ -7,6 +7,8 @@
  *         Pfefferkörner, Kundenstimmen (Bildungswoche).
  *   P19 = Presse-PDFs der alten Website (2019): Raumaufteilung, Heizung,
  *         Raumhöhe, nicht mehr aus eigener Kraft fahrtüchtig, kleinere Feiern.
+ *   D   = Uli über Sergiy, 10.11.2026: Dreharbeiten gab es bisher nur einmal („Die Pfefferkörner“) —
+ *         daher nirgends „TV-Produktionen“ in der Mehrzahl.
  *   U   = Uli, Antwort vom 07.11.2026 (`AUSSTATTUNG` in config.ts): WLAN, PA-Anlage,
  *         eigene Musik auch mit eigenem DJ, 20 Parkplätze. Der Satz der Presse 2019
  *         „keine Techno- und Disco-Partys“ entfällt seitdem (DJ ausdrücklich erlaubt).
@@ -135,12 +137,12 @@ export const ANLAESSE: Anlass[] = [
     kartenText: 'Eine Kulisse mit Geschichte — schon im Fernsehen und bei Shootings im Einsatz.',
     seoTitel: 'Drehort & Fotolocation Schiff in Hamburg | MS Wohldorf',
     seoBeschreibung:
-      'Drehort mit Charakter: TV-Produktionen und Fotoshootings an Bord der MS Wohldorf, Hamburger HADAG-Hafenfähre von 1959 — bekannt aus „Die Pfefferkörner“ (NDR).',
+      'Drehort mit Charakter: Film- und Fotoproduktionen an Bord der MS Wohldorf, Hamburger HADAG-Hafenfähre von 1959 — bekannt aus „Die Pfefferkörner“ (NDR).',
     einleitung:
       'Teak, Eiche, Vintage-Möbel und Fenster rundum — und eine Geschichte, die man sieht. Die Wohldorf war schon „Statist“ in der NDR-Serie „Die Pfefferkörner“.',
     absaetze: [
       'Als originale Hamburger Hafenfähre von 1959 bringt die Wohldorf eine Kulisse mit, die sich nicht nachbauen lässt: drinnen Vintage-Charme mit Teakholztüren, Eichendielen und Industrielampen, draußen Ponton, Gangway und die Süderelbe.',
-      'TV-Produktionen und Fotoshootings haben an Bord schon stattgefunden. Für die Planung können Sie das Schiff vorab im 3D-Rundgang erkunden. Sagen Sie uns, was Sie brauchen — wir klären die Details persönlich.',
+      'Vor der Kamera stand die Wohldorf schon für die NDR-Serie „Die Pfefferkörner“, auch Fotoshootings haben an Bord stattgefunden. Für die Planung können Sie das Schiff vorab im 3D-Rundgang erkunden. Sagen Sie uns, was Sie brauchen — wir klären die Details persönlich.',
     ],
     vorteile: [
       { titel: 'Im Fernsehen erprobt', text: '„Die Pfefferkörner“, Staffel 19, Folge 246 „Spätfolgen“ (NDR).' },
