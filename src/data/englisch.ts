@@ -63,7 +63,7 @@ export const FRAGEN_EN: FrageEn[] = [
     id: 'occasions',
     frage: 'What occasions can the MS Wohldorf be hired for?',
     antwort:
-      'Corporate events, workshops and seminars, film and photo productions, readings and exhibitions, and private celebrations. The ship has also hosted TV productions, presentations, brainstorming days and business dinners, and served as a base camp.',
+      'Corporate events, workshops and seminars, film and photo productions, readings and exhibitions, and private celebrations. The ship has also been used for a TV production (“Die Pfefferkörner”, NDR), for presentations, brainstorming days and business dinners, and as a base camp.',
   },
   {
     id: 'berlin',

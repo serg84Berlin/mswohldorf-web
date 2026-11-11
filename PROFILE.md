@@ -169,7 +169,7 @@ die Film Commission Hamburg (Kontakte: https://moin-filmfoerderung.de/en/film-co
 >
 > wir möchten die MS Wohldorf als Motiv für den Location Guide vorschlagen: eine HADAG-Hafenfähre von 1959,
 > 2016 zum Büro- und Veranstaltungsschiff umgebaut, heute am Anleger Finkenriek auf der Süderelbe
-> (Hamburg-Wilhelmsburg). Das Schiff war bereits Drehort, u. a. für die NDR-Serie „Die Pfefferkörner“
+> (Hamburg-Wilhelmsburg). Das Schiff war bereits Drehort für die NDR-Serie „Die Pfefferkörner“
 > (Staffel 19, Folge 246). Innen: Vintage-Interieur mit Teakholztüren, Eichendielen, Steuerrad und Kombüse;
 > außen: Ponton, Gangway und Süderelbe. Das Schiff fährt nicht mehr — gedreht wird am Liegeplatz.
 >
