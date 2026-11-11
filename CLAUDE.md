@@ -81,8 +81,9 @@ npm run profilbilder                         # Bilder für Google/Apple/Portale 
     (Phase 5): Textpaket, Klickpfade und Fragen an Uli in `PROFILE.md`; Bilder `npm run profilbilder`.
     Steht ein Profil, seinen Link in `PROFIL_LINKS` (`src/config.ts`) eintragen → Schema `sameAs`.
     Uli (07.11.2026): kein Maps-Eintrag, Profil gehört Finanzelot (Sergiy Manager), Navi-Adresse vorerst,
-    Video-Bestätigung macht Uli, Fotos dürfen in Profile/Portale, MOIN + HCB ok. Noch offen: 30 oder 35 Personen,
-    157,94 oder 165 m² (Giggster vs. Website — Website bleibt bis zur Klärung bei 35 / 165 m²).
+    Video-Bestätigung macht Uli, Fotos dürfen in Profile/Portale, MOIN + HCB ok. Uli (11.11.2026): **35 Gäste und
+    165 m² Nutzfläche** gelten (Giggster nennt noch 30 / 157,94 m² → dort angleichen). Erster Video-Versuch bei Google
+    ist gescheitert (Weg Straße → Deich → Schiff zu lang); Plan für den zweiten Versuch: `PROFILE.md` Abschnitt 3.
   - KI-Loops aus Originalfotos (Phase 4): Kosten und Bildrechte (Andrea Klick) klären.
   - Nach einigen Wochen: `https://mswohldorf.netlify.app` aus `ANFRAGE_HERKUNFT` nehmen; HSTS-`preload` erwägen.
 
