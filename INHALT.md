@@ -45,6 +45,7 @@ Zwei Tippfehler in der alten HTML löst das Skript auf: `wohldorf_innen_17jpg` �
 | Q11 | Uli, Mail vom 04.11.2026 | Impressum wie finanzelot.de, USt-IdNr., kein Datenschutzbeauftragter, „alles auf Anfrage“, Liegeplatz-Name „Anleger Finkenriek“ | `src/config.ts`, `src/pages/impressum.astro`, `src/data/anlaesse.ts` |
 | Q12 | Uli, Antworten an Sergiy vom 07.11.2026 (Abgleich mit seinem Giggster-Eintrag) | WLAN, PA-Anlage, eigene Musik auch mit eigenem DJ, 20 Parkplätze; Fotos von Andrea Klick dürfen auch in Profilen und Portalen genutzt werden; kein bestehender Google-Maps-Eintrag; Navi-Adresse vorerst als Profiladresse | `AUSSTATTUNG` in `src/config.ts` → Häufige Fragen, Anlass-Seiten, Englisch, Exposé, llms.txt, Schema; `PROFILE.md` |
 | Q13 | Uli über Sergiy, 10.11.2026 | Dreharbeiten gab es bisher nur einmal („Die Pfefferkörner“, NDR) — „TV-Produktionen“ (Mehrzahl) und „u. a.“ entfallen | `src/data/fragen.ts`, `src/data/englisch.ts`, `src/data/anlaesse.ts` (Film & Foto), `PROFILE.md` |
+| Q14 | Uli, Mail an Sergiy vom 11.11.2026 | 35 Gäste und 165 m² Nutzfläche gelten (bestätigt die Website; Giggster-Angaben 30 / 157,94 m² veraltet) | `src/config.ts` (`FAKTEN`, unverändert), `PROFILE.md` |
 | Q10 | DB-Korridorsanierung Hamburg–Berlin 2026 (deutschebahn.com), giga.de | ICE Berlin Hbf → Hamburg Hbf „knapp zwei Stunden“ (rund 107 Min.; DB nennt keine feste Zeit) | `src/data/anreise.ts` |
 
 **3D-Hero:** Die Schiffsebene bleibt das freigestellte Standbild aus dem Video 2024. Geprüft

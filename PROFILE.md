@@ -114,6 +114,23 @@ den Namen am Schiff (Schriftzug „Wohldorf“ am Bug — siehe `04-aussen-schri
 und dass man berechtigt ist (z. B. die Tür mit dem Schlüssel öffnen). Weil das Profil keine Öffnungszeiten hat,
 für den Videotermin eine Zeit wählen, in der jemand an Bord ist.
 
+**Video, zweiter Versuch** (der erste ist gescheitert, 11.11.2026). Google verlangt laut Hilfe ein **live in der
+App aufgenommenes Video ohne Schnitt, mindestens 30 Sekunden**; eine Höchstlänge nennt Google nicht (Ratgeber
+empfehlen 1–2 Minuten). Zu zeigen: Standort (Straßenschild, Hausnummer, Orientierungspunkte), den **Namen auf einem
+fest angebrachten Element** (er soll zum Profilnamen passen), Ausstattung und dass man das Unternehmen verwaltet
+(z. B. Tür mit Schlüssel aufschließen). Der ganze Weg von der Straße bis zum Schiff muss **nicht** gefilmt werden:
+
+1. Start oben am Deich, wo Straße/Straßenschild **und** Fluss oder Schiff in einem Schwenk zu sehen sind (5–10 s).
+2. Zügig den Weg zum Anleger, Kamera nach vorn, ohne anzuhalten.
+3. Schriftzug „Wohldorf“ am Bug (und ein Schild „MS Wohldorf“, falls vorhanden), Gangway, Tür mit Schlüssel öffnen.
+4. Innen: Hauptdeck, Kombüse, PA-Anlage oder WLAN-Router — dann beenden und hochladen.
+
+Ziel: 1,5–2,5 Minuten. Vorher prüfen: angemeldet mit dem Google-Konto, das Inhaber/Manager des Profils ist; Profilname
+„MS Wohldorf“; bei Tageslicht; Upload über das WLAN an Bord. Klappt es wieder nicht: unter **Probleme ansehen** den
+Grund lesen, ggf. eine andere angebotene Methode wählen (Live-Videoanruf mit Google, Telefon/SMS, E-Mail) oder den
+Support fragen (https://support.google.com/business/gethelp). Ein fest angebrachtes Schild „MS Wohldorf“ am Zugang
+zur Gangway hilft doppelt: bei Google und den Gästen beim Finden.
+
 **Bewertungen:** Zufriedene Kunden um eine Google-Rezension bitten — den Rezensions-Link aus dem Profil
 z. B. in die Dankes-Mail nach der Veranstaltung. Keine Gegenleistung anbieten — das verbietet Google.
 
@@ -203,8 +220,8 @@ Er weicht von der Website ab:
 
 | Giggster | Website (Quelle) | Was tun |
 |---|---|---|
-| bis zu 30 Personen; an einer Stelle 5 | bis zu 35 Gäste (alte Website) | **noch offen** — Website bleibt bei 35; Uli sagt, welche Zahl gilt, dann überall gleich |
-| 157,94 m² | 165 m² Nutzfläche (boote, Mai 2019) | **noch offen** — wie oben |
+| bis zu 30 Personen; an einer Stelle 5 | bis zu 35 Gäste (alte Website) | ✅ Uli (11.11.2026): **35 Gäste** gelten → bei Giggster auf 35 ändern |
+| 157,94 m² | 165 m² Nutzfläche (boote, Mai 2019) | ✅ Uli (11.11.2026): **165 m²** gelten → bei Giggster auf 165 m² ändern |
 | WLAN, 20 Parkplätze, PA-System | ✅ seit 07.11.2026 auch auf der Website (Uli bestätigt) | — |
 | eigener DJ erlaubt | ✅ Website angepasst (Uli, 07.11.2026); der Satz „keine Techno- und Disco-Partys“ entfällt | — |
 | Make-up-Bereich, Konferenzraum, Monitor, HiFi | nicht auf der Website (nicht bestätigt) | nur bei Bedarf mit Uli klären |
@@ -233,7 +250,7 @@ Wikidata erwartet neutrale, belegte Angaben; Werbung wird gelöscht. Erst angehe
 | 3 | Adresse Finkenrieker Hauptdeich 14, 21109 Hamburg? | Ja, vorerst; bei Bedarf später anpassen |
 | 4 | Wer macht die Video-Bestätigung vor Ort? | Uli |
 | 5 | Fotos von Andrea Klick in Profilen und Portalen? | Ja |
-| 6 | WLAN, 20 Parkplätze, PA-Anlage, eigener DJ? | Ja — auf die Website, „professionell und qualitativ“. **Offen:** 30 oder 35 Personen, 157,94 oder 165 m² |
+| 6 | WLAN, 20 Parkplätze, PA-Anlage, eigener DJ? | Ja — auf die Website, „professionell und qualitativ“. 35 Gäste und 165 m² gelten (Uli, 11.11.2026) |
 | 7 | Telefon +49 40 277347? | Ja |
 | 8 | Meldung an Film Commission Hamburg und HCB? | Ja |
 
