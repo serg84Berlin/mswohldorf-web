@@ -16,7 +16,7 @@ Ort, Telefon und Website ein Vertrauenssignal. Alle Texte hier stammen nur aus b
 | 3 | Bing Places: Import aus Google | Sergiy | 5 Min. + 7–12 Tage |
 | 4 | Apple Business Connect | Uli bzw. Sergiy | 20 Min. + Bestätigung |
 | 5 | OpenStreetMap-Punkt | Sergiy | 10 Min. |
-| 6 | Film Commission Hamburg (MOIN) und HCB Venuefinder | Sergiy | je 1 Mail bzw. 30 Min. |
+| 6 | Film Commission: Weitergabe an Scouts annehmen; Location-Agenturen über deren Motivgeber-Formulare; HCB Venuefinder | Sergiy (Uli: Agenturen ok?) | je 10–30 Min. |
 | 7 | Giggster-Eintrag an die Website angleichen | Uli | 10 Min. |
 | 8 | Links in `src/config.ts` → `PROFIL_LINKS` eintragen (Abschnitt 10) | Claude/Sergiy | 5 Min. |
 
@@ -174,31 +174,67 @@ wheelchair=no
 3. **Speichern**, Kommentar z. B. „MS Wohldorf (Veranstaltungsschiff) am Anleger Finkenriek ergänzt“.
    Nur Tatsachen eintragen, keine Werbung — so verlangt es OpenStreetMap.
 
-## 7. Film Commission Hamburg (MOIN Location Guide)
+## 7. Film Commission Hamburg (MOIN) und Location Scouts
 
-Der Location Guide der MOIN Filmförderung zeigt Motive in Hamburg und Schleswig-Holstein mit Kontakt zu den
-Eigentümern. Ein Formular zum Eintragen gibt es auf der Seite nicht (geprüft 05.11.2026) — deshalb per Mail an
-die Film Commission Hamburg (Kontakte: https://moin-filmfoerderung.de/en/film-commission/location-guide):
+**Stand 12.11.2026:** Die Film Commission Hamburg (Alexandra Luetkens) nimmt die Wohldorf **nicht** in den Location
+Guide auf: Dort stehen nur öffentliche Flächen und Gebäude; private und gewerbliche Motive vermitteln Location
+Scouts und Agenturen. Zwei Angebote aus ihrer Antwort:
 
-> **Betreff:** Motiv für den Location Guide: MS Wohldorf, ehemalige HADAG-Hafenfähre (1959), Süderelbe
+1. Die Film Commission **gibt das Angebot an die ihr bekannten Scouts und Location Manager weiter** — annehmen
+   (Antwort unten). Die Mail ging außerdem an die Kollegin für Veranstaltungen (Joelle Bavoux).
+2. Der **Production Guide** der MOIN listet 36 Location Scouts und Agenturen in Hamburg und Umgebung:
+   https://moin-filmfoerderung.de/film-commission/production-guide/42ea1c07-ba41-4893-8a01-d1a679fbc59e/location-scouts
+
+**Vorgehen bei den Scouts** — zuerst die Wege, die die Agenturen selbst für Motivgeber anbieten (geprüft 12.11.2026):
+
+| Agentur | Weg für Motivgeber |
+|---|---|
+| Fastforward Locationservice GmbH | Seite „Motivgeber“ auf fflocations.de („Registriere Deine Location!“) |
+| MotivBuero Karin Verbeek | https://www.motivbuero.de/motivgeber |
+| scout for location Pfeil GbR | Knopf „Location anbieten“ auf https://scoutforlocation.de (Formular mit Bildern) |
+
+Weitere Agenturen aus der Liste (ohne erkennbares Formular, Kontakt über deren Kontaktseite oder telefonisch):
+Himmelweit Locations, 70SEVEN, CITYBLUES Locations, eyeszeit, Metrosafari Locations, NORDSCOUT, We Love Pictures.
+
+**Vor dem Anschreiben klären:**
+
+- **Uli:** Einverstanden mit Agenturen? Agenturen arbeiten in der Regel gegen Provision oder eigenen Aufschlag —
+  Konditionen je Agentur erfragen, nichts exklusiv zusagen. (Giggster nimmt laut eigenem Eintrag 19 % Provision.)
+- **Recht:** Unaufgeforderte Werbe-E-Mails sind auch an Unternehmen nur mit Einwilligung zulässig (§ 7 Abs. 2 UWG).
+  Deshalb: Formulare der Agenturen nutzen, Weitergabe durch die Film Commission annehmen, sonst vorher anrufen —
+  **keine Rundmail** an alle 36 Adressen.
+- **Fragen, die Scouts stellen werden** (Antworten von Uli nötig): Stromanschluss und Leistung, Drehgenehmigung
+  am Liegeplatz, Tagessatz bzw. Konditionen, Parken für Technikfahrzeuge. Bekannt: Raumhöhe ca. 1,90 m (Presse 2019),
+  20 Parkplätze, WLAN, PA-Anlage, Zugang nicht barrierefrei, bisher ein Dreh („Die Pfefferkörner“, NDR).
+
+**Antwort an die Film Commission:**
+
+> **Betreff:** Re: Motiv für den Location Guide: MS Wohldorf
 >
 > Guten Tag Frau Luetkens,
 >
-> wir möchten die MS Wohldorf als Motiv für den Location Guide vorschlagen: eine HADAG-Hafenfähre von 1959,
-> 2016 zum Büro- und Veranstaltungsschiff umgebaut, heute am Anleger Finkenriek auf der Süderelbe
-> (Hamburg-Wilhelmsburg). Das Schiff war bereits Drehort für die NDR-Serie „Die Pfefferkörner“
-> (Staffel 19, Folge 246). Innen: Vintage-Interieur mit Teakholztüren, Eichendielen, Steuerrad und Kombüse;
-> außen: Ponton, Gangway und Süderelbe. Das Schiff fährt nicht mehr — gedreht wird am Liegeplatz.
+> vielen Dank für die schnelle und freundliche Rückmeldung — und für die Weiterleitung an Frau Bavoux.
 >
-> Fotos und 3D-Rundgang: https://www.mswohldorf.de/anlaesse/film-und-foto/ · Exposé:
-> https://www.mswohldorf.de/pdf/ms-wohldorf-expose.pdf
+> Ihr Angebot nehmen wir sehr gern an: Bitte geben Sie die MS Wohldorf an die Ihnen bekannten Scouts und
+> Location Manager weiter. Alles Nötige steht hier:
+> Fotos und 3D-Rundgang: https://www.mswohldorf.de/anlaesse/film-und-foto/
+> Exposé (PDF): https://www.mswohldorf.de/pdf/ms-wohldorf-expose.pdf
+> Ansprechpartner für Drehanfragen: Ulrich Ritter, Finanzelot GmbH & Co. KG, +49 40 277347, info@finanzelot.de
 >
-> Was benötigen Sie für die Aufnahme (Fotos, Angaben, Formular)?
+> Den Hinweis auf den Production Guide nehmen wir auf und melden uns dort bei den Agenturen.
 >
-> Viele Grüße · Ulrich Ritter · MS Wohldorf · Finanzelot GmbH & Co. KG · +49 40 277347
+> Mit freundlichen Grüßen
+> Sergiy Esposito · im Auftrag der Finanzelot GmbH & Co. KG
 
-Absender am besten Uli (Eigentümer). Fragen der Film Commission zu Strom, Drehgenehmigung oder Raumhöhe an
-Bord: **Uli fragen** — die Website nennt bisher nur die Raumhöhe von ca. 1,90 m (Presse 2019).
+**Text für die Formulare der Agenturen** (Beschreibungsfeld; Bilder aus `dist-profilbilder/`):
+
+> MS Wohldorf — ehemalige HADAG-Hafenfähre von 1959, 2016 zum Büro- und Veranstaltungsschiff umgebaut. Liegeplatz:
+> Anleger Finkenriek auf der Süderelbe, Hamburg-Wilhelmsburg, am Naturschutzgebiet Heuckenlock. Innen: Vintage-Interieur
+> mit Teakholztüren, Eichendielen, Steuerrad, Kombüse und verglastem Besprechungsraum, Fenster rundum, Raumhöhe ca.
+> 1,90 m. Außen: Ponton, Gangway, Süderelbe und grünes Ufer. Gedreht wird am Liegeplatz (das Schiff fährt nicht mehr).
+> 165 m² Nutzfläche, WLAN, 20 Parkplätze am Liegeplatz, Zugang nicht barrierefrei. Bereits Drehort für „Die
+> Pfefferkörner“ (NDR). 3D-Rundgang und Fotos: https://www.mswohldorf.de/anlaesse/film-und-foto/ · Kontakt: Ulrich
+> Ritter, +49 40 277347, info@finanzelot.de
 
 ## 8. Hamburg Convention Bureau — Venuefinder (eventlocations.com)
 
@@ -232,7 +268,7 @@ Beschreibung bei Giggster: Text „Englisch“ aus Abschnitt 2, Link zur Website
 ## 10. Danach: Profile mit der Website verknüpfen
 
 Sobald ein Profil öffentlich ist, seinen Link in `src/config.ts` → `PROFIL_LINKS` eintragen (Google-Maps-Link
-aus **Teilen** → **Link kopieren**, Apple-Link aus Apple Karten, OpenStreetMap-Link des Punkts, MOIN- und
+aus **Teilen** → **Link kopieren**, Apple-Link aus Apple Karten, OpenStreetMap-Link des Punkts, Agentur- und
 Venuefinder-Seite). Die Website nennt sie dann im Schema als `sameAs` — so erkennen Suchmaschinen und
 KI-Assistenten, dass alle Einträge dasselbe Schiff meinen. Giggster erst, wenn die Angaben übereinstimmen.
 
@@ -262,6 +298,8 @@ Wikidata erwartet neutrale, belegte Angaben; Werbung wird gelöscht. Erst angehe
 - Bing Places, neue Version mit Google-Import (Okt. 2025): https://blogs.bing.com/search/October-2025/Introducing-the-New-Bing-Places-for-Business-Built-for-Business-Owners,-Powered-by-Research
 - Apple Business Connect: https://businessconnect.apple.com
 - MOIN Location Guide und Kontakte: https://moin-filmfoerderung.de/en/film-commission/location-guide
+- MOIN Production Guide, Location Scouts: https://moin-filmfoerderung.de/film-commission/production-guide/42ea1c07-ba41-4893-8a01-d1a679fbc59e/location-scouts
+- § 7 UWG (unzumutbare Belästigungen, E-Mail-Werbung): https://www.gesetze-im-internet.de/uwg_2004/__7.html
 - HCB Venuefinder auf Basis von eventlocations.com: https://www.eventlocations.com/de/blog/eventlocationscom-stellt-white-label-version-fur-das-hamburg-convention-bureau-zur-verfugung
 - eventlocations.com, kostenloser Basic-Eintrag: https://www.eventlocations.com/de/faq/host/12/59
 - Giggster-Eintrag der Wohldorf: https://giggster.com/de/listing/step-aboard-history-1959-elbe-ferry-wohldorf
