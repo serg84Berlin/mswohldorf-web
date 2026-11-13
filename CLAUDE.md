@@ -77,9 +77,10 @@ npm run profilbilder                         # Bilder für Google/Apple/Portale 
   Bing Webmaster Tools (Import aus der Search Console).
 - **Offen** (`LIVEGANG.md` Schritt 9, `REICHWEITE.md` Phase 4–5):
   - Domains: Sergiy hat am 13.11.2026 alle Domains von Uli bei IONOS in einen Vertrag gezogen (Domain läuft damit
-    unabhängig vom alten Webspace). Website danach geprüft: A, `www`, HTTPS, Formular in Ordnung. **Aber:** Die
-    Mail-Einträge von `mswohldorf.de` stehen seitdem auf IONOS-Standard (MX `mx00/mx01.ionos.de`, SPF ohne Zoho,
-    `zoho-verification` und die Google-Bestätigung fehlen) — wiederherstellen, Werte in `LIVEGANG.md` Schritt 9.
+    unabhängig vom alten Webspace). Website danach geprüft: A, `www`, HTTPS, Formular in Ordnung. Die Mail-Einträge
+    von `mswohldorf.de` waren dabei auf IONOS-Standard zurückgefallen und sind wiederhergestellt (MX Zoho, SPF,
+    `zoho-verification` — geprüft 13.11.2026, 22:21 Uhr). **Noch offen:** TXT `google-site-verification` für die
+    Search Console neu anlegen, Test-Mail an @mswohldorf.de. Soll-Werte: `LIVEGANG.md` Schritt 9.
   - Lead-Quelle (`PUBLIC_ANFRAGE_ERWEITERT`) erst, wenn Merlin `art` und `herkunft` annimmt.
   - Google-Unternehmensprofil, Bing Places, Apple Business Connect, OpenStreetMap, MOIN, HCB Venuefinder
     (Phase 5): Textpaket, Klickpfade und Fragen an Uli in `PROFILE.md`; Bilder `npm run profilbilder`.
