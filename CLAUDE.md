@@ -42,7 +42,7 @@ npm run profilbilder                         # Bilder für Google/Apple/Portale 
 6. Code, Dateien und Texte auf Deutsch, Kunden in der Sie-Form.
 7. Vor jedem Push: `npm run check`, Vorschau-Build und – wenn Seiten betroffen sind – `npm run pruefen`.
 
-## Stand (12.11.2026)
+## Stand (13.11.2026)
 
 - **Live seit 05.11.2026** auf https://www.mswohldorf.de: DNS bei IONOS umgestellt (A `@` → `75.2.60.5`,
   CNAME `www` → `mswohldorf.netlify.app`; MX/SPF für Zoho unverändert), `www` ist Primary Domain,
@@ -52,7 +52,8 @@ npm run profilbilder                         # Bilder für Google/Apple/Portale 
   PR #3 (diese Datei), PR #4 (Rechtliches 10/12, Reichweite Phase 1), PR #5 (Reichweite Phase 2),
   PR #6 (Rückmeldung Uli, Ratgeber, Englisch), PR #7 (Datenschutz freigegeben, `LIVEGANG.md`),
   PR #8 (CORS-Schritt für Merlin), PR #9 (Live-Stand), PR #10 (Phase 5: `PROFILE.md`, Profilbilder, `PROFIL_LINKS`),
-  PR #11 (Ausstattung WLAN/PA/DJ/Parkplätze), PR #12 (3D-Hero), PR #13 (Dreharbeiten nur einmal), PR #14 (35 Gäste/165 m², Video-Plan).
+  PR #11 (Ausstattung WLAN/PA/DJ/Parkplätze), PR #12 (3D-Hero), PR #13 (Dreharbeiten nur einmal), PR #14 (35 Gäste/165 m², Video-Plan),
+  PR #15 (Film Commission, Plan für Scouts).
 - Rechtliches: alle Pflicht-Punkte geklärt (Sergiy; Uli per Mail 04.11.2026: Impressum wie finanzelot.de,
   kein Datenschutzbeauftragter; Preise, Catering, Technik usw. „alles auf Anfrage“). Datenschutzerklärung
   von Sergiy freigegeben (04.11.2026) — `npm run build` läuft durch. **Livegang-Anleitung: `LIVEGANG.md`.**
@@ -75,7 +76,11 @@ npm run profilbilder                         # Bilder für Google/Apple/Portale 
   Test-Mail an @mswohldorf.de, Google Search Console (Domain-Property, Sitemap, Indexierung beantragt),
   Bing Webmaster Tools (Import aus der Search Console).
 - **Offen** (`LIVEGANG.md` Schritt 9, `REICHWEITE.md` Phase 4–5):
-  - Domain-Vertrag bei IONOS prüfen (läuft unabhängig vom Webspace, der im Dezember endet).
+  - Domains: Sergiy hat am 13.11.2026 alle Domains von Uli bei IONOS in einen Vertrag gezogen (Domain läuft damit
+    unabhängig vom alten Webspace). Website danach geprüft: A, `www`, HTTPS, Formular in Ordnung. Die Mail-Einträge
+    von `mswohldorf.de` waren dabei auf IONOS-Standard zurückgefallen und sind wiederhergestellt (MX Zoho, SPF,
+    `zoho-verification` — geprüft 13.11.2026, 22:21 Uhr). **Noch offen:** TXT `google-site-verification` für die
+    Search Console neu anlegen, Test-Mail an @mswohldorf.de. Soll-Werte: `LIVEGANG.md` Schritt 9.
   - Lead-Quelle (`PUBLIC_ANFRAGE_ERWEITERT`) erst, wenn Merlin `art` und `herkunft` annimmt.
   - Google-Unternehmensprofil, Bing Places, Apple Business Connect, OpenStreetMap, MOIN, HCB Venuefinder
     (Phase 5): Textpaket, Klickpfade und Fragen an Uli in `PROFILE.md`; Bilder `npm run profilbilder`.

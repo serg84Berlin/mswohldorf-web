@@ -112,6 +112,22 @@ Hängt es nach einer Stunde noch: dort **Verify DNS configuration** / **Provisio
 
 ## 9. Danach
 
+> **13.11.2026 — nach dem Zusammenziehen der Domains in einen IONOS-Vertrag (Sergiy):** Website geprüft und in
+> Ordnung (A `75.2.60.5`, `www` → `mswohldorf.netlify.app`, HTTPS, Formular). Die **Mail-Einträge** von
+> `mswohldorf.de` standen danach auf IONOS-Standard (MX `mx00/mx01.ionos.de`, SPF ohne Zoho) und wurden am selben
+> Abend **wiederhergestellt** — von außen geprüft um 22:21 Uhr (Google- und Cloudflare-DNS):
+>
+> | Typ | Host | Wert |
+> |---|---|---|
+> | MX | @ | `mx.zoho.eu` (10), `mx2.zoho.eu` (20), `mx3.zoho.eu` (30) |
+> | TXT | @ | `v=spf1 include:one.zoho.eu include:_spf-eu.ionos.com ~all` |
+> | TXT | @ | `zoho-verification=zb73989138.zmverify.zoho.eu` |
+>
+> **Noch offen:** TXT `google-site-verification=…` für die Search Console (Wert dort unter Einstellungen →
+> Inhaberschaftsbestätigung) und eine Test-Mail an eine @mswohldorf.de-Adresse. DKIM und DMARC sind nicht gesetzt
+> (optional; DKIM-Wert stünde in der Zoho-Mail-Admin-Konsole). Bei künftigen Vertrags- oder Domain-Umzügen diese
+> Tabelle vorher sichern und danach vergleichen. `finanzelot.de` (Kontaktadresse der Website) war nicht betroffen.
+
 - Alter Webspace (Webspace-Verkauf, `37.218.254.109`): läuft im Dezember aus — nichts mehr darauf angewiesen.
   Prüfen, dass die **Domain** selbst in IONOS weiterläuft (sie ist nicht Teil des Webspace-Vertrags).
 - Lead-Quelle: erst wenn der Lotse-Server `art` und `herkunft` annimmt, in Netlify
