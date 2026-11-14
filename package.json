@@ -16,7 +16,8 @@
     "alte-seite": "node scripts/alte-seite-holen.mjs",
     "offen": "node scripts/offene-angaben.mjs",
     "expose": "node scripts/expose-erzeugen.mjs",
-    "profilbilder": "node scripts/profilbilder-erzeugen.mjs"
+    "profilbilder": "node scripts/profilbilder-erzeugen.mjs",
+    "suchdaten": "node scripts/suchdaten.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "3.7.4",

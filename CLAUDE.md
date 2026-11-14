@@ -25,6 +25,7 @@ npm run check                                # astro check
 npm run offen                                # alle offenen Angaben, Pflicht zuerst
 npm run pruefen                              # Playwright-Prüfungen gegen dist/
 npm run profilbilder                         # Bilder für Google/Apple/Portale → dist-profilbilder/
+npm run suchdaten                            # Search Console lesen (braucht GSC_DIENSTKONTO_B64, README „Search Console“)
 ```
 
 ## Regeln für Änderungen
@@ -42,7 +43,7 @@ npm run profilbilder                         # Bilder für Google/Apple/Portale 
 6. Code, Dateien und Texte auf Deutsch, Kunden in der Sie-Form.
 7. Vor jedem Push: `npm run check`, Vorschau-Build und – wenn Seiten betroffen sind – `npm run pruefen`.
 
-## Stand (13.11.2026)
+## Stand (14.11.2026)
 
 - **Live seit 05.11.2026** auf https://www.mswohldorf.de: DNS bei IONOS umgestellt (A `@` → `75.2.60.5`,
   CNAME `www` → `mswohldorf.netlify.app`; MX/SPF für Zoho unverändert), `www` ist Primary Domain,
@@ -53,7 +54,7 @@ npm run profilbilder                         # Bilder für Google/Apple/Portale 
   PR #6 (Rückmeldung Uli, Ratgeber, Englisch), PR #7 (Datenschutz freigegeben, `LIVEGANG.md`),
   PR #8 (CORS-Schritt für Merlin), PR #9 (Live-Stand), PR #10 (Phase 5: `PROFILE.md`, Profilbilder, `PROFIL_LINKS`),
   PR #11 (Ausstattung WLAN/PA/DJ/Parkplätze), PR #12 (3D-Hero), PR #13 (Dreharbeiten nur einmal), PR #14 (35 Gäste/165 m², Video-Plan),
-  PR #15 (Film Commission, Plan für Scouts).
+  PR #15 (Film Commission, Plan für Scouts), PR #16 (Domain-Umzug, Mail-Einträge).
 - Rechtliches: alle Pflicht-Punkte geklärt (Sergiy; Uli per Mail 04.11.2026: Impressum wie finanzelot.de,
   kein Datenschutzbeauftragter; Preise, Catering, Technik usw. „alles auf Anfrage“). Datenschutzerklärung
   von Sergiy freigegeben (04.11.2026) — `npm run build` läuft durch. **Livegang-Anleitung: `LIVEGANG.md`.**
@@ -79,8 +80,13 @@ npm run profilbilder                         # Bilder für Google/Apple/Portale 
   - Domains: Sergiy hat am 13.11.2026 alle Domains von Uli bei IONOS in einen Vertrag gezogen (Domain läuft damit
     unabhängig vom alten Webspace). Website danach geprüft: A, `www`, HTTPS, Formular in Ordnung. Die Mail-Einträge
     von `mswohldorf.de` waren dabei auf IONOS-Standard zurückgefallen und sind wiederhergestellt (MX Zoho, SPF,
-    `zoho-verification` — geprüft 13.11.2026, 22:21 Uhr). **Noch offen:** TXT `google-site-verification` für die
-    Search Console neu anlegen, Test-Mail an @mswohldorf.de. Soll-Werte: `LIVEGANG.md` Schritt 9.
+    `zoho-verification` — geprüft 13.11.2026, 22:21 Uhr), Test-Mail an @mswohldorf.de kam an (Sergiy, 14.11.2026).
+    **Noch offen:** TXT `google-site-verification` für die Search Console fehlt im DNS (geprüft 14.11.2026) — Wert
+    aus der Search Console holen und bei IONOS anlegen. Soll-Werte: `LIVEGANG.md` Schritt 9.
+  - Search Console per Skript: `npm run suchdaten` (Dienstkonto `mswohldorf-leser`, in der Search Console als Nutzer
+    „Eingeschränkt“ eingetragen, 14.11.2026). Fehlt noch: Sergiy trägt `GSC_DIENSTKONTO_B64` in einer Cloud-Umgebung
+    „mswohldorf“ ein und startet dort eine neue Sitzung. Ist die Variable da: `npm run suchdaten` laufen lassen und
+    auswerten (Suchanfragen, Seiten, Index-Status). Einzelheiten: README „Search Console“.
   - Lead-Quelle (`PUBLIC_ANFRAGE_ERWEITERT`) erst, wenn Merlin `art` und `herkunft` annimmt.
   - Google-Unternehmensprofil, Bing Places, Apple Business Connect, OpenStreetMap, MOIN, HCB Venuefinder
     (Phase 5): Textpaket, Klickpfade und Fragen an Uli in `PROFILE.md`; Bilder `npm run profilbilder`.
@@ -91,6 +97,8 @@ npm run profilbilder                         # Bilder für Google/Apple/Portale 
     ist gescheitert (Weg Straße → Deich → Schiff zu lang); Plan für den zweiten Versuch: `PROFILE.md` Abschnitt 3.
     Film Commission (12.11.2026): kein Eintrag im Location Guide (nur öffentliche Motive), gibt das Angebot aber an
     Scouts weiter; Location-Agenturen über deren Motivgeber-Formulare, keine Rundmail (§ 7 UWG) — `PROFILE.md` Abschnitt 7.
+    Antwort an die Film Commission und Mail an Uli (Okay für Agenturen, Strom, Drehgenehmigung, Tagessatz) sind raus
+    (Sergiy, 13./14.11.2026) — auf Ulis Antwort warten, dann Agenturen anmelden und Seite „Film & Foto“ ergänzen.
   - KI-Loops aus Originalfotos (Phase 4): Kosten und Bildrechte (Andrea Klick) klären.
   - Nach einigen Wochen: `https://mswohldorf.netlify.app` aus `ANFRAGE_HERKUNFT` nehmen; HSTS-`preload` erwägen.
 

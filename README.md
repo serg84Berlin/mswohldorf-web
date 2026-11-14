@@ -112,11 +112,28 @@ keine Sperre); alle Kästen lokal: `PUBLIC_VORSCHAU=1 npm run dev`.
 |---|---|
 | `npm run alte-seite` | Liest `quelle/alte-seite/` (offline) und erzeugt Foto-Katalog, Presse-Liste, `public/pdf/`, `public/alt/` und `quelle/alte-seite/texte.md`. Erkennt alle Galerien (auch `galerie//03_innen`, `thumb_`/`thumb-`). Mit `--quelle=https://…` würde es die Live-Seite spiegeln (Hosting gekündigt); `--trocken` zeigt nur an. |
 | `npm run expose` | Erzeugt das Exposé-PDF `public/pdf/ms-wohldorf-expose.pdf` (4 × A4) aus der Druckseite `/expose/` (baut dafür selbst als Vorschau nach `dist-expose/`). Neu erzeugen, wenn sich Angaben im Exposé ändern; danach normal bauen. Braucht Playwright + Chromium. |
+| `npm run suchdaten` | Liest Zugriff, Sitemaps, Leistung und Index-Status aus der Google Search Console (nur lesen). Braucht `GSC_DIENSTKONTO_B64`, siehe „Search Console“. |
 | `npm run poster` | Rendert das Hero-Poster (quer/hoch) aus der 3D-Szene. Ablauf: `npm run build && npm run poster && npm run build`. Braucht Playwright + Chromium. |
 | `npm run pruefen` | Alle Prüfungen (siehe unten). |
 | `npm run offen` | Listet alle offenen Angaben im Quelltext — zuerst **Pflicht** (rechtliche Platzhalter und `ENTWURF_HINWEIS_ANZEIGEN = true`; sperren den Produktions-Build), dann **inhaltlich** (Platzhalter ohne `pflicht`, `offen`-Listen). |
 | `node scripts/karte-erzeugen.mjs` | Erzeugt die statische Anfahrtskarte neu (OSM-Kacheln, einmalig). |
 | `node scripts/schiff-freistellen.mjs <foto> <ziel.webp>` | Stellt das Schiff für die 3D-Bühne frei (Maske passt zum aktuellen Foto). |
+
+## Search Console (nur lesen)
+
+`npm run suchdaten` zeigt Zugriff, Sitemaps, Leistung (Standard: 28 Tage, `-- --tage 90`) und den Index-Status
+der Startseite aus der Google Search Console. Das Skript ändert nichts.
+
+- **Zugang:** Dienstkonto `mswohldorf-leser` (Google-Cloud-Projekt „YouTube Data“ von Sergiy, Search Console API
+  dort aktiviert), in der Search Console als Nutzer mit **Eingeschränkt** eingetragen (14.11.2026).
+  Property: `sc-domain:mswohldorf.de` (anders: Variable `GSC_PROPERTY`).
+- **Schlüssel:** Umgebungsvariable `GSC_DIENSTKONTO_B64` = base64 der JSON-Schlüsseldatei in einer Zeile
+  (`base64 -w0 datei.json`). Sergiy trägt sie in den Einstellungen der Cloud-Umgebung ein — am besten in einer
+  eigenen Umgebung „mswohldorf“, nicht in „Default“ (die nutzen alle Projekte). **Nie ins Repo, nie in einen Chat.**
+- **Widerruf:** Schlüssel in der Google Cloud löschen (Dienstkonto → Schlüssel) oder den Nutzer in der Search
+  Console entfernen.
+- Die Bestätigung der Domain (TXT `google-site-verification`) liest das Skript nicht — die steht nur in der
+  Search Console unter Einstellungen → Inhaberschaftsbestätigung.
 
 ## Prüfungen
 
