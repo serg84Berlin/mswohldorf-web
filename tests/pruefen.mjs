@@ -673,6 +673,9 @@ for (const [breite, viewport] of Object.entries(GROESSEN)) {
   pruefe('llms.txt: Titel, Eckdaten, Fragen und Links auf www.mswohldorf.de', llms.startsWith('# MS Wohldorf') && llms.includes('bis zu 35 Personen') && llms.includes('## Häufige Fragen') && llms.includes('https://www.mswohldorf.de/offsite-hamburg/'));
   const robots = await readFile(join(PROJEKT, 'dist/robots.txt'), 'utf8');
   pruefe('robots.txt verweist auf Sitemap', robots.includes('Sitemap: https://www.mswohldorf.de/sitemap-index.xml'));
+  const sitemapIndex = await readFile(join(PROJEKT, 'dist/sitemap-index.xml'), 'utf8');
+  const sitemapXml = await readFile(join(PROJEKT, 'dist/sitemap.xml'), 'utf8').catch(() => '');
+  pruefe('/sitemap.xml gibt es und entspricht sitemap-index.xml', sitemapXml.length > 0 && sitemapXml === sitemapIndex && sitemapXml.includes('https://www.mswohldorf.de/sitemap-0.xml'));
   const vorschau = [];
   const sammle = async (o) => {
     for (const e of await readdir(o, { withFileTypes: true })) {
