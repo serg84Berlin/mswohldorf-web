@@ -4,6 +4,7 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import sicherheitsHeader from './integrationen/sicherheits-header.mjs';
 import livegangSperre from './integrationen/livegang-sperre.mjs';
+import sitemapXml from './integrationen/sitemap-xml.mjs';
 
 export default defineConfig({
   site: 'https://www.mswohldorf.de',
@@ -18,6 +19,8 @@ export default defineConfig({
       filter: (seite) => !seite.includes('/404') && !seite.includes('/expose/'),
       i18n: undefined,
     }),
+    // /sitemap.xml zusätzlich zu sitemap-index.xml (muss nach sitemap() stehen)
+    sitemapXml(),
     sicherheitsHeader(),
     // Muss die letzte bleiben: bricht einen Produktions-Build mit offenen
     // rechtlichen Angaben ab, nachdem dist/ vollständig geschrieben ist.

@@ -128,10 +128,14 @@ der Startseite aus der Google Search Console. Das Skript ändert nichts.
   dort aktiviert), in der Search Console als Nutzer mit **Eingeschränkt** eingetragen (14.11.2026).
   Property: `sc-domain:mswohldorf.de` (anders: Variable `GSC_PROPERTY`).
 - **Schlüssel:** Umgebungsvariable `GSC_DIENSTKONTO_B64` = base64 der JSON-Schlüsseldatei in einer Zeile
-  (`base64 -w0 datei.json`). Sergiy trägt sie in den Einstellungen der Cloud-Umgebung ein — am besten in einer
-  eigenen Umgebung „mswohldorf“, nicht in „Default“ (die nutzen alle Projekte). **Nie ins Repo, nie in einen Chat.**
+  (`base64 -w0 datei.json`), eingetragen in den Einstellungen der Cloud-Umgebung — als **Umgebungsvariable**, nicht
+  als Netzwerk-Secret (das Skript muss den Schlüssel selbst lesen). Seit 14.11.2026 steht sie in der Umgebung
+  „Default“; die nutzen alle Projekte von Sergiy — eine eigene Umgebung „mswohldorf“ wäre sauberer.
+  **Nie ins Repo, nie in einen Chat.**
 - **Widerruf:** Schlüssel in der Google Cloud löschen (Dienstkonto → Schlüssel) oder den Nutzer in der Search
   Console entfernen.
+- `/sitemap.xml` ist eine Kopie von `sitemap-index.xml` (`integrationen/sitemap-xml.mjs`), weil diese Adresse in
+  der Search Console eingereicht war und sonst auf einen 404 läuft.
 - Die Bestätigung der Domain (TXT `google-site-verification`) liest das Skript nicht — die steht nur in der
   Search Console unter Einstellungen → Inhaberschaftsbestätigung.
 
