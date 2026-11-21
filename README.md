@@ -121,8 +121,9 @@ keine Sperre); alle Kästen lokal: `PUBLIC_VORSCHAU=1 npm run dev`.
 
 ## Search Console (nur lesen)
 
-`npm run suchdaten` zeigt Zugriff, Sitemaps, Leistung (Standard: 28 Tage, `-- --tage 90`) und den Index-Status
-der Startseite aus der Google Search Console. Das Skript ändert nichts.
+`npm run suchdaten` zeigt Zugriff, Sitemaps, Leistung (Standard: 28 Tage, `-- --tage 90`) mit Verlauf pro Tag und
+den Index-Status der Startseite aus der Google Search Console; `-- --index` prüft den Index-Status **aller** Seiten
+der Sitemap. Das Skript ändert nichts — „Indexierung beantragen“ geht nur von Hand in der Search Console.
 
 - **Zugang:** Dienstkonto `mswohldorf-leser` (Google-Cloud-Projekt „YouTube Data“ von Sergiy, Search Console API
   dort aktiviert), in der Search Console als Nutzer mit **Eingeschränkt** eingetragen (14.11.2026).

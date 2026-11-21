@@ -25,7 +25,7 @@ npm run check                                # astro check
 npm run offen                                # alle offenen Angaben, Pflicht zuerst
 npm run pruefen                              # Playwright-Prüfungen gegen dist/
 npm run profilbilder                         # Bilder für Google/Apple/Portale → dist-profilbilder/
-npm run suchdaten                            # Search Console lesen (braucht GSC_DIENSTKONTO_B64, README „Search Console“)
+npm run suchdaten                            # Search Console lesen; `-- --index` prüft alle Seiten (braucht GSC_DIENSTKONTO_B64)
 ```
 
 ## Regeln für Änderungen
@@ -43,7 +43,7 @@ npm run suchdaten                            # Search Console lesen (braucht GSC
 6. Code, Dateien und Texte auf Deutsch, Kunden in der Sie-Form.
 7. Vor jedem Push: `npm run check`, Vorschau-Build und – wenn Seiten betroffen sind – `npm run pruefen`.
 
-## Stand (14.11.2026)
+## Stand (21.11.2026)
 
 - **Live seit 05.11.2026** auf https://www.mswohldorf.de: DNS bei IONOS umgestellt (A `@` → `75.2.60.5`,
   CNAME `www` → `mswohldorf.netlify.app`; MX/SPF für Zoho unverändert), `www` ist Primary Domain,
@@ -54,7 +54,8 @@ npm run suchdaten                            # Search Console lesen (braucht GSC
   PR #6 (Rückmeldung Uli, Ratgeber, Englisch), PR #7 (Datenschutz freigegeben, `LIVEGANG.md`),
   PR #8 (CORS-Schritt für Merlin), PR #9 (Live-Stand), PR #10 (Phase 5: `PROFILE.md`, Profilbilder, `PROFIL_LINKS`),
   PR #11 (Ausstattung WLAN/PA/DJ/Parkplätze), PR #12 (3D-Hero), PR #13 (Dreharbeiten nur einmal), PR #14 (35 Gäste/165 m², Video-Plan),
-  PR #15 (Film Commission, Plan für Scouts), PR #16 (Domain-Umzug, Mail-Einträge), PR #17 (`npm run suchdaten`).
+  PR #15 (Film Commission, Plan für Scouts), PR #16 (Domain-Umzug, Mail-Einträge), PR #17 (`npm run suchdaten`),
+  PR #18 (`/sitemap.xml`).
 - Rechtliches: alle Pflicht-Punkte geklärt (Sergiy; Uli per Mail 04.11.2026: Impressum wie finanzelot.de,
   kein Datenschutzbeauftragter; Preise, Catering, Technik usw. „alles auf Anfrage“). Datenschutzerklärung
   von Sergiy freigegeben (04.11.2026) — `npm run build` läuft durch. **Livegang-Anleitung: `LIVEGANG.md`.**
@@ -90,7 +91,15 @@ npm run suchdaten                            # Search Console lesen (braucht GSC
     `integrationen/sitemap-xml.mjs` eine Kopie. (2) Das Dienstkonto hat „Vollständig“ statt „Eingeschränkt“ — Sergiy
     sollte es auf „Eingeschränkt“ stellen. (3) Im Index stehen noch alte Adressen `/shop/pg/…` und `/?shop/detail/…`
     (nicht von uns, vermutlich Altlast/Spam der alten Seite): liefern 404 bzw. die Startseite, fallen von selbst raus.
-    Nächste Auswertung: nach 2–3 Wochen (`npm run suchdaten -- --tage 28`), dann Suchanfragen und Seiten nachschärfen.
+    Zweiter Abruf 21.11.2026 (`npm run suchdaten -- --index`): 8 Klicks, 55 Impressionen in 28 Tagen, seit dem 09.11.
+    nur 0–2 Impressionen pro Tag (fast nur Suchen nach dem Namen). `/sitemap.xml` jetzt ohne Fehler (19 Adressen).
+    **Erst 5 von 19 Seiten im Index** (Start, Offsite, Häufige Fragen, `/en/`, `/en/faq/`); 11 „Gefunden – zurzeit
+    nicht indexiert“, 3 „Google nicht bekannt“ — darunter alle Anlass-Seiten, Galerie, Geschichte, Ratgeber.
+    Technisch ist nichts im Weg (200, kein noindex, canonical richtig, von der Startseite verlinkt, robots offen):
+    Google hat die Seiten noch nicht abgeholt. Hebel: Sergiy beantragt die Indexierung je Seite in der Search Console
+    (URL-Prüfung, etwa 10 pro Tag); dazu Signale von außen (Google-Unternehmensprofil bestätigen, Link von
+    finanzelot.de — dort gibt es bisher keinen —, Portale). Dienstkonto steht weiter auf „Vollständig“, der TXT
+    `google-site-verification` fehlt weiter. Nächster Abruf: in 1–2 Wochen mit `--index`.
   - Lead-Quelle (`PUBLIC_ANFRAGE_ERWEITERT`) erst, wenn Merlin `art` und `herkunft` annimmt.
   - Google-Unternehmensprofil, Bing Places, Apple Business Connect, OpenStreetMap, MOIN, HCB Venuefinder
     (Phase 5): Textpaket, Klickpfade und Fragen an Uli in `PROFILE.md`; Bilder `npm run profilbilder`.
