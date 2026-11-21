@@ -2,6 +2,7 @@
 //
 //   npm run suchdaten                 → Zugriff, Sitemaps, Leistung der letzten 28 Tage, Startseite im Index?
 //   npm run suchdaten -- --tage 90    → anderer Zeitraum
+//   npm run suchdaten -- --index      → zusätzlich: Index-Status ALLER Seiten der Sitemap (eine Abfrage je Seite)
 //
 // Zugang: ein Google-Dienstkonto, das in der Search Console als Nutzer mit der Berechtigung
 // „Eingeschränkt“ eingetragen ist. Der Schlüssel steht NICHT im Repo und gehört nie in einen Chat:
@@ -16,6 +17,7 @@ const BEREICH = 'https://www.googleapis.com/auth/webmasters.readonly';
 
 const tageArg = process.argv.indexOf('--tage');
 const TAGE = tageArg > -1 ? Math.max(1, Number(process.argv[tageArg + 1]) || 28) : 28;
+const ALLE_SEITEN = process.argv.includes('--index');
 
 function ende(text) {
   console.error(text);
@@ -140,13 +142,36 @@ else {
   console.log(tabelle(mitSchluessel(await abfrage(['page'])).map((z) => ({ ...z, schluessel: z.schluessel.replace('https://www.mswohldorf.de', '') || '/' })), 'Seite'));
   console.log('\nLänder');
   console.log(tabelle(mitSchluessel(await abfrage(['country'], 8)), 'Land'));
+  // Verlauf: zeigt, ob die Sichtbarkeit wächst (Tage ohne Daten fehlen in der Antwort).
+  const tage = mitSchluessel(await abfrage(['date'], 400)).sort((a, b) => a.schluessel.localeCompare(b.schluessel));
+  console.log('\nVerlauf pro Tag (Impressionen · Klicks)');
+  console.log(tage.length ? tage.map((t) => `  ${t.schluessel}  ${String(t.impressions).padStart(4)} · ${t.clicks}`).join('\n') : '  (noch keine Daten)');
 }
 
-// 4. Ist die Startseite im Index?
-const pruefung = await api(token, '/v1/urlInspection/index:inspect', { inspectionUrl: STARTSEITE, siteUrl: PROPERTY, languageCode: 'de-DE' });
-console.log(`\nIndex-Status ${STARTSEITE}`);
-if (!pruefung.ok) console.log(`  nicht lesbar (${pruefung.status}: ${pruefung.fehler})`);
-else {
-  const i = pruefung.daten.inspectionResult?.indexStatusResult ?? {};
-  console.log(`  ${i.verdict ?? '?'} — ${i.coverageState ?? '?'}\n  zuletzt gecrawlt: ${i.lastCrawlTime ?? '—'} · kanonisch laut Google: ${i.googleCanonical ?? '—'}`);
+// 4. Index-Status: Startseite — mit --index alle Seiten der Sitemap
+async function indexStatus(adresse) {
+  const r = await api(token, '/v1/urlInspection/index:inspect', { inspectionUrl: adresse, siteUrl: PROPERTY, languageCode: 'de-DE' });
+  if (!r.ok) return { adresse, fehler: `${r.status}: ${r.fehler}` };
+  const i = r.daten.inspectionResult?.indexStatusResult ?? {};
+  return { adresse, urteil: i.verdict ?? '?', zustand: i.coverageState ?? '?', gecrawlt: i.lastCrawlTime ?? '—', kanonisch: i.googleCanonical ?? '—' };
+}
+
+if (!ALLE_SEITEN) {
+  const s = await indexStatus(STARTSEITE);
+  console.log(`\nIndex-Status ${STARTSEITE}`);
+  console.log(s.fehler ? `  nicht lesbar (${s.fehler})` : `  ${s.urteil} — ${s.zustand}\n  zuletzt gecrawlt: ${s.gecrawlt} · kanonisch laut Google: ${s.kanonisch}`);
+} else {
+  // Adressen aus der veröffentlichten Sitemap (öffentlich, ohne Schlüssel)
+  const karte = await fetch(`${STARTSEITE}sitemap-0.xml`).then((r) => (r.ok ? r.text() : ''), () => '');
+  const adressen = [...karte.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+  console.log(`\nIndex-Status aller ${adressen.length} Seiten der Sitemap`);
+  if (!adressen.length) console.log('  Sitemap nicht lesbar.');
+  let imIndex = 0;
+  for (const adresse of adressen) {
+    const s = await indexStatus(adresse);
+    if (s.urteil === 'PASS') imIndex++;
+    const pfad = adresse.replace('https://www.mswohldorf.de', '');
+    console.log(s.fehler ? `  ?     ${pfad} — nicht lesbar (${s.fehler})` : `  ${s.urteil === 'PASS' ? 'ja  ' : 'NEIN'}  ${pfad.padEnd(52)} ${s.zustand}${s.gecrawlt !== '—' ? ` · gecrawlt ${s.gecrawlt.slice(0, 10)}` : ''}`);
+  }
+  if (adressen.length) console.log(`\n  Im Index: ${imIndex} von ${adressen.length}`);
 }
