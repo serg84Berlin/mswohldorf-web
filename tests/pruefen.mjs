@@ -26,7 +26,7 @@ import { spawnSync } from 'node:child_process';
 import { createRequire } from 'node:module';
 import { mkdir, readFile, writeFile, readdir, rm } from 'node:fs/promises';
 import { dirname, join, relative, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { gzipSync } from 'node:zlib';
 import { starteServer } from './server.mjs';
 import { seitenPfad, sperrGruende } from '../integrationen/livegang-sperre.mjs';
@@ -676,6 +676,14 @@ for (const [breite, viewport] of Object.entries(GROESSEN)) {
   const sitemapIndex = await readFile(join(PROJEKT, 'dist/sitemap-index.xml'), 'utf8');
   const sitemapXml = await readFile(join(PROJEKT, 'dist/sitemap.xml'), 'utf8').catch(() => '');
   pruefe('/sitemap.xml gibt es und entspricht sitemap-index.xml', sitemapXml.length > 0 && sitemapXml === sitemapIndex && sitemapXml.includes('https://www.mswohldorf.de/sitemap-0.xml'));
+  // Altlast: Spam-Adressen der alten Seite → 410 (Netlify Edge Function); echte Parameter bleiben unberührt.
+  const { istAltlast, default: altlast, config: altlastConfig } = await import(pathToFileURL(join(PROJEKT, 'netlify/edge-functions/altlast.js')).href);
+  const spam = ['https://mswohldorf.de/?shop/detail/S1398444424.html', 'https://www.mswohldorf.de/?shop/detail/T14001270033.html', 'https://www.mswohldorf.de/shop/pg/1270033', 'https://www.mswohldorf.de/?goods/123.html'];
+  const echt = ['https://www.mswohldorf.de/', 'https://www.mswohldorf.de/?utm_source=google&utm_medium=profil', 'https://www.mswohldorf.de/?fbclid=AbC/dEf', 'https://www.mswohldorf.de/?utm_content=a/b', 'https://www.mswohldorf.de/anfrage/?anlass=Firmenevent'];
+  pruefe('Altlast: Spam-Adressen der alten Seite werden erkannt', spam.every((u) => istAltlast(new URL(u))));
+  pruefe('Altlast: Startseite und echte Parameter (utm, fbclid …) bleiben unberührt', echt.every((u) => !istAltlast(new URL(u)) && altlast(new Request(u)) === undefined));
+  const gone = altlast(new Request(spam[0]));
+  pruefe('Altlast: Antwort ist 410 mit noindex, läuft nur auf / und /shop', gone?.status === 410 && gone.headers.get('x-robots-tag') === 'noindex' && JSON.stringify(altlastConfig.path) === JSON.stringify(['/', '/shop', '/shop/*']));
   const vorschau = [];
   const sammle = async (o) => {
     for (const e of await readdir(o, { withFileTypes: true })) {
