@@ -683,7 +683,7 @@ for (const [breite, viewport] of Object.entries(GROESSEN)) {
   pruefe('Altlast: Spam-Adressen der alten Seite werden erkannt', spam.every((u) => istAltlast(new URL(u))));
   pruefe('Altlast: Startseite und echte Parameter (utm, fbclid …) bleiben unberührt', echt.every((u) => !istAltlast(new URL(u)) && altlast(new Request(u)) === undefined));
   const gone = altlast(new Request(spam[0]));
-  pruefe('Altlast: Antwort ist 410 mit noindex, läuft nur auf / und /shop', gone?.status === 410 && gone.headers.get('x-robots-tag') === 'noindex' && JSON.stringify(altlastConfig.path) === JSON.stringify(['/', '/shop', '/shop/*']));
+  pruefe('Altlast: Antwort ist 410 mit noindex, läuft nur auf / und /shop, fällt bei Fehlern auf die normale Seite zurück', gone?.status === 410 && gone.headers.get('x-robots-tag') === 'noindex' && JSON.stringify(altlastConfig.path) === JSON.stringify(['/', '/shop', '/shop/*']) && altlastConfig.onError === 'bypass');
   const vorschau = [];
   const sammle = async (o) => {
     for (const e of await readdir(o, { withFileTypes: true })) {

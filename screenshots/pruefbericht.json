@@ -1,5 +1,5 @@
 {
-  "zeit": "2026-11-23T20:39:27.517Z",
+  "zeit": "2026-11-23T20:45:43.006Z",
   "pruefungen": [
     {
       "name": "/ @390: Status 200",
@@ -954,7 +954,7 @@
     {
       "name": "Formular verbunden: JSON entspricht dem Vertrag",
       "ok": true,
-      "info": "{\"quelle\":\"mswohldorf\",\"anlass\":\"Firmenevent\",\"datum\":\"2027-06-12\",\"ausweichdatum\":\"2027-06-19\",\"gaeste\":24,\"name\":\"Erika Mustermann\",\"email\":\"erika@example.org\",\"telefon\":\"+49 40 123456\",\"nachricht\":\"Sommerfest für unser Team, gern ab 18 Uhr.\",\"einwilligung\":true,\"website\":\"\",\"dauerMs\":1943}"
+      "info": "{\"quelle\":\"mswohldorf\",\"anlass\":\"Firmenevent\",\"datum\":\"2027-06-12\",\"ausweichdatum\":\"2027-06-19\",\"gaeste\":24,\"name\":\"Erika Mustermann\",\"email\":\"erika@example.org\",\"telefon\":\"+49 40 123456\",\"nachricht\":\"Sommerfest für unser Team, gern ab 18 Uhr.\",\"einwilligung\":true,\"website\":\"\",\"dauerMs\":1966}"
     },
     {
       "name": "Erfolg ohne „erstantwort“: kein Hinweis auf automatische E-Mail, aber Exposé/Anruf/Rundgang angeboten",
@@ -1059,7 +1059,7 @@
     {
       "name": "Kompaktformular (Start): leere Felder werden null",
       "ok": true,
-      "info": "{\"quelle\":\"mswohldorf\",\"anlass\":\"Sonstiges\",\"datum\":null,\"ausweichdatum\":null,\"gaeste\":null,\"name\":\"Max Muster\",\"email\":\"max@example.org\",\"telefon\":null,\"nachricht\":\"Kurze Frage zur Verfügbarkeit im Mai.\",\"einwilligung\":true,\"website\":\"\",\"dauerMs\":4065}"
+      "info": "{\"quelle\":\"mswohldorf\",\"anlass\":\"Sonstiges\",\"datum\":null,\"ausweichdatum\":null,\"gaeste\":null,\"name\":\"Max Muster\",\"email\":\"max@example.org\",\"telefon\":null,\"nachricht\":\"Kurze Frage zur Verfügbarkeit im Mai.\",\"einwilligung\":true,\"website\":\"\",\"dauerMs\":5030}"
     },
     {
       "name": "Schnellanfrage (Offsite): Anlass vorausgewählt, kein Nachrichten-Pflichtfeld",
@@ -1074,7 +1074,7 @@
     {
       "name": "Schnellanfrage: gleicher JSON-Vertrag, Nachricht aus der Vorlage",
       "ok": true,
-      "info": "{\"quelle\":\"mswohldorf\",\"anlass\":\"Workshop/Seminar\",\"datum\":\"2027-03-04\",\"ausweichdatum\":null,\"gaeste\":18,\"name\":\"Team Lead Berlin\",\"email\":\"team@example.org\",\"telefon\":null,\"nachricht\":\"Schnellanfrage über die Website (/offsite-hamburg/): Bitte senden Sie mir Verfügbarkeit und ein Angebot.\",\"einwilligung\":true,\"website\":\"\",\"dauerMs\":2138}"
+      "info": "{\"quelle\":\"mswohldorf\",\"anlass\":\"Workshop/Seminar\",\"datum\":\"2027-03-04\",\"ausweichdatum\":null,\"gaeste\":18,\"name\":\"Team Lead Berlin\",\"email\":\"team@example.org\",\"telefon\":null,\"nachricht\":\"Schnellanfrage über die Website (/offsite-hamburg/): Bitte senden Sie mir Verfügbarkeit und ein Angebot.\",\"einwilligung\":true,\"website\":\"\",\"dauerMs\":2123}"
     },
     {
       "name": "Erfolg mit „erstantwort: true“: E-Mail wird angekündigt",
@@ -1099,7 +1099,7 @@
     {
       "name": "Englisch: gleicher Vertrag, Anlass-Wert deutsch, Hinweis „auf Englisch antworten“ für Uli",
       "ok": true,
-      "info": "{\"quelle\":\"mswohldorf\",\"anlass\":\"Firmenevent\",\"datum\":null,\"ausweichdatum\":null,\"gaeste\":null,\"name\":\"Alex Example\",\"email\":\"alex@example.org\",\"telefon\":null,\"nachricht\":\"Schnellanfrage über die Website (/en/): Bitte senden Sie mir Verfügbarkeit und ein Angebot. [Englische Seite — bitte auf Englisch antworten.]\",\"einwilligung\":true,\"website\":\"\",\"dauerMs\":2675}"
+      "info": "{\"quelle\":\"mswohldorf\",\"anlass\":\"Firmenevent\",\"datum\":null,\"ausweichdatum\":null,\"gaeste\":null,\"name\":\"Alex Example\",\"email\":\"alex@example.org\",\"telefon\":null,\"nachricht\":\"Schnellanfrage über die Website (/en/): Bitte senden Sie mir Verfügbarkeit und ein Angebot. [Englische Seite — bitte auf Englisch antworten.]\",\"einwilligung\":true,\"website\":\"\",\"dauerMs\":2654}"
     },
     {
       "name": "Englisch: Erfolgsmeldung englisch",
@@ -1407,7 +1407,7 @@
       "info": ""
     },
     {
-      "name": "Altlast: Antwort ist 410 mit noindex, läuft nur auf / und /shop",
+      "name": "Altlast: Antwort ist 410 mit noindex, läuft nur auf / und /shop, fällt bei Fehlern auf die normale Seite zurück",
       "ok": true,
       "info": ""
     },
@@ -1515,35 +1515,35 @@
   "gewicht": {
     "390": {
       "lcp": {
-        "ms": 132,
+        "ms": 128,
         "element": "SPAN.wort",
         "url": ""
       },
-      "ladezeitMsLokal": 139,
+      "ladezeitMsLokal": 127,
       "beimLadenKB": 154,
       "nachTypKB": {
         "stylesheet": 16,
+        "font": 83,
         "document": 21,
         "image": 24,
-        "font": 83,
         "script": 10
       },
       "beimLaden": [
         "stylesheet 7 kB /_astro/bilder.BK_ElzuW.css",
+        "font 36 kB /_astro/fraunces-latin-wght-normal.ukD16Tqj.woff2",
         "stylesheet 2 kB /_astro/index.td-SGHPV.css",
-        "document 21 kB /",
         "stylesheet 1 kB /_astro/Lightbox.tSWfEd92.css",
         "stylesheet 2 kB /_astro/Basis.D6rWlFaZ.css",
         "stylesheet 2 kB /_astro/PresseFilm.z996GO0W.css",
         "stylesheet 1 kB /_astro/AnfrageFormular.B2XFSRyg.css",
+        "document 21 kB /",
         "image 9 kB /_astro/poster-hoch.tRDmqTna_ZY3Tik.avif",
-        "font 36 kB /_astro/fraunces-latin-wght-normal.ukD16Tqj.woff2",
         "font 47 kB /_astro/inter-latin-wght-normal.Dx4kXJAl.woff2",
         "script 1 kB /_astro/Zeitleiste.astro_astro_type_script_index_0_lang.CuK3wq_s.js",
-        "script 2 kB /_astro/Hero.astro_astro_type_script_index_0_lang.awB59LGk.js",
-        "script 5 kB /_astro/AnfrageFormular.astro_astro_type_script_index_0_lang.HkGiiQnI.js",
         "script 1 kB /_astro/Lightbox.astro_astro_type_script_index_0_lang.CHIQJIXZ.js",
         "script 2 kB /_astro/Basis.astro_astro_type_script_index_0_lang.TKKq9Om4.js",
+        "script 2 kB /_astro/Hero.astro_astro_type_script_index_0_lang.awB59LGk.js",
+        "script 5 kB /_astro/AnfrageFormular.astro_astro_type_script_index_0_lang.HkGiiQnI.js",
         "script 0 kB /_astro/bewegung.Ci3i6uZa.js",
         "image 15 kB /_astro/ms-wohldorf-2024.DNJParMR_l2WSa.avif"
       ],
@@ -1555,34 +1555,34 @@
     },
     "1440": {
       "lcp": {
-        "ms": 144,
+        "ms": 168,
         "element": "SPAN.wort",
         "url": ""
       },
-      "ladezeitMsLokal": 151,
+      "ladezeitMsLokal": 180,
       "beimLadenKB": 279,
       "nachTypKB": {
-        "stylesheet": 16,
         "font": 83,
-        "document": 21,
+        "stylesheet": 16,
         "image": 149,
+        "document": 21,
         "script": 10
       },
       "beimLaden": [
-        "stylesheet 7 kB /_astro/bilder.BK_ElzuW.css",
         "font 36 kB /_astro/fraunces-latin-wght-normal.ukD16Tqj.woff2",
+        "stylesheet 7 kB /_astro/bilder.BK_ElzuW.css",
         "stylesheet 2 kB /_astro/index.td-SGHPV.css",
         "stylesheet 1 kB /_astro/Lightbox.tSWfEd92.css",
         "stylesheet 2 kB /_astro/Basis.D6rWlFaZ.css",
         "stylesheet 2 kB /_astro/PresseFilm.z996GO0W.css",
         "stylesheet 1 kB /_astro/AnfrageFormular.B2XFSRyg.css",
-        "document 21 kB /",
         "image 33 kB /_astro/poster-quer.BZGnAUbc_3kqvP.avif",
+        "document 21 kB /",
         "font 47 kB /_astro/inter-latin-wght-normal.Dx4kXJAl.woff2",
-        "script 1 kB /_astro/Zeitleiste.astro_astro_type_script_index_0_lang.CuK3wq_s.js",
         "script 2 kB /_astro/Hero.astro_astro_type_script_index_0_lang.awB59LGk.js",
-        "script 1 kB /_astro/Lightbox.astro_astro_type_script_index_0_lang.CHIQJIXZ.js",
         "script 5 kB /_astro/AnfrageFormular.astro_astro_type_script_index_0_lang.HkGiiQnI.js",
+        "script 1 kB /_astro/Lightbox.astro_astro_type_script_index_0_lang.CHIQJIXZ.js",
+        "script 1 kB /_astro/Zeitleiste.astro_astro_type_script_index_0_lang.CuK3wq_s.js",
         "script 2 kB /_astro/Basis.astro_astro_type_script_index_0_lang.TKKq9Om4.js",
         "script 0 kB /_astro/bewegung.Ci3i6uZa.js",
         "image 33 kB /_astro/ms-wohldorf-2024.DNJParMR_aAIpt.avif",
@@ -1652,7 +1652,7 @@
     "nachricht": "Sommerfest für unser Team, gern ab 18 Uhr.",
     "einwilligung": true,
     "website": "",
-    "dauerMs": 1943
+    "dauerMs": 1966
   },
   "livegang": {
     "gesperrt": false,

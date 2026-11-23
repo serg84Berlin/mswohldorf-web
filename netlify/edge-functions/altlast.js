@@ -42,4 +42,5 @@ export default function altlast(request) {
   });
 }
 
-export const config = { path: ['/', '/shop', '/shop/*'] };
+// onError 'bypass': Fällt die Funktion aus, liefert Netlify die normale Seite — die Startseite hängt nie an ihr.
+export const config = { path: ['/', '/shop', '/shop/*'], onError: 'bypass' };
