@@ -258,6 +258,20 @@ das Schiff selbst liegt fest (kaum merkliches Heben und Rollen um die Wasserlini
   `/images/galerie/*` → `/galerie/`, `/kontakt` → `/#anfahrt` (wird in den Buchungsmails
   verlinkt), `/impressum.html`, `/datenschutz.html`.
 
+## Altlast: Spam-Adressen der alten Seite
+
+Die alte Website (alter Webspace, bis 05.11.2026) war mit einem Spam-Shop verseucht. Google kennt davon rund
+177 000 Adressen (Search Console → Seitenindexierung, 23.11.2026), vor allem `/?shop/detail/….html` und
+`/shop/pg/…`. Eine davon war noch mit Abrufdatum 02.09.2026 im Index — die alte Seite hat den Spam also ausgeliefert.
+
+- `netlify/edge-functions/altlast.js` (Netlify Edge Function, läuft nur auf `/` und `/shop/*`): antwortet auf diese
+  Adressen mit **410 Gone** und `noindex`. Erkennung: der erste Parametername enthält einen Schrägstrich oder endet
+  auf `.html`/`.php`; echte Parameter (`utm_…`, `fbclid`, `gclid`) bleiben unberührt. Vorher lieferte `/?shop/…`
+  die Startseite mit 200 — Google wertete das als Duplikat der Startseite.
+- Nicht per `robots.txt` sperren: Google muss die 410 sehen können, um die Adressen aus dem Index zu nehmen.
+- Prüfen: `curl -I 'https://www.mswohldorf.de/?shop/detail/x.html'` → `410`; `npm run pruefen` testet die Erkennung.
+- Kann entfallen, wenn der Bericht „Seitenindexierung“ nur noch die echten Seiten zeigt (frühestens nach Monaten).
+
 ## Auf Netlify veröffentlichen
 
 1. Repository bei Netlify verbinden (*Add new site → Import an existing project*).

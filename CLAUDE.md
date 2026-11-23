@@ -43,7 +43,7 @@ npm run suchdaten                            # Search Console lesen; `-- --index
 6. Code, Dateien und Texte auf Deutsch, Kunden in der Sie-Form.
 7. Vor jedem Push: `npm run check`, Vorschau-Build und – wenn Seiten betroffen sind – `npm run pruefen`.
 
-## Stand (21.11.2026)
+## Stand (23.11.2026)
 
 - **Live seit 05.11.2026** auf https://www.mswohldorf.de: DNS bei IONOS umgestellt (A `@` → `75.2.60.5`,
   CNAME `www` → `mswohldorf.netlify.app`; MX/SPF für Zoho unverändert), `www` ist Primary Domain,
@@ -55,7 +55,7 @@ npm run suchdaten                            # Search Console lesen; `-- --index
   PR #8 (CORS-Schritt für Merlin), PR #9 (Live-Stand), PR #10 (Phase 5: `PROFILE.md`, Profilbilder, `PROFIL_LINKS`),
   PR #11 (Ausstattung WLAN/PA/DJ/Parkplätze), PR #12 (3D-Hero), PR #13 (Dreharbeiten nur einmal), PR #14 (35 Gäste/165 m², Video-Plan),
   PR #15 (Film Commission, Plan für Scouts), PR #16 (Domain-Umzug, Mail-Einträge), PR #17 (`npm run suchdaten`),
-  PR #18 (`/sitemap.xml`).
+  PR #18 (`/sitemap.xml`), PR #19 (`suchdaten -- --index`).
 - Rechtliches: alle Pflicht-Punkte geklärt (Sergiy; Uli per Mail 04.11.2026: Impressum wie finanzelot.de,
   kein Datenschutzbeauftragter; Preise, Catering, Technik usw. „alles auf Anfrage“). Datenschutzerklärung
   von Sergiy freigegeben (04.11.2026) — `npm run build` läuft durch. **Livegang-Anleitung: `LIVEGANG.md`.**
@@ -100,6 +100,15 @@ npm run suchdaten                            # Search Console lesen; `-- --index
     (URL-Prüfung, etwa 10 pro Tag); dazu Signale von außen (Google-Unternehmensprofil bestätigen, Link von
     finanzelot.de — dort gibt es bisher keinen —, Portale). Dienstkonto steht weiter auf „Vollständig“, der TXT
     `google-site-verification` fehlt weiter. Nächster Abruf: in 1–2 Wochen mit `--index`.
+    Dritter Abruf 23.11.2026: Sergiy hat am 22.11. für 10 Seiten die Indexierung beantragt → **15 von 19 im Index**
+    (offen: zwei Ratgeber-Artikel, Impressum, Datenschutz). Erste echte Suchanfragen: „firmenevent auf dem schiff
+    hamburg“, „hochzeit schiff hamburg“.
+  - **Spam-Altlast der alten Seite:** Der Bericht „Seitenindexierung“ zeigt rund 177 000 Adressen (174 487 nicht
+    indexiert, 2 792 indexiert) — Spam-Shop der gehackten alten Seite (`/?shop/detail/….html`, `/shop/pg/…`).
+    Seit 23.11.2026 antwortet `netlify/edge-functions/altlast.js` darauf mit 410 (README „Altlast“). Empfohlen an
+    Sergiy: in der Search Console „Sicherheit & manuelle Maßnahmen“ prüfen, unter „Entfernen“ die Präfixe
+    `https://www.mswohldorf.de/shop/` und `https://www.mswohldorf.de/?shop` beantragen, Zugangsdaten des alten
+    Webspace nicht weiterverwenden. Die Zahlen im Bericht sinken nur langsam (Monate).
   - Lead-Quelle (`PUBLIC_ANFRAGE_ERWEITERT`) erst, wenn Merlin `art` und `herkunft` annimmt.
   - Google-Unternehmensprofil, Bing Places, Apple Business Connect, OpenStreetMap, MOIN, HCB Venuefinder
     (Phase 5): Textpaket, Klickpfade und Fragen an Uli in `PROFILE.md`; Bilder `npm run profilbilder`.
